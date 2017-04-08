@@ -25,6 +25,8 @@
     "install": "^0.8.8",
     "mysql": "^2.13.0",
     "npm": "^4.4.4",
-    "sequelize": "^3.30.4"
+    "sequelize": "^3.30.4",
+    "fs": "0.0.1-security",
+    "https": "^1.0.0"
   }
 }

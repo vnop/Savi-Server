@@ -4,7 +4,7 @@ const express = require('express');
 const mysql = require('mysql');
 const seed = require('./seed');
 const fs = require('fs');
-const https = requre('https');
+const https = require('https');
 
 var connection = mysql.createConnection({
   host     : 'localhost',

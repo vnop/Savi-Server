@@ -9,7 +9,7 @@ const https = require('https');
 var connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
-  password : '',
+  password : 'savitravel',
   database : 'savilocal'
 });
 
@@ -22,9 +22,7 @@ app.get('*', (req, res) => {
   res.send('hullo werld');
 });
 
-
 let port = 8080;
-
 
 var pKey = fs.readFileSync('/etc/letsencrypt/live/savi-travel.com/privkey.pem');
 var cert = fs.readFileSync('/etc/letsencrypt/live/savi-travel.com/fullchain.pem');

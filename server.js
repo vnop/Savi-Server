@@ -1,5 +1,5 @@
 'use strict'
-require('./db.js');
+var db = require('./db');
 const express = require('express');
 const mysql = require('mysql');
 const seed = require('./seed');

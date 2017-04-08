@@ -1,7 +1,8 @@
 var db = require('./db');
 
-db.syncTables(true);
-
-db.City.create({
-  name: 'new york'
+db.syncTables(true).then(function() {
+  db.City.create({
+    name: 'new york'
+  });
 });
+

@@ -1,5 +1,7 @@
+'use strict'
 const Sequelize = require('sequelize')
-var schema = new Sequelize('savilocal', 'root', 'savitravel');
+const config = require('./config/config');
+var schema = new Sequelize(config.dbName, 'root', 'savitravel');
 
 var UserData = schema.define('user_data', {
   user_name: Sequelize.STRING,

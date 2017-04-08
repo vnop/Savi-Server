@@ -4,6 +4,7 @@ const express = require('express');
 const mysql = require('mysql');
 const fs = require('fs');
 const https = require('https');
+const config = require('./config/config')
 
 // var connection = mysql.createConnection({
 //   host     : 'localhost',
@@ -21,12 +22,10 @@ app.get('*', (req, res) => {
   res.send('hullo werld');
 });
 
-let port = 8080;
-
 var pKey = fs.readFileSync('/etc/letsencrypt/live/savi-travel.com/privkey.pem');
 var cert = fs.readFileSync('/etc/letsencrypt/live/savi-travel.com/fullchain.pem');
 var ca = fs.readFileSync('/etc/letsencrypt/live/savi-travel.com/chain.pem');
 
 let server = https.createServer({key: pKey, cert: cert, ca: ca}, app);
 
-server.listen(port, () => {console.log('listening on port', port)});
+server.listen(config.port, () => {console.log('listening on port', config.port)});

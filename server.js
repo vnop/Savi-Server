@@ -17,7 +17,7 @@ const https = require('https');
 
 //seed.refreshTables();
 
-db.syncTables(true);
+db.syncTables(false);
 
 const app = express();
 app.get('*', (req, res) => {

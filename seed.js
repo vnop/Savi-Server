@@ -1,21 +1,7 @@
 var db = require('./db');
 
-var refreshTables = function()  {
-	db.schema.sync({force: true});	
-}
+db.syncTables(true);
 
-module.exports = {
-	refreshTables: refreshTables
-}
-
-
-
-
-
-
-
-
-
-
-
-
+db.City.create({
+  name: 'new york'
+});

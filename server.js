@@ -6,16 +6,18 @@ const seed = require('./seed');
 const fs = require('fs');
 const https = require('https');
 
-var connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'root',
-  password : 'savitravel',
-  database : 'savilocal'
-});
+// var connection = mysql.createConnection({
+//   host     : 'localhost',
+//   user     : 'root',
+//   password : 'savitravel',
+//   database : 'savilocal'
+// });
 
-connection.connect();
+// connection.connect();
 
 //seed.refreshTables();
+
+db.syncTables(true);
 
 const app = express();
 app.get('*', (req, res) => {

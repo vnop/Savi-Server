@@ -56,7 +56,9 @@ Booking.belongsTo(UserData, {as: 'tourist'});
 UserData.belongsToMany(Languages, {as: 'user', through: UserLanguages});
 Languages.belongsToMany(UserData, {as: 'languages', through: UserLanguages});
 
-schema.sync();
+let syncTables = function(force) {
+  schema.sync({force: force});
+}
 
 module.exports = {
 	UserData: UserData,
@@ -68,5 +70,6 @@ module.exports = {
 	Offering: Offering,
 	Booking: Booking,
 	Tour: Tour,
-	schema: schema
+	schema: schema,
+  syncTables: syncTables
 }

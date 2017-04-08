@@ -56,7 +56,7 @@ Booking.belongsTo(UserData, {as: 'tourist'});
 UserData.belongsToMany(Languages, {as: 'user', through: UserLanguages});
 Languages.belongsToMany(UserData, {as: 'languages', through: UserLanguages});
 
-let syncTables = function(force) {
+var syncTables = function(force) {
   schema.sync({force: force});
 }
 

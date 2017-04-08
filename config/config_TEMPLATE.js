@@ -1,4 +1,4 @@
 module.exports = {
-  dbName: 'savitravel-alex',
+  dbName: 'savitravel_alex',
   port: 8081
 };

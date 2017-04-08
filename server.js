@@ -11,9 +11,7 @@ const https = require('https');
 //   password : 'savitravel',
 //   database : 'savilocal'
 // });
-
 // connection.connect();
-
 //seed.refreshTables();
 
 db.syncTables(false);

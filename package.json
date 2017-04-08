@@ -21,6 +21,10 @@
   },
   "homepage": "https://github.com/nihilates/Savi-Server#readme",
   "dependencies": {
-    "express": "^4.15.2"
+    "express": "^4.15.2",
+    "install": "^0.8.8",
+    "mysql": "^2.13.0",
+    "npm": "^4.4.4",
+    "sequelize": "^3.30.4"
   }
 }

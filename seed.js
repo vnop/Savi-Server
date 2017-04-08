@@ -1,21 +1,6 @@
 var db = require('./db');
 
-var refreshTables = function()  {
-	db.schema.sync({force: true});	
-}
-
-module.exports = {
-	refreshTables: refreshTables
-}
-
-
-
-
-
-
-
-
-
-
-
+db.syncTables(true).then(function() {
+  // Use this section to add data
+});
 

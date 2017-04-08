@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize')
-var schema = new Sequelize('savilocal', 'root', '');
+var schema = new Sequelize('savilocal', 'root', 'savitravel');
 
 var UserData = schema.define('user_data', {
   user_name: Sequelize.STRING,
@@ -9,9 +9,9 @@ var UserData = schema.define('user_data', {
   photo: Sequelize.STRING
 });
 
-var DriverData = schema.define('driver_data', {  
+var DriverData = schema.define('driver_data', {
   rating: Sequelize.INTEGER,
-  seats: Sequelize.INTEGER  
+  seats: Sequelize.INTEGER
 });
 
 var TourGuideData = schema.define('tour_guide_data', {
@@ -19,7 +19,7 @@ var TourGuideData = schema.define('tour_guide_data', {
 });
 
 var City = schema.define('city', {
-	name: Sequelize.STRING  
+	name: Sequelize.STRING
 }, {timestamps: false});
 
 var Languages = schema.define('languages', {
@@ -27,7 +27,7 @@ var Languages = schema.define('languages', {
 });
 
 var UserLanguages = schema.define('user_languages', {
-  
+
 });
 
 var Offering = schema.define('offering', {
@@ -56,7 +56,9 @@ Booking.belongsTo(UserData, {as: 'tourist'});
 UserData.belongsToMany(Languages, {as: 'user', through: UserLanguages});
 Languages.belongsToMany(UserData, {as: 'languages', through: UserLanguages});
 
-schema.sync();
+var syncTables = function(force) {
+  return schema.sync({force: force});
+}
 
 module.exports = {
 	UserData: UserData,
@@ -68,5 +70,6 @@ module.exports = {
 	Offering: Offering,
 	Booking: Booking,
 	Tour: Tour,
-	schema: schema
+	schema: schema,
+  syncTables: syncTables
 }

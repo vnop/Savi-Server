@@ -57,7 +57,7 @@ UserData.belongsToMany(Languages, {as: 'user', through: UserLanguages});
 Languages.belongsToMany(UserData, {as: 'languages', through: UserLanguages});
 
 var syncTables = function(force) {
-  schema.sync({force: force});
+  return schema.sync({force: force});
 }
 
 module.exports = {

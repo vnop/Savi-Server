@@ -44,8 +44,7 @@ module.exports = {
 			userEmail: 'peter@gmail.com',
 			mdn: '12323123',
 			country: 'USA',
-			photo: 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRr-2ztovFQrCV_5GpReNfM6uv2q7RzbJQWWyMX9L3pq2FsfRJH',
-			seats: 8
+			photo: 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRr-2ztovFQrCV_5GpReNfM6uv2q7RzbJQWWyMX9L3pq2FsfRJH'
 		},
 		{
 			type: 'Driver',
@@ -53,8 +52,7 @@ module.exports = {
 			userEmail: 'marge@gmail.com',
 			mdn: '54534323',
 			country: 'USA',
-			photo: 'https://qzprod.files.wordpress.com/2016/06/xxxx.jpg?quality=80&strip=all&w=1600',
-			seats: 8
+			photo: 'https://qzprod.files.wordpress.com/2016/06/xxxx.jpg?quality=80&strip=all&w=1600'
 		},
 		{
 			type: 'Driver',
@@ -62,8 +60,7 @@ module.exports = {
 			userEmail: 'serge@gmail.com',
 			mdn: '28288172',
 			country: 'France',
-			photo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSczp-qWQc6aplGEBkTCs3i6E7FP0pMheYitx0c3OM0YbhCPiKqMg',
-			seats: 12
+			photo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSczp-qWQc6aplGEBkTCs3i6E7FP0pMheYitx0c3OM0YbhCPiKqMg'
 		},
 		{
 			type: 'Tour Guide',

@@ -29,7 +29,7 @@ app.get('/api/cities', (req, res) => {
 
 app.get('/api/tours', (req, res) => {
   let cityId = req.query.cityId;
-  db.Tour.findAll({where: {city: cityId}}).then((toursArr) => {
+  db.Tour.findAll({where: {cityId: cityId}}).then((toursArr) => {
     res.json(toursArr);
     res.end();
   }).catch(() => {

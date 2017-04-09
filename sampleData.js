@@ -9,7 +9,7 @@ module.exports = {
 			description: 'See London from a different perspective on the London Eye and enjoy the new 4D Experience, a groundbreaking 3D film with spectacular in-theater effects that include wind, bubbles, and mist. Fast-track admission is also available.'
 		},
 		{
-			name: 'Amstermdam',
+			name: 'Amsterdam',
 			description: 'Enjoy a marvellous canal cruise in Amsterdam on board of a semi-open electric boat with zero emissions, and benefit from an audioguide in 19 different languages!'
 		},
 		{
@@ -21,7 +21,7 @@ module.exports = {
 			description: 'For tourists who only have a short layover in Shanghai, taking sightseeing bus to explore the beauty of the city undoubtedly is a good idea. In this way, visitors can squeeze limited time to tour around more must-sees during their one or two day(s) trip.'
 		},
 		{
-			city: 'New York',
+			name: 'New York',
 			description: 'The open-top Big Bus sightseeing tour is the most enjoyable and convenient way to see New York! You’ll see famous landmarks such as the iconic Empire State Building to the new One World Trade Center.'
 		}
 	],
@@ -44,7 +44,9 @@ module.exports = {
 			userEmail: 'peter@gmail.com',
 			mdn: '12323123',
 			country: 'USA',
-			photo: 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRr-2ztovFQrCV_5GpReNfM6uv2q7RzbJQWWyMX9L3pq2FsfRJH'
+			photo: 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRr-2ztovFQrCV_5GpReNfM6uv2q7RzbJQWWyMX9L3pq2FsfRJH',			
+			city: 'New York',
+			languages: ['English', 'French']
 		},
 		{
 			type: 'Driver',
@@ -52,7 +54,9 @@ module.exports = {
 			userEmail: 'marge@gmail.com',
 			mdn: '54534323',
 			country: 'USA',
-			photo: 'https://qzprod.files.wordpress.com/2016/06/xxxx.jpg?quality=80&strip=all&w=1600'
+			photo: 'https://qzprod.files.wordpress.com/2016/06/xxxx.jpg?quality=80&strip=all&w=1600',
+			city: 'Rio de Janeiro',
+			languages: ['Portuguese', 'English', 'French']
 		},
 		{
 			type: 'Driver',
@@ -60,7 +64,9 @@ module.exports = {
 			userEmail: 'serge@gmail.com',
 			mdn: '28288172',
 			country: 'France',
-			photo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSczp-qWQc6aplGEBkTCs3i6E7FP0pMheYitx0c3OM0YbhCPiKqMg'
+			photo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSczp-qWQc6aplGEBkTCs3i6E7FP0pMheYitx0c3OM0YbhCPiKqMg',
+			city: 'Paris',
+			languages: ['French', 'English', 'Italian']
 		},
 		{
 			type: 'Tour Guide',
@@ -68,7 +74,9 @@ module.exports = {
 			userEmail: 'franz@gmail.com',
 			mdn: '2729384',
 			country: 'Germany',
-			photo: 'http://az616578.vo.msecnd.net/files/2015/10/09/635799543747153957-829668496_TOUR%20.jpg'
+			photo: 'http://az616578.vo.msecnd.net/files/2015/10/09/635799543747153957-829668496_TOUR%20.jpg',
+			city: 'London',
+			languages: ['German', 'English', 'Spanish']
 		},
 		{
 			type: 'Tour Guide',
@@ -76,7 +84,9 @@ module.exports = {
 			userEmail: 'albert@gmail.com',
 			mdn: '82738376',
 			country: 'Netherlands',
-			photo: 'https://engagingplaces.files.wordpress.com/2016/02/tour-guide-antwerp.jpg'
+			photo: 'https://engagingplaces.files.wordpress.com/2016/02/tour-guide-antwerp.jpg',
+			city: 'Amsterdam',
+			languages: ['German', 'English']
 		},
 		{
 			type: 'Tour Guide',
@@ -84,7 +94,9 @@ module.exports = {
 			userEmail: 'xin@gmail.com',
 			mdn: '827374683',
 			country: 'China',
-			photo: 'http://news.xinhuanet.com/english/2015-09/17/CnybnyE005038_20150916_NYMFN0A002_11n.jpg'
+			photo: 'http://news.xinhuanet.com/english/2015-09/17/CnybnyE005038_20150916_NYMFN0A002_11n.jpg',
+			city: 'Shanghai',
+			languages: ['Mandarin', 'Japanese']
 		}
 	]
 }

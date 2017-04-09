@@ -4,26 +4,32 @@ const express = require('express');
 const mysql = require('mysql');
 const fs = require('fs');
 const https = require('https');
-const config = require('./config/config')
-
-// var connection = mysql.createConnection({
-//   host     : 'localhost',
-//   user     : 'root',
-//   password : 'savitravel',
-//   database : 'savilocal'
-// });
-// connection.connect();
-//seed.refreshTables();
+const config = require('./config/config');
+const bodyParser = require('body-parser');
+const morgan = require('morgan');
 
 db.syncTables(false);
-
 const app = express();
-// app.get('*', (req, res) => {
-//   res.send('hullo werld');
-// });
+
+
+app.use(morgan('dev')); //set logger
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+
+
+app.get('/api/cities', (req, res) => {
+  db.City.findAll().then((citiesArr) => {
+    res.json(citiesArr);
+    res.end()
+  }).catch(() => {
+    res.status(500).end();
+  })
+});
 
 app.get('/api/tours', (req, res) => {
-  db.Tour.findAll().then((toursArr) => {
+  let cityId = req.query.cityId;
+  db.Tour.findAll({where: {city: cityId}}).then((toursArr) => {
     res.json(toursArr);
     res.end();
   }).catch(() => {

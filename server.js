@@ -18,8 +18,17 @@ const config = require('./config/config')
 db.syncTables(false);
 
 const app = express();
-app.get('*', (req, res) => {
-  res.send('hullo werld');
+// app.get('*', (req, res) => {
+//   res.send('hullo werld');
+// });
+
+app.get('/api/tours', (req, res) => {
+  db.Tour.findAll().then((toursArr) => {
+    res.json(toursArr);
+    res.end();
+  }).catch(() => {
+    res.status(500).end();
+  });
 });
 
 var pKey = fs.readFileSync('/etc/letsencrypt/live/savi-travel.com/privkey.pem');

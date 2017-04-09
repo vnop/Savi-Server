@@ -4,11 +4,12 @@ const config = require('./config/config');
 var schema = new Sequelize(config.dbName, 'root', 'savitravel');
 
 var UserData = schema.define('user_data', {
-  user_name: Sequelize.STRING,
-  user_email: Sequelize.DATE,
+  userName: Sequelize.STRING,
+  userEmail: Sequelize.STRING,
   mdn: Sequelize.INTEGER,
   country: Sequelize.STRING,
-  photo: Sequelize.STRING
+  photo: Sequelize.STRING,
+  type: { type: Sequelize.STRING, defaultValue: 'Turist'}
 });
 
 var DriverData = schema.define('driver_data', {
@@ -73,5 +74,5 @@ module.exports = {
 	Booking: Booking,
 	Tour: Tour,
 	schema: schema,
-  syncTables: syncTables
+  	syncTables: syncTables
 }

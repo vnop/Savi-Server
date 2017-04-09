@@ -1,6 +1,6 @@
 module.exports = {
-  dbName: 'savitravel_alex',
-  port: 8081
+  dbName: 'savitravel_ignacio',
+  port: 8084
 };
 
 // Ports: 8081 - Alex

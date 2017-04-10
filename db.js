@@ -43,7 +43,8 @@ var Booking = schema.define('booking', {
 });
 
 var Tour = schema.define('tour', {
-	description: Sequelize.STRING
+	description: Sequelize.STRING,
+  mainImage: Sequelize.TEXT
 });
 
 DriverData.belongsTo(UserData, {as: 'user'});
@@ -75,5 +76,5 @@ module.exports = {
 	Booking: Booking,
 	Tour: Tour,
 	schema: schema,
-  	syncTables: syncTables
+  syncTables: syncTables
 }

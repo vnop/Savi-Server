@@ -10,7 +10,8 @@ db.syncTables(true).then(function() {
 	  ).then(function(createdCity) {	  	
 			db.Tour.create({
 				cityId: createdCity.dataValues.id,
-				description: city.description
+				description: city.description,
+				mainImage: city.mainImage
 			});
 
 			sampleData.users.forEach(function(user) {								
@@ -47,7 +48,7 @@ db.syncTables(true).then(function() {
 		db.Languages.create({
 			title: language
 		}).then(function(createdLanguage) {
-			sampleData.users.forEach(function(user, index) {
+			sampleData.users.forEach(function(user, index) {				
 				user.languages.forEach(function(language) {
 					if( language === createdLanguage.dataValues.title ) {
 						db.UserLanguages.create({

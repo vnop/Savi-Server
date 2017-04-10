@@ -10,7 +10,8 @@ db.syncTables(true).then(function() {
 	  ).then(function(createdCity) {	  	
 			db.Tour.create({
 				cityId: createdCity.dataValues.id,
-				description: city.description
+				description: city.description,
+				mainImage: city.mainImage
 			});
 
 			sampleData.users.forEach(function(user) {								

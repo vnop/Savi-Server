@@ -44,7 +44,7 @@ var Booking = schema.define('booking', {
 
 var Tour = schema.define('tour', {
 	description: Sequelize.STRING,
-  mainImage: Sequelize.TEXT,
+  mainImage: Sequelize.TEXT
 });
 
 DriverData.belongsTo(UserData, {as: 'user'});

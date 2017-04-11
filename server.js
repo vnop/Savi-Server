@@ -41,7 +41,7 @@ app.get('/api/tours', (req, res) => {
     });
   } else if (!!tourId) {
     db.Tour.find({where: {id: tourId}}).then((tour) => {
-      helpers.respondDBQuery(tour, req, res);
+      helpers.respondDBquery(tour, req, res);
     }).catch(() => {
       res.status(500).end();
     })

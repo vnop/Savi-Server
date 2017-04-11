@@ -27,11 +27,7 @@ app.get('/api/cities', (req, res) => {
 app.get('/api/images', (req, res) => {
   let imageName = req.query.imageName;
   if (imageName) {
-    try {
-      res.sendFile('./img/' + imageName)
-    } catch(e) {
-      res.json({error: e}).status(400).end();
-    }
+    res.sendFile('./img/' + imageName).end();
   } else {
     res.status(400).end('Invalid query string');
   }

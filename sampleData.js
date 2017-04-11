@@ -53,7 +53,7 @@ module.exports = {
 					mainImage: ''
 				}
 			]
-		// },
+		},
 		// {
 		// 	name: 'Rio de Janeiro',
 		// 	mainImage: 'rio-de-janiero_city.jpg',

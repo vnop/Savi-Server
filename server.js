@@ -26,21 +26,31 @@ app.get('/api/cities', (req, res) => {
 
 app.get('/api/tours', (req, res) => {
   let cityId = req.query.cityId;
+  let tourId = req.query.tourId;
 
-  if (!cityId) {
+  if (!cityId && !tourId) {
     db.Tour.findAll().then((toursArr) => {
       res.json(toursArr);
       res.end();
     }).catch(() => {
       res.status(500).end();
     });
-  } else {
+  } else if (!!tourId) {
+    db.Tour.find({where: {id: tourId}}).then((tour) => {
+      res.json(tour);
+      res.end();
+    }).catch(() => {
+      res.status(500).end();
+    })
+  } else if (!!cityId) {
     db.Tour.findAll({where: {cityId: cityId}}).then((toursArr) => {
       res.json(toursArr);
       res.end();
     }).catch(() => {
       res.status(500).end();
     });
+  } else {
+    res.status(500).end();
   }
 });
 

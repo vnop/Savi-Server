@@ -31,7 +31,7 @@ app.get('/api/images/:imageName', (req, res) => {
     res.sendFile(path.join(__dirname, '/img/' + imageName), null, (err) => {
       if(err) {
         console.log('Error on image get\n', JSON.stringify({file: imageName, error: err}));
-        res.json({error: err}).end();
+        res.send(JSON.stringify(error));
       } else {
         console.log('Sent file', imageName);
       }

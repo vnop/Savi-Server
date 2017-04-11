@@ -54,60 +54,36 @@ module.exports = {
 				}
 			]
 		},
-		// {
-		// 	name: 'Rio de Janeiro',
-		// 	mainImage: 'rio-de-janiero_city.jpg',
-		// 	tours: [
-		// 		{
-		// 			description: 'See 2 of the most iconic sights of Rio de Janeiro on a 4-hour guided tour of Corcovado and the Selarón Steps. Add-on Sugar Loaf Mountain on a 6-hour tour, and see Rio from different perspectives. Marvel at Chilean artist Jorge Selarón’s ceramic art steps!',
-		// 			mainImage: 'rio-de-janiero_tour_city.jpg'
-		// 		},
-		// 		{
-		// 			description: '',
-		// 			mainImage: ''
-		// 		},
-		// 		{
-		// 			description: '',
-		// 			mainImage: ''
-		// 		}
-		// 	]
-		// },
-		// {
-		// 	name: 'Shanghai',
-		// 	mainImage: 'shanghai_city.jpg',
-		// 	tours: [
-		// 		{
-		// 			description: 'For tourists who only have a short layover in Shanghai, taking sightseeing bus to explore the beauty of the city undoubtedly is a good idea. In this way, visitors can squeeze limited time to tour around more must-sees during their one or two day(s) trip.',
-		// 			mainImage: 'shanghai_tour_layover.jpg'
-		// 		},
-		// 		{
-		// 			description: '',
-		// 			mainImage: ''
-		// 		},
-		// 		{
-		// 			description: '',
-		// 			mainImage: ''
-		// 		}
-		// 	]
-		// },
-		// {
-		// 	name: 'New York',
-		// 	mainImage: 'new-york_city.jpg',
-		// 	tours: [
-		// 		{
-		// 			description: 'The open-top Big Bus sightseeing tour is the most enjoyable and convenient way to see New York! You’ll see famous landmarks such as the iconic Empire State Building to the new One World Trade Center.',
-		// 			mainImage: 'new-york_tour_bus.jpg'
-		// 		},
-		// 		{
-		// 			description: '',
-		// 			mainImage: ''
-		// 		},
-		// 		{
-		// 			description: '',
-		// 			mainImage: ''
-		// 		}
-		// 	]
-		// }
+		{
+			name: 'Rio de Janeiro',
+			mainImage: 'rio-de-janiero_city.jpg',
+			tours: [
+				{
+					description: 'See 2 of the most iconic sights of Rio de Janeiro on a 4-hour guided tour of Corcovado and the Selarón Steps. Add-on Sugar Loaf Mountain on a 6-hour tour, and see Rio from different perspectives. Marvel at Chilean artist Jorge Selarón’s ceramic art steps!',
+					mainImage: 'rio-de-janiero_tour_city.jpg'
+				}
+			]
+		},
+		{
+			name: 'Shanghai',
+			mainImage: 'shanghai_city.jpg',
+			tours: [
+				{
+					description: 'For tourists who only have a short layover in Shanghai, taking sightseeing bus to explore the beauty of the city undoubtedly is a good idea. In this way, visitors can squeeze limited time to tour around more must-sees during their one or two day(s) trip.',
+					mainImage: 'shanghai_tour_layover.jpg'
+				}
+			]
+		},
+		{
+			name: 'New York',
+			mainImage: 'new-york_city.jpg',
+			tours: [
+				{
+					description: 'The open-top Big Bus sightseeing tour is the most enjoyable and convenient way to see New York! You’ll see famous landmarks such as the iconic Empire State Building to the new One World Trade Center.',
+					mainImage: 'new-york_tour_bus.jpg'
+				}
+			]
+		}
 	],
 
 	languages: [

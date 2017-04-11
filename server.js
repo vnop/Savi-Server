@@ -47,7 +47,7 @@ app.get('/api/tours', (req, res) => {
       helpers.respondDBError(err, req, res);
     });
   } else {
-    res.status(500).end('Invalid query string');
+    res.status(400).end('Invalid query string');
   }
 });
 

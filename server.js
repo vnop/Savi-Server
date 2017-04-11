@@ -1,5 +1,5 @@
 'use strict'
-var db = require('./db');
+const db = require('./db');
 const express = require('express');
 const mysql = require('mysql');
 const fs = require('fs');
@@ -8,6 +8,7 @@ const config = require('./config/config');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const helpers = require('./helpers');
+const path = require('path');
 
 db.syncTables(false);
 const app = express();
@@ -27,7 +28,7 @@ app.get('/api/cities', (req, res) => {
 app.get('/api/images', (req, res) => {
   let imageName = req.query.imageName;
   if (imageName) {
-    res.sendFile('./img/' + imageName).end();
+    res.sendFile(path.join(__dirname, '/img/' + imageName)).end();
   } else {
     res.status(400).end('Invalid query string');
   }

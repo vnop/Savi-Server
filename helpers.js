@@ -7,7 +7,7 @@ const respondDBQuery = (dbResponse, req, res) => {
 }
 
 const respondDBError = (DBError, req, res) => {
-  res.status(500).send('Encountered a DB error');
+  res.json({error: DBError}).status(500).send;
 }
 
 module.exports = {

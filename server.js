@@ -28,7 +28,7 @@ app.get('/api/images', (req, res) => {
   let imageName = req.query.imageName;
   if (imageName) {
     try {
-      res.sendFile('./images/' + imageName)
+      res.sendFile('./img/' + imageName)
     } catch(e) {
       res.json({error: e}).status(400).end();
     }

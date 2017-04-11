@@ -24,6 +24,19 @@ app.get('/api/cities', (req, res) => {
   })
 });
 
+app.get('/api/images', (req, res) => {
+  let imageName = req.query.imageName;
+  if (imageName) {
+    try {
+      res.sendFile('./images/' + imageName)
+    } catch(e) {
+      res.json({error: e}).status(400).end();
+    }
+  } else {
+    res.status(400).end('Invalid query string');
+  }
+});
+
 app.get('/api/tours', (req, res) => {
   let cityId = req.query.cityId;
   let tourId = req.query.tourId;

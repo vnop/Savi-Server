@@ -7,6 +7,7 @@ const https = require('https');
 const config = require('./config/config');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
+const helpers = require('./helpers');
 
 db.syncTables(false);
 const app = express();
@@ -17,12 +18,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/api/cities', (req, res) => {
   db.City.findAll().then((citiesArr) => {
-    if (!citiesArr) {
-      res.status(500).end();
-    } else {
-      res.json(citiesArr);
-      res.end();
-    }
+    helpers.respondDBQuery(citiesArr, req, res);
   }).catch(() => {
     res.status(500).end();
   })
@@ -45,12 +41,7 @@ app.get('/api/tours', (req, res) => {
     });
   } else if (!!tourId) {
     db.Tour.find({where: {id: tourId}}).then((tour) => {
-      if (!tour) {
-        res.status(500).end();
-      } else {
-        res.json(tour);
-        res.end();
-      }
+      helpers.respondDBQuery(tour, req, res);
     }).catch(() => {
       res.status(500).end();
     })

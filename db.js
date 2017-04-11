@@ -22,7 +22,8 @@ var TourGuideData = schema.define('tour_guide_data', {
 });
 
 var City = schema.define('city', {
-	name: Sequelize.STRING
+	name: Sequelize.STRING,
+  mainImage: Sequelize.TEXT
 }, {timestamps: false});
 
 var Languages = schema.define('languages', {

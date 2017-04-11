@@ -4,17 +4,20 @@ var db = require('./db');
 var sampleData = require('./sampleData');
 
 db.syncTables(true).then(function() {
-	sampleData.cities.forEach(function(city, index) {		
+	sampleData.cities.forEach(function(city, index) {
 		db.City.create(
-	  	{name: city.name}  	
-	  ).then(function(createdCity) {	  	
+	  	{
+	  		name: city.name,
+	  		mainImage: city.mainImage
+	  	}
+	  ).then(function(createdCity) {
 			db.Tour.create({
 				cityId: createdCity.dataValues.id,
 				description: city.description,
 				mainImage: city.mainImage
 			});
 
-			sampleData.users.forEach(function(user) {								
+			sampleData.users.forEach(function(user) {
 				if( user.city === createdCity.dataValues.name	) {
 					db.UserData.create({
 						type: user.type,
@@ -23,9 +26,9 @@ db.syncTables(true).then(function() {
 						mdn: user.mdn,
 						country: user.country,
 						photo: user.photo,
-						cityId: createdCity.dataValues.id			
+						cityId: createdCity.dataValues.id
 					})
-					.then(function(createdUser) {						
+					.then(function(createdUser) {
 						if(createdUser.dataValues.type == 'Tour Guide') {
 							db.TourGuideData.create({
 								userId: createdUser.dataValues.id,
@@ -39,7 +42,7 @@ db.syncTables(true).then(function() {
 							})
 						}
 					});
-				}				
+				}
 			})
 	  })
 	});
@@ -48,7 +51,7 @@ db.syncTables(true).then(function() {
 		db.Languages.create({
 			title: language
 		}).then(function(createdLanguage) {
-			sampleData.users.forEach(function(user, index) {				
+			sampleData.users.forEach(function(user, index) {
 				user.languages.forEach(function(language) {
 					if( language === createdLanguage.dataValues.title ) {
 						db.UserLanguages.create({
@@ -56,7 +59,7 @@ db.syncTables(true).then(function() {
 							languageId: createdLanguage.id
 						})
 					}
-				})		
+				})
 			})
 		})
 	});

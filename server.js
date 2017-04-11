@@ -7,6 +7,7 @@ const https = require('https');
 const config = require('./config/config');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
+const helpers = require('./helpers');
 
 db.syncTables(false);
 const app = express();
@@ -17,30 +18,36 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/api/cities', (req, res) => {
   db.City.findAll().then((citiesArr) => {
-    res.json(citiesArr);
-    res.end()
-  }).catch(() => {
-    res.status(500).end();
+    helpers.respondDBQuery(citiesArr, req, res);
+  }).catch((err) => {
+    helpers.respondDBError(err, req, res);
   })
 });
 
 app.get('/api/tours', (req, res) => {
   let cityId = req.query.cityId;
+  let tourId = req.query.tourId;
 
-  if (!cityId) {
+  if (!cityId && !tourId) {
     db.Tour.findAll().then((toursArr) => {
-      res.json(toursArr);
-      res.end();
-    }).catch(() => {
-      res.status(500).end();
+      helpers.respondDBQuery(toursArr, req, res);
+    }).catch((err) => {
+      helpers.respondDBError(err, req, res);
+    });
+  } else if (!!tourId) {
+    db.Tour.find({where: {id: tourId}}).then((tour) => {
+      helpers.respondDBQuery(tour, req, res);
+    }).catch((err) => {
+      helpers.respondDBError(err, req, res);
+    })
+  } else if (!!cityId) {
+    db.Tour.findAll({where: {cityId: cityId}}).then((toursArr) => {
+      helpers.respondDBQuery(toursArr, req, res);
+    }).catch((err) => {
+      helpers.respondDBError(err, req, res);
     });
   } else {
-    db.Tour.findAll({where: {cityId: cityId}}).then((toursArr) => {
-      res.json(toursArr);
-      res.end();
-    }).catch(() => {
-      res.status(500).end();
-    });
+    res.status(400).end('Invalid query string');
   }
 });
 

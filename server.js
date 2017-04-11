@@ -30,29 +30,19 @@ app.get('/api/tours', (req, res) => {
 
   if (!cityId && !tourId) {
     db.Tour.findAll().then((toursArr) => {
-      if (!toursArr) {
-        res.status(500).end();
-      } else {
-        res.json(toursArr);
-        res.end();
-      }
+      helpers.respondDBQuery(toursArr, req, res);
     }).catch(() => {
       res.status(500).end();
     });
   } else if (!!tourId) {
     db.Tour.find({where: {id: tourId}}).then((tour) => {
-      helpers.respondDBquery(tour, req, res);
+      helpers.respondDBQuery(tour, req, res);
     }).catch(() => {
       res.status(500).end();
     })
   } else if (!!cityId) {
     db.Tour.findAll({where: {cityId: cityId}}).then((toursArr) => {
-      if (!toursArr) {
-        res.status(500).end();
-      } else {
-        res.json(toursArr);
-        res.end();
-      }
+      helpers.respondDBQuery(toursArr, req, res);
     }).catch(() => {
       res.status(500).end();
     });

@@ -14,6 +14,7 @@ db.syncTables(true).then(function() {
 	  	city.tours.forEach((tour, index) => {
 	  		db.Tour.create({
 	  			cityId: createdCity.dataValues.id,
+	  			title: tour.title,
 	  			description: tour.description,
 	  			mainImage: tour.mainImage
 	  		});

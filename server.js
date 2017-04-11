@@ -19,8 +19,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get('/api/cities', (req, res) => {
   db.City.findAll().then((citiesArr) => {
     helpers.respondDBQuery(citiesArr, req, res);
-  }).catch(() => {
-    res.status(500).end();
+  }).catch((err) => {
+    helpers.respondDBError(err, req, res);
   })
 });
 
@@ -31,23 +31,23 @@ app.get('/api/tours', (req, res) => {
   if (!cityId && !tourId) {
     db.Tour.findAll().then((toursArr) => {
       helpers.respondDBQuery(toursArr, req, res);
-    }).catch(() => {
-      res.status(500).end();
+    }).catch((err) => {
+      helpers.respondDBError(err, req, res);
     });
   } else if (!!tourId) {
     db.Tour.find({where: {id: tourId}}).then((tour) => {
       helpers.respondDBQuery(tour, req, res);
-    }).catch(() => {
-      res.status(500).end();
+    }).catch((err) => {
+      helpers.respondDBError(err, req, res);
     })
   } else if (!!cityId) {
     db.Tour.findAll({where: {cityId: cityId}}).then((toursArr) => {
       helpers.respondDBQuery(toursArr, req, res);
-    }).catch(() => {
-      res.status(500).end();
+    }).catch((err) => {
+      helpers.respondDBError(err, req, res);
     });
   } else {
-    res.status(500).end();
+    res.status(500).end('Invalid query string');
   }
 });
 

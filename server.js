@@ -17,8 +17,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/api/cities', (req, res) => {
   db.City.findAll().then((citiesArr) => {
-    res.json(citiesArr);
-    res.end()
+    if (!citiesArr) {
+      res.status(500).end();
+    } else {
+      res.json(citiesArr);
+      res.end();
+    }
   }).catch(() => {
     res.status(500).end();
   })

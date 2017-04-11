@@ -18,7 +18,6 @@ db.syncTables(true).then(function() {
 	  			mainImage: tour.mainImage
 	  		});
 	  	});
-	  });
 			// db.Tour.create({
 			// 	cityId: createdCity.dataValues.id,
 			// 	description: city.description,

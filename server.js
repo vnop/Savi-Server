@@ -29,7 +29,6 @@ app.get('/api/images', (req, res) => {
   let imageName = req.query.imageName;
   if (imageName) {
     res.sendFile(path.join(__dirname, '/img/' + imageName));
-    res.end();
   } else {
     res.status(400).end('Invalid query string');
   }

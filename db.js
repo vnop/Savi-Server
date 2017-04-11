@@ -1,7 +1,7 @@
 'use strict'
 const Sequelize = require('sequelize')
 const config = require('./config/config');
-var schema = new Sequelize(config.dbName, 'root', 'savitravel');
+var schema = new Sequelize(config.dbName, 'root', config.password);
 
 var UserData = schema.define('user_data', {
   userName: Sequelize.STRING,
@@ -43,7 +43,8 @@ var Booking = schema.define('booking', {
 });
 
 var Tour = schema.define('tour', {
-	description: Sequelize.STRING
+	description: Sequelize.STRING,
+  mainImage: Sequelize.TEXT
 });
 
 DriverData.belongsTo(UserData, {as: 'user'});
@@ -56,8 +57,9 @@ Booking.belongsTo(Offering, {as: 'offering'});
 Booking.belongsTo(UserData, {as: 'driver'});
 Booking.belongsTo(UserData, {as: 'tourGuide'});
 Booking.belongsTo(UserData, {as: 'tourist'});
-UserData.belongsToMany(Languages, {as: 'user', through: UserLanguages});
-Languages.belongsToMany(UserData, {as: 'languages', through: UserLanguages});
+UserData.belongsTo(City, {as: 'city'});
+UserData.belongsToMany(Languages, {as: 'user', through: UserLanguages, foreignKey: 'userId' });
+Languages.belongsToMany(UserData, {as: 'languages', through: UserLanguages, foreignKey: 'languageId' });
 
 var syncTables = function(force) {
   return schema.sync({force: force});
@@ -74,5 +76,5 @@ module.exports = {
 	Booking: Booking,
 	Tour: Tour,
 	schema: schema,
-  	syncTables: syncTables
+  syncTables: syncTables
 }

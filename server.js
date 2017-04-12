@@ -51,7 +51,7 @@ app.get('/api/bookings', (req, res) => {
             res.status(404).send('City not found');
           } else {
             let booking = {tour: tour, city: city, date: date};
-            let findDriver = db.User.find({where: {cityId: city.dataValues.id, type: 'Driver'}}).then((driver) => {
+            let findDriver = db.UserData.find({where: {cityId: city.dataValues.id, type: 'Driver'}}).then((driver) => {
               if (driver) {
                 booking.driver = driver;
               }

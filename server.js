@@ -34,6 +34,12 @@ app.get('/api/cities', (req, res) => {
   }
 });
 
+// app.get('/api/bookings')
+
+app.get('/api/test', (req, res) => {
+  res.status(404).send('error');
+});
+
 app.get('/api/images/:imageName', (req, res) => {
   let imageName = req.params.imageName;
   if (imageName) {

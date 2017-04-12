@@ -34,11 +34,16 @@ app.get('/api/cities', (req, res) => {
   }
 });
 
-// app.get('/api/bookings', (req, res) => {
-//   let tourId = req.query.tourId;
-//   let date = req.query.date;
-//   let
-// });
+app.get('/api/bookings', (req, res) => {
+  let tourId = req.query.tourId;
+  let date = req.query.date;
+  let passengers = req.query.passengers;
+  if (!passengers || !tourId || !date) {
+    res.status(400).send('Invalid query string');
+  } else {
+
+  }
+});
 
 app.get('/api/test', (req, res) => {
   res.status(404).send('error');
@@ -49,6 +54,8 @@ app.get('/api/images/:imageName', (req, res) => {
   let exists = fs.existsSync(path.join(__dirname, '/img/' + imageName));
   if (imageName && exists) {
     res.sendFile(path.join(__dirname, '/img/' + imageName));
+  } else if (!exists) {
+    res.status(404).send('Image does not exist');
   } else {
     res.status(400).send('Invalid param string');
   }

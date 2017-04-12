@@ -136,6 +136,36 @@ module.exports = {
 			languages: ['French', 'English', 'Italian']
 		},
 		{
+			type: 'Driver',
+			userName: 'Huge Jacked-Man',
+			userEmail: 'wolverine@xavier.edu',
+			mdn: '5552352353',
+			country: 'Australia',
+			photo: 'huge-jacked-man.jpg',
+			city: 'Amsterdam',
+			languages: ['English', 'Mandarin']
+		},
+		{
+			type: 'Driver',
+			userName: 'Buffalo Custardbath',
+			userEmail: 'sherlock@holmes.net',
+			mdn: '2830563555',
+			country: 'United Kingdom',
+			photo: 'benedict-cumberbatch.jpg',
+			city: 'London',
+			languages: ['English']
+		},
+		{
+			type: 'Driver',
+			userName: 'Nicolas Cage',
+			userEmail: 'wickerman123@aol.com',
+			mdn: '5553820356',
+			country: 'USA',
+			photo: 'nicolas-cage.jpg',
+			city: 'Shanghai',
+			languages: ['German', 'Mandarin', 'English']
+		},
+		{
 			type: 'Tour Guide',
 			userName: 'Franz Bauer',
 			userEmail: 'franz@gmail.com',
@@ -164,6 +194,36 @@ module.exports = {
 			photo: 'xin-meng.jpg',
 			city: 'Shanghai',
 			languages: ['Mandarin', 'Japanese']
+		},
+		{
+			type: 'Tour Guide',
+			userName: 'John Constantine',
+			userEmail: 'johnconstantine@asshole.net',
+			mdn: '3825555353',
+			country: 'USA',
+			photo: 'keanu-reeves.jpg',
+			city: 'New York',
+			languages: ['English']
+		},
+		{
+			type: 'Tour Guide',
+			userName: 'Dwayne Johnson',
+			userEmail: 'therock@muscles.org',
+			mdn: '3850635555',
+			country: 'USA',
+			photo: 'Dwayne Johnson',
+			city: 'Rio de Janeiro',
+			languages: ['English', 'Spanish']
+		},
+		{
+			type: 'Tour Guide',
+			userName: 'Daisy Johnson',
+			userEmail: 'quake@inhuman.biz',
+			mdn: '5559382353',
+			country: 'USA',
+			photo: 'daisy-johnson.jpg',
+			city: 'Paris',
+			languages: ['English', 'Spanish', 'French', 'Italian', 'Portuguese', 'German', 'Mandarin', 'Japanese']
 		}
 	]
 }

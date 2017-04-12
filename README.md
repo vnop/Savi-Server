@@ -17,4 +17,5 @@ With that done, and the DB created on each environment, you should be able to ty
   - `/api/tours?cityId=X` gets all tours for the city with ID of X
   - `/api/tours?tourId=X` gets the tour of that particular ID
   - `/api/cities` gets all cities from the DB
+  - `/api/cities?cityId=X` gets the city with ID X
   - `/api/images/<imagename>` gets the image of that name

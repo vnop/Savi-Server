@@ -161,7 +161,7 @@ module.exports = {
 			userEmail: 'xin@gmail.com',
 			mdn: '827374683',
 			country: 'China',
-			photo: 'http://news.xinhuanet.com/english/2015-09/17/CnybnyE005038_20150916_NYMFN0A002_11n.jpg',
+			photo: 'xin-meng.jpg',
 			city: 'Shanghai',
 			languages: ['Mandarin', 'Japanese']
 		}

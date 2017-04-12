@@ -34,7 +34,11 @@ app.get('/api/cities', (req, res) => {
   }
 });
 
-// app.get('/api/bookings')
+// app.get('/api/bookings', (req, res) => {
+//   let tourId = req.query.tourId;
+//   let date = req.query.date;
+//   let
+// });
 
 app.get('/api/test', (req, res) => {
   res.status(404).send('error');
@@ -42,15 +46,16 @@ app.get('/api/test', (req, res) => {
 
 app.get('/api/images/:imageName', (req, res) => {
   let imageName = req.params.imageName;
-  if (imageName) {
-    res.sendFile(path.join(__dirname, '/img/' + imageName), null, (err) => {
+  let exists = fs.existsSync(path.join(__dirname, '/img/' + imageName);
+  if (imageName && exists) {
+    res.sendFile(path.join(__dirname, '/img/' + imageName) /*, null, (err) => {
       if(err) {
         console.log('Error on image get\n', JSON.stringify({file: imageName, error: err}));
         res.status(404).json(err).end();
       } else {
         console.log('Sent file', imageName);
       }
-    });
+    }*/);
   } else {
     res.status(400).send('Invalid param string');
   }

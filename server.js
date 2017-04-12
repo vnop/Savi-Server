@@ -46,7 +46,7 @@ app.get('/api/test', (req, res) => {
 
 app.get('/api/images/:imageName', (req, res) => {
   let imageName = req.params.imageName;
-  let exists = fs.existsSync(path.join(__dirname, '/img/' + imageName);
+  let exists = fs.existsSync(path.join(__dirname, '/img/' + imageName));
   if (imageName && exists) {
     res.sendFile(path.join(__dirname, '/img/' + imageName) /*, null, (err) => {
       if(err) {

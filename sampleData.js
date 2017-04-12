@@ -17,7 +17,7 @@ module.exports = {
 				{
 					title: 'Restaurant Scene',
 					description: 'For the foodie tourist, this guided walkthrough will introduce you to some of the finest places to eat in the heart of Paris. By the time the tour is over you will be ready to dine like royalty!',
-					mainImage: 'paris_tour_restaurants'
+					mainImage: 'paris_tour_restaurants.jpg'
 				}
 			]
 		},

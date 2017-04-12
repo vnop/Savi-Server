@@ -42,7 +42,7 @@ app.get('/api/bookings', (req, res) => {
   if (!tourId || !date) {
     res.status(400).send('Invalid query string');
   } else {
-    db.Tour.find({where: {id: tourId}}).then((tour) => ) {
+    db.Tour.find({where: {id: tourId}}).then((tour) =>  {
       if (!tour) {
         res.status(404).send('Tour not found');
       } else {
@@ -72,7 +72,7 @@ app.get('/api/bookings', (req, res) => {
           }
         });
       }
-    }
+    });
   }
 });
 

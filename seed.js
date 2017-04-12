@@ -2,6 +2,7 @@
 // var schema = new Sequelize('savilocal', 'root', '');
 var db = require('./db');
 var sampleData = require('./sampleData');
+var Promise = require('bluebird');
 
 db.syncTables(true).then(function() {
 	sampleData.cities.forEach(function(city, index) {
@@ -24,10 +25,10 @@ db.syncTables(true).then(function() {
 			// 	description: city.description,
 			// 	mainImage: city.mainImage
 			// });
-
+			let userCreation = [];
 			sampleData.users.forEach(function(user) {
 				if( user.city === createdCity.dataValues.name	) {
-					db.UserData.create({
+					let createUser = db.UserData.create({
 						type: user.type,
 						userName: user.userName,
 						userEmail: user.userEmail,
@@ -49,26 +50,29 @@ db.syncTables(true).then(function() {
 								seats: 8
 							})
 						}
-					});
+					})
+					userCreation.push(createUser);
 				}
 			})
 	  })
 	});
-
-	sampleData.languages.forEach(function(language) {
-		db.Languages.create({
-			title: language
-		}).then(function(createdLanguage) {
-			sampleData.users.forEach(function(user, index) {
-				user.languages.forEach(function(language) {
-					if( language === createdLanguage.dataValues.title ) {
-						db.UserLanguages.create({
-							userId: index + 1,
-							languageId: createdLanguage.id
-						}).catch((error) => {console.log('error on creating user_language', error, '\n*****************************************************************')});
-					}
+	Promise.all(userCreation).then(() => {
+		sampleData.languages.forEach(function(language) {
+			db.Languages.create({
+				title: language
+			}).then(function(createdLanguage) {
+				sampleData.users.forEach(function(user, index) {
+					user.languages.forEach(function(language) {
+						if( language === createdLanguage.dataValues.title ) {
+							db.UserLanguages.create({
+								userId: index + 1,
+								languageId: createdLanguage.id
+							}).catch((error) => {console.log('error on creating user_language', error, '\n*****************************************************************')});
+						}
+					})
 				})
 			})
-		})
+		});
 	});
+
 });

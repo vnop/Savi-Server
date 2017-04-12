@@ -17,7 +17,7 @@ module.exports = {
 				{
 					title: 'Restaurant Scene',
 					description: 'For the foodie tourist, this guided walkthrough will introduce you to some of the finest places to eat in the heart of Paris. By the time the tour is over you will be ready to dine like royalty!',
-					mainImage: 'paris_tour_restaurants'
+					mainImage: 'paris_tour_restaurants.jpg'
 				}
 			]
 		},
@@ -161,7 +161,7 @@ module.exports = {
 			userEmail: 'xin@gmail.com',
 			mdn: '827374683',
 			country: 'China',
-			photo: 'http://news.xinhuanet.com/english/2015-09/17/CnybnyE005038_20150916_NYMFN0A002_11n.jpg',
+			photo: 'xin-meng.jpg',
 			city: 'Shanghai',
 			languages: ['Mandarin', 'Japanese']
 		}

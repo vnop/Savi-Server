@@ -223,7 +223,7 @@ module.exports = {
 			country: 'USA',
 			photo: 'daisy-johnson.jpg',
 			city: 'Paris',
-			languages: ['English', 'Spanish', 'French', 'Italian', 'Portuguese', 'German', 'Mandarin', 'Japanese']
+			languages: ['English', 'Spanish', 'French', 'Italian', 'Portuguese']
 		}
 	]
 }

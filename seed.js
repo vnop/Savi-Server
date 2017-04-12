@@ -69,6 +69,6 @@ db.syncTables(true).then(function() {
 					}
 				})
 			})
-		})
+		}).catch((error) => {console.log('eror on create user_language', error)});
 	});
 });

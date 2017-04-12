@@ -50,8 +50,25 @@ app.get('/api/bookings', (req, res) => {
           if(!city) {
             res.status(404).send('City not found');
           } else {
-            let findDriver = db.User.find({where: {cityId: city.dataValues.id, type: 'Driver'}});
-            let findGuide = db.user.find()
+            let booking = {tour: tour, city: city, date: date};
+            let findDriver = db.User.find({where: {cityId: city.dataValues.id, type: 'Driver'}}).then((driver) => {
+              if (driver) {
+                booking.driver = driver;
+              }
+            });
+            let findGuide = db.user.find({where: {cityId: city.dataValues.id, type: 'Tour Guide'}}).then((guide) => {
+              if (guide) {
+                booking.guide = guide;
+              }
+            });
+
+            Promise.all([findDriver, findGuide]).then(() => {
+              if (booking.guide && booking.driver) {
+                res.json(booking).end();
+              } else {
+                res.send('We were unable to book you with the given parameters');
+              }
+            })
           }
         });
       }

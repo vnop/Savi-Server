@@ -18,11 +18,20 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/api/cities', (req, res) => {
-  db.City.findAll().then((citiesArr) => {
-    helpers.respondDBQuery(citiesArr, req, res);
-  }).catch((err) => {
-    helpers.respondDBError(err, req, res);
-  })
+  let cityId = req.query.cityId;
+  if (!cityId) {
+    db.City.findAll().then((citiesArr) => {
+      helpers.respondDBQuery(citiesArr, req, res);
+    }).catch((err) => {
+      helpers.respondDBError(err, req, res);
+    })
+  } else {
+    db.City.find({where: {id: cityId}}).then((citiesArr) => {
+      helpers.respondDBQuery(citiesArr, req, res);
+    }).catch((err) => {
+      helpers.respondDBError(err, req, res);
+    })
+  }
 });
 
 app.get('/api/images/:imageName', (req, res) => {

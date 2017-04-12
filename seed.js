@@ -1,5 +1,8 @@
 // const Sequelize = require('sequelize')
 // var schema = new Sequelize('savilocal', 'root', '');
+
+'use strict';
+
 var db = require('./db');
 var sampleData = require('./sampleData');
 var Promise = require('bluebird');

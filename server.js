@@ -1,5 +1,5 @@
 'use strict'
-var db = require('./db');
+const db = require('./db');
 const express = require('express');
 const mysql = require('mysql');
 const fs = require('fs');
@@ -8,6 +8,7 @@ const config = require('./config/config');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const helpers = require('./helpers');
+const path = require('path');
 
 db.syncTables(false);
 const app = express();
@@ -22,6 +23,22 @@ app.get('/api/cities', (req, res) => {
   }).catch((err) => {
     helpers.respondDBError(err, req, res);
   })
+});
+
+app.get('/api/images/:imageName', (req, res) => {
+  let imageName = req.params.imageName;
+  if (imageName) {
+    res.sendFile(path.join(__dirname, '/img/' + imageName), null, (err) => {
+      if(err) {
+        console.log('Error on image get\n', JSON.stringify({file: imageName, error: err}));
+        res.send(JSON.stringify(err));
+      } else {
+        console.log('Sent file', imageName);
+      }
+    });
+  } else {
+    res.status(400).send('Invalid param string');
+  }
 });
 
 app.get('/api/tours', (req, res) => {

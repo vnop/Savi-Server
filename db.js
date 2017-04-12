@@ -44,6 +44,7 @@ var Booking = schema.define('booking', {
 });
 
 var Tour = schema.define('tour', {
+  title: Sequelize.STRING,
 	description: Sequelize.STRING,
   mainImage: Sequelize.TEXT
 });

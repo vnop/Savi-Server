@@ -11,11 +11,19 @@ db.syncTables(true).then(function() {
 	  		mainImage: city.mainImage
 	  	}
 	  ).then(function(createdCity) {
-			db.Tour.create({
-				cityId: createdCity.dataValues.id,
-				description: city.description,
-				mainImage: city.mainImage
-			});
+	  	city.tours.forEach((tour, index) => {
+	  		db.Tour.create({
+	  			cityId: createdCity.dataValues.id,
+	  			title: tour.title,
+	  			description: tour.description,
+	  			mainImage: tour.mainImage
+	  		});
+	  	});
+			// db.Tour.create({
+			// 	cityId: createdCity.dataValues.id,
+			// 	description: city.description,
+			// 	mainImage: city.mainImage
+			// });
 
 			sampleData.users.forEach(function(user) {
 				if( user.city === createdCity.dataValues.name	) {

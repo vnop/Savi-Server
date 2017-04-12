@@ -2,44 +2,105 @@ module.exports = {
 	cities: [
 		{
 			name: 'Paris',
-			description: 'Skip the line to the Paris Catacombs and discover a darker side to the City of Lights. Descend beneath the streets of Paris and listen to the commentary from your informative audio guide, available in 4 languages.',
-			mainImage: 'https://pbs.twimg.com/media/C4QNypEWEAQT32x.jpg'
+			mainImage: 'paris_city.jpg',
+			tours: [
+				{
+					title: 'Eiffel Tower',
+					description: 'See the outside and inside of the famous Eiffel Tower. Learn the ins and outs of this historical building, eat in the restaurant, and leave with an experience you\'ll never forget!',
+					mainImage: 'paris_tour_eiffel-tower.jpg'
+				},
+				{
+					title: 'The Riever Seine',
+					description: 'Take a boat down the River Seine for a beautiful view of Paris right as the sun sets, then get dropped off just in time to visit some of the world\'s finest restaurants',
+					mainImage: 'paris_tour_seine.jpg'
+				},
+				{
+					title: 'Restaurant Scene',
+					description: 'For the foodie tourist, this guided walkthrough will introduce you to some of the finest places to eat in the heart of Paris. By the time the tour is over you will be ready to dine like royalty!',
+					mainImage: 'paris_tour_restaurants'
+				}
+			]
 		},
 		{
 			name: 'London',
-			description: 'See London from a different perspective on the London Eye and enjoy the new 4D Experience, a groundbreaking 3D film with spectacular in-theater effects that include wind, bubbles, and mist. Fast-track admission is also available.',
-			mainImage: 'https://media.timeout.com/images/100644443/image.jpg'
+			mainImage: 'london_city.jpg',
+			tours: [
+				{
+					title: 'See the City',
+					description: 'See London from a different perspective on the London Eye and enjoy the new 4D Experience, a groundbreaking 3D film with spectacular in-theater effects that include wind, bubbles, and mist. Fast-track admission is also available.',
+					mainImage: 'london_tour_city.jpg'
+				},
+				{
+					title: 'Big Ben',
+					description: 'Visit London\s most iconic building, the clock tower Big Ben and get the inside scoop on its historical significance, how it was built, and more',
+					mainImage: 'london_tour_big-ben.jpg'
+				},
+				{
+					title: 'Buckingham Palace',
+					description: 'This guided tour of Buckingham Palace will give you insight like no other into the inner workings of the royal family\'s famous abode',
+					mainImage: 'london_tour_buckingham-palace.jpg'
+				}
+			]
 		},
 		{
 			name: 'Amsterdam',
-			description: 'Enjoy a marvellous canal cruise in Amsterdam on board of a semi-open electric boat with zero emissions, and benefit from an audioguide in 19 different languages!',
-			mainImage: 'https://triptravel.es/wp-content/uploads/2017/03/escapada_a_amsterdam_en_febrero_marzo_y_abril-reservas-hoteles_en_amsterdam-restaurantes_en_amsterdam-vacaciones_en_paises_bajos-lunas_de_miel_en_amsterdam-viajes_a_paises_bajos-vuelos_a_paises_bajos-1024x538.jpg'
+			mainImage: 'amsterdam_city.jpg',
+			tours: [
+				{
+					title: 'Canal Boat Tour',
+					description: 'Enjoy a marvellous canal cruise in Amsterdam on board of a semi-open electric boat with zero emissions, and benefit from an audioguide in 19 different languages!',
+					mainImage: 'amsterdam_tour_canal.jpg'
+				},
+				{
+					title: 'Amsterdam Night Life',
+					description: 'Get an end-to-end tour of Amsterdam\'s greatest party spots. Come tour the night life during the day so you know where to go once the sun sets. These guides are experienced in having a great time!',
+					mainImage: 'amsterdam_tour_night-life.jpg'
+				}
+			]
 		},
 		{
 			name: 'Rio de Janeiro',
-			description: 'See 2 of the most iconic sights of Rio de Janeiro on a 4-hour guided tour of Corcovado and the Selarón Steps. Add-on Sugar Loaf Mountain on a 6-hour tour, and see Rio from different perspectives. Marvel at Chilean artist Jorge Selarón’s ceramic art steps!',
-			mainImage: 'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcS3n0PS3xp282FtZw0j9_Cd789HepQ0_ons1woN6tykGPUoS5GI'
+			mainImage: 'rio-de-janiero_city.jpg',
+			tours: [
+				{
+					title: 'Rio de Janiero Highlights',
+					description: 'See 2 of the most iconic sights of Rio de Janeiro on a 4-hour guided tour of Corcovado and the Selarón Steps. Add-on Sugar Loaf Mountain on a 6-hour tour, and see Rio from different perspectives. Marvel at Chilean artist Jorge Selarón’s ceramic art steps!',
+					mainImage: 'rio-de-janiero_tour_city.jpg'
+				}
+			]
 		},
 		{
 			name: 'Shanghai',
-			description: 'For tourists who only have a short layover in Shanghai, taking sightseeing bus to explore the beauty of the city undoubtedly is a good idea. In this way, visitors can squeeze limited time to tour around more must-sees during their one or two day(s) trip.',
-			mainImage: 'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcROreloGGsSrsPROFFx2uX3ziyWnKGtcZ63ubREZS5By1v3BP6Y'
+			mainImage: 'shanghai_city.jpg',
+			tours: [
+				{
+					title: 'Shanghai in a Hurry',
+					description: 'For tourists who only have a short layover in Shanghai, taking sightseeing bus to explore the beauty of the city undoubtedly is a good idea. In this way, visitors can squeeze limited time to tour around more must-sees during their one or two day(s) trip.',
+					mainImage: 'shanghai_tour_layover.jpg'
+				}
+			]
 		},
 		{
 			name: 'New York',
-			description: 'The open-top Big Bus sightseeing tour is the most enjoyable and convenient way to see New York! You’ll see famous landmarks such as the iconic Empire State Building to the new One World Trade Center.',
-			mainImage: 'https://only-apartments.storage.googleapis.com/web/imgs/city/New-York_Small.jpg'
+			mainImage: 'new-york_city.jpg',
+			tours: [
+				{
+					title: 'NYC Bus Tour',
+					description: 'The open-top Big Bus sightseeing tour is the most enjoyable and convenient way to see New York! You’ll see famous landmarks such as the iconic Empire State Building to the new One World Trade Center.',
+					mainImage: 'new-york_tour_bus.jpg'
+				}
+			]
 		}
 	],
 
 	languages: [
-		'English', 
-		'Spanish', 
-		'French', 
-		'Italian', 
-		'Portuguese', 
-		'German', 
-		'Mandarin', 
+		'English',
+		'Spanish',
+		'French',
+		'Italian',
+		'Portuguese',
+		'German',
+		'Mandarin',
 		'Japanese'
 	],
 
@@ -50,7 +111,7 @@ module.exports = {
 			userEmail: 'peter@gmail.com',
 			mdn: '12323123',
 			country: 'USA',
-			photo: 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRr-2ztovFQrCV_5GpReNfM6uv2q7RzbJQWWyMX9L3pq2FsfRJH',			
+			photo: 'peter-melnick.jpg',
 			city: 'New York',
 			languages: ['English', 'French']
 		},
@@ -60,7 +121,7 @@ module.exports = {
 			userEmail: 'marge@gmail.com',
 			mdn: '54534323',
 			country: 'USA',
-			photo: 'https://qzprod.files.wordpress.com/2016/06/xxxx.jpg?quality=80&strip=all&w=1600',
+			photo: 'elisa-bhandari.jpg',
 			city: 'Rio de Janeiro',
 			languages: ['Portuguese', 'English', 'French']
 		},
@@ -70,7 +131,7 @@ module.exports = {
 			userEmail: 'serge@gmail.com',
 			mdn: '28288172',
 			country: 'France',
-			photo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSczp-qWQc6aplGEBkTCs3i6E7FP0pMheYitx0c3OM0YbhCPiKqMg',
+			photo: 'serge-henry.jpg',
 			city: 'Paris',
 			languages: ['French', 'English', 'Italian']
 		},
@@ -80,7 +141,7 @@ module.exports = {
 			userEmail: 'franz@gmail.com',
 			mdn: '2729384',
 			country: 'Germany',
-			photo: 'http://az616578.vo.msecnd.net/files/2015/10/09/635799543747153957-829668496_TOUR%20.jpg',
+			photo: 'franz-bauer.jpg',
 			city: 'London',
 			languages: ['German', 'English', 'Spanish']
 		},
@@ -90,7 +151,7 @@ module.exports = {
 			userEmail: 'albert@gmail.com',
 			mdn: '82738376',
 			country: 'Netherlands',
-			photo: 'https://engagingplaces.files.wordpress.com/2016/02/tour-guide-antwerp.jpg',
+			photo: 'albert-hoffmann.jpg',
 			city: 'Amsterdam',
 			languages: ['German', 'English']
 		},

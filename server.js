@@ -56,7 +56,7 @@ app.get('/api/bookings', (req, res) => {
                 booking.driver = driver;
               }
             });
-            let findGuide = db.user.find({where: {cityId: city.dataValues.id, type: 'Tour Guide'}}).then((guide) => {
+            let findGuide = db.UserData.find({where: {cityId: city.dataValues.id, type: 'Tour Guide'}}).then((guide) => {
               if (guide) {
                 booking.guide = guide;
               }

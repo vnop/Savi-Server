@@ -65,10 +65,10 @@ db.syncTables(true).then(function() {
 						db.UserLanguages.create({
 							userId: index + 1,
 							languageId: createdLanguage.id
-						})
+						}).catch((error) => {console.log('error on creating user_language', error, '\n*****************************************************************')});
 					}
 				})
 			})
-		}).catch((error) => {console.log('eror on create user_language', error)});
+		})
 	});
 });

@@ -1,6 +1,6 @@
 # Savi-Server
 
-Seed File
+### Seed File
 
 The sampleData.js file will help will seed the DB or recreate and seed the tables if they already have data in it. Use it then as a starting or reset command.
 
@@ -11,3 +11,10 @@ With that done, and the DB created on each environment, you should be able to ty
 ```> nodejs seed.js```
 
 
+### API Endpoints
+- GET
+  - `/api/tours` gets all tours from the DB
+  - `/api/tours?cityId=X` gets all tours for the city with ID of X
+  - `/api/tours?tourId=X` gets the tour of that particular ID
+  - `/api/cities` gets all cities from the DB
+  - `/api/images/<imagename>` gets the image of that name

@@ -76,7 +76,7 @@ module.exports = {
 			mainImage: 'amsterdam_tour_night-life.jpg'
 		},
 		{
-			city: 'Rio de Janeiro'
+			city: 'Rio de Janeiro',
 			title: 'Rio de Janeiro Highlights',
 			description: 'See 2 of the most iconic sights of Rio de Janeiro on a 4-hour guided tour of Corcovado and the Selarón Steps. Add-on Sugar Loaf Mountain on a 6-hour tour, and see Rio from different perspectives. Marvel at Chilean artist Jorge Selarón’s ceramic art steps!',
 			mainImage: 'rio-de-janiero_tour_city.jpg'

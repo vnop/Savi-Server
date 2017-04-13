@@ -6,7 +6,7 @@ var schema = new Sequelize(config.dbName, 'root', config.password);
 var UserData = schema.define('user_data', {
   userName: Sequelize.STRING,
   userEmail: Sequelize.STRING,
-  mdn: Sequelize.INTEGER,
+  mdn: Sequelize.STRING,
   country: Sequelize.STRING,
   photo: Sequelize.STRING,
   type: { type: Sequelize.STRING, defaultValue: 'Turist'}

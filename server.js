@@ -1,14 +1,16 @@
 'use strict'
-const db = require('./db');
-const express = require('express');
-const mysql = require('mysql');
 const fs = require('fs');
-const https = require('https');
-const config = require('./config/config');
-const bodyParser = require('body-parser');
-const morgan = require('morgan');
-const helpers = require('./helpers');
 const path = require('path');
+const mysql = require('mysql');
+const https = require('https');
+const morgan = require('morgan');
+const express = require('express');
+const Promise = require('bluebird');
+const bodyParser = require('body-parser');
+
+const db = require('./db');
+const helpers = require('./helpers');
+const config = require('./config/config');
 
 db.syncTables(false);
 const app = express();
@@ -34,11 +36,46 @@ app.get('/api/cities', (req, res) => {
   }
 });
 
-// app.get('/api/bookings', (req, res) => {
-//   let tourId = req.query.tourId;
-//   let date = req.query.date;
-//   let
-// });
+app.get('/api/bookings', (req, res) => {
+  let tourId = req.query.tourId;
+  let date = req.query.date;
+  if (!tourId || !date) {
+    res.status(400).send('Invalid query string');
+  } else {
+    db.Tour.find({where: {id: tourId}}).then((tour) =>  {
+      if (!tour) {
+        res.status(404).send('Tour not found');
+      } else {
+        db.City.find({where: {id: tour.dataValues.cityId}}).then((city) => {
+          if(!city) {
+            res.status(404).send('City not found');
+          } else {
+            let booking = {tour: tour, city: city, date: date};
+            let findDriver = db.UserData.find({where: {cityId: city.dataValues.id, type: 'Driver'}}).then((driver) => {
+              if (driver) {
+                booking.driver = driver;
+              }
+            });
+            let findGuide = db.UserData.find({where: {cityId: city.dataValues.id, type: 'Tour Guide'}}).then((guide) => {
+              if (guide) {
+                booking.guide = guide;
+              }
+            });
+
+            Promise.all([findDriver, findGuide]).then(() => {
+              console.log(booking);
+              if (booking.guide && booking.driver) {
+                res.json(booking).end();
+              } else {
+                res.send('We were unable to book you with the given parameters');
+              }
+            })
+          }
+        });
+      }
+    });
+  }
+});
 
 app.get('/api/test', (req, res) => {
   res.status(404).send('error');
@@ -49,6 +86,8 @@ app.get('/api/images/:imageName', (req, res) => {
   let exists = fs.existsSync(path.join(__dirname, '/img/' + imageName));
   if (imageName && exists) {
     res.sendFile(path.join(__dirname, '/img/' + imageName));
+  } else if (!exists) {
+    res.status(404).send('Image does not exist');
   } else {
     res.status(400).send('Invalid param string');
   }

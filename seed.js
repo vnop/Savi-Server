@@ -67,6 +67,7 @@ Promise.all(languageCreation.concat(cityCreation)).then(() => {
 		});
 	});
 });
+
 /*
 db.syncTables(true).then(function() {
 	sampleData.cities.forEach(function(city, index) {
@@ -136,3 +137,4 @@ db.syncTables(true).then(function() {
 	});
 
 });
+*/

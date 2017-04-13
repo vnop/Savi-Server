@@ -39,7 +39,7 @@ const seedDatabase = () => {
 				db.Tour.create({
 					cityId: cityId,
 					title: tour.title,
-					description: tour.descrpition,
+					description: tour.description,
 					mainImage: tour.mainImage
 				})
 			});

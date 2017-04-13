@@ -8,7 +8,9 @@ const sampleData = require('./sampleData');
 const Promise = require('bluebird');
 
 const getCityId = (name) => {
-	return db.City.find({where: {name: name}}).then(resolve(city.dataValues.id));
+	return db.City.find({where: {name: name}}).then((city) => {
+		return city.dataValues.id;
+	});
 };
 
 let cityCreation = [];
@@ -134,5 +136,3 @@ db.syncTables(true).then(function() {
 	});
 
 });
-
-*/

@@ -10,7 +10,9 @@ const Promise = require('bluebird');
 
 const getCityId = (name) => {
 	return db.City.find({where: {name: name}}).then((city) => {
-		return city.dataValues.id;
+		return new Promise((resolve) => {
+			resolve(city.dataValues.id);
+		});
 	});
 };
 

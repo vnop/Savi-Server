@@ -58,7 +58,7 @@ const seedDatabase = () => {
 					mdn: user.mdn,
 					country: user.country,
 					photo: user.photo,
-					city: cityId
+					cityId: cityId
 				}).then((createdUser) => {
 					user.languages.forEach((language, index) => {
 						db.Languages.find({where: {title: language}}).then((language) => {

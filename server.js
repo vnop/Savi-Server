@@ -63,7 +63,6 @@ app.get('/api/bookings', (req, res) => {
             });
 
             Promise.all([findDriver, findGuide]).then(() => {
-              console.log(booking);
               if (booking.guide && booking.driver) {
                 res.json(booking).end();
               } else {

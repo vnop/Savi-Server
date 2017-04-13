@@ -213,7 +213,7 @@ module.exports = {
 			userEmail: 'therock@muscles.org',
 			mdn: '202-555-0180',
 			country: 'USA',
-			photo: 'Dwayne Johnson',
+			photo: 'dwayne-johnson.jpg',
 			city: 'Rio de Janeiro',
 			languages: ['English', 'Spanish']
 		},

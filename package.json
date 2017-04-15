@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "mocha -R spec test/server-spec.js",
-    "start": "sudo nodemon server.js 2>&1 | tee server.log"
+    "start": "sudo nodemon server.js 2>&1 | tee server.log",
+    "seed": "node db/seed.js"
   },
   "repository": {
     "type": "git",

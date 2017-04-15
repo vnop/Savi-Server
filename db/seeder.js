@@ -6,10 +6,6 @@
 const db = require('./db');
 const sampleData = require('./sampleData');
 const Promise = require('bluebird');
-const Sequelize = require('sequelize');
-const config = require('../config/config');
-var schema = new Sequelize(config.dbName, 'root', config.password);
-
 
 const getCityId = (name) => {
 	return db.City.find({where: {name: name}}).then((city) => {

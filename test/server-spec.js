@@ -3,14 +3,21 @@
 const request = require('supertest');
 const express = require('express');
 const http = require('http');
+const Sequelize = require('sequelize');
+const testDBSetup = require('./testDBSetup');
+const db = require('../db/db');
+
 const port = 1337;
-// require('../seed');
 
 describe('server load test', () => {
   var server, app;
+  before((done) => {
+    testDBSetup(db).then(done);
+  });
+
   beforeEach(() => {
     app = express();
-    require('../routes')(app, express);
+    require('../routes')(app, express, db);
     server = app.listen(port, () => {
       console.log('server listening on', port);
     });

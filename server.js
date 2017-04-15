@@ -21,8 +21,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 require('./routes.js')(app, express);
 
-// THIS IS A CHANGE
-
 var pKey = fs.readFileSync('/etc/letsencrypt/live/savi-travel.com/privkey.pem');
 var cert = fs.readFileSync('/etc/letsencrypt/live/savi-travel.com/fullchain.pem');
 var ca = fs.readFileSync('/etc/letsencrypt/live/savi-travel.com/chain.pem');

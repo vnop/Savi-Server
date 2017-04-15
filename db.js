@@ -9,7 +9,7 @@ var UserData = schema.define('user_data', {
   mdn: Sequelize.STRING,
   country: Sequelize.STRING,
   photo: Sequelize.STRING,
-  type: { type: Sequelize.STRING, defaultValue: 'Turist'}
+  type: { type: Sequelize.STRING, defaultValue: 'Tourist'}
 });
 
 var DriverData = schema.define('driver_data', {

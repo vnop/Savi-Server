@@ -7,12 +7,12 @@ const express = require('express');
 const Promise = require('bluebird');
 const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
-const db = require('./db');
+const db = require('./db/db');
 const helpers = require('./helpers');
 const mailer = require('./mailer/mailer')
 
 module.exports = function(app, express) {
-	app.get('/email', function(req, res) {	  	  
+	app.get('/email', function(req, res) {
 		// This function takes 4 arguments (targetEmail, userName, tourName, date)
 	  mailer.transporter.sendMail(mailer.mailOptions(/*........*/), (error, info) => {
        if (error) {

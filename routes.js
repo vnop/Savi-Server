@@ -5,9 +5,10 @@ const https = require('https');
 const morgan = require('morgan');
 const express = require('express');
 const Promise = require('bluebird');
+const passport = require('passport');
+const bodyParser = require('body-parser');
 const helpers = require('./helpers');
 const nodemailer = require('nodemailer');
-const bodyParser = require('body-parser');
 const mailer = require('./mailer/mailer');
 
 module.exports = function(app, express, db) {
@@ -25,6 +26,17 @@ module.exports = function(app, express, db) {
        }
        console.log('Message %s sent: %s', info.messageId, info.response);
 	  });
+	});
+
+	app.get('/login/facebook', function(req, res) {	  	  
+		passport.authenticate('facebook'));
+	});
+
+	app.get('/login/facebook/return', function(req, res) {	  	  
+		passport.authenticate('facebook', { failureRedirect: '/login' }),
+		function(req, res) {			
+			res.redirect('/');
+		}
 	});
 
 	app.get('/api/cities', (req, res) => {

@@ -8,11 +8,15 @@ const express = require('express');
 const Promise = require('bluebird');
 const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
-const db = require('./db');
+const Sequelize = require('sequelize');
+
+const db = require('./db/db');
 const helpers = require('./helpers');
 const config = require('./config/config');
 
-db.syncTables(false);
+const schema = new Sequelize(config.dbName, 'root', config.password);
+
+db.syncTables(false, schema);
 const app = express();
 
 app.use(morgan('dev')); //set logger

@@ -6,6 +6,9 @@
 const db = require('./db');
 const sampleData = require('./sampleData');
 const Promise = require('bluebird');
+const Sequelize = require('sequelize');
+const config = require('../config/config');
+var schema = new Sequelize(config.dbName, 'root', config.password);
 
 
 const getCityId = (name) => {
@@ -17,7 +20,7 @@ const getCityId = (name) => {
 };
 
 
-const seedDatabase = () => {
+const seedDatabase = (db) => {
 	let cityCreation = [];
 	sampleData.cities.forEach((city, index) => {
 		let createSingleCity = db.City.create({
@@ -74,7 +77,7 @@ const seedDatabase = () => {
 	});
 }
 
-db.syncTables(true).then(seedDatabase);
+db.syncTables(true, schema).then(() => {seedDatabase(db)});
 /*
 db.syncTables(true).then(function() {
 	sampleData.cities.forEach(function(city, index) {

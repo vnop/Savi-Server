@@ -4,6 +4,7 @@ const request = require('supertest');
 const express = require('express');
 const http = require('http');
 const port = 1337;
+// require('../seed');
 
 describe('server load test', () => {
   var server, app;
@@ -24,5 +25,16 @@ describe('server load test', () => {
 
   it('/api/tours/ should respond', (done) => {
     request(server).get('/api/tours').expect(200, done);
+  });
+
+  it('should respond with 404 for unknown route', (done) => {
+    request(server).get('/unknown').expect(404, done);
+  });
+
+  it('This test is a test test', (done) => {
+    request(server).get('/api/cities').end((err, res) => {
+      console.log(res);
+      done();
+    });
   });
 });

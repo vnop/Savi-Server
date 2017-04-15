@@ -1,1 +1,1 @@
-sudo node server.js 2>&1 | tee server.log
+sudo nodemon server.js 2>&1 | tee server.log

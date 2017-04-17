@@ -27,8 +27,8 @@ const saveImage = (imageURL, imageName) => {
     encoding: null
   }
 
+  var fullPath = path.join(__dirname, '/img/' + imageName);
   request(options, (err, res, body) => {
-    var fullPath = path.join(__dirname, '/img/' + imageName);
     if (err) {
       return false
     } else {
@@ -43,7 +43,6 @@ const saveImage = (imageURL, imageName) => {
         return false;
       }
     }
-    console.log(fullPath);
     fs.writeFileSync(fullPath, body);
     return true;
   });

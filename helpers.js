@@ -55,7 +55,7 @@ const saveImage = (imageURL, imageName) => {
         res();
       }
     });
-  })
+  });
 }
 
 module.exports = {

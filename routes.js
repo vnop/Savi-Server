@@ -84,7 +84,7 @@ module.exports = function(app, express, db) {
 
 	app.get('/api/test', (req, res) => {
 		let saveImage = helpers.saveImage('http://1.bp.blogspot.com/-4x8LvBUopUg/UP_3v-hRgcI/AAAAAAAAC90/rerm6FhEJ4I/s1600/Anthony+Lamb+-+Nick+Cage+as+Salvador+Dali.jpg', 'test-img');
-		saveImage.then(() => {res.end()}, (err) => {res.status(500).send(err)};
+		saveImage.then(() => {res.end()}, (err) => {res.status(500).send(err)});
 	});
 
 	app.get('/api/images/:imageName', (req, res) => {

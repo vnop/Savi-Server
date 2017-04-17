@@ -38,9 +38,22 @@ module.exports = function(app, express, db) {
 	  }
 	});
 
-	// app.post('/api/cities', (req, res) => {
-	// 	let name =
-	// });
+	app.post('/api/cities', (req, res) => {
+		let name = req.body.name;
+		let imageUrl = req.body.mainImage;
+		let mainImage = name.split(' ').join('-').toLowerCase() + '_city';
+		helpers.saveImage(imageUrl, mainImage).then((imageName) => {
+			db.City.create({name: name, mainImage: mainImage}).then((newCity) => {
+				res.send('created ' + newCity.dataValues.name);
+			}).catch((error) => {
+				res.status(500).send('error');
+			});
+		}, (error) => {
+			res.status(500).send
+		}).catch((error) => {
+			res.status(500).send('error');
+		});
+	});
 
 	app.get('/api/bookings', (req, res) => {
 	  let tourId = req.query.tourId;
@@ -82,10 +95,16 @@ module.exports = function(app, express, db) {
 	  }
 	});
 
-	app.get('/api/test', (req, res) => {
-		let saveImage = helpers.saveImage('http://1.bp.blogspot.com/-4x8LvBUopUg/UP_3v-hRgcI/AAAAAAAAC90/rerm6FhEJ4I/s1600/Anthony+Lamb+-+Nick+Cage+as+Salvador+Dali.jpg', 'test-img');
-		saveImage.then((imageName) => {res.send('saved image as ' + imageName)}, (err) => {res.status(500).send({err: err})});
-	});
+	// app.get('/api/test', (req, res) => {
+	// 	let saveImage = helpers.saveImage('http://1.bp.blogspot.com/-4x8LvBUopUg/UP_3v-hRgcI/AAAAAAAAC90/rerm6FhEJ4I/s1600/Anthony+Lamb+-+Nick+Cage+as+Salvador+Dali.jpg', 'test-img');
+	// 	saveImage.then((imageName) => {
+	// 		res.send('saved image as ' + imageName)
+	// 	}, (err) => {
+	// 		res.status(500).send(err);
+	// 	}).catch((err) => {
+	// 		res.status(500).send(err);
+	// 	});
+	// });
 
 	app.get('/api/images/:imageName', (req, res) => {
 	  let imageName = req.params.imageName;

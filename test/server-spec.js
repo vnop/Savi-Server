@@ -81,6 +81,13 @@ describe('Cities endpoints', () => {
     request(server).get('/api/cities?cityId=1').expect('{"id":1,"name":"Gotham","mainImage":"gotham_city.jpg"}', done);
   });
 
+  it('post to /api/cities should create a new city', (done) => {
+    request(server).post('/api/cities').field('name', 'Central City').field('mainImage', 'http://i.imgur.com/w1S5ZM5.jpg').end((err, res) => {
+      console.log(res);
+      done();
+    });
+  })
+
 });
 
 describe('Tours endpoints', () => {

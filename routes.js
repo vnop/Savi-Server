@@ -79,14 +79,8 @@ module.exports = function(app, express, db) {
 	});
 
 	app.post('/api/test', (req, res) => {
-		let query = req.body.imageURL;
-		console.log('req.body', req.body);
-		let saveStatus = helpers.saveImage(query, 'testImg');
-		if (!saveStatus) {
-			res.status(500).send('something went wrong');
-		} else {
-			res.send('okay');
-		}
+		helpers.saveImage('http://1.bp.blogspot.com/-4x8LvBUopUg/UP_3v-hRgcI/AAAAAAAAC90/rerm6FhEJ4I/s1600/Anthony+Lamb+-+Nick+Cage+as+Salvador+Dali.jpg', 'test-img');
+		res.end();
 	});
 
 	app.get('/api/images/:imageName', (req, res) => {

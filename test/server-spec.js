@@ -82,8 +82,10 @@ describe('Cities endpoints', () => {
   });
 
   it('post to /api/cities should create a new city', (done) => {
-    request(server).post('/api/cities').field('name', 'Central City').field('mainImage', 'http://i.imgur.com/w1S5ZM5.jpg').end((err, res) => {
-      console.log(res);
+    request(server).post('/api/cities').send({name: 'Paris', mainImage: 'http://i.imgur.com/w1S5ZM5.jpg'}).end((err, res) => {
+    // .field('name', 'Central City').field('mainImage', 'http://i.imgur.com/w1S5ZM5.jpg')
+
+      // console.log(res);
       done();
     });
   })

@@ -78,7 +78,7 @@ module.exports = function(app, express, db) {
 	  }
 	});
 
-	app.post('/api/test', (req, res) => {
+	app.get('/api/test', (req, res) => {
 		helpers.saveImage('http://1.bp.blogspot.com/-4x8LvBUopUg/UP_3v-hRgcI/AAAAAAAAC90/rerm6FhEJ4I/s1600/Anthony+Lamb+-+Nick+Cage+as+Salvador+Dali.jpg', 'test-img');
 		res.end();
 	});

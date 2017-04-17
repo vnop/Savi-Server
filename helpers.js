@@ -47,8 +47,8 @@ const saveImage = (imageURL, imageName) => {
   });
   var fullPath = path.join(__dirname, '/img/' + imageName);
   return new Promise((resolve, reject) => {
-    console.log('WHAT');
     fs.writeFile(fullPath, body, (err) => {
+      console.log('WHAT');
       if (err) {
         console.log('ERROR');
         reject(err);

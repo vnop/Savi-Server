@@ -26,8 +26,9 @@ const saveImage = (imageURL, imageName) => {
     url: imageURL,
     encoding: null
   }
-
+  var data;
   request(options, (err, res, body) => {
+    data = body;
     if (err) {
       console.log('false because error on get')
       return false;
@@ -48,17 +49,13 @@ const saveImage = (imageURL, imageName) => {
   var fullPath = path.join(__dirname, '/img/' + imageName);
   return new Promise((resolve, reject) => {
     console.log('WHAT');
-    fs.writeFile(fullPath, body, (err) => {
+    fs.writeFile(fullPath, data, (err) => {
       if (err) {
-        console.log('ERROR');
         reject(err);
       } else {
-        console.log('GOOD TO GO');
         resolve(imageName);
       }
     });
-  }).catch((err) => {
-    console.log(err);
   });
 }
 

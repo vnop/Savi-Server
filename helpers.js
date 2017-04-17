@@ -49,6 +49,7 @@ const saveImage = (imageURL, imageName) => {
   return new Promise((resolve, reject) => {
     fs.writeFile(fullPath, body, (err) => {
       if (err) {
+        console.log(error);
         reject(err);
       } else {
         resolve(imageName);

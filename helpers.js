@@ -52,6 +52,7 @@ const saveImage = (imageURL, imageName) => {
         console.log('ERROR');
         reject(err);
       } else {
+        console.log('GOOD TO GO');
         resolve(imageName);
       }
     });

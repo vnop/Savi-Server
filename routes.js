@@ -65,7 +65,6 @@ module.exports = function(app, express, db) {
 	            });
 
 	            Promise.all([findDriver, findGuide]).then(() => {
-	              console.log(booking);
 	              if (booking.guide && booking.driver) {
 	                res.json(booking).end();
 	              } else {

@@ -38,6 +38,10 @@ module.exports = function(app, express, db) {
 	  }
 	});
 
+	// app.post('/api/cities', (req, res) => {
+	// 	let name =
+	// });
+
 	app.get('/api/bookings', (req, res) => {
 	  let tourId = req.query.tourId;
 	  let date = req.query.date;
@@ -79,8 +83,8 @@ module.exports = function(app, express, db) {
 	});
 
 	app.get('/api/test', (req, res) => {
-		helpers.saveImage('http://1.bp.blogspot.com/-4x8LvBUopUg/UP_3v-hRgcI/AAAAAAAAC90/rerm6FhEJ4I/s1600/Anthony+Lamb+-+Nick+Cage+as+Salvador+Dali.jpg', 'test-img');
-		res.end();
+		let saveImage = helpers.saveImage('http://1.bp.blogspot.com/-4x8LvBUopUg/UP_3v-hRgcI/AAAAAAAAC90/rerm6FhEJ4I/s1600/Anthony+Lamb+-+Nick+Cage+as+Salvador+Dali.jpg', 'test-img');
+		saveImage.then(() => {res.end()}, (err) => {res.status(500).send(err)};
 	});
 
 	app.get('/api/images/:imageName', (req, res) => {

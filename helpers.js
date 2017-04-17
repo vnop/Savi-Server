@@ -46,10 +46,16 @@ const saveImage = (imageURL, imageName) => {
         return false;
       }
     }
-    fs.writeFileSync(fullPath, body);
-    return true;
   });
-
+  return new Promise((res, rej) => {
+    fs.writeFile(fullPath, body, (err) => {
+      if (err) {
+        rej(err)
+      } else {
+        res();
+      }
+    });
+  })
 }
 
 module.exports = {

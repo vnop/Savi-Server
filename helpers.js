@@ -22,7 +22,7 @@ const saveImage = (imageURL, imageName) => {
   };
 
   let options = {
-    method: GET,
+    method: 'GET',
     url: imageURL,
     encoding: null
   }

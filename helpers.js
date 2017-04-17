@@ -27,32 +27,31 @@ const saveImage = (imageURL, imageName) => {
     encoding: null
   }
 
-  var fullPath = path.join(__dirname, '/img/' + imageName);
   request(options, (err, res, body) => {
     if (err) {
       console.log('false because error on get')
       return false;
     } else {
       let bodyHeader = body.toString('hex', 0, 4);
-      console.log(bodyHeader);
       if (bodyHeader === validHeaders.jpg) {
-        fullPath += '.jpg';
+        imageName += '.jpg';
       } else if (bodyHeader === validHeaders.png) {
-        fullPath += '.png';
+        imageName += '.png';
       } else if (bodyHeader === validHeaders.gif) {
-        fullPath += '.gif'
+        imageName += '.gif'
       } else {
         console.log('false because bad format');
         return false;
       }
     }
   });
-  return new Promise((res, rej) => {
+  var fullPath = path.join(__dirname, '/img/' + imageName);
+  return new Promise((resolve, reject) => {
     fs.writeFile(fullPath, body, (err) => {
       if (err) {
-        rej(err)
+        reject(err);
       } else {
-        res();
+        resolve(imageName);
       }
     });
   });

@@ -40,7 +40,7 @@ const saveImage = (imageURL, imageName) => {
       } else if (bodyHeader === validHeaders.gif) {
         fullPath += '.gif'
       } else {
-        retrurn false;
+        return false;
       }
     }
   });

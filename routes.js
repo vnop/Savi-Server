@@ -80,6 +80,7 @@ module.exports = function(app, express, db) {
 
 	app.post('/api/test', (req, res) => {
 		let query = req.body.imageURL;
+		console.log('query');
 		let saveStatus = helpers.saveImage(query, 'testImg');
 		if (!saveStatus) {
 			res.status(500).send('something went wrong');

@@ -30,9 +30,11 @@ const saveImage = (imageURL, imageName) => {
   var fullPath = path.join(__dirname, '/img/' + imageName);
   request(options, (err, res, body) => {
     if (err) {
-      return false
+      console.log('false because error on get')
+      return false;
     } else {
       let bodyHeader = body.toString('hex', 0, 4);
+      console.log(bodyHeader);
       if (bodyHeader === validHeaders.jpg) {
         fullPath += '.jpg';
       } else if (bodyHeader === validHeaders.png) {
@@ -40,6 +42,7 @@ const saveImage = (imageURL, imageName) => {
       } else if (bodyHeader === validHeaders.gif) {
         fullPath += '.gif'
       } else {
+        console.log('false because bad format');
         return false;
       }
     }

@@ -28,7 +28,7 @@ const saveImage = (imageURL, imageName) => {
   }
 
   request(options, (err, res, body) => {
-    let fullPath = path.join(__dirname, '/img/' + imageName);
+    var fullPath = path.join(__dirname, '/img/' + imageName);
     if (err) {
       return false
     } else {

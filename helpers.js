@@ -43,6 +43,7 @@ const saveImage = (imageURL, imageName) => {
         return false;
       }
     }
+    console.log(fullPath);
     fs.writeFileSync(fullPath, body);
     return true;
   });

@@ -84,9 +84,7 @@ module.exports = function(app, express, db) {
 		if (!saveStatus) {
 			res.status(500).send('something went wrong');
 		} else {
-			saveStatus.then(() => {
-				res.send('okay');
-			});
+			res.send('okay');
 		}
 	});
 

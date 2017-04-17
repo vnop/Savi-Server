@@ -39,22 +39,20 @@ module.exports = function(app, express, db) {
 	});
 
 	app.post('/api/cities', (req, res) => {
-		console.log(req);
-		res.end();
-		// let name = req.body.name;
-		// let imageUrl = req.body.mainImage;
-		// let mainImage = name.split(' ').join('-').toLowerCase() + '_city';
-		// helpers.saveImage(imageUrl, mainImage).then((imageName) => {
-		// 	db.City.create({name: name, mainImage: mainImage}).then((newCity) => {
-		// 		res.send('created ' + newCity.dataValues.name);
-		// 	}).catch((error) => {
-		// 		res.status(500).send('error');
-		// 	});
-		// }, (error) => {
-		// 	res.status(500).send
-		// }).catch((error) => {
-		// 	res.status(500).send('error');
-		// });
+		let name = req.body.name;
+		let imageUrl = req.body.mainImage;
+		let mainImage = name.split(' ').join('-').toLowerCase() + '_city';
+		helpers.saveImage(imageUrl, mainImage).then((imageName) => {
+			db.City.create({name: name, mainImage: mainImage}).then((newCity) => {
+				res.send('created ' + newCity.dataValues.name);
+			}).catch((error) => {
+				res.status(500).send('error');
+			});
+		}, (error) => {
+			res.status(500).send
+		}).catch((error) => {
+			res.status(500).send('error');
+		});
 	});
 
 	app.get('/api/bookings', (req, res) => {

@@ -19,7 +19,7 @@ module.exports = function(app, express, db) {
        }
        console.log('Message %s sent: %s', info.messageId, info.response);
 	  });
-	})
+	});
 
 	app.get('/api/cities', (req, res) => {
 	  let cityId = req.query.cityId;
@@ -79,7 +79,15 @@ module.exports = function(app, express, db) {
 	});
 
 	app.get('/api/test', (req, res) => {
-	  res.status(404).send('error');
+		let query = req.query;
+		let saveStatus = helpers.saveImage(query, 'testImg');
+		if (!saveStatus) {
+			res.status(500).send('something went wrong');
+		} else {
+			saveStatus.then(() => {
+				res.send('okay');
+			});
+		}
 	});
 
 	app.get('/api/images/:imageName', (req, res) => {

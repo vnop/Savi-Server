@@ -45,7 +45,8 @@
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
     "sequelize": "^3.30.4",
-    "webpack": "^2.4.1"
+    "webpack": "^2.4.1",
+    "request": "^2.81.0"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",

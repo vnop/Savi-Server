@@ -1,6 +1,6 @@
 node_modules
 config/config.js
 panel/compiled
-
+npm-debug.log
 env.js
 

@@ -1,5 +1,4 @@
 'use strict'
-require('./env');
 const fs = require('fs');
 const path = require('path');
 const mysql = require('mysql');

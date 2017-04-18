@@ -157,6 +157,7 @@ module.exports = function(app, express, db) {
 
 	app.post('/api/tours', (req, res) => {
 		if (!req.body || !req.body.title || !req.body.description || !req.body.cityId || !req.body.mainImage) {
+			console.log(req.body);
 			res.status(400).send('invalid request');
 		} else {
 			let mainImage = req.body.title.split(' ').join('-') + '_tour';

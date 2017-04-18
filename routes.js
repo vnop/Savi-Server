@@ -5,7 +5,6 @@ const https = require('https');
 const morgan = require('morgan');
 const express = require('express');
 const Promise = require('bluebird');
-const passport = require('passport');
 const bodyParser = require('body-parser');
 const helpers = require('./helpers');
 const nodemailer = require('nodemailer');
@@ -67,7 +66,7 @@ module.exports = function(app, express, db) {
 	      if (!tour) {
 	        res.status(404).send('Tour not found');
 	      } else {
-	        db.City.find({where: {id: tour.dataValues.cityId}}).then((city) => {	        
+	        db.City.find({where: {id: tour.dataValues.cityId}}).then((city) => {
 	          if(!city) {
 	            res.status(404).send('City not found');
 	          } else {
@@ -84,15 +83,15 @@ module.exports = function(app, express, db) {
 	            });
 
 	            Promise.all([findDriver, findGuide]).then(() => {
-	              if (booking.guide && booking.driver) {	              	
+	              if (booking.guide && booking.driver) {
 	              	let tourName = booking.tour.dataValues.title;
 	              	let destinataries = [
 										booking.driver.dataValues,
 										booking.guide.dataValues
-	              	];	              	
+	              	];
 
-	              	mailer.sendMailToAll(destinataries, tourName, booking.date);	              		        
-	               	res.json(booking).end();	              		
+	              	mailer.sendMailToAll(destinataries, tourName, booking.date);
+	               	res.json(booking).end();
 	              } else {
 	                res.send('We were unable to book you with the given parameters');
 	              }

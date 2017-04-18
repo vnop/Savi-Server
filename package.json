@@ -55,6 +55,7 @@
     "babel-cli": "^6.24.1",
     "babel-watch": "^2.0.6",
     "mocha": "^3.2.0",
+    "sequelize-mock": "^0.7.0",
     "sinon": "^2.1.0",
     "supertest": "^3.0.0",
     "webpack-dev-server": "^2.4.2"

@@ -28,12 +28,12 @@ class AddCity extends React.Component {
   }
 
   //INITIAL DATA FETCH
-  componentWillMount() {
-    fetch('https://savi-travel.com:8082/api/cities', {mode: 'no-cors'})
-      .then(resp => resp.json())
-      .then(data => this.setState({data}))
-      .catch(err => console.error(err));
-  }
+  // componentWillMount() {
+  //   fetch('https://savi-travel.com:8082/api/cities', {mode: 'no-cors'})
+  //     .then(resp => resp.json())
+  //     .then(data => this.setState({data}))
+  //     .catch(err => console.error(err));
+  // }
 
   render() {
     return (

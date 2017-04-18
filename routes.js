@@ -60,7 +60,7 @@ module.exports = function(app, express, db) {
 			}, (error) => {
 				res.status(500).send('error saving image', JSON.stringify(error))
 			}).catch((error) => {
-				res.status(500).send('unknown error', , JSON.stringify(error));
+				res.status(500).send('unknown error', JSON.stringify(error));
 			});
 		}
 	});
@@ -178,7 +178,6 @@ module.exports = function(app, express, db) {
 			}).catch((error) => {
 				res.status(500).send('unknown error', JSON.stringify(error));
 			});
-		}
 		}
 	});
 }

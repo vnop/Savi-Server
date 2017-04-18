@@ -29,7 +29,7 @@ module.exports = function(app, express, db) {
 	});
 
 	app.get('/login/facebook', function(req, res) {	  	  
-		passport.authenticate('facebook'));
+		passport.authenticate('facebook');
 	});
 
 	app.get('/login/facebook/return', function(req, res) {	  	  

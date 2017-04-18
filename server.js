@@ -1,4 +1,5 @@
 'use strict'
+require('./env');
 const fs = require('fs');
 const path = require('path');
 const mysql = require('mysql');
@@ -6,6 +7,8 @@ const https = require('https');
 const morgan = require('morgan');
 const express = require('express');
 const Promise = require('bluebird');
+const passport = require('passport');
+const FacebookStrategy = require('passport-facebook');
 const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
 const Sequelize = require('sequelize');
@@ -19,22 +22,16 @@ const schema = new Sequelize(config.dbName, 'root', config.password);
 db.syncTables(false, schema);
 const app = express();
 
-app.use(express.static(path.join(__dirname, './panel')));
-app.use(morgan('dev')); //set logger
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
 require('./routes.js')(app, express, db);
 
-// var pKey = fs.readFileSync('/etc/letsencrypt/live/savi-travel.com/privkey.pem');
-// var cert = fs.readFileSync('/etc/letsencrypt/live/savi-travel.com/fullchain.pem');
-// var ca = fs.readFileSync('/etc/letsencrypt/live/savi-travel.com/chain.pem');
+var pKey = fs.readFileSync('/etc/letsencrypt/live/savi-travel.com/privkey.pem');
+var cert = fs.readFileSync('/etc/letsencrypt/live/savi-travel.com/fullchain.pem');
+var ca = fs.readFileSync('/etc/letsencrypt/live/savi-travel.com/chain.pem');
 
-// let server = https.createServer({key: pKey, cert: cert, ca: ca}, app);
+let server = https.createServer({key: pKey, cert: cert, ca: ca}, app);
 
-// server.listen(config.port, () => {console.log('listening on port', config.port)});
+server.listen(config.port, () => {console.log('listening on port', config.port)});
 
-
-app.listen(config.port, () => {console.log('listening on port... ' + config.port)});
+//app.listen(config.port, () => {console.log('listening on port... ' + config.port)});
 
 

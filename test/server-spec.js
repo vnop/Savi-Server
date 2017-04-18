@@ -1,15 +1,18 @@
 'use strict'
 
-const request = require('supertest');
-const express = require('express');
+const fs = require('fs');
 const http = require('http');
-const Sequelize = require('sequelize');
+const path = require('path');
 const db = require('../db/db');
-const config = require('../config/config');
-const seeder = require('../db/seeder.js');
-const schema = new Sequelize('test', 'root', config.password, {logging: false});
+const express = require('express');
+const request = require('supertest');
 const expect = require('chai').expect;
+const Sequelize = require('sequelize');
+const helpers = require('../helpers.js');
+const seeder = require('../db/seeder.js');
+const config = require('../config/config');
 
+const schema = new Sequelize('test', 'root', config.password, {logging: false});
 const port = 1337;
 
 const compareSomeKeys = (expected, actual) => {
@@ -21,9 +24,70 @@ const compareSomeKeys = (expected, actual) => {
   return true;
 }
 
+describe ('helper function tests', () => {
+
+  after((done) => {
+    fs.unlinkSync(path.join(__dirname, '../img/' + 'test-img0.jpg'));
+    fs.unlinkSync(path.join(__dirname, '../img/' + 'test-img2.jpg'));
+    fs.unlinkSync(path.join(__dirname, '../img/' + 'test-img3.png'));
+    fs.unlinkSync(path.join(__dirname, '../img/' + 'test-img4.gif'));
+    done();
+  })
+
+  it('saveImage should correctly save a valid image', (done) => {
+    var imageSave = helpers.saveImage('http://i.imgur.com/zxPr3e8.jpg', 'test-img0');
+    imageSave.then((imageName) => {
+      expect(imageName).to.equal('test-img0.jpg', 'Should have the correct image name');
+      let exists = fs.existsSync(path.join(__dirname, '../img/' + imageName));
+      expect(exists).to.equal(true, 'Saved image should exist');
+      done();
+    });
+  });
+
+  it('saveImage should error on an invalid image URL', (done) => {
+    var imageSave = helpers.saveImage('badurl', 'test-img1');
+    imageSave.then((imageName) => {
+      expect(imageName).to.not.exist;
+      done();
+    }, (error) => {
+      expect(error).to.exist;
+      done();
+    });
+  });
+
+  it('saveImage should correctly save JPG files as such', (done) => {
+    var imageSave = helpers.saveImage('http://i.imgur.com/zxPr3e8.jpg', 'test-img2');
+    imageSave.then((imageName) => {
+      expect(imageName).to.equal('test-img2.jpg', 'Should have the correct image name');
+      let exists = fs.existsSync(path.join(__dirname, '../img/' + imageName));
+      expect(exists).to.equal(true, 'Saved image should exist');
+      done();
+    });
+  });
+
+  it('saveImage should correctly save PNG files as such', (done) => {
+    var imageSave = helpers.saveImage('http://i.imgur.com/JLTfOBL.png', 'test-img3');
+    imageSave.then((imageName) => {
+      expect(imageName).to.equal('test-img3.png', 'Should have the correct image name');
+      let exists = fs.existsSync(path.join(__dirname, '../img/' + imageName));
+      expect(exists).to.equal(true, 'Saved image should exist');
+      done();
+    });
+  });
+
+  it('saveImage should correctly save GIF files as such', (done) => {
+    var imageSave = helpers.saveImage('http://i.imgur.com/9LEsBZn.gif', 'test-img4');
+    imageSave.then((imageName) => {
+      expect(imageName).to.equal('test-img4.gif', 'Should have the correct image name');
+      let exists = fs.existsSync(path.join(__dirname, '../img/' + imageName));
+      expect(exists).to.equal(true, 'Saved image should exist');
+      done();
+    });
+  });
+});
+
 describe('Basic server tests', () => {
   var server, app;
-  var _this = this;
   before((done) => {
     db.syncTables(true, schema).then(() => {done()});
   });
@@ -69,6 +133,11 @@ describe('Cities endpoints', () => {
     server.close(done);
   });
 
+  after((done) => {
+    fs.unlinkSync(path.join(__dirname, '../img/' + 'central-city_city.jpg'));
+    done();
+  });
+
   it('/api/cities should respond', (done) => {
     request(server).get('/api/cities').expect(200, done);
   });
@@ -81,11 +150,25 @@ describe('Cities endpoints', () => {
     request(server).get('/api/cities?cityId=1').expect('{"id":1,"name":"Gotham","mainImage":"gotham_city.jpg"}', done);
   });
 
+  it('post to /api/cities should create a new city', (done) => {
+    request(server).post('/api/cities').send({name: 'Central City', mainImage: 'http://i.imgur.com/w1S5ZM5.jpg'}).expect('created Central City', done);
+  });
+
+  it('newly created city should respond correctly', (done) => {
+    request(server).get('/api/cities?cityId=3').end((err, res) => {
+      expect(compareSomeKeys({name: 'Central City', mainImage: 'central-city_city.jpg'}, res.body)).to.equal(true, 'server should be able to serve newly created city');
+      done();
+    })
+  });
+
+  it('post to /api/cities should respond with error for bad post body', (done) => {
+    request(server).post('/api/cities').send({datum: 'Item', otherDatum: 'Other Item'}).expect(400, done);
+  });
+
 });
 
 describe('Tours endpoints', () => {
   var server, app;
-  var _this = this;
   var city1Expected, city2Expected;
   var tour1Expected, tour2Expected, tour3Expected, tour4Expected;
   before((done) => {
@@ -121,6 +204,11 @@ describe('Tours endpoints', () => {
     server.close(done);
   });
 
+  after((done) => {
+    fs.unlinkSync(path.join(__dirname, '../img/' + 'gotham-eats_tour.jpg'));
+    done();
+  });
+
   it('/api/tours/ should respond', (done) => {
     request(server).get('/api/tours').expect(200, done);
   });
@@ -145,11 +233,29 @@ describe('Tours endpoints', () => {
       done();
     });
   });
+
+  it('post to /api/tours should create a new tour', (done) => {
+    request(server).post('/api/tours').send({title: 'Gotham Eats', mainImage: 'http://i.imgur.com/zxPr3e8.jpg', description: 'Get some good eats in Gotham City', cityId: 1}).expect('created Gotham Eats', done);
+  });
+
+  it('post to /api/tours return an error when adding a tour to a city that does not exist', (done) => {
+    request(server).post('/api/tours').send({title: 'Gotham Eats', mainImage: 'http://i.imgur.com/zxPr3e8.jpg', description: 'Get some good eats in Gotham City', cityId: 100}).expect(500, done);
+  });
+
+  it('newly created tour should respond correctly', (done) => {
+    request(server).get('/api/tours?tourId=5').end((err, res) => {
+      expect(compareSomeKeys({title: 'Gotham Eats', mainImage: 'gotham-eats_tour.jpg', description: 'Get some good eats in Gotham City', cityId: 100}, res.body)).to.equal(true, 'server should be able to serve newly created tour');
+      done();
+    })
+  });
+
+  it('post to /api/tours should respond with error for bad post body', (done) => {
+    request(server).post('/api/tours').send({datum: 'Item', otherDatum: 'Other Item'}).expect(400, done);
+  });
 });
 
 describe('Bookings endpoint', () => {
   var server, app;
-  var _this = this;
   var city1Expected, city2Expected;
   var tour1Expected, tour2Expected, tour3Expected, tour4Expected;
   var user1Expected, user2Expected;
@@ -224,4 +330,35 @@ describe('Bookings endpoint', () => {
     });
   });
 
+});
+
+describe('Images endpoint', () => {
+  var server, app;
+
+  before((done) => {
+    helpers.saveImage('http://i.imgur.com/zxPr3e8.jpg', 'test-img0').then(() => {done()});
+  });
+
+  beforeEach(() => {
+    app = express();
+    require('../routes')(app, express, db);
+    server = app.listen(port, () => {
+    });
+  });
+  afterEach((done) => {
+    server.close(done);
+  });
+
+  after((done) => {
+    fs.unlinkSync(path.join(__dirname, '../img/' + 'test-img0.jpg'));
+    done();
+  });
+
+  it('/api/images should return an error for a nonexistant image', (done) => {
+    request(server).get('/api/images/nonexistantImage').expect(404, done);
+  });
+
+  it('/api/images should return properly for a requested image that exists', (done) => {
+    request(server).get('/api/images/test-img0.jpg').expect(200, done);
+  })
 });

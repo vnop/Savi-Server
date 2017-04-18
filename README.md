@@ -18,5 +18,12 @@ With that done, and the DB created on each environment, you should be able to ty
   - `/api/tours?tourId=X` gets the tour of that particular ID
   - `/api/cities` gets all cities from the DB
   - `/api/cities?cityId=X` gets the city with ID X
-  - `/api/images/<imagename>` gets the image of that name
+  - `/api/images/_imagename_` gets the image of that name
   - `/api/bookings?tourId=X&date=Y` returns a booking with a driver and guide for the given tourID (X) and with date (Y) as a property
+
+- POST
+  - `/api/cities` Posts new city to DB
+    - Format: {name: 'Name Of City', mainImage: '_VALID IMAGE URL_'}
+  - `/api/tours` Posts a new tour to DB
+    - Format: {title: 'Name of Tour', description: 'Tour Description', mainImage: '_VALID IMAGE URL_', cityId: X}
+    - Note cityId (X) must be the id of a city that already exists in the DB

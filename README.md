@@ -25,5 +25,5 @@ With that done, and the DB created on each environment, you should be able to ty
   - `/api/cities` Posts new city to DB
     - Format: {name: 'Name Of City', mainImage: '<<VALID IMAGE URL>>'}
   - `/api/tours` Posts a new tour to DB
-    - Format: {title: 'Name of Tour', description: 'Tour Description', mainImage: '<<VALID IMAGE URL>>', cityId: 1}
-    - Note cityId must be the id of a city that already exists in the DB
+    - Format: {title: 'Name of Tour', description: 'Tour Description', mainImage: '<<VALID IMAGE URL>>', cityId: X}
+    - Note cityId (X) must be the id of a city that already exists in the DB

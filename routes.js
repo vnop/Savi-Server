@@ -55,12 +55,12 @@ module.exports = function(app, express, db) {
 				db.City.create({name: name, mainImage: imageName}).then((newCity) => {
 					res.send('created ' + newCity.dataValues.name);
 				}).catch((error) => {
-					res.status(500).send('error creating new tour', JSON.stringify(error));
+					res.status(500).send('error creating new tour ' + JSON.stringify(error));
 				});
 			}, (error) => {
-				res.status(500).send('error saving image', JSON.stringify(error))
+				res.status(500).send('error saving image ' + JSON.stringify(error))
 			}).catch((error) => {
-				res.status(500).send('unknown error', JSON.stringify(error));
+				res.status(500).send('unknown error ' + JSON.stringify(error));
 			});
 		}
 	});
@@ -171,12 +171,12 @@ module.exports = function(app, express, db) {
 				db.Tour.create(newTour).then((newTour) => {
 					res.send('created ' + newTour.dataValues.title);
 				}).catch((error) => {
-					res.status(500).send('error creating new tour', JSON.stringify(error));
+					res.status(500).send('error creating new tour ' + JSON.stringify(error));
 				});
 			}, (error) => {
-				res.status(500).send('error saving image', JSON.stringify(error))
+				res.status(500).send('error saving image ' + JSON.stringify(error))
 			}).catch((error) => {
-				res.status(500).send('unknown error', JSON.stringify(error));
+				res.status(500).send('unknown error ' + JSON.stringify(error));
 			});
 		}
 	});

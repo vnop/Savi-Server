@@ -9,17 +9,30 @@ let transporter = nodemailer.createTransport({
     }
 });
 
-let mailOptions = function(targetEmail, userName, tourName, date) {
-    return {
-        from: '"Savi Travel 👻" <savitravel.mail@gmail.com>', // sender address
-        to: targetEmail,
-        subject: mailTemplate.newBooking.subject, // Subject line
-        text: 'Howdy!', // plain text body
-        html: mailTemplate.newBooking.content(userName, tourName, date) // html body    
-    }
+let mailOptions = function(userObject, tourName, date) {
+  return {
+    from: '"Savi Travel 👻" <savitravel.mail@gmail.com>',
+    to: userObject.userEmail,
+    subject: mailTemplate[userObject.type].subject, 
+    text: 'Howdy!', 
+    html: mailTemplate[userObject.type].content(userObject.userName, tourName, date) // html body    
+  }
 }
+
+let sendMailToAll = function(destinataries, tour, date) {    
+  Array.prototype.forEach.call(destinataries, function(destinatary) {
+    transporter.sendMail(mailOptions(destinatary, tour, date), (error, info) => {
+      if (error) {
+        return console.log(error);
+      }
+      console.log('Message %s sent: %s', info.messageId, info.response);
+    });
+  })
+}
+
 
 module.exports = {
     mailOptions: mailOptions,
-    transporter: transporter
+    transporter: transporter,
+    sendMailToAll: sendMailToAll
 }

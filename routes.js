@@ -5,27 +5,16 @@ const https = require('https');
 const morgan = require('morgan');
 const express = require('express');
 const Promise = require('bluebird');
+const passport = require('passport');
+const bodyParser = require('body-parser');
 const helpers = require('./helpers');
 const nodemailer = require('nodemailer');
-const bodyParser = require('body-parser');
 const mailer = require('./mailer/mailer');
 
 module.exports = function(app, express, db) {
-
 	app.use(morgan('dev')); //set logger
 	app.use(bodyParser.json());
 	app.use(bodyParser.urlencoded({ extended: true }));
-
-
-	app.get('/email', function(req, res) {
-		// This function takes 4 arguments (targetEmail, userName, tourName, date)
-	  mailer.transporter.sendMail(mailer.mailOptions(/*........*/), (error, info) => {
-       if (error) {
-           return console.log(error);
-       }
-       console.log('Message %s sent: %s', info.messageId, info.response);
-	  });
-	});
 
 	app.get('/api/cities', (req, res) => {
 	  let cityId = req.query.cityId;
@@ -66,16 +55,18 @@ module.exports = function(app, express, db) {
 	});
 
 	app.get('/api/bookings', (req, res) => {
+		console.log('bookings request...', req.query)
 	  let tourId = req.query.tourId;
 	  let date = req.query.date;
 	  if (!tourId || !date) {
 	    res.status(400).send('Invalid query string');
 	  } else {
+	  	console.log('getting tour..')
 	    db.Tour.find({where: {id: tourId}}).then((tour) =>  {
 	      if (!tour) {
 	        res.status(404).send('Tour not found');
 	      } else {
-	        db.City.find({where: {id: tour.dataValues.cityId}}).then((city) => {
+	        db.City.find({where: {id: tour.dataValues.cityId}}).then((city) => {	        
 	          if(!city) {
 	            res.status(404).send('City not found');
 	          } else {
@@ -93,6 +84,15 @@ module.exports = function(app, express, db) {
 
 	            Promise.all([findDriver, findGuide]).then(() => {
 	              if (booking.guide && booking.driver) {
+	              	console.log('booking created!...', booking.guide.dataValues, booking.driver.dataValues)
+	              	let tourName = booking.tour.dataValues.title;
+	              	let destinataries = [
+										booking.driver.dataValues,
+										booking.guide.dataValues
+	              	]	              	
+
+	              	mailer.sendMailToAll(destinataries, tourName, booking.date);			        
+
 	                res.json(booking).end();
 	              } else {
 	                res.send('We were unable to book you with the given parameters');

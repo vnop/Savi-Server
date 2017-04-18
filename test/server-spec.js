@@ -362,3 +362,22 @@ describe('Images endpoint', () => {
     request(server).get('/api/images/test-img0.jpg').expect(200, done);
   })
 });
+
+describe('Admin Control Panel', () => {
+  var server, app;
+
+  beforeEach(() => {
+    app = express();
+    require('../routes')(app, express, db);
+    server = app.listen(port, () => {
+    });
+  });
+  afterEach((done) => {
+    server.close(done);
+  });
+
+  it('should respond with 200 when loading panel', (done) => {
+    request(server).get('/').expect(200, done);
+  });
+
+});

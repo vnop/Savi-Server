@@ -29,5 +29,5 @@ require('./routes.js')(app, express, db);
 
 // server.listen(config.port, () => {console.log('listening on port', config.port)});
 
-
+//app.use(express.static(path.join(__dirname, '/panel'))); //serves up access to panel
 app.listen(config.port, () => {console.log('listening on port... ' + config.port)});

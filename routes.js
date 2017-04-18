@@ -160,7 +160,7 @@ module.exports = function(app, express, db) {
 			console.log(req.body);
 			res.status(400).send('invalid request');
 		} else {
-			let mainImage = req.body.title.split(' ').join('-') + '_tour';
+			let mainImage = req.body.title.split(' ').join('-').toLowerCase() + '_tour';
 			helpers.saveImage(req.body.mainImage, mainImage).then((imageName) => {
 				let newTour = {
 					title: req.body.title,

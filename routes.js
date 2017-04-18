@@ -5,12 +5,18 @@ const https = require('https');
 const morgan = require('morgan');
 const express = require('express');
 const Promise = require('bluebird');
-const bodyParser = require('body-parser');
-const nodemailer = require('nodemailer');
 const helpers = require('./helpers');
-const mailer = require('./mailer/mailer')
+const nodemailer = require('nodemailer');
+const bodyParser = require('body-parser');
+const mailer = require('./mailer/mailer');
 
 module.exports = function(app, express, db) {
+
+	app.use(morgan('dev')); //set logger
+	app.use(bodyParser.json());
+	app.use(bodyParser.urlencoded({ extended: true }));
+
+
 	app.get('/email', function(req, res) {
 		// This function takes 4 arguments (targetEmail, userName, tourName, date)
 	  mailer.transporter.sendMail(mailer.mailOptions(/*........*/), (error, info) => {
@@ -39,20 +45,24 @@ module.exports = function(app, express, db) {
 	});
 
 	app.post('/api/cities', (req, res) => {
-		let name = req.body.name;
-		let imageUrl = req.body.mainImage;
-		let mainImage = name.split(' ').join('-').toLowerCase() + '_city';
-		helpers.saveImage(imageUrl, mainImage).then((imageName) => {
-			db.City.create({name: name, mainImage: mainImage}).then((newCity) => {
-				res.send('created ' + newCity.dataValues.name);
+		if (!req.body || !req.body.name || !req.body.mainImage) {
+			res.status(400).send('invalid request');
+		} else {
+			let name = req.body.name;
+			let imageUrl = req.body.mainImage;
+			let mainImage = name.split(' ').join('-').toLowerCase() + '_city';
+			helpers.saveImage(imageUrl, mainImage).then((imageName) => {
+				db.City.create({name: name, mainImage: imageName}).then((newCity) => {
+					res.send('created ' + newCity.dataValues.name);
+				}).catch((error) => {
+					res.status(500).send('error creating new tour', JSON.stringify(error));
+				});
+			}, (error) => {
+				res.status(500).send('error saving image', JSON.stringify(error))
 			}).catch((error) => {
-				res.status(500).send('error');
+				res.status(500).send('unknown error', , JSON.stringify(error));
 			});
-		}, (error) => {
-			res.status(500).send
-		}).catch((error) => {
-			res.status(500).send('error');
-		});
+		}
 	});
 
 	app.get('/api/bookings', (req, res) => {
@@ -143,5 +153,32 @@ module.exports = function(app, express, db) {
 	  } else {
 	    res.status(400).end('Invalid query string');
 	  }
+	});
+
+	app.post('/api/tours', (req, res) => {
+		if (!req.body || !req.body.title || !req.body.description || !req.body.cityId || !req.body.mainImage) {
+			res.status(400).send('invalid request');
+		} else {
+			let mainImage = req.body.title.split(' ').join('-') + '_tour';
+			helpers.saveImage(req.body.mainImage, mainImage).then((imageName) => {
+				let newTour = {
+					title: req.body.title,
+					description: req.body.description,
+					mainImage: imageName,
+					cityId: req.body.cityId
+				}
+
+				db.Tour.create(newTour).then((newTour) => {
+					res.send('created ' + newTour.dataValues.title);
+				}).catch((error) => {
+					res.status(500).send('error creating new tour', JSON.stringify(error));
+				});
+			}, (error) => {
+				res.status(500).send('error saving image', JSON.stringify(error))
+			}).catch((error) => {
+				res.status(500).send('unknown error', JSON.stringify(error));
+			});
+		}
+		}
 	});
 }

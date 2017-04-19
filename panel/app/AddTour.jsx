@@ -39,11 +39,13 @@ class AddTour extends React.Component {
     fetch('https://savi-travel.com:8082/api/cities', {mode: 'no-cors'})
       .then(resp => resp.json())
       .then(data => this.setState({cityData: data}))
+      .then(console.log(this.state.cityData))
       .catch(err => console.error(err));
 
     fetch('https://savi-travel.com:8082/api/tours', {mode: 'no-cors'})
       .then(resp => resp.json())
       .then(data => this.setState({tourData: data}))
+      .then(console.log(this.state.tourData))
       .catch(err => console.error(err));
   }
 
@@ -73,7 +75,6 @@ class AddTour extends React.Component {
 
         <h2>Available Tours for this City</h2>
         <div>
-
         </div>
 
       </div>

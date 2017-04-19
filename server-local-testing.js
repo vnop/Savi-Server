@@ -19,7 +19,7 @@ const schema = new Sequelize(config.dbName, 'root', config.password);
 db.syncTables(false, schema);
 const app = express();
 
-app.get('*', (req, res) => {
+app.get('/addcity', (req, res) => {
   res.status(200).end()
 });
 

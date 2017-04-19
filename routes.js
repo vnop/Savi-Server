@@ -205,8 +205,7 @@ module.exports = function(app, express, db) {
 								newUser.cityId = city.dataValues.id;
 								db.UserData.create(newUser).then((user) => {
 									for (var language of req.body.profileData.languages) {
-										console.log(language);
-										db.Languages.find({where: {name: language}}).then((lang) => {
+										db.Languages.find({where: {title: language}}).then((lang) => {
 											if (lang) {
 												db.UserLanguages.create({
 													userId: user.dataValues.id,

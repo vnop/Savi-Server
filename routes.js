@@ -196,7 +196,7 @@ module.exports = function(app, express, db) {
 						// languages: req.body.profileData.,
 						userAuthId: req.body.userId
 					};
-					helpers.saveImage(req.body.profileData.photo, newUser.name.split(' ').join('-').toLowerCase()).then((imageName) => {
+					helpers.saveImage(req.body.profileData.photo, newUser.userName.split(' ').join('-').toLowerCase()).then((imageName) => {
 						newUser.photo = imageName;
 						db.City.find({where: {name: req.body.profileData.city}}).then((city) => {
 							if (!city) {

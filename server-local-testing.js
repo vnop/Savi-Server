@@ -19,11 +19,6 @@ const schema = new Sequelize(config.dbName, 'root', config.password);
 db.syncTables(false, schema);
 const app = express();
 
-app.get('/api/addcity', (req, res) => {
-  console.log('butts')
-  res.status(200)
-});
-
 require('./routes.js')(app, express, db);
 
 // var pKey = fs.readFileSync('/etc/letsencrypt/live/savi-travel.com/privkey.pem');

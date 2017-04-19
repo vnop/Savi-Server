@@ -87,15 +87,9 @@ class AddTour extends React.Component {
     )
   }
 }
-/*
-<div>{this.processData(this.state.tourData).map(item, i) => {
-  <div key={i}>
-    <div>{item.title}</div>
-  </div>
-}}</div>
-<img id="tourImgs" src={"https://savi-travel.com:8080/api/images/"+item.mainImage} />
+
 module.exports = AddTour;
-*/
+
 
 const sample = [
   {

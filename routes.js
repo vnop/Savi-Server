@@ -182,7 +182,7 @@ module.exports = function(app, express, db) {
 		}
 	});
 
-	app.get('/addcity', (req, res) => {
+	app.get('/api/addcity', (req, res) => {
 		res.sendFile(__dirname, '/panel/index.html');
 	});
 }

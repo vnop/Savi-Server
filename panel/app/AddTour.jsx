@@ -67,8 +67,13 @@ class AddTour extends React.Component {
       <div>
         <form onSubmit={this.handleSubmit}>
           <label>
-            City:
-            <input type="text" value={this.state.tourCity} onChange={this.cityForm} />           
+            <select name="City">
+              {this.state.cityData.map((item, i) => {
+                return (
+                  <option value={item.id}>{item.name}</option>
+                )
+              })}
+            </select>
           </label>
 
           <label>

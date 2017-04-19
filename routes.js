@@ -192,30 +192,38 @@ module.exports = function(app, express, db) {
 						mdn: req.body.profileData.phone,
 						country: req.body.profileData.country,
 						// photo: req.body.profileData.,
-						city: req.body.profileData.city,
+						// city: req.body.profileData.city,
 						// languages: req.body.profileData.,
 						userAuthId: req.body.userId
 					};
-
 					helpers.saveImage(req.body.profileData.photo, newUser.name.split(' ').join('-').toLowerCase()).then((imageName) => {
 						newUser.photo = imageName;
-						db.UserData.create(newUser).then((user) => {
-							for (var language of req.body.profileData.languages) {
-								db.Languages.find({where: {name: language}}).then((lang) => {
-									if (lang) {
-										db.UserLanguages.create({
-											userId: user.dataValues.id,
-											languageId: lang.dataValues.id
+						db.City.find({where: {name: req.body.profileData.city}}).then((city) => {
+							if (!city) {
+								res.status(404).send('City not found');
+							} else {
+								newUser.cityId = city.dataValues.id;
+								db.UserData.create(newUser).then((user) => {
+									for (var language of req.body.profileData.languages) {
+										db.Languages.find({where: {name: language}}).then((lang) => {
+											if (lang) {
+												db.UserLanguages.create({
+													userId: user.dataValues.id,
+													languageId: lang.dataValues.id
+												});
+											}
+										}).catch((error) => {
+											res.status(500).send('Error, probably an invalid language ' + JSON.stringify(error));
 										});
+										res.json({exists: true, user: user}).end();
 									}
 								}).catch((error) => {
-									res.status(500).send('Error, probably an invalid language ' + JSON.stringify(error));
+									res.status(500).send('error creating new user ' + JSON.stringify(error));
 								});
-								res.json({exists: true, user: user}).end();
 							}
 						}).catch((error) => {
-							res.status(500).send('error creating new user ' + JSON.stringify(error));
-						})
+							res.status(500).send('Error, probably an invalid city ' + JSON.stringify(error));
+						});
 					}, (error) => {
 						res.status(500).send('error saving image ' + JSON.stringify(error))
 					});

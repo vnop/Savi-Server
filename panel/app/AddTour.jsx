@@ -4,8 +4,8 @@ class AddTour extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      cityData: {data: []},
-      tourData: {data: []},
+      cityData: [],
+      tourData: [],
       tourName: '',
       tourImg: '',
       tourDesc: ''

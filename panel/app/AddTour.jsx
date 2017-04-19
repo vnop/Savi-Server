@@ -15,6 +15,7 @@ class AddTour extends React.Component {
     this.imageForm = this.imageForm.bind(this);
     this.descForm
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.processData = this.processData.bind(this);
   }
 
   nameForm(e) {
@@ -32,7 +33,13 @@ class AddTour extends React.Component {
   handleSubmit(e) {
     console.log('Data:', this.state);
     e.preventDefault();
-  }    
+  }
+
+  processData(array, key, val) { //takes and array, a key (as string), and value
+    return array.filter((obj)=>{
+      return obj[key] === val;
+    });
+  } 
 
   //INITIAL DATA FETCH
   componentWillMount() {
@@ -73,7 +80,18 @@ class AddTour extends React.Component {
 
         <h2>Available Tours for this City</h2>
         <div>
-          {JSON.stringify(this.state.tourData)}
+          {this.state.cityData.map((item, i) => {
+            return (
+              <div key={i}>
+                <div>{item.name+" tours: "}</div>
+                <div>{this.processData(this.state.tourData).map(item, i) => {
+                  <div key={i}>
+                    <div>{item.title}</div>
+                  </div>
+                }}</div>
+              </div>
+            )
+          })}          
         </div>
 
       </div>
@@ -81,15 +99,8 @@ class AddTour extends React.Component {
   }
 }
 
-// {this.state.cityData.map((item, i) => {
-//   return (
-//     <div key={i}>
-//       {item.name}
-//       <img id="tourImgs" src={"https://savi-travel.com:8080/api/images/"+item.mainImage} />
-//     </div>
-//   )
-// })}
 
+//<img id="tourImgs" src={"https://savi-travel.com:8080/api/images/"+item.mainImage} />
 module.exports = AddTour;
 
 const sample = [

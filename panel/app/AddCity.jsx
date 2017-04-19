@@ -26,7 +26,7 @@ class AddCity extends React.Component {
   handleSubmit(e) {
     console.log('Data:', this.state);
     e.preventDefault();
-    console.log(Router);
+    console.log(Route);
   }
 
   //INITIAL DATA FETCH

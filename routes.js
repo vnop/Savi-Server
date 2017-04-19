@@ -216,8 +216,8 @@ module.exports = function(app, express, db) {
 										}).catch((error) => {
 											res.status(500).send('Error, probably an invalid language ' + JSON.stringify(error));
 										});
-										res.json({exists: true, user: user}).end();
 									}
+									res.json({exists: true, user: user}).end();
 								}).catch((error) => {
 									res.status(500).send('error creating new user ' + JSON.stringify(error));
 								});

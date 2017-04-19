@@ -81,13 +81,13 @@ class AddTour extends React.Component {
         <h2>Available Tours for this City</h2>
 
         <div>
-          {this.state.cityData.map((item, i) => {
+          {this.state.data.map((item, i) => {
             return (
               <div key={i}>
-                <div>{item.name+" tours: "}</div>
+                {item.name}
               </div>
             )
-          })}               
+          })}             
         </div>
 
       </div>

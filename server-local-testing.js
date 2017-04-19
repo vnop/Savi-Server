@@ -20,7 +20,8 @@ db.syncTables(false, schema);
 const app = express();
 
 app.get('/addcity', (req, res) => {
-  res.status(200).end()
+  console.log('butts')
+  res.status(200)
 });
 
 require('./routes.js')(app, express, db);

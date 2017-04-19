@@ -212,8 +212,6 @@ module.exports = function(app, express, db) {
 													languageId: lang.dataValues.id
 												});
 											}
-										}).catch((error) => {
-											res.status(500).send('Error, probably an invalid language ' + JSON.stringify(error));
 										});
 									}
 									res.json({exists: true, user: user}).end();

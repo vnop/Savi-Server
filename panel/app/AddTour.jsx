@@ -6,28 +6,34 @@ class AddTour extends React.Component {
     this.state = {
       cityData: [],
       tourData: [],
+      //form field states
       tourName: '',
       tourImg: '',
-      tourDesc: ''
+      tourDesc: '',
+      tourCity: null
     }
 
+    //METHOD BINDINGS
     this.nameForm = this.nameForm.bind(this);
     this.imageForm = this.imageForm.bind(this);
     this.descForm = this.descForm.bind(this);
+    this.cityForm = this.cityForm.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.processData = this.processData.bind(this);
   }
 
+  //FORM CONTROLS
   nameForm(e) {
     this.setState({ tourName: e.target.value });
   }
-
   imageForm(e) {
     this.setState({ tourImg: e.target.value });
   }
-
   descForm(e) {
     this.setState({ tourDesc: e.target.value });
+  }
+  cityForm(e) {
+    this.setState({ tourCity: e.target.value })
   }
 
   handleSubmit(e) {
@@ -35,19 +41,21 @@ class AddTour extends React.Component {
     e.preventDefault();
   }
 
+  //To filter the tourData array for a desired city value
   processData(array, key, val) { //takes and array, a key (as string), and value
-    return array.filter((obj)=>{
+    return array.filter((obj) => {
       return obj[key] === val;
     });
   } 
 
   //INITIAL DATA FETCH
   componentWillMount() {
+    //get the current city list
     fetch('https://savi-travel.com:8082/api/cities', {mode: 'no-cors'})
       .then(resp => resp.json())
       .then(data => this.setState({cityData: data}))
       .catch(err => console.error(err));
-
+    //get the current tour list
     fetch('https://savi-travel.com:8082/api/tours', {mode: 'no-cors'})
       .then(resp => resp.json())
       .then(data => this.setState({tourData: data}))
@@ -58,6 +66,11 @@ class AddTour extends React.Component {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
+          <label>
+            City:
+            <input type="text" value={this.state.tourCity} onChange={this.cityForm} />           
+          </label>
+
           <label>
             Tour:
             <input type="text" value={this.state.tourName} onChange={this.nameForm} />           

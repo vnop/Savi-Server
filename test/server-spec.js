@@ -375,6 +375,9 @@ describe('Automatic mailer', () => {
     });
   });
 
+  afterEach((done) => {
+    server.close(done);
+  });
 
   var fakeUsers = [
     {
@@ -385,6 +388,11 @@ describe('Automatic mailer', () => {
     {
       userEmail: 'anotherUser@gmail.com',
       userName: 'Patrick',
+      type: 'Driver'        
+    },
+    {
+      userEmail: 'aThirdUser@gmail.com',
+      userName: 'Sean',
       type: 'Driver'        
     }
   ]
@@ -405,16 +413,19 @@ describe('Automatic mailer', () => {
 
   it('/api/bookings should send email to all destinataries', function(done) {     
     this.timeout(10000);
-
-    mailer.sendMailToAll(fakeUsers, 'Test Tour', 'Test Date').then(function(emailResponse) {            
-      expect(emailResponse.lastIndex).to.be(fakeUsers.length - 1);
-      done()
+    var count = 0;
+    mailer.sendMailToAll(fakeUsers, 'Test Tour', 'Test Date').then(function(emailResponse) {                  
+      if(emailResponse.lastIndex === fakeUsers.length - 1) {                
+        done()
+      }
+    }, function(error) {
+      console.log(error)
     });     
   });  
 });
 
 describe('Admin Control Panel', () => {
-
+  var app, server;
   beforeEach(() => {
     app = express();
     require('../routes')(app, express, db);
@@ -427,6 +438,6 @@ describe('Admin Control Panel', () => {
   });
 
   it('should respond with 200 when loading panel', (done) => {
-    request(server).get('/').expect(200, done);
+    request(server).get('/').expect(200, done);    
   });
 });

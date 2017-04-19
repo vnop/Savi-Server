@@ -12,6 +12,7 @@ const nodemailer = require('nodemailer');
 const mailer = require('./mailer/mailer');
 
 module.exports = function(app, express, db) {
+	app.use(express.static(path.join(__dirname, '/panel'))); //serves up access to panel
 	app.use(morgan('dev')); //set logger
 	app.use(bodyParser.json());
 	app.use(bodyParser.urlencoded({ extended: true }));

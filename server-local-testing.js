@@ -29,5 +29,4 @@ require('./routes.js')(app, express, db);
 
 // server.listen(config.port, () => {console.log('listening on port', config.port)});
 
-
 app.listen(config.port, () => {console.log('listening on port... ' + config.port)});

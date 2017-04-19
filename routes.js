@@ -182,7 +182,7 @@ module.exports = function(app, express, db) {
 		}
 	});
 
-	app.get('/*', (req, res) => {
-		res.redirect('/');
+	app.get('*', (req, res) => {
+		res.sendFile(__dirname, '/panel/index.html');
 	});
 }

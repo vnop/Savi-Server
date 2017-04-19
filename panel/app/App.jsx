@@ -25,6 +25,7 @@ export default class App extends React.Component {
           <Route exact path="/" component={Home}/>
           <Route path="/addcity" component={AddCity}/>
           <Route path="/addtour" component={AddTour}/>
+          <Route component={NoMatch}/>
         </div>
       </Router>
     )

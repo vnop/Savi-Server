@@ -194,7 +194,7 @@ module.exports = function(app, express, db) {
 						// photo: req.body.profileData.,
 						city: req.body.profileData.city,
 						// languages: req.body.profileData.,
-						userAuthId: req.body.userId;
+						userAuthId: req.body.userId
 					};
 
 					helpers.saveImage(req.body.profileData.photo, newUser.name.split(' ').join('-').toLowerCase()).then((imageName) => {

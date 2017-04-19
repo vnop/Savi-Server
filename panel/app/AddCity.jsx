@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter as Router, Match, Route, Link } from 'react-router-dom';
 
 class AddCity extends React.Component {
   constructor(props) {
@@ -25,6 +26,7 @@ class AddCity extends React.Component {
   handleSubmit(e) {
     console.log('Data:', this.state);
     e.preventDefault();
+    console.log(Router);
   }
 
   //INITIAL DATA FETCH
@@ -70,37 +72,3 @@ class AddCity extends React.Component {
 }
 
 module.exports = AddCity;
-
-//sample data
-var sample = []
-//   {
-//     "id": 1,
-//     "name": "Paris",
-//     "mainImage": "paris_city.jpg"
-//   },
-//   {
-//     "id": 2,
-//     "name": "London",
-//     "mainImage": "london_city.jpg"
-//   },
-//   {
-//     "id": 3,
-//     "name": "Amsterdam",
-//     "mainImage": "amsterdam_city.jpg"
-//   },
-//   {
-//     "id": 4,
-//     "name": "Rio de Janeiro",
-//     "mainImage": "rio-de-janiero_city.jpg"
-//   },
-//   {
-//     "id": 5,
-//     "name": "Shanghai",
-//     "mainImage": "shanghai_city.jpg"
-//   },
-//   {
-//     "id": 6,
-//     "name": "New York",
-//     "mainImage": "new-york_city.jpg"
-//   }
-// ]

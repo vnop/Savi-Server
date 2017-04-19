@@ -12,7 +12,8 @@ var syncTables = function(force, schema) {
     mdn: Sequelize.STRING,
     country: Sequelize.STRING,
     photo: Sequelize.STRING,
-    type: { type: Sequelize.STRING, defaultValue: 'Tourist'}
+    type: { type: Sequelize.STRING, defaultValue: 'Tourist'},
+    userAuthId: Sequelize.STRING
   });
 
   module.exports.DriverData = schema.define('driver_data', {

@@ -316,20 +316,20 @@ describe('Bookings endpoint', () => {
     server.close(done);
   });
 
-  // it('/api/bookings should respond with 400 if no/incorrect queries supplied', (done) => {
-  //   request(server).get('/api/bookings').expect(400, done);
-  // });
+  it('/api/bookings should respond with 400 if no/incorrect queries supplied', (done) => {
+    request(server).get('/api/bookings').expect(400, done);
+  });
 
-  // it('/api/bookings should respond with a booking object with queried', (done) => {
-  //   request(server).get('/api/bookings?tourId=1&date=testDate').end((err, res) => {
-  //     expect(compareSomeKeys(user1Expected, res.body.driver)).to.equal(true, 'Should have the correct driver');
-  //     expect(compareSomeKeys(user2Expected, res.body.guide)).to.equal(true, 'Should have the correct tourguide');
-  //     expect(compareSomeKeys(city1Expected, res.body.city)).to.equal(true, 'Should have the correct city');
-  //     expect(compareSomeKeys(tour1Expected, res.body.tour)).to.equal(true, 'Should have the correct tour');
-  //     expect(res.body.date).to.equal('testDate', 'should have the correct date');
-  //     done();
-  //   });
-  // });
+  it('/api/bookings should respond with a booking object with queried', (done) => {
+    request(server).get('/api/bookings?tourId=1&date=testDate').end((err, res) => {
+      expect(compareSomeKeys(user1Expected, res.body.driver)).to.equal(true, 'Should have the correct driver');
+      expect(compareSomeKeys(user2Expected, res.body.guide)).to.equal(true, 'Should have the correct tourguide');
+      expect(compareSomeKeys(city1Expected, res.body.city)).to.equal(true, 'Should have the correct city');
+      expect(compareSomeKeys(tour1Expected, res.body.tour)).to.equal(true, 'Should have the correct tour');
+      expect(res.body.date).to.equal('testDate', 'should have the correct date');
+      done();
+    });
+  });
 
 });
 
@@ -407,7 +407,7 @@ describe('Automatic mailer', () => {
   });  
 
   it('/api/bookings should send email to all destinataries', function(done) {     
-    this.timeout(5000);
+    this.timeout(10000);
 
     mailer.sendMailToAll(fakeUsers, 'Test Tour', 'Test Date').then(function(emailResponse) {            
       expect(emailResponse.lastIndex).to.be(fakeUsers.length - 1);

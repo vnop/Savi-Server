@@ -1,6 +1,5 @@
 // const Sequelize = require('sequelize')
 // var schema = new Sequelize('savilocal', 'root', '');
-
 'use strict';
 
 const db = require('./db');

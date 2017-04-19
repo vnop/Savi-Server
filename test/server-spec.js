@@ -6,11 +6,12 @@ const path = require('path');
 const db = require('../db/db');
 const express = require('express');
 const request = require('supertest');
-const expect = require('chai').expect;
+const expect = require('expect.js');
 const Sequelize = require('sequelize');
 const helpers = require('../helpers.js');
 const seeder = require('../db/seeder.js');
 const config = require('../config/config');
+const mailer = require('../mailer/mailer')
 
 const schema = new Sequelize('test', 'root', config.password, {logging: false});
 const port = 1337;
@@ -363,7 +364,8 @@ describe('Images endpoint', () => {
   })
 });
 
-describe('Admin Control Panel', () => {
+describe('Automatic mailer', () => {
+
   var server, app;
 
   beforeEach(() => {
@@ -372,6 +374,54 @@ describe('Admin Control Panel', () => {
     server = app.listen(port, () => {
     });
   });
+
+
+  var fakeUsers = [
+    {
+      userEmail: 'user@gmail.com',
+      userName: 'John',
+      type: 'Driver'        
+    },
+    {
+      userEmail: 'anotherUser@gmail.com',
+      userName: 'Patrick',
+      type: 'Driver'        
+    }
+  ]
+  
+  it('mailer.sendMailToAll should be a function', (done) => {     
+    expect(typeof(mailer.sendMailToAll)).to.be('function')    
+    done();
+  });
+
+  it('/api/bookings should send email successfully', function(done) {     
+    this.timeout(5000);
+
+    mailer.sendMailToAll(fakeUsers, 'Test Tour', 'Test Date').then(function(emailResponse) {      
+      expect(emailResponse.emailResMessage).to.be('Email sent successfully!');
+      done()
+    });     
+  });  
+
+  it('/api/bookings should send email to all destinataries', function(done) {     
+    this.timeout(10000);
+
+    mailer.sendMailToAll(fakeUsers, 'Test Tour', 'Test Date').then(function(emailResponse) {            
+      expect(emailResponse.lastIndex).to.be(fakeUsers.length - 1);
+      done()
+    });     
+  });  
+});
+
+describe('Admin Control Panel', () => {
+
+  beforeEach(() => {
+    app = express();
+    require('../routes')(app, express, db);
+    server = app.listen(port, () => {
+    });
+  });
+
   afterEach((done) => {
     server.close(done);
   });
@@ -379,5 +429,4 @@ describe('Admin Control Panel', () => {
   it('should respond with 200 when loading panel', (done) => {
     request(server).get('/').expect(200, done);
   });
-
 });

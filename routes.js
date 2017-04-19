@@ -84,17 +84,15 @@ module.exports = function(app, express, db) {
 	            });
 
 	            Promise.all([findDriver, findGuide]).then(() => {
-	              if (booking.guide && booking.driver) {
-	              	console.log('booking created!...', booking.guide.dataValues, booking.driver.dataValues)
+	              if (booking.guide && booking.driver) {	              	
 	              	let tourName = booking.tour.dataValues.title;
 	              	let destinataries = [
 										booking.driver.dataValues,
 										booking.guide.dataValues
-	              	]	              	
+	              	];	              	
 
-	              	mailer.sendMailToAll(destinataries, tourName, booking.date);			        
-
-	                res.json(booking).end();
+	              	mailer.sendMailToAll(destinataries, tourName, booking.date);	              		        
+	               	res.json(booking).end();	              		
 	              } else {
 	                res.send('We were unable to book you with the given parameters');
 	              }

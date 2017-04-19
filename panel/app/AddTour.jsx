@@ -13,7 +13,7 @@ class AddTour extends React.Component {
 
     this.nameForm = this.nameForm.bind(this);
     this.imageForm = this.imageForm.bind(this);
-    this.descForm
+    this.descForm = this.descForm.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.processData = this.processData.bind(this);
   }

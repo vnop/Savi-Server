@@ -181,4 +181,8 @@ module.exports = function(app, express, db) {
 			});
 		}
 	});
+
+	app.get('/*', (req, res) => {
+		res.redirect('/');
+	});
 }

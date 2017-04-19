@@ -181,8 +181,4 @@ module.exports = function(app, express, db) {
 			});
 		}
 	});
-
-	app.get('/api/addcity', (req, res) => {
-		res.sendFile(__dirname, '/panel/index.html');
-	});
 }

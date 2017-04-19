@@ -110,7 +110,7 @@ module.exports = {
 		{
 			type: 'Driver',
 			userName: 'Peter Melnick',
-			userEmail: 'peter@gmail.com',
+			userEmail: 'example@mail.com',
 			mdn: '202-555-0173',
 			country: 'USA',
 			photo: 'peter-melnick.jpg',
@@ -120,7 +120,7 @@ module.exports = {
 		{
 			type: 'Driver',
 			userName: 'Elisa Bhandari',
-			userEmail: 'marge@gmail.com',
+			userEmail: 'example@mail.com',
 			mdn: '202-555-0174',
 			country: 'USA',
 			photo: 'elisa-bhandari.jpg',
@@ -130,7 +130,7 @@ module.exports = {
 		{
 			type: 'Driver',
 			userName: 'Serge Henry',
-			userEmail: 'serge@gmail.com',
+			userEmail: 'example@mail.com',
 			mdn: '202-555-0175',
 			country: 'France',
 			photo: 'serge-henry.jpg',
@@ -140,7 +140,7 @@ module.exports = {
 		{
 			type: 'Driver',
 			userName: 'Huge Jacked-Man',
-			userEmail: 'wolverine@xavier.edu',
+			userEmail: 'example@mail.com',
 			mdn: '202-555-0176',
 			country: 'Australia',
 			photo: 'huge-jacked-man.jpg',
@@ -150,7 +150,7 @@ module.exports = {
 		{
 			type: 'Driver',
 			userName: 'Buffalo Custardbath',
-			userEmail: 'sherlock@holmes.net',
+			userEmail: 'example@mail.com',
 			mdn: '202-555-0177',
 			country: 'United Kingdom',
 			photo: 'benedict-cumberbatch.jpg',
@@ -160,7 +160,7 @@ module.exports = {
 		{
 			type: 'Driver',
 			userName: 'Nicolas Cage',
-			userEmail: 'wickerman123@aol.com',
+			userEmail: 'example@mail.com',
 			mdn: '202-555-0178',
 			country: 'USA',
 			photo: 'nicolas-cage.jpg',
@@ -170,7 +170,7 @@ module.exports = {
 		{
 			type: 'Tour Guide',
 			userName: 'Franz Bauer',
-			userEmail: 'franz@gmail.com',
+			userEmail: 'example@mail.com',
 			mdn: '202-555-0179',
 			country: 'Germany',
 			photo: 'franz-bauer.jpg',
@@ -180,7 +180,7 @@ module.exports = {
 		{
 			type: 'Tour Guide',
 			userName: 'Albert Hoffmann',
-			userEmail: 'albert@gmail.com',
+			userEmail: 'example@mail.com',
 			mdn: '202-555-0170',
 			country: 'Netherlands',
 			photo: 'albert-hoffmann.jpg',
@@ -190,7 +190,7 @@ module.exports = {
 		{
 			type: 'Tour Guide',
 			userName: 'Xin Meng',
-			userEmail: 'xin@gmail.com',
+			userEmail: 'example@mail.com',
 			mdn: '202-555-0171',
 			country: 'China',
 			photo: 'xin-meng.jpg',
@@ -200,7 +200,7 @@ module.exports = {
 		{
 			type: 'Tour Guide',
 			userName: 'John Constantine',
-			userEmail: 'johnconstantine@asshole.net',
+			userEmail: 'example@mail.com',
 			mdn: '202-555-0172',
 			country: 'USA',
 			photo: 'keanu-reeves.jpg',
@@ -210,7 +210,7 @@ module.exports = {
 		{
 			type: 'Tour Guide',
 			userName: 'Dwayne Johnson',
-			userEmail: 'therock@muscles.org',
+			userEmail: 'example@mail.com',
 			mdn: '202-555-0180',
 			country: 'USA',
 			photo: 'dwayne-johnson.jpg',
@@ -220,7 +220,7 @@ module.exports = {
 		{
 			type: 'Tour Guide',
 			userName: 'Daisy Johnson',
-			userEmail: 'quake@inhuman.biz',
+			userEmail: 'example@mail.com',
 			mdn: '202-555-0181',
 			country: 'USA',
 			photo: 'daisy-johnson.jpg',

@@ -1,5 +1,4 @@
 'use strict'
-require('./env');
 const fs = require('fs');
 const path = require('path');
 const mysql = require('mysql');
@@ -7,8 +6,6 @@ const https = require('https');
 const morgan = require('morgan');
 const express = require('express');
 const Promise = require('bluebird');
-const passport = require('passport');
-const FacebookStrategy = require('passport-facebook');
 const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
 const Sequelize = require('sequelize');

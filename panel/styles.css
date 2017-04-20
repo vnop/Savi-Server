@@ -1,4 +1,9 @@
-img#cityImgs {
+div#cityImgs {
+  max-height: 200px;
+  max-width: 200px;
+}
+
+div#tourImgs {
   max-height: 200px;
   max-width: 200px;
 }

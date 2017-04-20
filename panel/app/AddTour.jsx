@@ -134,8 +134,8 @@ class AddTour extends React.Component {
               {this.processData(this.state.tourData, 'cityId', item.id).map((item, i) => {
                 return (
                   <div key={i}>
-                    {item.title}
-                    <img id="tourImgs" src={"https://savi-travel.com:8082/api/images/"+item.mainImage} />
+                    <div id="tourName">{item.title}</div>
+                    <div id="tourImgs"><img src={"https://savi-travel.com:8082/api/images/"+item.mainImage} /></div>
                   </div>
                 )
               })}                

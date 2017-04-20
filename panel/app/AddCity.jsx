@@ -46,12 +46,8 @@ class AddCity extends React.Component {
         })
       });
       this.setState({ cityName: '', cityImg: '' }); //Clear the form after submission
-      forceUpdate();
+      this.componentWillMount();
     }
-  }
-
-  componentDidMount() {
-    componentWillMount();
   }
 
   //INITIAL DATA FETCH

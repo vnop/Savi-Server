@@ -50,6 +50,10 @@ class AddCity extends React.Component {
     }
   }
 
+  componentDidMount() {
+    componentWillMount();
+  }
+
   //INITIAL DATA FETCH
   componentWillMount() {
     fetch('https://savi-travel.com:8082/api/cities', {mode: 'no-cors'})

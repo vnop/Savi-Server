@@ -388,12 +388,12 @@ describe('Automatic mailer', () => {
     {
       userEmail: 'anotherUser@gmail.com',
       userName: 'Patrick',
-      type: 'Driver'        
+      type: 'Driver'
     },
     {
       userEmail: 'aThirdUser@gmail.com',
       userName: 'Sean',
-      type: 'Driver'        
+      type: 'Driver'
     }
   ]
 
@@ -411,17 +411,17 @@ describe('Automatic mailer', () => {
     });
   });
 
-  xit('/api/bookings should send email to all destinataries', function(done) {
+  it('/api/bookings should send email to all destinataries', function(done) {
     this.timeout(10000);
     var count = 0;
-    mailer.sendMailToAll(fakeUsers, 'Test Tour', 'Test Date').then(function(emailResponse) {                  
-      if(emailResponse.lastIndex === fakeUsers.length - 1) {                
+    mailer.sendMailToAll(fakeUsers, 'Test Tour', 'Test Date').then(function(emailResponse) {
+      if(emailResponse.lastIndex === fakeUsers.length - 1) {
         done()
       }
     }, function(error) {
       console.log(error)
-    });     
-  });  
+    });
+  });
 
 });
 
@@ -439,6 +439,6 @@ describe('Admin Control Panel', () => {
   });
 
   it('should respond with 200 when loading panel', (done) => {
-    request(server).get('/').expect(200, done);    
+    request(server).get('/').expect(200, done);
   });
 });

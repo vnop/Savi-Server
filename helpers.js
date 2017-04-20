@@ -26,6 +26,7 @@ const saveImage = (imageURL, imageName) => {
     url: imageURL,
     encoding: null
   }
+  let validImage = false;
   return new Promise((resolve, reject) => {
     request(options, (err, res, body) => {
       if (err) {
@@ -34,22 +35,27 @@ const saveImage = (imageURL, imageName) => {
       } else {
         let bodyHeader = body.toString('hex', 0, 4);
         if (bodyHeader === validHeaders.jpg) {
+          validImage = true;
           imageName += '.jpg';
         } else if (bodyHeader === validHeaders.png) {
+          validImage = true;
           imageName += '.png';
         } else if (bodyHeader === validHeaders.gif) {
-          imageName += '.gif'
+          validImage = true;
+          imageName += '.gif';
         } else {
           reject('bad URL or not an image');
         }
-        var fullPath = path.join(__dirname, '/img/' + imageName);
-        fs.writeFile(fullPath, body, (err) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(imageName);
-          }
-        });
+        if (validImage) {
+          var fullPath = path.join(__dirname, '/img/' + imageName);
+          fs.writeFile(fullPath, body, (err) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(imageName);
+            }
+          });
+        }
       }
     });
   });

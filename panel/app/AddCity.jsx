@@ -31,22 +31,20 @@ class AddCity extends React.Component {
     }).length>0;    
 
     if (exists) {//city already exists...
-      console.log(exists)
       alert('City alredy exists...');
     } else {//otherewise...
-      alert('Ready to POST!');
-      // //POST REQEUST
-      // fetch('https://savi-travel.com:8082/api/cities', {
-      //   method: 'POST',
-      //   headers: {
-      //     'Accept': 'application/json',
-      //     'Content-Type': 'application/json'
-      //   },
-      //   body: JSON.stringify({
-      //     name: this.state.cityName, 
-      //     mainImage: this.state.cityImg
-      //   })
-      // })
+      //POST REQEUST
+      fetch('https://savi-travel.com:8082/api/cities', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: this.state.cityName, 
+          mainImage: this.state.cityImg
+        })
+      })
       this.setState({ cityName: '', cityImg: '' }) //Clear the form after submission
     }
   }

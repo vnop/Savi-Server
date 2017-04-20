@@ -14,9 +14,19 @@ export default class App extends React.Component {
     return (
       <Router>
         <div className="container">
-            <Link to="/">Home</Link>
-            <Link to="/addcity">Cities</Link>
-            <Link to="/addtour">Tour</Link>
+          <div className="row">
+            <div className="col">
+              <Link to="/">Home</Link>
+            </div>
+            
+            <div className="col">
+              <Link to="/addcity">Cities</Link>
+            </div>
+
+            <div className="col">
+              <Link to="/addtour">Tour</Link>
+            </div>
+          </div>
 
           <hr/>
 

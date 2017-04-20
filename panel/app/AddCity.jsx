@@ -6,25 +6,23 @@ class AddCity extends React.Component {
     super(props);
     this.state = {
       data: [],
+      //form field states
       cityName: '',
       cityImg: ''
     };
 
+    //METHOD BINDINGS
     this.nameForm = this.nameForm.bind(this);
     this.imageForm = this.imageForm.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  nameForm(e) {
-    this.setState({ cityName: e.target.value });
-  }
-
-  imageForm(e) {
-    this.setState({ cityImg: e.target.value });
-  }
+  //FORM CONTROLS
+  nameForm(e) {this.setState({ cityName: e.target.value })}
+  imageForm(e) {this.setState({ cityImg: e.target.value })}
 
   handleSubmit(e) {
-    e.preventDefault();
+    e.preventDefault();//stops page refresh on submit
 
     let exists = this.state.data.filter((obj)=>{
       return obj.name.toLowerCase() === this.state.cityName.toLowerCase();

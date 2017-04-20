@@ -53,7 +53,7 @@ class AddTour extends React.Component {
     });
     this.state.tourData.push({
       title: this.state.tourName, 
-      mainImage: this.state.tourName.replace(' ', '-').toLowerCase()+'_tour.jpg'
+      mainImage: this.state.tourName.replace(' ', '-').toLowerCase()+'_tour.jpg',
       description: this.state.tourDesc, 
       cityId: this.state.tourCity
     });        

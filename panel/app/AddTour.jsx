@@ -50,14 +50,13 @@ class AddTour extends React.Component {
         description: this.state.tourDesc, 
         cityId: this.state.tourCity
       })
-
-      this.setState({ //reset forms
-        tourCity: 0,
-        tourName: '',
-        tourImg: '',
-        tourDesc: ''
-      })
-    })    
+    });    
+    this.setState({ //reset forms
+      tourCity: 0,
+      tourName: '',
+      tourImg: '',
+      tourDesc: ''
+    });
   }
 
   //To filter the tourData array for a desired city value

@@ -238,7 +238,7 @@ module.exports = function(app, express, db) {
 	});
 
 	app.get('*', function (req, res) {
-  	res.send('./panel/index.html')
+  	res.redirect('./panel/index.html')
 	})
 
 }

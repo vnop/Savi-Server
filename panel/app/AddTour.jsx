@@ -63,13 +63,6 @@ class AddTour extends React.Component {
   }
 
   render() {
-
-    const cityMenu = (item, i) => {
-      <option key={i} 
-        value={item.id}>{item.name}
-      </option>
-    }
-
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
@@ -82,7 +75,6 @@ class AddTour extends React.Component {
                 )
               })}
             </select>
-            <h1>{this.state.tourCity}</h1>
           </label>
 
           <label>

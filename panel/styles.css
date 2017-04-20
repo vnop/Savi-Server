@@ -1,11 +1,11 @@
 /*NAVIGATION*/
-img#saviLogo {
-  position: fixed;
-  max-width: 100px;
-  max-height: 100px;
-}
 span#navItem {
   margin: 20px;
+}
+img#saviLogo {
+  float: left;
+  max-width: 100px;
+  max-height: 100px;
 }
 
 /*CITIES*/

@@ -30,6 +30,8 @@ export default class App extends React.Component {
                   <span id="navItem" className="nav-item">
                     <Link to="/addtour">Tour</Link>
                   </span>
+
+                  <img id="saviLogo" src="../assets/savi_logo.png"/>
                 </div>
               </nav>
 

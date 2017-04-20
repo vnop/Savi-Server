@@ -1,9 +1,11 @@
 img#cityImgs {
   max-height: 200px;
   max-width: 200px;
+  border: solid 5px;
 }
 
 img#tourImgs {
   max-height: 200px;
   max-width: 200px;
+  border: solid 5px;
 }

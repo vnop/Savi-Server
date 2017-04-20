@@ -18,15 +18,15 @@ export default class App extends React.Component {
 
             <nav className="navbar navbar-toggleable-md navbar-light bg-faded">
               <ul className="navbar-nav mr-auto">
-                <li className="nav-item">
+                <li id="navItem" className="nav-item">
                   <Link to="/">Home</Link>
                 </li>
 
-                <li className="nav-item">
+                <li id="navItem" className="nav-item">
                   <Link to="/addcity">Cities</Link>
                 </li>
 
-                <li className="nav-item">
+                <li id="navItem" className="nav-item">
                   <Link to="/addtour">Tour</Link>
                 </li>
               </ul>

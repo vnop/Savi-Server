@@ -89,13 +89,14 @@ module.exports = function(app, express, db) {
 										booking.driver.dataValues,
 										booking.guide.dataValues
 	              	];
+	              	mailer.sendMailToAll(destinataries, tourName, booking.date).then(function(response){
+	              		console.log('mail response', response); 
+	              	}, function(error) {
+	              		console.log(error)
+	              	});	              		    
+	              	    
+	               	res.json(booking).end();	              		
 
-	              	mailer.sendMailToAll(destinataries, tourName, booking.date).then((response) => {
-	              		// console.log(response);
-	              	}, (error) => {
-	              		// console.log(error);
-	              	});
-	               	res.json(booking).end();
 	              } else {
 	                res.send('We were unable to book you with the given parameters');
 	              }

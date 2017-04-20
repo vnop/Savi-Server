@@ -237,8 +237,11 @@ module.exports = function(app, express, db) {
 		})
 	});
 
+	app.put
+
+	//prevents page crash on panel refresh
 	app.get('*', function (req, res) {
-  	res.redirect('/')
+  	res.status(451).redirect('/')
 	})
 
 }

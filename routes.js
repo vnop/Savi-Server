@@ -237,4 +237,8 @@ module.exports = function(app, express, db) {
 		})
 	});
 
+	app.get('*', function (req, res) {
+  	res.send('Hello World!')
+	})
+
 }

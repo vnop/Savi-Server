@@ -26,6 +26,20 @@ class AddCity extends React.Component {
   handleSubmit(e) {
     console.log('Data:', this.state);
     e.preventDefault();
+
+    //POST REQUEST
+    fetch('https://savi-travel.com:8082/api/cities', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: 'Central City', 
+        mainImage: 'http://i.imgur.com/w1S5ZM5.jpg'
+      })
+    })
+
   }
 
   //INITIAL DATA FETCH

@@ -7,10 +7,10 @@ class AddTour extends React.Component {
       cityData: [],
       tourData: [],
       //form field states
-      tourCity: '',
-      tourName: '',
-      tourImg: '',
-      tourDesc: ''
+      tourCity: 0, //id of the selected city
+      tourName: '', //name of the tour attraction
+      tourImg: '', //url of the image to be stored
+      tourDesc: '' //description of the tour
     }
 
     //METHOD BINDINGS

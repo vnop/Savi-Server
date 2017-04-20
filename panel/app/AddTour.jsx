@@ -7,10 +7,10 @@ class AddTour extends React.Component {
       cityData: [],
       tourData: [],
       //form field states
+      tourCity: '',
       tourName: '',
       tourImg: '',
-      tourDesc: '',
-      tourCity: 'City'
+      tourDesc: ''
     }
 
     //METHOD BINDINGS
@@ -23,23 +23,19 @@ class AddTour extends React.Component {
   }
 
   //FORM CONTROLS
-  nameForm(e) {
-    this.setState({ tourName: e.target.value });
-  }
-  imageForm(e) {
-    this.setState({ tourImg: e.target.value });
-  }
-  descForm(e) {
-    this.setState({ tourDesc: e.target.value });
-  }
-  cityForm(e) {
-    this.setState({ tourCity: e.target.value })
-  }
+  cityForm(e) {this.setState({ tourCity: e.target.value })}
+  nameForm(e) {this.setState({ tourName: e.target.value })}
+  imageForm(e) {this.setState({ tourImg: e.target.value })}
+  descForm(e) {this.setState({ tourDesc: e.target.value })}
 
   //handle the event of submitting form data
   handleSubmit(e) {
-    console.log('Data:', this.state);
     e.preventDefault();
+    //TESTING LOGS
+    console.log('City:', this.state.tourCity);
+    console.log('Tour:', this.state.tourName);
+    console.log('ImageURL:', this.state.tourImg);
+    console.log('Description:', this.state.tourDesc);
   }
 
   //To filter the tourData array for a desired city value

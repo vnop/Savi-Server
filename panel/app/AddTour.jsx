@@ -36,6 +36,28 @@ class AddTour extends React.Component {
     console.log('Tour:', this.state.tourName);
     console.log('ImageURL:', this.state.tourImg);
     console.log('Description:', this.state.tourDesc);
+
+    //POST REQUEST
+    fetch('https://savi-travel.com:8082/api/tours', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        title: this.state.tourName, 
+        mainImage: this.state.tourImg, 
+        description: this.state.tourDesc, 
+        cityId: this.state.tourCity
+      })
+
+      this.setState({ //reset forms
+        tourCity: 0,
+        tourName: '',
+        tourImg: '',
+        tourDesc: ''
+      })
+    })    
   }
 
   //To filter the tourData array for a desired city value

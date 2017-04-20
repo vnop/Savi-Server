@@ -46,6 +46,7 @@ class AddCity extends React.Component {
         })
       })
       this.setState({ cityName: '', cityImg: '' }) //Clear the form after submission
+      this.forceUpdate()
     }
   }
 

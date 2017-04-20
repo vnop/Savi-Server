@@ -1,11 +1,14 @@
+/*CITIES*/
 img#cityImgs {
   max-height: 200px;
   max-width: 200px;
   border: solid 5px;
 }
 
+/*TOURS*/
 img#tourImgs {
   max-height: 200px;
   max-width: 200px;
   border: solid 5px;
 }
+

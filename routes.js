@@ -238,7 +238,7 @@ module.exports = function(app, express, db) {
 	});
 
 	app.get('*', function (req, res) {
-  	res.redirect('https://savi-travel.com:8082/')
+  	res.redirect('/')
 	})
 
 }

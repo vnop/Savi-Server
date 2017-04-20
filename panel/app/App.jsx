@@ -17,17 +17,19 @@ export default class App extends React.Component {
           <div className="row">
 
             <nav className="navbar navbar-light">
-              <span id="nav-item">
-                <Link to="/">Home</Link>
-              </span>
+              <ul className="navbar-nav mr-auto">
+                <li className="nav-item">
+                  <Link to="/">Home</Link>
+                </li>
 
-              <span id="nav-item">
-                <Link to="/addcity">Cities</Link>
-              </span>
+                <li className="nav-item">
+                  <Link to="/addcity">Cities</Link>
+                </li>
 
-              <span id="nav-item">
-                <Link to="/addtour">Tour</Link>
-              </span>
+                <li className="nav-item">
+                  <Link to="/addtour">Tour</Link>
+                </li>
+              </ul>
             </nav>
 
           </div>

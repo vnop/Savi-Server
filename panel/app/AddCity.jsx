@@ -24,14 +24,14 @@ class AddCity extends React.Component {
   }
 
   handleSubmit(e) {
-    console.log('Data:', this.state);
     e.preventDefault();
 
     let exists = this.state.data.filter((obj)=>{
       return obj.name.toLowerCase() === this.state.cityName.toLowerCase();
-    });    
+    }).length>0;    
 
     if (exists) {//city already exists...
+      console.log(exists)
       alert('City alredy exists...');
     } else {//otherewise...
       alert('Ready to POST!');

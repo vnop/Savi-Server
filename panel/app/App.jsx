@@ -15,17 +15,22 @@ export default class App extends React.Component {
       <Router>
         <div className="container">
           <div className="row">
-            <div className="col">
-              <Link to="/">Home</Link>
-            </div>
-            
-            <div className="col">
-              <Link to="/addcity">Cities</Link>
-            </div>
 
-            <div className="col">
-              <Link to="/addtour">Tour</Link>
-            </div>
+            <nav className="navbar navbar-light">
+              <div id='navbar'>
+                <Link to="/">Home</Link>
+              </div>
+
+              <div id='navbar'>
+                <Link to="/addcity">Cities</Link>
+              </div>
+
+              <div id='navbar'>
+                <Link to="/addtour">Tour</Link>
+              </div>
+            </nav>
+
+
           </div>
 
           <hr/>

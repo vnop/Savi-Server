@@ -10,7 +10,7 @@ class AddTour extends React.Component {
       tourName: '',
       tourImg: '',
       tourDesc: '',
-      tourCity: null
+      tourCity: 'City'
     }
 
     //METHOD BINDINGS
@@ -67,7 +67,7 @@ class AddTour extends React.Component {
       <div>
         <form onSubmit={this.handleSubmit}>
           <label>
-            <select name="City">
+            <select value={this.state.tourCity} onChange={this.cityform}>
               {this.state.cityData.map((item, i) => {
                 return (
                   <option value={item.id}>{item.name}</option>

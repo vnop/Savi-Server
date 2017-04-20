@@ -7,10 +7,10 @@ class AddTour extends React.Component {
       cityData: [],
       tourData: [],
       //form field states
-      tourName: '',
-      tourImg: '',
-      tourDesc: '',
-      tourCity: 'City'
+      tourCity: 0, //id of the selected city
+      tourName: '', //name of the tour attraction
+      tourImg: '', //url of the image to be stored
+      tourDesc: '' //description of the tour
     }
 
     //METHOD BINDINGS
@@ -23,23 +23,49 @@ class AddTour extends React.Component {
   }
 
   //FORM CONTROLS
-  nameForm(e) {
-    this.setState({ tourName: e.target.value });
-  }
-  imageForm(e) {
-    this.setState({ tourImg: e.target.value });
-  }
-  descForm(e) {
-    this.setState({ tourDesc: e.target.value });
-  }
-  cityForm(e) {
-    this.setState({ tourCity: e.target.value })
-  }
+  cityForm(e) {this.setState({ tourCity: e.target.value })}
+  nameForm(e) {this.setState({ tourName: e.target.value })}
+  imageForm(e) {this.setState({ tourImg: e.target.value })}
+  descForm(e) {this.setState({ tourDesc: e.target.value })}
 
   //handle the event of submitting form data
   handleSubmit(e) {
-    console.log('Data:', this.state);
-    e.preventDefault();
+    e.preventDefault();//stops page refresh on submit
+
+    let exists = this.state.tourData.filter((obj)=>{
+      return obj.title.toLowerCase() === this.state.tourName.toLowerCase();
+    }).length>0;  
+
+    if (exists) { //if the tour already exists...
+
+    } else { //otherwise...
+      //POST REQUEST
+      fetch('https://savi-travel.com:8082/api/tours', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          title: this.state.tourName, 
+          mainImage: this.state.tourImg, 
+          description: this.state.tourDesc, 
+          cityId: this.state.tourCity
+        })
+      });
+      this.state.tourData.push({
+        title: this.state.tourName, 
+        mainImage: this.state.tourName.replace(' ', '-').toLowerCase()+'_tour.jpg',
+        description: this.state.tourDesc, 
+        cityId: this.state.tourCity
+      });        
+      this.setState({ //reset forms
+        tourCity: 0,
+        tourName: '',
+        tourImg: '',
+        tourDesc: ''
+      });
+    }
   }
 
   //To filter the tourData array for a desired city value
@@ -72,7 +98,7 @@ class AddTour extends React.Component {
             <select onChange={this.cityForm} value={this.state.tourCity}>
               {this.state.cityData.map((item, i) => {
                 return (
-                  <option key={i} value={item.name}>{item.name}</option>
+                  <option key={i} value={item.id}>{item.name}</option>
                 )
               })}
             </select>
@@ -107,8 +133,10 @@ class AddTour extends React.Component {
               <h3>{item.name}</h3>
               {this.processData(this.state.tourData, 'cityId', item.id).map((item, i) => {
                 return (
-                  <div key={i}>
-                    {item.title}
+                  <div id="tourData" key={i}>
+                    <div id="tourName">{item.title}</div>
+                    <img id="tourImgs" src={"https://savi-travel.com:8082/api/images/"+item.mainImage} />
+                    <div id="tourDesc">{item.description}</div>
                   </div>
                 )
               })}                

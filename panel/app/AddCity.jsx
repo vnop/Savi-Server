@@ -27,19 +27,28 @@ class AddCity extends React.Component {
     console.log('Data:', this.state);
     e.preventDefault();
 
-    //POST REQUEST
-    fetch('https://savi-travel.com:8082/api/cities', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        name: 'Central City', 
-        mainImage: 'http://i.imgur.com/w1S5ZM5.jpg'
-      })
-    })
+    let exists = this.state.data.filter((obj)=>{
+      return obj.name.toLowerCase() === this.state.cityName.toLowerCase();
+    });    
 
+    if (exists) {//city already exists...
+      alert('City alredy exists...');
+    } else {//otherewise...
+      alert('Ready to POST!');
+      // //POST REQEUST
+      // fetch('https://savi-travel.com:8082/api/cities', {
+      //   method: 'POST',
+      //   headers: {
+      //     'Accept': 'application/json',
+      //     'Content-Type': 'application/json'
+      //   },
+      //   body: JSON.stringify({
+      //     name: this.state.cityName, 
+      //     mainImage: this.state.cityImg
+      //   })
+      // })
+      this.setState({ cityName: '', cityImg: '' }) //Clear the form after submission
+    }
   }
 
   //INITIAL DATA FETCH

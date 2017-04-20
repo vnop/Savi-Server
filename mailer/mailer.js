@@ -19,15 +19,21 @@ let mailOptions = function(userObject, tourName, date) {
   }
 }
 
-let sendMailToAll = function(destinataries, tour, date) {    
-  Array.prototype.forEach.call(destinataries, function(destinatary) {
-    transporter.sendMail(mailOptions(destinatary, tour, date), (error, info) => {
-      if (error) {
-        return console.log(error);
-      }
-      console.log('Message %s sent: %s', info.messageId, info.response);
-    });
-  })
+let sendMailToAll = function(destinataries, tour, date) {     
+  return new Promise(function(resolve, reject) {
+    Array.prototype.forEach.call(destinataries, function(destinatary, index, array) {                    
+      transporter.sendMail(mailOptions(destinatary, tour, date), (error, info) => {
+        if (error) {
+          console.log(error);
+          reject(error);
+        } else {     
+          if(index === array.length-1) {
+            resolve({emailResMessage: 'Email sent successfully!', lastIndex: index})                    
+          }               
+        }
+      });
+    })    
+  }) 
 }
 
 

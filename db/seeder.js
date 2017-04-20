@@ -1,6 +1,5 @@
 // const Sequelize = require('sequelize')
 // var schema = new Sequelize('savilocal', 'root', '');
-
 'use strict';
 
 const db = require('./db');
@@ -57,7 +56,8 @@ module.exports.seedDatabase = (db) => {
 					mdn: user.mdn,
 					country: user.country,
 					photo: user.photo,
-					cityId: cityId
+					cityId: cityId,
+					userAuthId: user.userAuthId
 				}).then((createdUser) => {
 					user.languages.forEach((language, index) => {
 						db.Languages.find({where: {title: language}}).then((language) => {

@@ -73,7 +73,7 @@ class AddCity extends React.Component {
             return (
               <div key={i}>
                 {item.name}
-                <img id="cityImgs" src={"https://savi-travel.com:8080/api/images/"+item.mainImage} />
+                <img id="cityImgs" src={"https://savi-travel.com:8082/api/images/"+item.mainImage} />
               </div>
             )
           })}

@@ -17,15 +17,15 @@ export default class App extends React.Component {
           <div className="row">
 
             <nav className="navbar navbar-light">
-              <span id='navbar'>
+              <span id="nav-item">
                 <Link to="/">Home</Link>
               </span>
 
-              <span id='navbar'>
+              <span id="nav-item">
                 <Link to="/addcity">Cities</Link>
               </span>
 
-              <span id='navbar'>
+              <span id="nav-item">
                 <Link to="/addtour">Tour</Link>
               </span>
             </nav>

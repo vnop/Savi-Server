@@ -82,7 +82,7 @@ class AddCity extends React.Component {
             return (
               <div key={i}>
                 <div id="cityName">{item.name}</div>
-                <div id="cityImgs"><img src={"https://savi-travel.com:8082/api/images/"+item.mainImage} /></div>
+                <img id="cityImgs" src={"https://savi-travel.com:8082/api/images/"+item.mainImage} />
               </div>
             )
           })}

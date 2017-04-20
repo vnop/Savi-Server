@@ -441,4 +441,12 @@ describe('Admin Control Panel', () => {
   it('should respond with 200 when loading panel', (done) => {
     request(server).get('/').expect(200, done);    
   });
+
+  it('/api/cities should respond', (done) => {
+    request(server).get('/api/cities').expect(200, done);
+  });
+
+  it('/api/tours should respond', (done) => {
+    request(server).get('/api/tours').expect(200, done);
+  });
 });

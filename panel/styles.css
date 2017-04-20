@@ -1,5 +1,6 @@
 /*NAVIGATION*/
 img#saviLogo {
+  position: absolute;
   max-width: 200px;
   max-height: 200px;
 }

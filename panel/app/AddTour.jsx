@@ -136,6 +136,7 @@ class AddTour extends React.Component {
                   <div key={i}>
                     <div id="tourName">{item.title}</div>
                     <img id="tourImgs" src={"https://savi-travel.com:8082/api/images/"+item.mainImage} />
+                    <div id="tourDesc">{item.description}</div>
                   </div>
                 )
               })}                

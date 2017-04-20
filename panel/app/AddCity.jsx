@@ -45,7 +45,10 @@ class AddCity extends React.Component {
           mainImage: this.state.cityImg
         })
       });
-      this.state.data.push({name: this.state.cityName, mainImage: this.state.cityImg})
+      this.state.data.unshift({
+        name: this.state.cityName, 
+        mainImage: this.state.cityName.replace(' ', '-').toLowerCase()+'_city.jpg'
+      })
       this.setState({ cityName: '', cityImg: '' }); //Clear the form after submission
     }
   }

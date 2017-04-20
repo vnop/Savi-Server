@@ -5,7 +5,6 @@ const https = require('https');
 const morgan = require('morgan');
 const express = require('express');
 const Promise = require('bluebird');
-const passport = require('passport');
 const bodyParser = require('body-parser');
 const helpers = require('./helpers');
 const nodemailer = require('nodemailer');
@@ -67,7 +66,7 @@ module.exports = function(app, express, db) {
 	      if (!tour) {
 	        res.status(404).send('Tour not found');
 	      } else {
-	        db.City.find({where: {id: tour.dataValues.cityId}}).then((city) => {	        
+	        db.City.find({where: {id: tour.dataValues.cityId}}).then((city) => {
 	          if(!city) {
 	            res.status(404).send('City not found');
 	          } else {
@@ -84,13 +83,12 @@ module.exports = function(app, express, db) {
 	            });
 
 	            Promise.all([findDriver, findGuide]).then(() => {
-	              if (booking.guide && booking.driver) {	              	
+	              if (booking.guide && booking.driver) {
 	              	let tourName = booking.tour.dataValues.title;
 	              	let destinataries = [
 										booking.driver.dataValues,
 										booking.guide.dataValues
-	              	];	              	
-
+	              	];
 	              	mailer.sendMailToAll(destinataries, tourName, booking.date).then(function(response){
 	              		console.log('mail response', response); 
 	              	}, function(error) {
@@ -98,6 +96,7 @@ module.exports = function(app, express, db) {
 	              	});	              		    
 	              	    
 	               	res.json(booking).end();	              		
+
 	              } else {
 	                res.send('We were unable to book you with the given parameters');
 	              }
@@ -184,4 +183,58 @@ module.exports = function(app, express, db) {
 			});
 		}
 	});
+
+	app.post('/api/users', (req, res) => {
+		let userId = req.body.userId;
+		db.UserData.find({where: {userAuthId: userId}}).then((user) => {
+			if(!user) {
+				if (!req.body.profileData) {
+					res.json({exists: false, user: null}).end();
+				} else {
+					let newUser = {
+						userName: req.body.profileData.name,
+						userEmail: req.body.profileData.email,
+						mdn: req.body.profileData.phone,
+						country: req.body.profileData.country,
+						// photo: req.body.profileData.,
+						// city: req.body.profileData.city,
+						// languages: req.body.profileData.,
+						userAuthId: req.body.userId
+					};
+					helpers.saveImage(req.body.profileData.photo, newUser.userName.split(' ').join('-').toLowerCase()).then((imageName) => {
+						newUser.photo = imageName;
+						db.City.find({where: {name: req.body.profileData.city}}).then((city) => {
+							if (!city) {
+								res.status(404).send('City not found');
+							} else {
+								newUser.cityId = city.dataValues.id;
+								db.UserData.create(newUser).then((user) => {
+									for (var language of req.body.profileData.languages) {
+										db.Languages.find({where: {title: language}}).then((lang) => {
+											if (lang) {
+												db.UserLanguages.create({
+													userId: user.dataValues.id,
+													languageId: lang.dataValues.id
+												});
+											}
+										});
+									}
+									res.json({exists: true, user: user}).end();
+								}).catch((error) => {
+									res.status(500).send('error creating new user ' + JSON.stringify(error));
+								});
+							}
+						}).catch((error) => {
+							res.status(500).send('Error, probably an invalid city ' + JSON.stringify(error));
+						});
+					}, (error) => {
+						res.status(500).send('error saving image ' + JSON.stringify(error))
+					});
+				}
+			} else {
+				res.json({exists: true, user: user}).end();
+			}
+		})
+	});
+
 }

@@ -115,7 +115,8 @@ module.exports = {
 			country: 'USA',
 			photo: 'peter-melnick.jpg',
 			city: 'New York',
-			languages: ['English', 'French']
+			languages: ['English', 'French'],
+			userAuthId: 'ABCDEFGHIJKLMNOP1'
 		},
 		{
 			type: 'Driver',
@@ -125,7 +126,8 @@ module.exports = {
 			country: 'USA',
 			photo: 'elisa-bhandari.jpg',
 			city: 'Rio de Janeiro',
-			languages: ['Portuguese', 'English', 'French']
+			languages: ['Portuguese', 'English', 'French'],
+			userAuthId: 'ABCDEFGHIJKLMNOP2'
 		},
 		{
 			type: 'Driver',
@@ -135,7 +137,8 @@ module.exports = {
 			country: 'France',
 			photo: 'serge-henry.jpg',
 			city: 'Paris',
-			languages: ['French', 'English', 'Italian']
+			languages: ['French', 'English', 'Italian'],
+			userAuthId: 'ABCDEFGHIJKLMNOP3'
 		},
 		{
 			type: 'Driver',
@@ -145,7 +148,8 @@ module.exports = {
 			country: 'Australia',
 			photo: 'huge-jacked-man.jpg',
 			city: 'Amsterdam',
-			languages: ['English', 'Mandarin']
+			languages: ['English', 'Mandarin'],
+			userAuthId: 'ABCDEFGHIJKLMNOP4'
 		},
 		{
 			type: 'Driver',
@@ -155,7 +159,8 @@ module.exports = {
 			country: 'United Kingdom',
 			photo: 'benedict-cumberbatch.jpg',
 			city: 'London',
-			languages: ['English']
+			languages: ['English'],
+			userAuthId: 'ABCDEFGHIJKLMNOP5'
 		},
 		{
 			type: 'Driver',
@@ -165,7 +170,8 @@ module.exports = {
 			country: 'USA',
 			photo: 'nicolas-cage.jpg',
 			city: 'Shanghai',
-			languages: ['German', 'Mandarin', 'English']
+			languages: ['German', 'Mandarin', 'English'],
+			userAuthId: 'ABCDEFGHIJKLMNOP6'
 		},
 		{
 			type: 'Tour Guide',
@@ -175,7 +181,8 @@ module.exports = {
 			country: 'Germany',
 			photo: 'franz-bauer.jpg',
 			city: 'London',
-			languages: ['German', 'English', 'Spanish']
+			languages: ['German', 'English', 'Spanish'],
+			userAuthId: 'ABCDEFGHIJKLMNOP7'
 		},
 		{
 			type: 'Tour Guide',
@@ -185,7 +192,8 @@ module.exports = {
 			country: 'Netherlands',
 			photo: 'albert-hoffmann.jpg',
 			city: 'Amsterdam',
-			languages: ['German', 'English']
+			languages: ['German', 'English'],
+			userAuthId: 'ABCDEFGHIJKLMNOP8'
 		},
 		{
 			type: 'Tour Guide',
@@ -195,7 +203,8 @@ module.exports = {
 			country: 'China',
 			photo: 'xin-meng.jpg',
 			city: 'Shanghai',
-			languages: ['Mandarin', 'Japanese']
+			languages: ['Mandarin', 'Japanese'],
+			userAuthId: 'ABCDEFGHIJKLMNOP9'
 		},
 		{
 			type: 'Tour Guide',
@@ -205,7 +214,8 @@ module.exports = {
 			country: 'USA',
 			photo: 'keanu-reeves.jpg',
 			city: 'New York',
-			languages: ['English']
+			languages: ['English'],
+			userAuthId: 'ABCDEFGHIJKLMNOP10'
 		},
 		{
 			type: 'Tour Guide',
@@ -215,7 +225,8 @@ module.exports = {
 			country: 'USA',
 			photo: 'dwayne-johnson.jpg',
 			city: 'Rio de Janeiro',
-			languages: ['English', 'Spanish']
+			languages: ['English', 'Spanish'],
+			userAuthId: 'ABCDEFGHIJKLMNOP11'
 		},
 		{
 			type: 'Tour Guide',
@@ -225,7 +236,8 @@ module.exports = {
 			country: 'USA',
 			photo: 'daisy-johnson.jpg',
 			city: 'Paris',
-			languages: ['English', 'Spanish', 'French', 'Italian', 'Portuguese']
+			languages: ['English', 'Spanish', 'French', 'Italian', 'Portuguese'],
+			userAuthId: 'ABCDEFGHIJKLMNOP12'
 		}
 	]
 }

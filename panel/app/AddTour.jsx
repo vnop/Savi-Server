@@ -71,7 +71,9 @@ class AddTour extends React.Component {
             <select value={'cup'} onChange={this.cityform}>
               {this.state.cityData.map((item, i) => {
                 return (
-                  <option value={item.name}>{item.name}</option>
+                  <div key={i}>
+                    <option value={item.name}>{item.name}</option>
+                  </div>
                 )
               })}
             </select>

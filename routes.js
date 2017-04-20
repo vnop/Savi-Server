@@ -237,8 +237,8 @@ module.exports = function(app, express, db) {
 		})
 	});
 
-	app.get('/addcity', function (req, res) {
-  	res.redirect('/addcity')
+	app.get('*', function (req, res) {
+  	res.redirect('/')
 	})
 
 }

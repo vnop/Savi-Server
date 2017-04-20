@@ -36,6 +36,7 @@ class AddTour extends React.Component {
     this.setState({ tourCity: e.target.value })
   }
 
+  //handle the event of submitting form data
   handleSubmit(e) {
     console.log('Data:', this.state);
     e.preventDefault();

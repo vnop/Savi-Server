@@ -1,4 +1,8 @@
 /*NAVIGATION*/
+img#saviLogo {
+  max-width: 200px;
+  max-height: 200px;
+}
 span#navItem {
   margin: 20px;
 }

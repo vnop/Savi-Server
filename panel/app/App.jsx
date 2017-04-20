@@ -19,6 +19,8 @@ export default class App extends React.Component {
 
               <nav className="navbar navbar-toggleable-md navbar-light bg-faded">
                 <div className="navbar-nav mr-auto">
+                  <img id="saviLogo" src="../assets/savi_logo.png"/>
+                  
                   <span id="navItem" className="nav-item">
                     <Link to="/">Home</Link>
                   </span>
@@ -31,7 +33,6 @@ export default class App extends React.Component {
                     <Link to="/addtour">Tour</Link>
                   </span>
 
-                  <img id="saviLogo" src="../assets/savi_logo.png"/>
                 </div>
               </nav>
 

@@ -237,7 +237,7 @@ module.exports = function(app, express, db) {
 		})
 	});
 
-	//prevents page crash on panel refresh
+	//Redirect Panel for invalid extensions
 	app.get('*', function (req, res) {
   	res.status(302).redirect('/')
 	})

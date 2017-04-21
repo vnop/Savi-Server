@@ -186,7 +186,7 @@ module.exports = function(app, express, db) {
 
 	app.get('/api/users', (req, res) => {
 		let user = {
-			name: req.query.userName,
+			name: req.query.userName.replace('_',' '),
 			email: req.query.userEmail,
 			mdn: req.query.mdn,
 			county: req.query.country,

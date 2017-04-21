@@ -8,15 +8,19 @@ body {
 	width: 100vw;
 
 	div#app {
-		background: red;
+		height: 100vh;
 		div.main-container {
 			div.inner-wrapper {
-				background: green;
+				background-image: url('https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-100420.jpg');
+				background-size: cover;
+				height: 480px;
+
 				nav.navbar {
 					padding-top: 15px;
+
 				  div.nav-inner-wrapper {
 				  	@include outer-container;
-				  	background: grey;
+
 						div.workers-nav {
 							@include span-columns(6);
 							padding-left: 3%;
@@ -53,7 +57,10 @@ body {
 				}
 
 				div.logo-wrapper {
-
+					text-align: center;
+					img {
+						width: 480px;
+					}
 				}
 			}
  		}

@@ -7,14 +7,11 @@ class AddCity extends React.Component {
     this.state = {
       data: [],
       //form field states
-      userName: req.body.profileData.name,
-      userEmail: req.body.profileData.email,
-      mdn: req.body.profileData.phone,
-      country: req.body.profileData.country,
-      // photo: req.body.profileData.,
-      // city: req.body.profileData.city,
-      // languages: req.body.profileData.,
-      userAuthId: req.body.userId
+      userName: '',
+      userEmail: '',
+      mdn: '',
+      country: '',
+      userAuthId: ''
     };
   }
 

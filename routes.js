@@ -10,9 +10,14 @@ const helpers = require('./helpers');
 const nodemailer = require('nodemailer');
 const mailer = require('./mailer/mailer');
 
-module.exports = function(app, express, db) {
+module.exports = function(app, express, db, log) {
+	if (log === undefined) {
+		var log = true;
+	}
 	app.use(express.static(path.join(__dirname, '/panel'))); //serves up access to panel
-	app.use(morgan('dev')); //set logger
+	if(log) {
+		app.use(morgan('dev')); //set logger
+	}
 	app.use(bodyParser.json());
 	app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -55,13 +60,13 @@ module.exports = function(app, express, db) {
 	});
 
 	app.get('/api/bookings', (req, res) => {
-		console.log('bookings request...', req.query)
+		// console.log('bookings request...', req.query);
 	  let tourId = req.query.tourId;
 	  let date = req.query.date;
 	  if (!tourId || !date) {
 	    res.status(400).send('Invalid query string');
 	  } else {
-	  	console.log('getting tour..')
+	  	// console.log('getting tour..');
 	    db.Tour.find({where: {id: tourId}}).then((tour) =>  {
 	      if (!tour) {
 	        res.status(404).send('Tour not found');
@@ -90,12 +95,12 @@ module.exports = function(app, express, db) {
 										booking.guide.dataValues
 	              	];
 	              	mailer.sendMailToAll(destinataries, tourName, booking.date).then(function(response){
-	              		console.log('mail response', response); 
+	              		// console.log('mail response', response);
 	              	}, function(error) {
-	              		console.log(error)
-	              	});	              		    
-	              	    
-	               	res.json(booking).end();	              		
+	              		// console.log(error)
+	              	});
+
+	               	res.json(booking).end();
 
 	              } else {
 	                res.send('We were unable to book you with the given parameters');

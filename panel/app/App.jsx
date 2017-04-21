@@ -14,14 +14,14 @@ export default class App extends React.Component {
   render() {
     return (
       <Router>
-        <div className="container">
-          <div className="col">
-            <div className="row">
+        <div style={{backgroundColor: 'red'}} className="main-container">
+          <div className="">
+            <div className="">
 
-              <nav className="navbar navbar-toggleable-md navbar-light bg-faded">
-                <div className="navbar-nav mr-auto">
+              <nav className="">
+                <div className="">
                   <img id="saviLogo" src="../assets/savi_logo.png"/>
-                  
+
                   <span id="navItem" className="nav-item">
                     <Link to="/">Home</Link>
                   </span>
@@ -54,6 +54,6 @@ export default class App extends React.Component {
       </Router>
     )
   }
-} 
+}
 
 module.exports = App;

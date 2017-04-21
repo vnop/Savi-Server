@@ -35,7 +35,7 @@ export default class App extends React.Component {
                   </span>
 
                   <span id="navItem" className="nav-item">
-                    <Link to="/manageusers">Users</Link>
+                    <Link to="/manageusers">Manage Users</Link>
                   </span>
 
                 </div>

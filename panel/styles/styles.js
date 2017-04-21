@@ -5,7 +5,19 @@ module.exports = {
 	},
 
 	innerWrapper: {
-		backgroundColor: 'green',
 		height: 200
+	},
+
+	navbar: {
+
+		height: 50
+	},
+
+	logoWrapper: {
+
+	},
+
+	navInnerWrapper: {
+		flexDirection: 'row'
 	}
 }

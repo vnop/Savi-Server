@@ -15,14 +15,21 @@ export default class App extends React.Component {
   render() {
     return (
       <Router>
-        <div style={Styles.mainContainer}>
-          <div style={Styles.innerWrapper}>
-            <div className="">
+        <div style={Styles.mainContainer} className="main-container">
+          <div style={Styles.innerWrapper} className="inner-wrapper">
+            <nav style={Styles.navbar} className="navbar">
+              <div style={Styles.navInnerWrapper} className="nav-inner-wrapper">
+                <div className="workers-nav">
+                  <span id="navItem" className="nav-item">
+                    <Link to="/">Driver</Link>
+                  </span>
 
-              <nav className="">
-                <div className="">
-                  <img id="saviLogo" src="../assets/savi_logo.png"/>
+                  <span id="navItem" className="nav-item">
+                    <Link to="/addcity">Tour Guide</Link>
+                  </span>
+                </div>
 
+                <div className="tourist-nav test">
                   <span id="navItem" className="nav-item">
                     <Link to="/">Home</Link>
                   </span>
@@ -40,8 +47,10 @@ export default class App extends React.Component {
                   </span>
 
                 </div>
-              </nav>
-
+              </div>
+            </nav>
+            <div style={Styles.logoWrapper} className="logo-wrapper">
+              <img id="saviLogo" src="../assets/savi_logo.png"/>
             </div>
 
             <hr/>

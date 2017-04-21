@@ -184,6 +184,14 @@ module.exports = function(app, express, db) {
 		}
 	});
 
+	app.get('/api/users', (req, res) => {
+		db.UserData.findAll()
+			.then((users => {
+				helpers.respondDBQuery(users, req, res)
+			.catch((err) => {
+	      helpers.respondDBError(err, req, res);
+	});
+
 	app.post('/api/users', (req, res) => {
 		let userId = req.body.userId;
 		db.UserData.find({where: {userAuthId: userId}}).then((user) => {

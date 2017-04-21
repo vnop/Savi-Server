@@ -230,7 +230,6 @@ module.exports = function(app, express, db) {
 				helpers.respondDBError(err, req, res);
 			});
 		}
-
 	});
 
 	app.post('/api/users', (req, res) => {

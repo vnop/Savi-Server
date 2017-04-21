@@ -13,16 +13,23 @@ var syncTables = function(force, schema) {
     country: Sequelize.STRING,
     photo: Sequelize.STRING,
     type: { type: Sequelize.STRING, defaultValue: 'Tourist'},
-    userAuthId: Sequelize.STRING
+    userAuthId: Sequelize.STRING,
+    city: Sequelize.STRING
   });
 
-  module.exports.DriverData = schema.define('driver_data', {
+  // module.exports.DriverData = schema.define('driver_data', {
+  //   rating: Sequelize.INTEGER,
+  //   seats: Sequelize.INTEGER
+  // });
+
+  // module.exports.TourGuideData = schema.define('tour_guide_data', {
+  //   rating: Sequelize.INTEGER,
+  // });
+
+  module.exports.EmployeeData = schema.define('employee_data', {
+    type: Sequelize.STRING,
     rating: Sequelize.INTEGER,
     seats: Sequelize.INTEGER
-  });
-
-  module.exports.TourGuideData = schema.define('tour_guide_data', {
-    rating: Sequelize.INTEGER,
   });
 
   module.exports.City = schema.define('city', {
@@ -35,7 +42,6 @@ var syncTables = function(force, schema) {
   });
 
   module.exports.UserLanguages = schema.define('user_languages', {
-
   });
 
   module.exports.Offering = schema.define('offering', {
@@ -53,8 +59,9 @@ var syncTables = function(force, schema) {
     mainImage: Sequelize.TEXT
   });
 
-  module.exports.DriverData.belongsTo(module.exports.UserData, {as: 'user'});
-  module.exports.TourGuideData.belongsTo(module.exports.UserData, {as: 'user'});
+  // module.exports.DriverData.belongsTo(module.exports.UserData, {as: 'user'});
+  // module.exports.TourGuideData.belongsTo(module.exports.UserData, {as: 'user'});
+  module.exports.EmployeeData.belongsTo(module.exports.UserData, {as: 'user'});
   module.exports.Tour.belongsTo(module.exports.City, {as: 'city'});
   module.exports.Offering.belongsTo(module.exports.Tour, {as: 'tour'});
   module.exports.Offering.belongsTo(module.exports.UserData, {as: 'driver'});
@@ -63,7 +70,7 @@ var syncTables = function(force, schema) {
   module.exports.Booking.belongsTo(module.exports.UserData, {as: 'driver'});
   module.exports.Booking.belongsTo(module.exports.UserData, {as: 'tourGuide'});
   module.exports.Booking.belongsTo(module.exports.UserData, {as: 'tourist'});
-  module.exports.UserData.belongsTo(module.exports.City, {as: 'city'});
+  module.exports.EmployeeData.belongsTo(module.exports.City, {as: 'city'});
   module.exports.UserData.belongsToMany(module.exports.Languages, {as: 'user', through: module.exports.UserLanguages, foreignKey: 'userId' });
   module.exports.Languages.belongsToMany(module.exports.UserData, {as: 'languages', through: module.exports.UserLanguages, foreignKey: 'languageId' });
 

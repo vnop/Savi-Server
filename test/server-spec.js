@@ -13,7 +13,7 @@ const seeder = require('../db/seeder.js');
 const config = require('../config/config');
 const mailer = require('../mailer/mailer')
 
-const schema = new Sequelize('test', 'root', config.password, {logging: false});
+const schema = new Sequelize('test', 'root', config.password, {logging: true});
 const port = 1337;
 
 const compareSomeKeys = (expected, actual) => {
@@ -372,7 +372,6 @@ describe('Users endpoint', () => {
       name: 'Metropolis',
       mainImage: 'metropolis_city.jpg'
     }
-
     user1Expected = {
       type: 'Tourist',
       userName: 'Bruce Wayne',

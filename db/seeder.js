@@ -46,29 +46,64 @@ module.exports.seedDatabase = (db) => {
 		});
 	});
 
+
+
 	Promise.all(languageCreation.concat(cityCreation)).then(() => {
 		sampleData.users.forEach((user, index) => {
-			getCityId(user.city).then((cityId) => {
-				db.UserData.create({
-					type: user.type,
-					userName: user.userName,
-					userEmail: user.userEmail,
-					mdn: user.mdn,
-					country: user.country,
-					photo: user.photo,
-					cityId: cityId,
-					userAuthId: user.userAuthId
-				}).then((createdUser) => {
-					user.languages.forEach((language, index) => {
-						db.Languages.find({where: {title: language}}).then((language) => {
-							db.UserLanguages.create({
-								userId: createdUser.dataValues.id,
-								languageId: language.dataValues.id
-							});
+			var newUser = {
+				userName: user.userName,
+				userEmail: user.userEmail,
+				mdn: user.mdn,
+				city: user.city,
+				photo: user.photo,
+				type: user.type,
+				userAuthId: user.userAuthId,
+				country: user.country
+			};
+
+			db.UserData.create(newUser).then((createdUser) => {
+				user.languages.forEach((language, index) => {
+					db.Languages.find({where: {title: language}}).then((language) => {
+						db.UserLanguages.create({
+							userId: createdUser.dataValues.id,
+							languageId: language.dataValues.id
 						});
 					});
 				});
+
+				if (createdUser.type === 'Driver' || createdUser.type === 'Tour Guide') {
+					getCityId(createdUser.dataValues.city).then((cityId) => {
+						db.EmployeeData.create({
+							userId: createdUser.dataValues.id,
+							cityId: cityId,
+							type: createdUser.dataValues.type,
+							rating: user.employeeData.rating,
+							seats: user.employeeData.seats
+						});
+					});
+				}
 			});
+			// getCityId(user.city).then((cityId) => {
+			// 	db.UserData.create({
+			// 		type: user.type,
+			// 		userName: user.userName,
+			// 		userEmail: user.userEmail,
+			// 		mdn: user.mdn,
+			// 		country: user.country,
+			// 		photo: user.photo,
+			// 		cityId: cityId,
+			// 		userAuthId: user.userAuthId
+			// 	}).then((createdUser) => {
+			// 		user.languages.forEach((language, index) => {
+			// 			db.Languages.find({where: {title: language}}).then((language) => {
+			// 				db.UserLanguages.create({
+			// 					userId: createdUser.dataValues.id,
+			// 					languageId: language.dataValues.id
+			// 				});
+			// 			});
+			// 		});
+			// 	});
+			// });
 		});
 	});
 }

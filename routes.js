@@ -217,6 +217,12 @@ module.exports = function(app, express, db) {
 			}).catch((err) => {
 				helpers.respondDBError(err, req, res);
 			});
+		} else if (!!user.country) { //else, if a user country exists... 
+			db.UserData.findAll({where: {country: user.country}}).then((users) => { //grab all that match
+				helpers.respondDBQuery(users, req, res);
+			}).catch((err) => {
+				helpers.respondDBError(err, req, res);
+			});
 		}
 
 	});

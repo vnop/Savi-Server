@@ -1,6 +1,13 @@
 @import 'bourbon/bourbon';
 @import 'neat/neat';
 
+$mainBlue: #003171;
+$jordyBlue: #89C4F4;
+$almostWhite: #ecf0f1;
+$lightBlue: #4B77BE;
+$middleBlue: #1F4788;
+$lightGreen: #2ABB9B;
+
 body {
 	background: beige;
 	margin: 0;
@@ -17,6 +24,7 @@ body {
 
 				nav.navbar {
 					padding-top: 15px;
+					font-family: play, Georgia;
 
 				  div.nav-inner-wrapper {
 				  	@include outer-container;
@@ -26,9 +34,9 @@ body {
 							padding-left: 3%;
 
 							span {
-								background: blue;
+								background: $lightGreen;
     						padding: 5px 24px;
-    						border-radius: 5px;
+    						border-radius: 2px;
     						margin: 0 8px;
 								a {
 									text-decoration: none;
@@ -43,10 +51,11 @@ body {
 							padding-right: 3%;
 
 							span {
-								background: blue;
+								background: $mainBlue;
     						padding: 5px 24px;
-    						border-radius: 5px;
+    						border-radius: 2px;
     						margin: 0 8px;
+
 								a {
 									text-decoration: none;
 									color: white;

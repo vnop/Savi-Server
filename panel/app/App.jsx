@@ -53,8 +53,6 @@ export default class App extends React.Component {
               <img id="saviLogo" src="../assets/savi_logo.png"/>
             </div>
 
-            <hr/>
-
             <Route exact path="/" component={Home}/>
             <Route path="/addcity" component={AddCity}/>
             <Route path="/addtour" component={AddTour}/>

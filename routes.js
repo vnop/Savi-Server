@@ -185,11 +185,28 @@ module.exports = function(app, express, db) {
 	});
 
 	app.get('/api/users', (req, res) => {
-		db.UserData.findAll().then((users) => {
-			helpers.respondDBQuery(users, req, res);
-		}).catch((err) => {
-			helpers.respondDBError(err, req, res)
-		});
+		let user = {
+			name: req.query.userName,
+			email: req.query.userEmail,
+			mdn: req.query.mdn,
+			county: req.query.country,
+			city: req.query.city
+		};
+
+		if (!user.name && !user.email && !user.mdn && !user.country && !user.city) { //if no user data came from the req.body...
+			db.UserData.findAll().then((users) => { //grab all data from the table instead
+				helpers.respondDBQuery(users, req, res);
+			}).catch((err) => {
+				helpers.respondDBError(err, req, res);
+			});
+		} else if (!!user.name) { //otherwise, if a user name exists... 
+			db.UserData.find({where: {userName: user.name}}).then((user) => {
+				helpers.respondDBQuery(user, req, res);
+			}).catch((err) => {
+				helpers.respondDBError(err, req, res);
+			});
+		}
+
 	});
 
 	app.post('/api/users', (req, res) => {

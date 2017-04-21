@@ -186,14 +186,14 @@ module.exports = function(app, express, db) {
 
 	app.get('/api/users', (req, res) => {
 		let user = {
-			name: req.query.userName.replace('_',' '),
+			name: req.query.userName,
 			email: req.query.userEmail,
 			mdn: req.query.mdn,
 			county: req.query.country,
 			city: req.query.city
 		};
 		// console.log('inbound data', req.query.userName);
-		console.log('converted value', user.name);
+		//console.log('converted value', user.name);
 		if (!user.name && !user.email && !user.mdn && !user.country && !user.city) { //if no user data came from the req.body...
 			db.UserData.findAll().then((users) => { //grab all data from the table instead
 				helpers.respondDBQuery(users, req, res);

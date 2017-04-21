@@ -189,7 +189,7 @@ module.exports = function(app, express, db) {
 			name: req.query.userName,
 			email: req.query.userEmail,
 			mdn: req.query.mdn, //mobile device number
-			county: req.query.country,
+			country: req.query.country,
 			city: req.query.city
 		};
 

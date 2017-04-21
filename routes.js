@@ -192,7 +192,8 @@ module.exports = function(app, express, db) {
 			county: req.query.country,
 			city: req.query.city
 		};
-		console.log(req.query.userName);
+		console.log('inbound data', req.query.userName);
+		console.log('converted value', user.name);
 		if (!user.name && !user.email && !user.mdn && !user.country && !user.city) { //if no user data came from the req.body...
 			db.UserData.findAll().then((users) => { //grab all data from the table instead
 				helpers.respondDBQuery(users, req, res);

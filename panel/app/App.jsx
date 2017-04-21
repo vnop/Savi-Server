@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Home from './Home.jsx';
+import Styles from '../styles/styles.js';
 import AddCity from './AddCity.jsx';
 import AddTour from './AddTour.jsx';
 import ManageUsers from './ManageUsers.jsx';
@@ -14,8 +15,8 @@ export default class App extends React.Component {
   render() {
     return (
       <Router>
-        <div style={{backgroundColor: 'red'}} className="main-container">
-          <div className="">
+        <div style={Styles.mainContainer}>
+          <div style={Styles.innerWrapper}>
             <div className="">
 
               <nav className="">

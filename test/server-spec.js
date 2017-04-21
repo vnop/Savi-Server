@@ -95,7 +95,7 @@ describe('Basic server tests', () => {
 
   beforeEach(() => {
     app = express();
-    require('../routes')(app, express, db);
+    require('../routes')(app, express, db, false);
     server = app.listen(port, () => {
     });
   });
@@ -126,7 +126,7 @@ describe('Cities endpoints', () => {
 
   beforeEach(() => {
     app = express();
-    require('../routes')(app, express, db);
+    require('../routes')(app, express, db, false);
     server = app.listen(port, () => {
     });
   });
@@ -197,7 +197,7 @@ describe('Tours endpoints', () => {
 
   beforeEach(() => {
     app = express();
-    require('../routes')(app, express, db);
+    require('../routes')(app, express, db, false);
     server = app.listen(port, () => {
     });
   });
@@ -308,7 +308,7 @@ describe('Bookings endpoint', () => {
 
   beforeEach(() => {
     app = express();
-    require('../routes')(app, express, db);
+    require('../routes')(app, express, db, false);
     server = app.listen(port, () => {
     });
   });
@@ -342,7 +342,7 @@ describe('Images endpoint', () => {
 
   beforeEach(() => {
     app = express();
-    require('../routes')(app, express, db);
+    require('../routes')(app, express, db, false);
     server = app.listen(port, () => {
     });
   });
@@ -364,13 +364,98 @@ describe('Images endpoint', () => {
   })
 });
 
+describe('Users endpoint', () => {
+  var user1Expected, user2Expected, cityExpected;
+  var app, server;
+  before((done) => {
+    cityExpected = {
+      name: 'Metropolis',
+      mainImage: 'metropolis_city.jpg'
+    }
+
+    user1Expected = {
+      type: 'Tourist',
+      userName: 'Bruce Wayne',
+      userEmail: 'bwayne@wayneenterprises.com',
+      mdn: '202-555-0173',
+      country: 'USA',
+      photo: 'bruce-wayne.jpg',
+      cityId: 1,
+      userAuthId: 'ABCDEFGHIJKLMNOP1'
+    };
+    user2Expected = {
+      type: 'Tourist',
+      userName: 'Barbara Gordon',
+      userEmail: 'bgordon@gcpd.gov',
+      mdn: '202-555-0174',
+      country: 'USA',
+      photo: 'barbara-gordon.jpg',
+      cityId: 1,
+      userAuthId: 'ABCDEFGHIJKLMNOP2'
+    }
+
+    db.City.create(cityExpected).then(() => {
+      db.UserData.create(user1Expected).then(() => {done()});
+    })
+  });
+
+  after((done) => {
+    fs.unlinkSync(path.join(__dirname, '../img/' + 'barbara-gordon.jpg'));
+    done();
+  });
+
+  beforeEach(() => {
+    app = express();
+    require('../routes')(app, express, db, false);
+    server = app.listen(port, () => {
+    });
+  });
+
+  afterEach((done) => {
+    server.close(done);
+  });
+
+  it('should find a user that exists', (done) => {
+    request(server).post('/api/users').send({userId: user1Expected.userAuthId}).end((err, res) => {
+      expect(res.body.exists).to.equal(true, 'should respond with true for a user that exists');
+      expect(compareSomeKeys(user1Expected, res.body.user)).to.equal(true, 'should respond with the correct user data');
+      done();
+    });
+  });
+
+  it('should not find a user that does not exist', (done) => {
+    request(server).post('/api/users').send({userId: user2Expected.userAuthId}).end((err, res) => {
+      expect(res.body.exists).to.equal(false, 'should respond with false for a user that does not exist');
+      expect(res.body.user).to.equal(null, 'should respond with null user data');
+      done();
+    });
+  });
+
+  it('should create a user that does not exist when given the data', (done) => {
+    let newUserData = {
+      name: user2Expected.userName,
+      email: user2Expected.userEmail,
+      phone: user2Expected.mdn,
+      photo: 'https://upload.wikimedia.org/wikipedia/en/d/df/Barbara_Gordon_Batgirl.jpg',
+      city: 'Gotham',
+      country: 'USA',
+      languages: []
+    }
+    request(server).post('/api/users').send({userId: user2Expected.userAuthId, profileData: newUserData}).end((err, res) => {
+      expect(res.body.exists).to.equal(true, 'should respond with false for a user that does not exist');
+      expect(compareSomeKeys(user2Expected, res.body.user)).to.equal(true, 'should respond with the new user data');
+      done();
+    });
+  });
+});
+
 describe('Automatic mailer', () => {
 
   var server, app;
 
   beforeEach(() => {
     app = express();
-    require('../routes')(app, express, db);
+    require('../routes')(app, express, db, false);
     server = app.listen(port, () => {
     });
   });
@@ -429,7 +514,7 @@ describe('Admin Control Panel', () => {
   var app, server;
   beforeEach(() => {
     app = express();
-    require('../routes')(app, express, db);
+    require('../routes')(app, express, db, false);
     server = app.listen(port, () => {
     });
   });

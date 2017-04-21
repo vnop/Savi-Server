@@ -188,7 +188,7 @@ module.exports = function(app, express, db) {
 		let user = {
 			name: req.query.userName,
 			email: req.query.userEmail,
-			mdn: req.query.mdn,
+			mdn: req.query.mdn, //mobile device number
 			county: req.query.country,
 			city: req.query.city
 		};
@@ -199,14 +199,20 @@ module.exports = function(app, express, db) {
 			}).catch((err) => {
 				helpers.respondDBError(err, req, res);
 			});
-		} else if (!!user.name) { //otherwise, if a user name exists... 
+		} else if (!!user.name) { //else, if a user name exists... 
 			db.UserData.find({where: {userName: user.name}}).then((user) => {
 				helpers.respondDBQuery(user, req, res);
 			}).catch((err) => {
 				helpers.respondDBError(err, req, res);
 			});
-		} else if (!!user.email) { //otherwise, if a user name exists... 
+		} else if (!!user.email) { //else, if a user email exists... 
 			db.UserData.find({where: {userEmail: user.email}}).then((user) => {
+				helpers.respondDBQuery(user, req, res);
+			}).catch((err) => {
+				helpers.respondDBError(err, req, res);
+			});
+		} else if (!!user.mdn) { //else, if a user mobile device number exists... 
+			db.UserData.find({where: {mdn: user.mdn}}).then((user) => {
 				helpers.respondDBQuery(user, req, res);
 			}).catch((err) => {
 				helpers.respondDBError(err, req, res);

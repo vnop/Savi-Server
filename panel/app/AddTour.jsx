@@ -1,5 +1,5 @@
 import React from 'react';
-
+import config from '../../config/config.js';
 class AddTour extends React.Component {
   constructor(props) {
     super(props);
@@ -34,31 +34,31 @@ class AddTour extends React.Component {
 
     let exists = this.state.tourData.filter((obj)=>{
       return obj.title.toLowerCase() === this.state.tourName.toLowerCase();
-    }).length>0;  
+    }).length>0;
 
     if (exists) { //if the tour already exists...
 
     } else { //otherwise...
       //POST REQUEST
-      fetch('https://savi-travel.com:8082/api/tours', {
+      fetch('https://savi-travel.com:'+config.port+'/api/tours', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          title: this.state.tourName, 
-          mainImage: this.state.tourImg, 
-          description: this.state.tourDesc, 
+          title: this.state.tourName,
+          mainImage: this.state.tourImg,
+          description: this.state.tourDesc,
           cityId: this.state.tourCity
         })
       });
       this.state.tourData.push({
-        title: this.state.tourName, 
+        title: this.state.tourName,
         mainImage: this.state.tourName.replace(' ', '-').toLowerCase()+'_tour.jpg',
-        description: this.state.tourDesc, 
+        description: this.state.tourDesc,
         cityId: this.state.tourCity
-      });        
+      });
       this.setState({ //reset forms
         tourCity: 0,
         tourName: '',
@@ -73,17 +73,17 @@ class AddTour extends React.Component {
     return array.filter((obj) => {
       return obj[key] === val;
     });
-  } 
+  }
 
   //INITIAL DATA FETCH
   componentWillMount() {
     //get the current city list
-    fetch('https://savi-travel.com:8082/api/cities', {mode: 'no-cors'})
+    fetch('https://savi-travel.com:'+config.port+'/api/cities', {mode: 'no-cors'})
       .then(resp => resp.json())
       .then(data => this.setState({cityData: data}))
       .catch(err => console.error(err));
     //get the current tour list
-    fetch('https://savi-travel.com:8082/api/tours', {mode: 'no-cors'})
+    fetch('https://savi-travel.com:'+config.port+'/api/tours', {mode: 'no-cors'})
       .then(resp => resp.json())
       .then(data => this.setState({tourData: data}))
       .catch(err => console.error(err));
@@ -106,18 +106,18 @@ class AddTour extends React.Component {
 
           <label>
             Tour:
-            <input type="text" value={this.state.tourName} onChange={this.nameForm} />           
+            <input type="text" value={this.state.tourName} onChange={this.nameForm} />
           </label>
 
           <label>
             Image:
-            <input type="text" value={this.state.tourImg} onChange={this.imageForm} />           
+            <input type="text" value={this.state.tourImg} onChange={this.imageForm} />
           </label>
 
           <label>
             Description:
-            <input type="text" value={this.state.tourDesc} onChange={this.descForm} />           
-          </label>   
+            <input type="text" value={this.state.tourDesc} onChange={this.descForm} />
+          </label>
 
           <input type="submit" value="Add" />
         </form>
@@ -135,14 +135,14 @@ class AddTour extends React.Component {
                 return (
                   <div id="tourData" key={i}>
                     <div id="tourName">{item.title}</div>
-                    <img id="tourImgs" src={"https://savi-travel.com:8082/api/images/"+item.mainImage} />
+                    <img id="tourImgs" src={"https://savi-travel.com:"+config.port+"/api/images/"+item.mainImage} />
                     <div id="tourDesc">{item.description}</div>
                   </div>
                 )
-              })}                
+              })}
               </div>
             )
-          })}                   
+          })}
         </div>
 
       </div>

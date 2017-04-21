@@ -200,8 +200,8 @@ module.exports = function(app, express, db) {
 			}).catch((err) => {
 				helpers.respondDBError(err, req, res);
 			});
-		} else if (!!user.name) { //otherwise, if a user name exists... 
-			db.UserData.find({where: {userName: user.name.replace('_',' ')}}).then((user) => {
+		} else if (!!user.email) { //otherwise, if a user name exists... 
+			db.UserData.find({where: {userEmail: user.email}}).then((user) => {
 				helpers.respondDBQuery(user, req, res);
 			}).catch((err) => {
 				helpers.respondDBError(err, req, res);

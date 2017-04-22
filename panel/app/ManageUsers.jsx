@@ -39,7 +39,7 @@ class ManageUsers extends React.Component {
           </select>
         </form>
         <DynamicForms method={this.state.method} cityData={this.state.cityData} />
-        <DisplayUsers component={DynamicForms}/>
+        <DisplayUsers><DynamicForms/></DisplayUsers>
       </div>
     )
   }//End of Render

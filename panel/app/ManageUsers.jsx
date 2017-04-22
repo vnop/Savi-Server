@@ -35,7 +35,7 @@ class DynamicForms extends React.Component {
           <input type="submit" value="Search" />
         </form>
       )
-    } else {
+    } else {//every other case
       return (
         <div>The other case</div>
       )

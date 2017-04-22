@@ -136,7 +136,8 @@ describe('Cities endpoints', () => {
 
   after((done) => {
     fs.unlinkSync(path.join(__dirname, '../img/' + 'central-city_city.jpg'));
-    done();
+    db.syncTables(true, schema).then(() => {done()});
+    // done();
   });
 
   it('/api/cities should respond', (done) => {
@@ -207,7 +208,8 @@ describe('Tours endpoints', () => {
 
   after((done) => {
     fs.unlinkSync(path.join(__dirname, '../img/' + 'gotham-eats_tour.jpg'));
-    done();
+    db.syncTables(true, schema).then(() => {done()});
+    // done();
   });
 
   it('/api/tours/ should respond', (done) => {
@@ -260,6 +262,7 @@ describe('Bookings endpoint', () => {
   var city1Expected, city2Expected;
   var tour1Expected, tour2Expected, tour3Expected, tour4Expected;
   var user1Expected, user2Expected;
+  var offering1expected, offering2expected;
   before((done) => {
     city1Expected = {name: 'Gotham', mainImage: 'gotham_city.jpg'};
     city2Expected = {name: 'Metropolis', mainImage: 'metropolis_city.jpg'};
@@ -269,6 +272,9 @@ describe('Bookings endpoint', () => {
     tour3Expected = {cityId: 2, title: 'Tour 3', description: 'Third tour', mainImage: 'tour3.jpg'};
     tour4Expected = {cityId: 2, title: 'Tour 4', description: 'Fourth tour', mainImage: 'tour4.jpg'};
 
+    offering1expected = {cityId: 1, userId: 1, userType: 'Driver', seats: 0, date: '00-00-0000'};
+    offering2expected = {cityId: 1, userId: 2, userType: 'Tour Guide', seats: 0, date: '00-00-0000'};
+
     user1Expected = {
       type: 'Driver',
       userName: 'Bruce Wayne',
@@ -276,7 +282,7 @@ describe('Bookings endpoint', () => {
       mdn: '202-555-0173',
       country: 'USA',
       photo: 'bruce-wayne.jpg',
-      cityId: 1
+      city: 'Gotham'
     }
 
     user2Expected = {
@@ -286,7 +292,7 @@ describe('Bookings endpoint', () => {
       mdn: '202-555-0174',
       country: 'USA',
       photo: 'barbara-gordon.jpg',
-      cityId: 1
+      cityId: 'Gotham'
     }
 
     db.syncTables(true, schema).then(() => {
@@ -301,6 +307,8 @@ describe('Bookings endpoint', () => {
         toursAndUsers.push(db.Tour.create(tour4Expected));
         toursAndUsers.push(db.UserData.create(user1Expected));
         toursAndUsers.push(db.UserData.create(user2Expected));
+        toursAndUsers.push(db.Offering.create(offering1expected));
+        toursAndUsers.push(db.Offering.create(offering2expected));
         Promise.all(toursAndUsers).then(() => {done()});
       });
     });
@@ -316,21 +324,28 @@ describe('Bookings endpoint', () => {
     server.close(done);
   });
 
+  after((done) => {
+    db.syncTables(true, schema).then(() => {done()});
+  });
+
   it('/api/bookings should respond with 400 if no/incorrect queries supplied', (done) => {
     request(server).get('/api/bookings').expect(400, done);
   });
 
   it('/api/bookings should respond with a booking object with queried', (done) => {
-    request(server).get('/api/bookings?tourId=1&date=testDate').end((err, res) => {
+    request(server).get('/api/bookings?tourId=1&date=00-00-0000').end((err, res) => {
       expect(compareSomeKeys(user1Expected, res.body.driver)).to.equal(true, 'Should have the correct driver');
       expect(compareSomeKeys(user2Expected, res.body.guide)).to.equal(true, 'Should have the correct tourguide');
       expect(compareSomeKeys(city1Expected, res.body.city)).to.equal(true, 'Should have the correct city');
       expect(compareSomeKeys(tour1Expected, res.body.tour)).to.equal(true, 'Should have the correct tour');
-      expect(res.body.date).to.equal('testDate', 'should have the correct date');
+      expect(res.body.date).to.equal('00-00-0000', 'should have the correct date');
       done();
     });
   });
 
+  it('/api/bookings should respond with a failure if there are no offerings', (done) => {
+    request(server).get('/api/bookings?tourId=1&date=00-00-0000').expect('We were unable to book you with the given parameters', done);
+  });
 });
 
 describe('Images endpoint', () => {
@@ -352,7 +367,8 @@ describe('Images endpoint', () => {
 
   after((done) => {
     fs.unlinkSync(path.join(__dirname, '../img/' + 'test-img0.jpg'));
-    done();
+    db.syncTables(true, schema).then(() => {done()});
+    // done();
   });
 
   it('/api/images should return an error for a nonexistant image', (done) => {
@@ -372,7 +388,6 @@ describe('Users endpoint', () => {
       name: 'Metropolis',
       mainImage: 'metropolis_city.jpg'
     }
-
     user1Expected = {
       type: 'Tourist',
       userName: 'Bruce Wayne',
@@ -380,7 +395,7 @@ describe('Users endpoint', () => {
       mdn: '202-555-0173',
       country: 'USA',
       photo: 'bruce-wayne.jpg',
-      cityId: 1,
+      city: 'Gotham',
       userAuthId: 'ABCDEFGHIJKLMNOP1'
     };
     user2Expected = {
@@ -390,7 +405,7 @@ describe('Users endpoint', () => {
       mdn: '202-555-0174',
       country: 'USA',
       photo: 'barbara-gordon.jpg',
-      cityId: 1,
+      city: 'Gotham',
       userAuthId: 'ABCDEFGHIJKLMNOP2'
     }
 
@@ -401,7 +416,8 @@ describe('Users endpoint', () => {
 
   after((done) => {
     fs.unlinkSync(path.join(__dirname, '../img/' + 'barbara-gordon.jpg'));
-    done();
+    db.syncTables(true, schema).then(() => {done()});
+    // done();
   });
 
   beforeEach(() => {

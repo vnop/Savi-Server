@@ -13,16 +13,23 @@ var syncTables = function(force, schema) {
     country: Sequelize.STRING,
     photo: Sequelize.STRING,
     type: { type: Sequelize.STRING, defaultValue: 'Tourist'},
-    userAuthId: Sequelize.STRING
+    userAuthId: Sequelize.STRING,
+    city: Sequelize.STRING
   });
 
-  module.exports.DriverData = schema.define('driver_data', {
-    rating: Sequelize.INTEGER,
+  // module.exports.DriverData = schema.define('driver_data', {
+  //   rating: Sequelize.INTEGER,
+  //   seats: Sequelize.INTEGER
+  // });
+
+  // module.exports.TourGuideData = schema.define('tour_guide_data', {
+  //   rating: Sequelize.INTEGER,
+  // });
+
+  module.exports.EmployeeData = schema.define('employee_data', {
+    type: Sequelize.STRING,
+    rating: Sequelize.FLOAT,
     seats: Sequelize.INTEGER
-  });
-
-  module.exports.TourGuideData = schema.define('tour_guide_data', {
-    rating: Sequelize.INTEGER,
   });
 
   module.exports.City = schema.define('city', {
@@ -35,12 +42,12 @@ var syncTables = function(force, schema) {
   });
 
   module.exports.UserLanguages = schema.define('user_languages', {
-
   });
 
   module.exports.Offering = schema.define('offering', {
-    start: Sequelize.DATE,
-    end: Sequelize.DATE
+    date: Sequelize.STRING,
+    userType: Sequelize.STRING,
+    seats: Sequelize.INTEGER
   });
 
   module.exports.Booking = schema.define('booking', {
@@ -50,20 +57,24 @@ var syncTables = function(force, schema) {
   module.exports.Tour = schema.define('tour', {
     title: Sequelize.STRING,
     description: Sequelize.STRING,
-    mainImage: Sequelize.TEXT
+    mainImage: Sequelize.TEXT,
+    price: Sequelize.FLOAT
   });
 
-  module.exports.DriverData.belongsTo(module.exports.UserData, {as: 'user'});
-  module.exports.TourGuideData.belongsTo(module.exports.UserData, {as: 'user'});
+  // module.exports.DriverData.belongsTo(module.exports.UserData, {as: 'user'});
+  // module.exports.TourGuideData.belongsTo(module.exports.UserData, {as: 'user'});
+  module.exports.EmployeeData.belongsTo(module.exports.UserData, {as: 'user'});
   module.exports.Tour.belongsTo(module.exports.City, {as: 'city'});
-  module.exports.Offering.belongsTo(module.exports.Tour, {as: 'tour'});
-  module.exports.Offering.belongsTo(module.exports.UserData, {as: 'driver'});
-  module.exports.Offering.belongsTo(module.exports.UserData, {as: 'tourGuide'});
+  module.exports.Offering.belongsTo(module.exports.City, {as: 'city'});
+  // module.exports.Offering.belongsTo(module.exports.UserData, {as: 'driver'});
+  // module.exports.Offering.belongsTo(module.exports.UserData, {as: 'tourGuide'});
+  module.exports.Offering.belongsTo(module.exports.UserData, {as: 'user'});
+  // module.exports.Offering.belongsTo(module.exports.EmployeeData, {as: 'employee'});
   module.exports.Booking.belongsTo(module.exports.Offering, {as: 'offering'});
   module.exports.Booking.belongsTo(module.exports.UserData, {as: 'driver'});
   module.exports.Booking.belongsTo(module.exports.UserData, {as: 'tourGuide'});
   module.exports.Booking.belongsTo(module.exports.UserData, {as: 'tourist'});
-  module.exports.UserData.belongsTo(module.exports.City, {as: 'city'});
+  module.exports.EmployeeData.belongsTo(module.exports.City, {as: 'city'});
   module.exports.UserData.belongsToMany(module.exports.Languages, {as: 'user', through: module.exports.UserLanguages, foreignKey: 'userId' });
   module.exports.Languages.belongsToMany(module.exports.UserData, {as: 'languages', through: module.exports.UserLanguages, foreignKey: 'languageId' });
 

@@ -45,6 +45,7 @@ class DynamicForms extends React.Component {
       }
     };
 
+    console.log(searchTerm());
     //GET request for the input data
     fetch('https://savi-travel.com:'+config.port+'/api/users'+searchTerm())
       .then(resp => resp.json())
@@ -92,37 +93,36 @@ class DynamicForms extends React.Component {
     if (this.props.method==='userName') {//if the search method is by userName
       return (
         <div>
-          {JSON.stringify(this.state.data)}
           <form onSubmit={this.handleSubmit}>
             <input type="text" value={this.state.userName} onChange={this.nameForm} />
             <input type="submit" value="Search" />
           </form>
+          {JSON.stringify(this.state.data)}
         </div>
       )
     } else if (this.props.method==='userEmail') {//if the search method is by userEmail
       return (
         <div>
-        {JSON.stringify(this.state.data)}
           <form onSubmit={this.handleSubmit}>
             <input type="text" value={this.state.userEmail} onChange={this.emailForm} />
             <input type="submit" value="Search" />
           </form>
+        {JSON.stringify(this.state.data)}
         </div>
       )
     } else if (this.props.method==='mdn') {//if the search method is by mdn (mobile device number)
       return (
          <div>
-         {JSON.stringify(this.state.data)}
           <form onSubmit={this.handleSubmit}>
             <input type="text" value={this.state.mdn} onChange={this.mdnForm} />
             <input type="submit" value="Search" />
           </form>
+         {JSON.stringify(this.state.data)}
         </div>
       )
     } else if (this.props.method==='cityId') {//if the search method is by userName
       return (
         <div>
-        {JSON.stringify(this.state.data)}
           <form onSubmit={this.handleSubmit}>
             <select onChange={this.cityForm} value={this.state.cityId}>
               {this.props.cityData.map((item, i) => {
@@ -133,6 +133,7 @@ class DynamicForms extends React.Component {
             </select>
             <input type="submit" value="Search" />
           </form>
+        {JSON.stringify(this.state.data)}
         </div>
       )
     }

@@ -17,6 +17,7 @@ class AddCity extends React.Component {
 
     //METHOD BINDINGS
     this.methodMenu = this.methodMenu.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   //FORM CONTROLS

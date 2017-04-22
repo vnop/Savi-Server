@@ -436,7 +436,7 @@ describe('Users endpoint', () => {
 
   it('/api/users/ should handle requesting a user by name', (done) => {
     request(server).get('/api/users?userName='+user1Expected.userName).end((err, res) => {
-      expect(res.body.userName).to.equal(user1Expected.userName, 'should match the searched user');
+      expect(res.query.userName).to.equal(user1Expected.userName, 'should match the searched user');
     });
   });
 });

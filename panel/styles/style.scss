@@ -75,7 +75,9 @@ body {
 
 				div.home-section {
 					div.callout {
+						font-family: play, Georgia;
 						height: 270px;
+						text-align: center;
 					}
 
 					div.cities-images {
@@ -89,6 +91,13 @@ body {
 							height: 200px;
 						}
 					}
+
+					div.info-section {
+						text-align: center;
+				    padding: 46px 26%;
+				    line-height: 1.5em;
+				    font-family: play, Georgia;
+					}
 				}
 
 				div.info-section {
@@ -97,8 +106,31 @@ body {
 				}
 
 				div.footer {
+					@include outer-container;
 					background: $lightBlue;
 					height: 150px;
+
+					div.footer-links {
+						@include span-columns(6);
+						text-align: center;
+						font-family: play, Georgia;
+					}
+
+					div.social-icons {
+						@include span-columns(6);
+
+						div.links-wrapper {
+							@include outer-container;
+							padding: 12% 0;
+							div.image-wrapper {
+								@include span-columns(6);
+								text-align: center;
+								img {
+									width: 40%;
+								}
+							}
+						}
+					}
 				}
 			}
  		}

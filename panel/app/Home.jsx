@@ -47,7 +47,22 @@ class Home extends React.Component {
         </div>
 
         <div className="footer">
-          <h3>Footer Of Savi Travel</h3>
+          <div className="footer-links">
+            <h3>Footer Of Savi Travel</h3>
+            <p>Footer Of Savi Travel</p>
+            <p>Footer Of Savi Travel</p>
+          </div>
+
+          <div className="social-icons">
+            <div className="links-wrapper">
+              <div className="image-wrapper">
+                <img src="https://kidtrol.com/wp-content/uploads/2015/12/kidtrol-app-download.png" />
+              </div>
+              <div className="image-wrapper">
+                <img src="http://www.thelevites312.com/wp-content/uploads/2013/03/icon-google-play.png" />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     )

@@ -1,6 +1,20 @@
 import React from 'react';
 import { BrowserRouter as Router, Match, Route, Link } from 'react-router-dom';
 
+class DynamicForms extends React.Component {
+  constructor(props){
+    super(props);
+  }
+
+  render() {
+    return (
+      <div>
+        We got the funk
+      </div>
+    )
+  }
+}
+
 class ManageUsers extends React.Component {
   constructor(props) {
     super(props);
@@ -50,7 +64,7 @@ class ManageUsers extends React.Component {
           </label>
 
           <label>
-
+            <DynamicForms />
           </label>
 
           <input type="submit" value="Search" />

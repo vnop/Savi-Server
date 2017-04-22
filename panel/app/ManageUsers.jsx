@@ -9,17 +9,23 @@ class DynamicForms extends React.Component {
       //form field states
       userName: '',
       userEmail: '',
-      mdn: 0, //mobile device number
+      mdn: '', //mobile device number
       cityId: ''
     };
 
     //METHOD BINDINGS
     this.nameForm = this.nameForm.bind(this);
+    this.emailForm = this.emailForm.bind(this);
+    this.mdnForm = this.mdnForm.bind(this);
+    this.cityForm = this.cityForm.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   //FORM CONTROL
   nameForm(e) {this.setState({ userName: e.target.value })}
+  emailForm(e) {this.setState({ userEmail: e.target.value })}
+  mdnForm(e) {this.setState({ mdn: e.target.value })}
+  cityForm(e) {this.setState({ cityId: e.target.value })}
 
   handleSubmit(e) {
     e.preventDefault();
@@ -27,20 +33,40 @@ class DynamicForms extends React.Component {
   }
 
   render() {
-    //For Search By User Name
-    if (this.props.method==='userName') {
+     //reset states when search method changes
+    this.setState({ userName: '', userEmail: '', mdn: '', cityId: '' })
+
+    //check for the value of the props.method to determine which form to render
+    if (this.props.method==='userName') {//if the search method is by userName
       return (
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit}>BY USERNAME
           <input type="text" value={this.state.userName} onChange={this.nameForm} />
           <input type="submit" value="Search" />
         </form>
       )
-    } else {//every other case
+    } else if (this.props.method==='userEmail') {//if the search method is by userEmail
       return (
-        <div>The other case</div>
+        <form onSubmit={this.handleSubmit}>BY USEREMAIL
+          <input type="text" value={this.state.userEmail} onChange={this.emailForm} />
+          <input type="submit" value="Search" />
+        </form>
+      )
+    } else if (this.props.method==='mdn') {//if the search method is by mdn (mobile device number)
+      return (
+        <form onSubmit={this.handleSubmit}>BY MDN
+          <input type="text" value={this.state.mdn} onChange={this.mdnForm} />
+          <input type="submit" value="Search" />
+        </form>
+      )
+    } else if (this.props.method==='cityId') {//if the search method is by userName
+      return (
+        <form onSubmit={this.handleSubmit}>BY CITY
+          <input type="text" value={this.state.cityId} onChange={this.cityForm} />
+          <input type="submit" value="Search" />
+        </form>
       )
     }
-  }//end of render
+  }//End of Component Render
 }
 
 //MAIN COMPONENT

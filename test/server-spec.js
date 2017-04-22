@@ -443,8 +443,14 @@ describe('Users endpoint', () => {
 
   it('/api/users/ should handle requesting a user by email', (done) => {
     request(server).get('/api/users?userEmail=bwayne@wayneenterprises.com').end((err, res) => {
-      console.log(res.body);
       expect(res.body.userEmail).to.equal(user1Expected.userEmail, 'should match the user searched by email');
+      done();
+    });
+  });
+
+  it('/api/users/ should handle requesting a user by MDN', (done) => {
+    request(server).get('/api/users?mdn=202-555-0173').end((err, res) => {
+      expect(res.body.mdn).to.equal(user1Expected.mdn, 'should match the user searched by MDN');
       done();
     });
   });

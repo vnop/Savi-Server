@@ -14,7 +14,8 @@ var syncTables = function(force, schema) {
     photo: Sequelize.STRING,
     type: { type: Sequelize.STRING, defaultValue: 'Tourist'},
     userAuthId: Sequelize.STRING,
-    city: Sequelize.STRING
+    city: Sequelize.STRING,
+    price: Sequelize.FLOAT
   });
 
   // module.exports.DriverData = schema.define('driver_data', {
@@ -28,7 +29,7 @@ var syncTables = function(force, schema) {
 
   module.exports.EmployeeData = schema.define('employee_data', {
     type: Sequelize.STRING,
-    rating: Sequelize.INTEGER,
+    rating: Sequelize.FLOAT,
     seats: Sequelize.INTEGER
   });
 

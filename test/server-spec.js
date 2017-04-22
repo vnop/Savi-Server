@@ -457,11 +457,17 @@ describe('Users endpoint', () => {
 
   it('should be able to GET multiple users by country', (done) => {
     request(server).get('/api/users?country=USA').end((err, res) => {
-      console.log(res.body);
-      expect(res.body[0].country).to.equal(user1Expected.country, 'should match the first user');
+      expect(res.body.length>0).to.equal(true, 'should return multiple users');
       done();
     });
   });
+
+  it('should be able to GET multiple users by city', (done) => {
+    request(server).get('/api/users?cityId=1').end((err, res) => {
+      expect(res.body.length>0).to.equal(true, 'should return multiple users');
+      done();
+    });
+  });  
 
 });
 

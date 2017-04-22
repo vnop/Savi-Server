@@ -90,10 +90,11 @@ class DynamicForms extends React.Component {
     //GET request for the input data
     fetch('https://savi-travel.com:'+config.port+'/api/users'+searchTerm())
       .then(resp => resp.json())
-      .then(data => this.setState({data}))
+      .then(data => {
+        this.setState({data});
+        window.data = data;
+      })
       .catch(err => console.error(err));
-
-    window.secretData = "It's a secret";
   }
 
   //DidUpdate _> Runs whenever the page updates due to render

@@ -88,6 +88,7 @@ body {
 
 						div.city-container {
 							@include span-columns(4);
+							@include omega();
 							p.city-name {
 
 							}

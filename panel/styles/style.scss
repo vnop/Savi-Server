@@ -86,6 +86,8 @@ body {
 						flex-direction: 'row';
 
 						div.image {
+							display: flex;
+							flex-direction: column;
 							flex-grow: 1;
 							flex-basis: calc(33.33%);
 							height: 275px;
@@ -93,6 +95,9 @@ body {
 							p.city-name {
 								color: $almostWhite;
 								text-align: center;
+								margin: auto;
+								font-family: play, Georgia;
+								font-size: 2em;
 							}
 						}
 					}

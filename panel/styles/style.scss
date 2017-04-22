@@ -81,8 +81,9 @@ body {
 					@include three-column-frames;
 				}
 
-				div.add-tour-component {
+				div.add-tours-component {
 					@include row-centered-form;
+					@include three-column-frames;
 				}
 
 				div.home-section {

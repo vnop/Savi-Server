@@ -59,7 +59,7 @@ class Home extends React.Component {
   }
 }
 
-class CityImages extends Component {
+class CityImages extends React.Component {
   constructor(props) {
     super(props);
 

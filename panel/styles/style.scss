@@ -8,6 +8,8 @@ $lightBlue: #4B77BE;
 $middleBlue: #1F4788;
 $lightGreen: #2ABB9B;
 
+$mainFont: play, Georgia;
+
 body {
 	background: $almostWhite;
 	margin: 0;
@@ -25,7 +27,7 @@ body {
 
 				nav.navbar {
 					padding-top: 15px;
-					font-family: play, Georgia;
+					font-family: $mainFont;
 
 				  div.nav-inner-wrapper {
 				  	@include outer-container(100%);
@@ -75,7 +77,7 @@ body {
 
 				div.home-section {
 					div.callout {
-						font-family: play, Georgia;
+						font-family: $mainFont;
 						height: 270px;
 						text-align: center;
 					}
@@ -96,7 +98,7 @@ body {
 								color: $almostWhite;
 								text-align: center;
 								margin: auto;
-								font-family: play, Georgia;
+								font-family: $mainFont;
 								font-size: 2em;
 							}
 						}
@@ -110,7 +112,7 @@ body {
 						text-align: center;
 					    padding: 3% 26%;
 					    line-height: 1.5em;
-					    font-family: play, Georgia;
+					    font-family: $mainFont;
 					    margin: 5% 0;
 					}
 				}
@@ -127,7 +129,7 @@ body {
 					div.footer-links {
 						@include span-columns(6);
 						text-align: center;
-						font-family: play, Georgia;
+						font-family: $mainFont;
 						margin: 6% 0;
 					}
 

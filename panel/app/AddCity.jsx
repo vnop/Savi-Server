@@ -62,33 +62,34 @@ class AddCity extends React.Component {
 
   render() {
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            City:
-            <input type="text" value={this.state.cityName} onChange={this.nameForm} />
-          </label>
-          <label>
-            Image:
-            <input type="text" value={this.state.cityImg} onChange={this.imageForm} />
-          </label>
-          <input type="submit" value="Add" />
-        </form>
+      <div className="add-cities-component">
+        <div className="form-wrapper">
+          <form onSubmit={this.handleSubmit}>
+            <label>
+              City:
+              <input type="text" value={this.state.cityName} onChange={this.nameForm} />
+            </label>
+            <label>
+              Image:
+              <input type="text" value={this.state.cityImg} onChange={this.imageForm} />
+            </label>
+            <input type="submit" value="Add" />
+          </form>
+        </div>
 
-        <hr/>
-
-        <h2>Available Cities</h2>
-        <div>
+        <div className="available-cities">
+          <h2>Available Cities</h2>
           {this.state.data.map((item, i) => {
             return (
-              <div key={i}>
-                <div id="cityName">{item.name}</div>
-                <img id="cityImgs" src={"https://savi-travel.com:"+config.port+"/api/images/"+item.mainImage} />
+              <div className="city-container" key={i}>
+                <div className="city-name">{item.name}</div>
+                <div className="image-wrapper">
+                  <img className="city-images" src={"https://savi-travel.com:"+config.port+"/api/images/"+item.mainImage} />
+                </div>
               </div>
             )
           })}
         </div>
-
       </div>
     )
   }

@@ -47,7 +47,6 @@ class ManageUsers extends React.Component {
 
     //METHOD BINDINGS
     this.methodMenu = this.methodMenu.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   //FORM CONTROLS
@@ -65,6 +64,7 @@ class ManageUsers extends React.Component {
             <option value="cityId">City</option>
           </select>
         </form>
+        <DynamicForms />
       </div>
     )
   }

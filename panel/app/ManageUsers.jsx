@@ -45,13 +45,13 @@ class AddCity extends React.Component {
               <option value="userName">User Name</option>
               <option value="userEmail">Email</option>
               <option value="mdn">Phone Number</option>
-              <option value="city">City</option>
+              <option value="cityId">City</option>
             </select>
           </label>
 
           <label>
             <input
-              type="text"
+              type={"text"}
               value={this.state.name}
               onChange={this.nameForm}
             />

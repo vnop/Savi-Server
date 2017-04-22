@@ -81,8 +81,21 @@ module.exports.seedDatabase = (db) => {
 							rating: user.employeeData.rating,
 							seats: user.employeeData.seats
 						});
+						if (index < 60) {
+							var offeringType = index % 5;
+
+							sampleData.offerings[offeringType].forEach((offering, index) => {
+								db.Offering.create({
+									userId: createdUser.id,
+									seats: user.seats,
+									userType: createdUser.type,
+									cityId: cityId
+								})
+							});
+						}
 					});
 				}
+
 			});
 			// getCityId(user.city).then((cityId) => {
 			// 	db.UserData.create({

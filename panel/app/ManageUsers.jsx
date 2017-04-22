@@ -34,24 +34,24 @@ class DynamicForms extends React.Component {
 
   componentDidUpdate() {
     console.log("What's the method?", this.props.method);
-    //Reset unused form fields when search method changes
-    // if (this.props.method==='userName') { //if the method is userName, reset all else
-    //   this.state.userEmail = '';
-    //   this.state.mdn = '';
-    //   this.state.cityId = '';
-    // } else if (this.props.method==='userEmail') { //if the method is userEmail, reset all else
-    //   this.state.userName = '';
-    //   this.state.mdn = '';
-    //   this.state.cityId = '';
-    // } else if (this.props.method==='mdn') { //if the method is mdn, reset all else
-    //   this.state.userName = '';
-    //   this.state.userEmail = '';
-    //   this.state.cityId = '';
-    // } else if (this.props.method==='cityId') { //if the method is cityId, reset all else
-    //   this.state.userName = '';
-    //   this.state.userEmail = '';
-    //   this.state.mdn = '';
-    // }
+    // Reset unused form fields when search method changes
+    if (this.props.method==='userName') { //if the method is userName, reset all else
+      this.state.userEmail = '';
+      this.state.mdn = '';
+      this.state.cityId = '';
+    } else if (this.props.method==='userEmail') { //if the method is userEmail, reset all else
+      this.state.userName = '';
+      this.state.mdn = '';
+      this.state.cityId = '';
+    } else if (this.props.method==='mdn') { //if the method is mdn, reset all else
+      this.state.userName = '';
+      this.state.userEmail = '';
+      this.state.cityId = '';
+    } else if (this.props.method==='cityId') { //if the method is cityId, reset all else
+      this.state.userName = '';
+      this.state.userEmail = '';
+      this.state.mdn = '';
+    }
   }
 
   render() {

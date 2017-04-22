@@ -87,9 +87,10 @@ module.exports.seedDatabase = (db) => {
 							sampleData.offerings[offeringType].forEach((offering, index) => {
 								db.Offering.create({
 									userId: createdUser.id,
-									seats: user.seats,
+									seats: user.employeeData.seats,
 									userType: createdUser.type,
-									cityId: cityId
+									cityId: cityId,
+									date: offering
 								})
 							});
 						}

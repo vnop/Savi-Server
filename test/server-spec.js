@@ -278,7 +278,7 @@ describe('Bookings endpoint', () => {
       mdn: '202-555-0173',
       country: 'USA',
       photo: 'bruce-wayne.jpg',
-      cityId: 1
+      city: 'Gotham'
     }
 
     user2Expected = {
@@ -288,7 +288,7 @@ describe('Bookings endpoint', () => {
       mdn: '202-555-0174',
       country: 'USA',
       photo: 'barbara-gordon.jpg',
-      cityId: 1
+      cityId: 'Gotham'
     }
 
     db.syncTables(true, schema).then(() => {
@@ -336,7 +336,6 @@ describe('Bookings endpoint', () => {
       done();
     });
   });
-
 });
 
 describe('Images endpoint', () => {
@@ -386,7 +385,7 @@ describe('Users endpoint', () => {
       mdn: '202-555-0173',
       country: 'USA',
       photo: 'bruce-wayne.jpg',
-      cityId: 1,
+      city: 'Gotham',
       userAuthId: 'ABCDEFGHIJKLMNOP1'
     };
     user2Expected = {
@@ -396,7 +395,7 @@ describe('Users endpoint', () => {
       mdn: '202-555-0174',
       country: 'USA',
       photo: 'barbara-gordon.jpg',
-      cityId: 1,
+      city: 'Gotham',
       userAuthId: 'ABCDEFGHIJKLMNOP2'
     }
 

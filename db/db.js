@@ -45,7 +45,7 @@ var syncTables = function(force, schema) {
   });
 
   module.exports.Offering = schema.define('offering', {
-    date: Sequelize.DATEONLY,
+    date: Sequelize.STRING,
     userType: Sequelize.STRING,
     seats: Sequelize.INTEGER
   });

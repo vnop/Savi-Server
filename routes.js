@@ -76,31 +76,49 @@ module.exports = function(app, express, db, log) {
 	            res.status(404).send('City not found');
 	          } else {
 	            let booking = {tour: tour, city: city, date: date};
-	            let findDriver = db.UserData.find({where: {cityId: city.dataValues.id, type: 'Driver'}}).then((driver) => {
+	            var driverOffering, guideOffering;
+	            let findDriver = db.Offering.find({where: {cityId: city.dataValues.id, userType: 'Driver', date: date}}).then((driver) => {
 	              if (driver) {
-	                booking.driver = driver;
+	                driverOffering = driver;
 	              }
 	            });
-	            let findGuide = db.UserData.find({where: {cityId: city.dataValues.id, type: 'Tour Guide'}}).then((guide) => {
+	            let findGuide = db.Offering.find({where: {cityId: city.dataValues.id, userType: 'Tour Guide', date: date}}).then((guide) => {
 	              if (guide) {
-	                booking.guide = guide;
+	                guideOffering = guide;
 	              }
 	            });
 
 	            Promise.all([findDriver, findGuide]).then(() => {
-	              if (booking.guide && booking.driver) {
-	              	let tourName = booking.tour.dataValues.title;
-	              	let destinataries = [
-										booking.driver.dataValues,
-										booking.guide.dataValues
-	              	];
-	              	mailer.sendMailToAll(destinataries, tourName, booking.date).then(function(response){
-	              		// console.log('mail response', response);
-	              	}, function(error) {
-	              		// console.log(error)
-	              	});
+	              if (!!guideOffering && !!driverOffering) {
 
-	               	res.json(booking).end();
+	              	let asyncActions = [];
+	              	asyncActions.push(db.UserData.find({where: {id: driverOffering.userId}}).then((user) => {
+	              		booking.driver = user;
+	              	}));
+	              	asyncActions.push(db.UserData.find({where: {id: guideOffering.userId}}).then((user) => {
+	              		booking.guide = user;
+	              	}));
+	              	asyncActions.push(db.EmployeeData.find({where: {id: driverOffering.userId}}).then((user) => {
+	              		booking.driverEmployeeData = user;
+	              	}));
+	              	asyncActions.push(db.EmployeeData.find({where: {id: guideOffering.userId}}).then((user) => {
+	              		booking.guideEmployeeData = user;
+	              	}));
+	              	asyncActions.push(db.Offering.destroy({where: {id: driverOffering.id}}));
+	              	asyncActions.push(db.Offering.destroy({where: {id: guideOffering.id}}));
+	              	Promise.all(asyncActions).then(() => {
+		              	let tourName = booking.tour.dataValues.title;
+		              	let destinataries = [
+											booking.driver.dataValues,
+											booking.guide.dataValues
+		              	];
+		              	mailer.sendMailToAll(destinataries, tourName, booking.date).then(function(response){
+		              		// console.log('mail response', response);
+		              	}, function(error) {
+		              		// console.log(error)
+		              	});
+	               		res.json(booking).end();
+	              	});
 
 	              } else {
 	                res.send('We were unable to book you with the given parameters');
@@ -204,31 +222,31 @@ module.exports = function(app, express, db, log) {
 			}).catch((err) => {
 				helpers.respondDBError(err, req, res);
 			});
-		} else if (!!user.name) { //else, if a user name exists... 
+		} else if (!!user.name) { //else, if a user name exists...
 			db.UserData.find({where: {userName: user.name}}).then((user) => {
 				helpers.respondDBQuery(user, req, res);
 			}).catch((err) => {
 				helpers.respondDBError(err, req, res);
 			});
-		} else if (!!user.email) { //else, if a user email exists... 
+		} else if (!!user.email) { //else, if a user email exists...
 			db.UserData.find({where: {userEmail: user.email}}).then((user) => {
 				helpers.respondDBQuery(user, req, res);
 			}).catch((err) => {
 				helpers.respondDBError(err, req, res);
 			});
-		} else if (!!user.mdn) { //else, if a user mobile device number exists... 
+		} else if (!!user.mdn) { //else, if a user mobile device number exists...
 			db.UserData.find({where: {mdn: user.mdn}}).then((user) => {
 				helpers.respondDBQuery(user, req, res);
 			}).catch((err) => {
 				helpers.respondDBError(err, req, res);
 			});
-		} else if (!!user.country) { //else, if a user country exists... 
+		} else if (!!user.country) { //else, if a user country exists...
 			db.UserData.findAll({where: {country: user.country}}).then((users) => { //grab all that match
 				helpers.respondDBQuery(users, req, res);
 			}).catch((err) => {
 				helpers.respondDBError(err, req, res);
 			});
-		} else if (!!user.city) { //else, if a user city exists... 
+		} else if (!!user.city) { //else, if a user city exists...
 			db.UserData.findAll({where: {cityId: user.city}}).then((users) => { //grab all that match
 				helpers.respondDBQuery(users, req, res);
 			}).catch((err) => {
@@ -249,37 +267,30 @@ module.exports = function(app, express, db, log) {
 						userEmail: req.body.profileData.email,
 						mdn: req.body.profileData.phone,
 						country: req.body.profileData.country,
-						// photo: req.body.profileData.,
-						// city: req.body.profileData.city,
-						// languages: req.body.profileData.,
+						city: req.body.profileData.city,
 						userAuthId: req.body.userId
 					};
 					helpers.saveImage(req.body.profileData.photo, newUser.userName.split(' ').join('-').toLowerCase()).then((imageName) => {
 						newUser.photo = imageName;
-						db.City.find({where: {name: req.body.profileData.city}}).then((city) => {
-							if (!city) {
-								res.status(404).send('City not found');
-							} else {
-								newUser.cityId = city.dataValues.id;
-								db.UserData.create(newUser).then((user) => {
-									for (var language of req.body.profileData.languages) {
-										db.Languages.find({where: {title: language}}).then((lang) => {
-											if (lang) {
-												db.UserLanguages.create({
-													userId: user.dataValues.id,
-													languageId: lang.dataValues.id
-												});
-											}
+						// if (!city) {
+						// 	res.status(404).send('City not found');
+						// } else {
+						db.UserData.create(newUser).then((user) => {
+							for (var language of req.body.profileData.languages) {
+								db.Languages.find({where: {title: language}}).then((lang) => {
+									if (lang) {
+										db.UserLanguages.create({
+											userId: user.dataValues.id,
+											languageId: lang.dataValues.id
 										});
 									}
-									res.json({exists: true, user: user}).end();
-								}).catch((error) => {
-									res.status(500).send('error creating new user ' + JSON.stringify(error));
 								});
 							}
+							res.json({exists: true, user: user}).end();
 						}).catch((error) => {
-							res.status(500).send('Error, probably an invalid city ' + JSON.stringify(error));
+							res.status(500).send('error creating new user ' + JSON.stringify(error));
 						});
+
 					}, (error) => {
 						res.status(500).send('error saving image ' + JSON.stringify(error))
 					});

@@ -93,7 +93,7 @@ class DynamicForms extends React.Component {
       .then(data => this.setState({data}))
       .catch(err => console.error(err));
 
-    window.secretData = this.state.data;
+    window.secretData = "It's a secret";
   }
 
   //DidUpdate _> Runs whenever the page updates due to render

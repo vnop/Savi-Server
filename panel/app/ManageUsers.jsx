@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Match, Route, Link } from 'react-router-dom';
 
-class AddCity extends React.Component {
+class ManageUsers extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -50,11 +50,7 @@ class AddCity extends React.Component {
           </label>
 
           <label>
-            <input
-              type={"text"}
-              value={this.state.name}
-              onChange={this.nameForm}
-            />
+
           </label>
 
           <input type="submit" value="Search" />
@@ -64,4 +60,4 @@ class AddCity extends React.Component {
   }
 }
 
-module.exports = AddCity;
+module.exports = ManageUsers;

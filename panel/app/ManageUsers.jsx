@@ -38,7 +38,7 @@ class AddCity extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <label>
             Search By:
-            <select onChange={this.methodForm} value={this.state.method}>
+            <select onChange={this.methodMenu} value={this.state.method}>
               <option value="userName">User Name</option>
               <option value="userEmail">Email</option>
               <option value="mdn">Phone Number</option>

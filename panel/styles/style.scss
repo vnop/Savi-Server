@@ -91,6 +91,16 @@ body {
 						}
 					}
 				}
+
+				div.info-section {
+					background: $almostWhite;
+					height: 400px;
+				}
+
+				div.footer {
+					background: $lightBlue;
+					height: 300px;
+				}
 			}
  		}
 	}

@@ -31,14 +31,18 @@ class DynamicForms extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();//prevent page refresh upon submit
-    console.log("userName is:", this.state.userName);
-    if (this.state.userName.length>0) {//if the userName isn't blank...
+
+    if (this.state.userName.length) {//if the userName isn't blank...
       fetch('https://savi-travel.com:'+config.port+'/api/users?userName='+this.state.userName)
         .then(resp => resp.json())
         .then(data => this.setState({data}))
         .catch(err => console.error(err));
+    } else if (this.state.userEmail.length) {
+      fetch('https://savi-travel.com:'+config.port+'/api/users?userEmail='+this.state.userEmail)
+        .then(resp => resp.json())
+        .then(data => this.setState({data}))
+        .catch(err => console.error(err));
     }
-    console.log('Received', this.state.data);
   }
 
   //DidUpdate _> Runs whenever the page updates due to render

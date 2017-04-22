@@ -65,7 +65,7 @@ class ManageUsers extends React.Component {
             <option value="cityId">City</option>
           </select>
         </form>
-        <DynamicForms />
+        <DynamicForms method={this.state.method}/>
       </div>
     )
   }

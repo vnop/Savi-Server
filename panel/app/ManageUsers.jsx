@@ -28,13 +28,19 @@ class DynamicForms extends React.Component {
 
   render() {
     //For Search By User Name
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <input type="text" value={this.state.userName} onChange={this.nameForm} />
-        <input type="submit" value="Search" />
-      </form>
-    )
-  }
+    if (this.props.method==='userName') {
+      return (
+        <form onSubmit={this.handleSubmit}>
+          <input type="text" value={this.state.userName} onChange={this.nameForm} />
+          <input type="submit" value="Search" />
+        </form>
+      )
+    } else {
+      return (
+        <div>The other case</div>
+      )
+    }
+  }//end of render
 }
 
 //MAIN COMPONENT

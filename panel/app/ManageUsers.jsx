@@ -125,6 +125,7 @@ class DynamicForms extends React.Component {
         <div>
           <form onSubmit={this.handleSubmit}>
             <select onChange={this.cityForm} value={this.state.cityId}>
+              <option value={0}></option>
               {this.props.cityData.map((item, i) => {
                 return (
                   <option key={i} value={item.id}>{item.name}</option>

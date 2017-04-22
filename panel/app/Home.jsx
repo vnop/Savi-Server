@@ -31,7 +31,8 @@ class Home extends React.Component {
                   backgroundImage: "url('https://savi-travel.com:"+config.port+"/api/images/"+city.mainImage+"')",
                   backgroundSize: 'cover'
                 }}
-                className="image">{city.name}
+                className="image">
+                <p className="city-name">{city.name}</p>
               </div>
             )
           })}

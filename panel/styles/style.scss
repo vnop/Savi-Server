@@ -88,7 +88,12 @@ body {
 						div.image {
 							flex-grow: 1;
 							flex-basis: calc(33.33%);
-							height: 200px;
+							height: 275px;
+
+							p.city-name {
+								color: $almostWhite;
+								text-align: center;
+							}
 						}
 					}
 

@@ -74,7 +74,7 @@ class AddCity extends React.Component {
             <div className="input-wrapper">
               <label>Image</label>
               <input type="text" value={this.state.cityImg} onChange={this.imageForm} />
-            <div>
+            </div>
 
             <input type="submit" value="Add" />
           </form>

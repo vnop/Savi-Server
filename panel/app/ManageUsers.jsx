@@ -1,41 +1,24 @@
 import React from 'react';
 import { BrowserRouter as Router, Match, Route, Link } from 'react-router-dom';
 
+//HELPER FOR FORMS
 class DynamicForms extends React.Component {
   constructor(props){
     super(props);
-  }
-
-  render() {
-    return (
-      <div>
-        {JSON.stringify(this.props)}
-      </div>
-    )
-  }
-}
-
-class ManageUsers extends React.Component {
-  constructor(props) {
-    super(props);
     this.state = {
-      data: [],
       //form field states
-      method: 'userName',
-      name: '',
-      email: '',
+      userName: '',
+      userEmail: '',
       mdn: 0, //mobile device number
-      city: ''
+      cityId: ''
     };
 
     //METHOD BINDINGS
-    this.methodMenu = this.methodMenu.bind(this);
     this.nameForm = this.nameForm.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  //FORM CONTROLS
-  methodMenu(e) {this.setState({ method: e.target.value })}
+  //FORM CONTROL
   nameForm(e) {this.setState({ method: e.target.value })}
 
   handleSubmit(e) {
@@ -43,32 +26,46 @@ class ManageUsers extends React.Component {
     console.log('LOGGING', this.state.method);
   }
 
-  processData(array, key, val) { //takes and array, a key (as string), and value
-    return array.filter((obj) => {
-      return obj[key] === val;
-    });
+  render() {
+    //For Search By User Name
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <input type="text" value={this.state.userName} onChange={this.nameForm} />
+      </form>
+    )
   }
+}
+
+//MAIN COMPONENT
+class ManageUsers extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: [],
+      method: 'userName'
+    };
+
+    //METHOD BINDINGS
+    this.methodMenu = this.methodMenu.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  //FORM CONTROLS
+  methodMenu(e) {this.setState({ method: e.target.value })}
 
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Search By:
-            <select onChange={this.methodMenu} value={this.state.method}>
-              <option value="userName">User Name</option>
-              <option value="userEmail">Email</option>
-              <option value="mdn">Phone Number</option>
-              <option value="cityId">City</option>
-            </select>
-          </label>
-
-          <label>
-            <DynamicForms method={this.state.method}/>
-          </label>
-
-          <input type="submit" value="Search" />
+        <form>
+          Search By:
+          <select onChange={this.methodMenu} value={this.state.method}>
+            <option value="userName">User Name</option>
+            <option value="userEmail">Email</option>
+            <option value="mdn">Phone Number</option>
+            <option value="cityId">City</option>
+          </select>
         </form>
+        <DynamicForms />
       </div>
     )
   }

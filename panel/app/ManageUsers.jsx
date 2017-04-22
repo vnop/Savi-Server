@@ -34,29 +34,37 @@ class DynamicForms extends React.Component {
 
   componentDidUpdate() {
     const s = this.state;
+    const defaults = { //Default values to make checks agaist and a central place to make changes
+      userName: = '',
+      userEmail: = '',
+      mdn: = '',
+      cityId: = ''
+    };
+
     console.log("What's the method?", this.props.method);
-    // Reset unused form fields when search method changes
+    //Resets unused form fields when search method changes
+    //If you need to change default values, do so in the "defaults" const above
     if (this.props.method==='userName') { //USERNAME
       //if the method is userName, reset all other forms
       //if forms are already blank, do not set state (prevent forcing a render when not needed)
-      if (s.userEmail!=='') {this.state.userEmail = ''};
-      if (s.mdn!=='') {this.state.mdn = ''};
-      if (s.cityId!=='') {this.state.cityId = ''};
+      if (s.userEmail!==defaults.userEmail) {this.state.userEmail = defaults.userEmail};
+      if (s.mdn!==defaults.mdn) {this.state.mdn = defaults.mdn};
+      if (s.cityId!==defaults.cityId) {this.state.cityId = defaults.cityId};
     } else if (this.props.method==='userEmail') { //USEREMAIL
       //if the method is userEmail, reset all other forms
-      if (s.userName!=='') {this.state.userName = ''};
-      if (s.mdn!=='') {this.state.mdn = ''};
-      if (s.cityId!=='') {this.state.cityId = ''};
+      if (s.userName!==defaults.userName) {this.state.userName = defaults.userName};
+      if (s.mdn!==defaults.mdn) {this.state.mdn = defaults.mdn};
+      if (s.cityId!==defaults.cityId) {this.state.cityId = defaults.cityId};
     } else if (this.props.method==='mdn') { //USER MOBILE DEVICE NUMBER
       //if the method is mdn, reset all other forms
-      if (s.userName!=='') {this.state.userName = ''};
-      if (s.userEmail!=='') {this.state.userEmail = ''};
-      if (s.cityId!=='') {this.state.cityId = ''};
+      if (s.userName!==defaults.userName) {this.state.userName = defaults.userName};
+      if (s.userEmail!==defaults.userEmail) {this.state.userEmail = defaults.userEmail};
+      if (s.cityId!==defaults.cityId) {this.state.cityId = defaults.cityId};
     } else if (this.props.method==='cityId') { //USER CITY
       //if the method is cityId, reset all other forms
-      if (s.userName!=='') {this.state.userName = ''};
-      if (s.userEmail!=='') {this.state.userEmail = ''};
-      if (s.mdn!=='') {this.state.mdn = ''};
+      if (s.userName!==defaults.userName) {this.state.userName = defaults.userName};
+      if (s.userEmail!==defaults.userEmail) {this.state.userEmail = defaults.userEmail};
+      if (s.mdn!==defaults.mdn) {this.state.mdn = defaults.mdn};
     }
   }
 

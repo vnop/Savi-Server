@@ -189,6 +189,54 @@ module.exports = function(app, express, db, log) {
 		}
 	});
 
+	app.get('/api/users', (req, res) => {
+		let user = {
+			name: req.query.userName,
+			email: req.query.userEmail,
+			mdn: req.query.mdn, //mobile device number
+			country: req.query.country,
+			city: req.query.city
+		};
+
+		if (!user.name && !user.email && !user.mdn && !user.country && !user.city) { //if no user data came from the req.body...
+			db.UserData.findAll().then((users) => { //grab all data from the table instead
+				helpers.respondDBQuery(users, req, res);
+			}).catch((err) => {
+				helpers.respondDBError(err, req, res);
+			});
+		} else if (!!user.name) { //else, if a user name exists... 
+			db.UserData.find({where: {userName: user.name}}).then((user) => {
+				helpers.respondDBQuery(user, req, res);
+			}).catch((err) => {
+				helpers.respondDBError(err, req, res);
+			});
+		} else if (!!user.email) { //else, if a user email exists... 
+			db.UserData.find({where: {userEmail: user.email}}).then((user) => {
+				helpers.respondDBQuery(user, req, res);
+			}).catch((err) => {
+				helpers.respondDBError(err, req, res);
+			});
+		} else if (!!user.mdn) { //else, if a user mobile device number exists... 
+			db.UserData.find({where: {mdn: user.mdn}}).then((user) => {
+				helpers.respondDBQuery(user, req, res);
+			}).catch((err) => {
+				helpers.respondDBError(err, req, res);
+			});
+		} else if (!!user.country) { //else, if a user country exists... 
+			db.UserData.findAll({where: {country: user.country}}).then((users) => { //grab all that match
+				helpers.respondDBQuery(users, req, res);
+			}).catch((err) => {
+				helpers.respondDBError(err, req, res);
+			});
+		} else if (!!user.city) { //else, if a user city exists... 
+			db.UserData.findAll({where: {cityId: user.city}}).then((users) => { //grab all that match
+				helpers.respondDBQuery(users, req, res);
+			}).catch((err) => {
+				helpers.respondDBError(err, req, res);
+			});
+		}
+	});
+
 	app.post('/api/users', (req, res) => {
 		let userId = req.body.userId;
 		db.UserData.find({where: {userAuthId: userId}}).then((user) => {
@@ -241,5 +289,10 @@ module.exports = function(app, express, db, log) {
 			}
 		})
 	});
+
+	//Redirect Panel for invalid extensions
+	app.get('*', function (req, res) {
+  	res.status(302).redirect('/')
+	})
 
 }

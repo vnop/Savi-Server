@@ -103,9 +103,9 @@ describe('Basic server tests', () => {
     server.close(done);
   });
 
-  it('should respond with 404 for unknown route', (done) => {
-    request(server).get('/unknown').expect(404, done);
-  });
+  // it('should respond with 404 for unknown route', (done) => {
+  //   request(server).get('/unknown').expect(404, done);
+  // });
 });
 
 describe('Cities endpoints', () => {
@@ -444,6 +444,41 @@ describe('Users endpoint', () => {
     request(server).post('/api/users').send({userId: user2Expected.userAuthId, profileData: newUserData}).end((err, res) => {
       expect(res.body.exists).to.equal(true, 'should respond with false for a user that does not exist');
       expect(compareSomeKeys(user2Expected, res.body.user)).to.equal(true, 'should respond with the new user data');
+      done();
+    });
+  });
+
+  it('should be able to GET a user by name', (done) => {
+    request(server).get('/api/users?userName=Bruce Wayne').end((err, res) => {
+      expect(res.body.userName).to.equal(user1Expected.userName, 'should match the user searched by name');
+      done();
+    });
+  });
+
+  it('should be able to GET a user by email', (done) => {
+    request(server).get('/api/users?userEmail=bwayne@wayneenterprises.com').end((err, res) => {
+      expect(res.body.userEmail).to.equal(user1Expected.userEmail, 'should match the user searched by email');
+      done();
+    });
+  });
+
+  it('should be able to GET a user by MDN', (done) => {
+    request(server).get('/api/users?mdn=202-555-0173').end((err, res) => {
+      expect(res.body.mdn).to.equal(user1Expected.mdn, 'should match the user searched by MDN');
+      done();
+    });
+  });
+
+  it('should be able to GET multiple users by country', (done) => {
+    request(server).get('/api/users?country=USA').end((err, res) => {
+      expect(res.body.length>0).to.equal(true, 'should return multiple users');
+      done();
+    });
+  });
+
+  it('should be able to GET multiple users by city', (done) => {
+    request(server).get('/api/users?cityId=1').end((err, res) => {
+      expect(res.body.length>0).to.equal(true, 'should return multiple users');
       done();
     });
   });

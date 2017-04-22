@@ -130,8 +130,8 @@ class AddTour extends React.Component {
                 <div className="image-wrapper">
                   <img className="city-images" src={"https://savi-travel.com:"+config.port+"/api/images/"+item.mainImage} />
                 </div>
+                <div className="tourDesc">{item.description}</div>
               </div>
-              <div id="tourDesc">{item.description}</div>
             )
           })}
         </div>

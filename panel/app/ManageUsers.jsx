@@ -39,7 +39,7 @@ class ManageUsers extends React.Component {
           </select>
         </form>
         <DynamicForms method={this.state.method} cityData={this.state.cityData} />
-        <DisplayUsers><DynamicForms/></DisplayUsers>
+        <DisplayUsers/>
       </div>
     )
   }//End of Render
@@ -92,6 +92,8 @@ class DynamicForms extends React.Component {
       .then(resp => resp.json())
       .then(data => this.setState({data}))
       .catch(err => console.error(err));
+
+    window.secretData = this.state.data;
   }
 
   //DidUpdate _> Runs whenever the page updates due to render

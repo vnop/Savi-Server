@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Home from './Home.jsx';
+import Styles from '../styles/styles.js';
 import AddCity from './AddCity.jsx';
 import AddTour from './AddTour.jsx';
 import ManageUsers from './ManageUsers.jsx';
@@ -14,14 +15,21 @@ export default class App extends React.Component {
   render() {
     return (
       <Router>
-        <div className="container">
-          <div className="col">
-            <div className="row">
+        <div style={Styles.mainContainer} className="main-container">
+          <div style={Styles.innerWrapper} className="inner-wrapper">
+            <nav style={Styles.navbar} className="navbar">
+              <div style={Styles.navInnerWrapper} className="nav-inner-wrapper">
+                <div className="workers-nav">
+                  <span id="navItem" className="nav-item">
+                    <Link to="/">Driver</Link>
+                  </span>
 
-              <nav className="navbar navbar-toggleable-md navbar-light bg-faded">
-                <div className="navbar-nav mr-auto">
-                  <img id="saviLogo" src="../assets/savi_logo.png"/>
-                  
+                  <span id="navItem" className="nav-item">
+                    <Link to="/addcity">Tour Guide</Link>
+                  </span>
+                </div>
+
+                <div className="tourist-nav test">
                   <span id="navItem" className="nav-item">
                     <Link to="/">Home</Link>
                   </span>
@@ -39,11 +47,11 @@ export default class App extends React.Component {
                   </span>
 
                 </div>
-              </nav>
-
+              </div>
+            </nav>
+            <div style={Styles.logoWrapper} className="logo-wrapper">
+              <img id="saviLogo" src="../assets/savi_logo.png"/>
             </div>
-
-            <hr/>
 
             <Route exact path="/" component={Home}/>
             <Route path="/addcity" component={AddCity}/>
@@ -54,6 +62,6 @@ export default class App extends React.Component {
       </Router>
     )
   }
-} 
+}
 
 module.exports = App;

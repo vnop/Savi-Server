@@ -1,0 +1,150 @@
+@import '../../node_modules/bourbon/app/assets/stylesheets/bourbon';
+@import '../../node_modules/bourbon-neat/app/assets/stylesheets/neat';
+
+$mainBlue: #003171;
+$jordyBlue: #89C4F4;
+$almostWhite: #ecf0f1;
+$lightBlue: #4B77BE;
+$middleBlue: #1F4788;
+$lightGreen: #2ABB9B;
+
+body {
+	background: $almostWhite;
+	margin: 0;
+	height: 100vh;
+	width: 100vw;
+	color: $middleBlue;
+
+	div#app {
+		height: 100vh;
+		div.main-container {
+			div.inner-wrapper {
+				background-image: url('https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-100420.jpg');
+				background-size: cover;
+				height: 480px;
+
+				nav.navbar {
+					padding-top: 15px;
+					font-family: play, Georgia;
+
+				  div.nav-inner-wrapper {
+				  	@include outer-container;
+
+						div.workers-nav {
+							@include span-columns(6);
+							padding-left: 3%;
+
+							span {
+								background: $lightGreen;
+    						padding: 5px 24px;
+    						border-radius: 2px;
+    						margin: 0 8px;
+								a {
+									text-decoration: none;
+									color: $almostWhite;
+								}
+							}
+						}
+
+						div.tourist-nav {
+							@include span-columns(6);
+							text-align: right;
+							padding-right: 3%;
+
+							span {
+								background: $mainBlue;
+    						padding: 5px 24px;
+    						border-radius: 2px;
+    						margin: 0 8px;
+
+								a {
+									text-decoration: none;
+									color: $almostWhite;
+								}
+							}
+						}
+				  }
+				}
+
+				div.logo-wrapper {
+					text-align: center;
+					img {
+						width: 480px;
+					}
+				}
+
+				div.home-section {
+					div.callout {
+						font-family: play, Georgia;
+						height: 270px;
+						text-align: center;
+					}
+
+					div.cities-images {
+						display: flex;
+						flex-wrap: wrap;
+						flex-direction: 'row';
+
+						div.image {
+							display: flex;
+							flex-direction: column;
+							flex-grow: 1;
+							flex-basis: calc(33.33%);
+							height: 275px;
+
+							p.city-name {
+								color: $almostWhite;
+								text-align: center;
+								margin: auto;
+								font-family: play, Georgia;
+								font-size: 2em;
+							}
+						}
+					}
+
+					div.info-section {
+						text-align: center;
+					    padding: 3% 26%;
+					    line-height: 1.5em;
+					    font-family: play, Georgia;
+					    margin: 5% 0;
+					}
+				}
+
+				div.info-section {
+					background: $almostWhite;
+					height: 270px;
+				}
+
+				div.footer {
+					@include outer-container;
+					background: $mainBlue;
+
+					div.footer-links {
+						@include span-columns(6);
+						text-align: center;
+						font-family: play, Georgia;
+						margin: 6% 0;
+					}
+
+					div.social-icons {
+						@include span-columns(6);
+						margin: 6% 0;
+
+						div.links-wrapper {
+							@include outer-container;
+							padding: 12% 0;
+							div.image-wrapper {
+								@include span-columns(6);
+								text-align: center;
+								img {
+									width: 40%;
+								}
+							}
+						}
+					}
+				}
+			}
+ 		}
+	}
+}

@@ -82,6 +82,7 @@ body {
 
 					div.available-cities {
 						@include outer-container;
+						font-family: $mainFont;
 						h2 {
 							text-align: center;
 						}

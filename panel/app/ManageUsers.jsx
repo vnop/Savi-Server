@@ -7,6 +7,7 @@ class DynamicForms extends React.Component {
   constructor(props){
     super(props);
     this.state = {
+      data: [], //empty array to store search results upon fetch
       //form field states
       userName: '',
       userEmail: '',
@@ -29,7 +30,13 @@ class DynamicForms extends React.Component {
   cityForm(e) {this.setState({ cityId: e.target.value })}
 
   handleSubmit(e) {
-    e.preventDefault();
+    e.preventDefault();//prevent page refresh upon submit
+    if (this.state.userName.length<1) {//if the userName isn't blank...
+      fetch('https://savi-travel.com:'+config.port+'/api/users?userName='+this.state.userName)
+        .then(resp => resp.json())
+        .then(data => this.setState({data}))
+        .catch(err => console.error(err));
+    }
     console.log('LOGGING', this.state);
   }
 

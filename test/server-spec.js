@@ -441,8 +441,8 @@ describe('Users endpoint', () => {
     });
   });
   it('/api/users/ should handle requesting a user by email', (done) => {
-    console.log(res.body);
     request(server).get('/api/users?email='+user1Expected.userEmail).end((err, res) => {
+      console.log(res.body);
       expect(res.body.userEmail).to.equal(user1Expected.userEmail, 'should match the searched user');
       done();
     });

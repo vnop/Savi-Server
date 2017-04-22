@@ -24,7 +24,19 @@ class Home extends React.Component {
         </div>
 
         <div className="cities-images">
-          <CityImages cityData={this.state.cityData}/>
+          {this.state.cityData.map((city, i) => {
+            return (
+              <div
+                key={i}
+                style={{
+                  backgroundImage: "url('https://savi-travel.com:"+config.port+"/api/images/"+city.mainImage+"')",
+                  backgroundSize: 'cover'
+                }}
+                className="image">
+                <p className="city-name">{city.name}</p>
+              </div>
+            )
+          })}
         </div>
 
         <div className="info-section">
@@ -56,29 +68,6 @@ class Home extends React.Component {
         </div>
       </div>
     )
-  }
-}
-
-class CityImages extends React.Component {
-  constructor(props) {
-    super(props);
-
-  }
-
-  render() {
-    {this.props.cityData.map((city, i) => {
-      return (
-        <div
-          key={i}
-          style={{
-            backgroundImage: "url('https://savi-travel.com:"+config.port+"/api/images/"+city.mainImage+"')",
-            backgroundSize: 'cover'
-          }}
-          className="image">
-          <p className="city-name">{city.name}</p>
-        </div>
-      )
-    })}
   }
 }
 

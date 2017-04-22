@@ -187,7 +187,7 @@ class DisplayUsers extends React.Component {
 
   render() {
     return (
-      <div>USERS GO HERE LEL</div>
+      <div>{JSON.stringify(this.props)}</div>
     )
   }//End of Render
 }

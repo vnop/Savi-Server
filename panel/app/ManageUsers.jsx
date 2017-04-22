@@ -42,6 +42,7 @@ class DynamicForms extends React.Component {
   }
 
   render() {
+    this.state.userName = '';
     //check for the value of the props.method to determine which form to render
     if (this.props.method==='userName') {//if the search method is by userName
       return (

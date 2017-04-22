@@ -33,6 +33,7 @@ class DynamicForms extends React.Component {
   }
 
   componentWillMount() {
+    console.log("What's the method?", this.props.method);
     //Reset unused form fields when search method changes
     if (this.props.method==='userName') { //if the method is userName, reset all else
       this.state.userEmail = '';

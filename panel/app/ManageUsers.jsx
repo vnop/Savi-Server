@@ -39,7 +39,7 @@ class DynamicForms extends React.Component {
       } else if (this.state.mdn.length) { //else, if an MDN was input...
         return '?mdn='+this.state.mdn;
       } else if (this.state.cityId>0) { //else, if a cityId was selected...
-        return '?cityId='+this.state.cityId;
+        return '?city='+this.state.cityId;
       } else { //otherwise, return the entire list of users
         return '';
       }

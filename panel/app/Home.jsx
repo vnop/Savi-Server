@@ -23,10 +23,11 @@ class Home extends React.Component {
         </div>
 
         <div className="cities-images">
-          {this.state.cityData.map((city) => {
+          {this.state.cityData.map((city, i) => {
             return (
               <div
-
+                key={i}
+                style={{backgroundImage: url('https://savi-travel.com:8084/api/images/paris_city.jpg')}}
                 className="image">{JSON.stringify(city.name)}
               </div>
             )

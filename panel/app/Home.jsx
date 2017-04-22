@@ -23,12 +23,11 @@ class Home extends React.Component {
         </div>
 
         <div className="cities-images">
-          <div className="image">{JSON.stringify(this.state.cityData)}</div>
-          <div className="image">Amsterdam</div>
-          <div className="image">London</div>
-          <div className="image">New York</div>
-          <div className="image">Rio de Janeiro</div>
-          <div className="image">Shanghai</div>
+          {this.state.cityData.map((city) => {
+            return (
+              <div className="image">{JSON.stringify(city.name)}</div>
+            )
+          })}
         </div>
       </div>
     )

@@ -91,10 +91,10 @@ class AddTour extends React.Component {
 
   render() {
     return (
-      <div className="add-cities-component">
+      <div className="add-tours-component">
         <div className="form-wrapper">
           <h3>Add New City</h3>
-          <form className="new-city-form" onSubmit={this.handleSubmit}>
+          <form className="centered-form" onSubmit={this.handleSubmit}>
             <select onChange={this.cityForm} value={this.state.tourCity}>
               {this.state.cityData.map((item, i) => {
                 return (
@@ -121,16 +121,16 @@ class AddTour extends React.Component {
           </form>
         </div>
 
-        <div className="available-cities">
+        <div className="available-records">
           <h2>Available Tours</h2>
           {this.state.cityData.map((item, i) => {
             return (
-              <div className="city-container" key={i}>
-                <p className="city-name">{item.title}</p>
+              <div className="record-container" key={i}>
+                <p className="record-name">{item.title}</p>
                 <div className="image-wrapper">
-                  <img className="city-images" src={"https://savi-travel.com:"+config.port+"/api/images/"+item.mainImage} />
+                  <img className="record-images" src={"https://savi-travel.com:"+config.port+"/api/images/"+item.mainImage} />
                 </div>
-                <div className="tourDesc">{item.description}</div>
+                <div className="record-description">{item.description}</div>
               </div>
             )
           })}

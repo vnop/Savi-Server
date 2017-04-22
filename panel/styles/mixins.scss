@@ -7,7 +7,7 @@
 			text-align: center;
 		}
 
-		form.new-city-form {
+		form.centered-form {
 			select {
 		    width: 100%;
 		    height: 35px;
@@ -37,6 +37,42 @@
 		    border: 0;
 		    padding: 4px 0;
 		    margin-top: 16px;
+			}
+		}
+	}
+}
+
+
+@mixin three-column-frames {
+	div.available-records {
+		@include outer-container;
+		font-family: $mainFont;
+		h2 {
+			text-align: center;
+		}
+
+		div.record-container {
+			@include span-columns(4);
+			@include omega();
+			padding: 0 15px;
+
+			p.record-name {
+
+			}
+
+			div.image-wrapper {
+				border: 1px solid $mainBlue;
+		    padding: 4px;
+		    border-radius: 3px;
+				img.record-images {
+					height: 270px;
+			    width: 100%;
+			    border-radius: 3px;
+				}
+			}
+
+			div.record-description {
+
 			}
 		}
 	}

@@ -78,35 +78,11 @@ body {
 
 				div.add-cities-component {
 					@include row-centered-form;
+					@include three-column-frames;
+				}
 
-					div.available-cities {
-						@include outer-container;
-						font-family: $mainFont;
-						h2 {
-							text-align: center;
-						}
-
-						div.city-container {
-							@include span-columns(4);
-							@include omega();
-							padding: 0 15px;
-
-							p.city-name {
-
-							}
-
-							div.image-wrapper {
-								border: 1px solid $mainBlue;
-						    padding: 4px;
-						    border-radius: 3px;
-								img {
-									height: 270px;
-							    width: 100%;
-							    border-radius: 3px;
-								}
-							}
-						}
-					}
+				div.add-tour-component {
+					@include row-centered-form;
 				}
 
 				div.home-section {

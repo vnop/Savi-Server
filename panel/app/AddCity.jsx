@@ -65,7 +65,7 @@ class AddCity extends React.Component {
       <div className="add-cities-component">
         <div className="form-wrapper">
           <h3>Add New City</h3>
-          <form className="new-city-form" onSubmit={this.handleSubmit}>
+          <form className="centered-form" onSubmit={this.handleSubmit}>
             <div className="input-wrapper">
               <label>City</label>
               <input type="text" value={this.state.cityName} onChange={this.nameForm} />
@@ -80,14 +80,14 @@ class AddCity extends React.Component {
           </form>
         </div>
 
-        <div className="available-cities">
+        <div className="available-records">
           <h2>Available Cities</h2>
           {this.state.data.map((item, i) => {
             return (
-              <div className="city-container" key={i}>
-                <p className="city-name">{item.name}</p>
+              <div className="record-container" key={i}>
+                <p className="record-name">{item.name}</p>
                 <div className="image-wrapper">
-                  <img className="city-images" src={"https://savi-travel.com:"+config.port+"/api/images/"+item.mainImage} />
+                  <img className="record-images" src={"https://savi-travel.com:"+config.port+"/api/images/"+item.mainImage} />
                 </div>
               </div>
             )

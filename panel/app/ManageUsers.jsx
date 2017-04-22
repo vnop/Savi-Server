@@ -80,28 +80,31 @@ class DynamicForms extends React.Component {
     //check for the value of the props.method to determine which form to render
     if (this.props.method==='userName') {//if the search method is by userName
       return (
-        <form onSubmit={this.handleSubmit}>BY USERNAME
-          <input type="text" value={this.state.userName} onChange={this.nameForm} />
-          <input type="submit" value="Search" />
-        </form>
+        <div>
+          {this.state.data}
+          <form onSubmit={this.handleSubmit}>
+            <input type="text" value={this.state.userName} onChange={this.nameForm} />
+            <input type="submit" value="Search" />
+          </form>
+        </div>
       )
     } else if (this.props.method==='userEmail') {//if the search method is by userEmail
       return (
-        <form onSubmit={this.handleSubmit}>BY USEREMAIL
+        <form onSubmit={this.handleSubmit}>
           <input type="text" value={this.state.userEmail} onChange={this.emailForm} />
           <input type="submit" value="Search" />
         </form>
       )
     } else if (this.props.method==='mdn') {//if the search method is by mdn (mobile device number)
       return (
-        <form onSubmit={this.handleSubmit}>BY MDN
+        <form onSubmit={this.handleSubmit}>
           <input type="text" value={this.state.mdn} onChange={this.mdnForm} />
           <input type="submit" value="Search" />
         </form>
       )
     } else if (this.props.method==='cityId') {//if the search method is by userName
       return (
-        <form onSubmit={this.handleSubmit}>BY CITY
+        <form onSubmit={this.handleSubmit}>
           <select onChange={this.cityForm} value={this.state.cityId}>
             {this.props.cityData.map((item, i) => {
               return (

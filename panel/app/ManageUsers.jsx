@@ -19,11 +19,11 @@ class DynamicForms extends React.Component {
   }
 
   //FORM CONTROL
-  nameForm(e) {this.setState({ method: e.target.value })}
+  nameForm(e) {this.setState({ userName: e.target.value })}
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log('LOGGING', this.state.method);
+    console.log('LOGGING', this.props.method);
   }
 
   render() {

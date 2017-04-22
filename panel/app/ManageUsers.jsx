@@ -44,7 +44,7 @@ class DynamicForms extends React.Component {
         return '';
       }
     };
-
+    console.log("CityId:", this.state.cityId);
     console.log(searchTerm());
     //GET request for the input data
     fetch('https://savi-travel.com:'+config.port+'/api/users'+searchTerm())

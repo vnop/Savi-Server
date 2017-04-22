@@ -434,9 +434,9 @@ describe('Users endpoint', () => {
     });
   });
 
-  it('/api/users/ should handle requesting tours by name', (done) => {
+  it('/api/users/ should handle requesting a user by name', (done) => {
     request(server).get('/api/users?userName='+user1Expected.userName).end((err, res) => {
-      expect(res.body.length).to.equal(1, 'should have exactly one user');
+      expect(res.body.userName).to.equal(user1Expected.userName, 'should match the searched user');
     });
   });
 });

@@ -104,9 +104,10 @@ body {
 
 					div.info-section {
 						text-align: center;
-				    padding: 46px 26%;
-				    line-height: 1.5em;
-				    font-family: play, Georgia;
+					    padding: 3% 26%;
+					    line-height: 1.5em;
+					    font-family: play, Georgia;
+					    margin: 5% 0;
 					}
 				}
 
@@ -120,14 +121,18 @@ body {
 					background: $lightBlue;
 					height: 150px;
 
+
+
 					div.footer-links {
 						@include span-columns(6);
 						text-align: center;
 						font-family: play, Georgia;
+						margin: 6% 0;
 					}
 
 					div.social-icons {
 						@include span-columns(6);
+						margin: 6% 0;
 
 						div.links-wrapper {
 							@include outer-container;

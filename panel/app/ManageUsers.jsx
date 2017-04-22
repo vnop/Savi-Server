@@ -31,24 +31,23 @@ class DynamicForms extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();//prevent page refresh upon submit
-    const search = () => {
+    const search = () => { //determin a search term to use in our GET request
       if (this.state.userName.length) {
-        return this.state.userName;
-      } else if (this.state.userEmail.length) {
-        return this.state.userEmail;
+        return '?userName='+this.state.userName;
+      } else if (this.state.userEmail) {
+        return '?userEmail'+this.state.userEmail;
+      } else if (this.state.mdn.length) {
+        return '?mdn='+this.state.mdn;
+      } else if (this.state.cityId) {
+        return '?cityId='+this.state.cityId;
       } else {
-        return "BIFF MEATWAGON, ATTORNEY AT LAW";
+        return '';
       }
     }
 
     console.log(search());
     if (this.state.userName.length) {//if the userName isn't blank...
-      fetch('https://savi-travel.com:'+config.port+'/api/users?userName='+this.state.userName)
-        .then(resp => resp.json())
-        .then(data => this.setState({data}))
-        .catch(err => console.error(err));
-    } else if (this.state.userEmail.length) {
-      fetch('https://savi-travel.com:'+config.port+'/api/users?userEmail='+this.state.userEmail)
+      fetch('https://savi-travel.com:'+config.port+'/api/users'+search())
         .then(resp => resp.json())
         .then(data => this.setState({data}))
         .catch(err => console.error(err));

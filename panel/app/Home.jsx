@@ -28,7 +28,7 @@ class Home extends React.Component {
               <div
                 key={i}
                 style={{
-                  backgroundImage: "url('https://savi-travel.com:8084/api/images/paris_city.jpg')",
+                  backgroundImage: "url('https://savi-travel.com:"+config.port+"/api/images/"+city.mainImage+"')",
                   backgroundSize: 'cover'
                 }}
                 className="image">{JSON.stringify(city.name)}

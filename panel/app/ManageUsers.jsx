@@ -30,7 +30,7 @@ class DynamicForms extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log('LOGGING', this.props.method);
+    console.log('LOGGING', this.state);
   }
 
   //DidUpdate _> Runs whenever the page updates due to render
@@ -101,6 +101,7 @@ class DynamicForms extends React.Component {
               )
             })}
           </select>
+          <input type="submit" value="Search" />
         </form>
       )
     }

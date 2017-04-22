@@ -262,6 +262,7 @@ describe('Bookings endpoint', () => {
   var city1Expected, city2Expected;
   var tour1Expected, tour2Expected, tour3Expected, tour4Expected;
   var user1Expected, user2Expected;
+  var offering1expected, offering2expected;
   before((done) => {
     city1Expected = {name: 'Gotham', mainImage: 'gotham_city.jpg'};
     city2Expected = {name: 'Metropolis', mainImage: 'metropolis_city.jpg'};
@@ -270,6 +271,9 @@ describe('Bookings endpoint', () => {
     tour2Expected = {cityId: 1, title: 'Tour 2', description: 'Second tour', mainImage: 'tour2.jpg'};
     tour3Expected = {cityId: 2, title: 'Tour 3', description: 'Third tour', mainImage: 'tour3.jpg'};
     tour4Expected = {cityId: 2, title: 'Tour 4', description: 'Fourth tour', mainImage: 'tour4.jpg'};
+
+    offering1expected = {cityId: 1, userId: 1, userType: 'Driver', seats: 0, date: '00-00-0000'};
+    offering2expected = {cityId: 1, userId: 2, userType: 'Tour Guide', seats: 0, date: '00-00-0000'};
 
     user1Expected = {
       type: 'Driver',
@@ -303,6 +307,8 @@ describe('Bookings endpoint', () => {
         toursAndUsers.push(db.Tour.create(tour4Expected));
         toursAndUsers.push(db.UserData.create(user1Expected));
         toursAndUsers.push(db.UserData.create(user2Expected));
+        toursAndUsers.push(db.Offering.create(offering1expected));
+        toursAndUsers.push(db.Offering.create(offering2expected));
         Promise.all(toursAndUsers).then(() => {done()});
       });
     });
@@ -327,14 +333,18 @@ describe('Bookings endpoint', () => {
   });
 
   it('/api/bookings should respond with a booking object with queried', (done) => {
-    request(server).get('/api/bookings?tourId=1&date=testDate').end((err, res) => {
+    request(server).get('/api/bookings?tourId=1&date=00-00-0000').end((err, res) => {
       expect(compareSomeKeys(user1Expected, res.body.driver)).to.equal(true, 'Should have the correct driver');
       expect(compareSomeKeys(user2Expected, res.body.guide)).to.equal(true, 'Should have the correct tourguide');
       expect(compareSomeKeys(city1Expected, res.body.city)).to.equal(true, 'Should have the correct city');
       expect(compareSomeKeys(tour1Expected, res.body.tour)).to.equal(true, 'Should have the correct tour');
-      expect(res.body.date).to.equal('testDate', 'should have the correct date');
+      expect(res.body.date).to.equal('00-00-0000', 'should have the correct date');
       done();
     });
+  });
+
+  it('/api/bookings should respond with a failure if there are no offerings', (done) => {
+    request(server).get('/api/bookings?tourId=1&date=00-00-0000').expect('We were unable to book you with the given parameters', done);
   });
 });
 

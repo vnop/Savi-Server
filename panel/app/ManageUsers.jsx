@@ -31,7 +31,8 @@ class DynamicForms extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();//prevent page refresh upon submit
-
+    const search = if (this.state.userName.length) {'FOUND IT'} else {'NOT FOUND IT'};
+    console.log(search);
     if (this.state.userName.length) {//if the userName isn't blank...
       fetch('https://savi-travel.com:'+config.port+'/api/users?userName='+this.state.userName)
         .then(resp => resp.json())

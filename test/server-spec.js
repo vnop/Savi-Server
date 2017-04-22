@@ -468,7 +468,6 @@ describe('Users endpoint', () => {
       done();
     });
   });  
-
 });
 
 describe('Automatic mailer', () => {

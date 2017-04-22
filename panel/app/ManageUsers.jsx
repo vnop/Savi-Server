@@ -44,8 +44,6 @@ class DynamicForms extends React.Component {
         return '';
       }
     };
-    console.log("CityId:", this.state.cityId);
-    console.log(searchTerm());
     //GET request for the input data
     fetch('https://savi-travel.com:'+config.port+'/api/users'+searchTerm())
       .then(resp => resp.json())
@@ -125,7 +123,7 @@ class DynamicForms extends React.Component {
         <div>
           <form onSubmit={this.handleSubmit}>
             <select onChange={this.cityForm} value={this.state.cityId}>
-              <option value={0}></option>
+              <option value={0}>*all</option>
               {this.props.cityData.map((item, i) => {
                 return (
                   <option key={i} value={item.id}>{item.name}</option>

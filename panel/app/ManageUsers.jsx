@@ -38,7 +38,7 @@ class DynamicForms extends React.Component {
 
       if (this.state.userEmail.length ||
           this.state.mdn.length ||
-          this.state.cityId.length ||) {
+          this.state.cityId.length) {
         this.setState({
           userEmail: '',
           mdn: '',

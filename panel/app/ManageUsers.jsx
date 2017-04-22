@@ -2,7 +2,49 @@ import React from 'react';
 import { BrowserRouter as Router, Match, Route, Link } from 'react-router-dom';
 import config from '../../config/config.js';
 
-//HELPER FOR FORMS
+//MAIN COMPONENT
+class ManageUsers extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: [],
+      method: 'userName'
+    };
+
+    //METHOD BINDINGS
+    this.methodMenu = this.methodMenu.bind(this);
+  }
+
+  //FORM CONTROLS
+  methodMenu(e) {this.setState({ method: e.target.value })}
+
+  componentWillMount() {
+    //get the current city list
+    fetch('https://savi-travel.com:'+config.port+'/api/cities', {mode: 'no-cors'})
+      .then(resp => resp.json())
+      .then(data => this.setState({cityData: data}))
+      .catch(err => console.error(err));
+  }
+
+  render() {
+    return (
+      <div>
+        <form>
+          Search By:
+          <select onChange={this.methodMenu} value={this.state.method}>
+            <option value="userName">User Name</option>
+            <option value="userEmail">Email</option>
+            <option value="mdn">Phone Number</option>
+            <option value="cityId">City</option>
+          </select>
+        </form>
+        <DynamicForms method={this.state.method} cityData={this.state.cityData} />
+      </div>
+    )
+  }//End of Render
+}
+
+//COMPONENT FOR RENDERING DIFFERENT FORMS BASED ON SELECTION
 class DynamicForms extends React.Component {
   constructor(props){
     super(props);
@@ -95,7 +137,6 @@ class DynamicForms extends React.Component {
             <input type="text" value={this.state.userName} onChange={this.nameForm} />
             <input type="submit" value="Search" />
           </form>
-          {JSON.stringify(this.state.data)}
         </div>
       )
     } else if (this.props.method==='userEmail') {//if the search method is by userEmail
@@ -105,7 +146,6 @@ class DynamicForms extends React.Component {
             <input type="text" value={this.state.userEmail} onChange={this.emailForm} />
             <input type="submit" value="Search" />
           </form>
-        {JSON.stringify(this.state.data)}
         </div>
       )
     } else if (this.props.method==='mdn') {//if the search method is by mdn (mobile device number)
@@ -115,7 +155,6 @@ class DynamicForms extends React.Component {
             <input type="text" value={this.state.mdn} onChange={this.mdnForm} />
             <input type="submit" value="Search" />
           </form>
-         {JSON.stringify(this.state.data)}
         </div>
       )
     } else if (this.props.method==='cityId') {//if the search method is by userName
@@ -132,53 +171,27 @@ class DynamicForms extends React.Component {
             </select>
             <input type="submit" value="Search" />
           </form>
-        {JSON.stringify(this.state.data)}
         </div>
       )
     }
-  }//End of Component Render
+    {JSON.stringify(this.state.data)}
+  }//End of Render
 }
 
-//MAIN COMPONENT
-class ManageUsers extends React.Component {
+//COMPONENT TO DYNAMICALLY DISPLAY SEARCH RESULTS AND ALLOW DETAIL EDITING
+class DisplayUsers extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      data: [],
-      method: 'userName'
-    };
-
-    //METHOD BINDINGS
-    this.methodMenu = this.methodMenu.bind(this);
-  }
-
-  //FORM CONTROLS
-  methodMenu(e) {this.setState({ method: e.target.value })}
-
-  componentWillMount() {
-    //get the current city list
-    fetch('https://savi-travel.com:'+config.port+'/api/cities', {mode: 'no-cors'})
-      .then(resp => resp.json())
-      .then(data => this.setState({cityData: data}))
-      .catch(err => console.error(err));
+    this.state = {};
   }
 
   render() {
     return (
-      <div>
-        <form>
-          Search By:
-          <select onChange={this.methodMenu} value={this.state.method}>
-            <option value="userName">User Name</option>
-            <option value="userEmail">Email</option>
-            <option value="mdn">Phone Number</option>
-            <option value="cityId">City</option>
-          </select>
-        </form>
-        <DynamicForms method={this.state.method} cityData={this.state.cityData} />
-      </div>
+
     )
-  }
+  }//End of Render
 }
 
+
+//Export the ManageUsers component for use within App.jsx
 module.exports = ManageUsers;

@@ -40,7 +40,8 @@ module.exports.seedDatabase = (db) => {
 					cityId: cityId,
 					title: tour.title,
 					description: tour.description,
-					mainImage: tour.mainImage
+					mainImage: tour.mainImage,
+					price: tour.price
 				})
 			});
 		});

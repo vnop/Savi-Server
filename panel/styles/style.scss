@@ -77,7 +77,40 @@ body {
 
 				div.add-cities-component {
 					div.form-wrapper {
+						margin: 0 33%;
 
+						h3 {
+							font-family: $mainFont;
+							text-align: center;
+						}
+
+						form.new-city-form {
+							div.input-wrapper {
+								margin: 13px 0;
+								label {
+									font-family: $mainFont;
+								}
+
+								input {
+							    width: 100%;
+							    height: 32px;
+							    border-radius: 3px;
+							    border: 1px solid $mainBlue;
+							    margin-top: 8px;
+								}
+							}
+
+							input[type="submit"] {
+								width: 100%;
+						    background: $mainBlue;
+						    font-size: 1.2em;
+						    color: $almostWhite;
+						    border-radius: 3px;
+						    border: 0;
+						    padding: 4px 0;
+						    margin-top: 16px;
+							}
+						}
 					}
 
 					div.available-cities {

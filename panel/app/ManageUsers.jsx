@@ -103,30 +103,39 @@ class DynamicForms extends React.Component {
       )
     } else if (this.props.method==='userEmail') {//if the search method is by userEmail
       return (
-        <form onSubmit={this.handleSubmit}>
-          <input type="text" value={this.state.userEmail} onChange={this.emailForm} />
-          <input type="submit" value="Search" />
-        </form>
+        <div>
+        {JSON.stringify(this.state.data)}
+          <form onSubmit={this.handleSubmit}>
+            <input type="text" value={this.state.userEmail} onChange={this.emailForm} />
+            <input type="submit" value="Search" />
+          </form>
+        </div>
       )
     } else if (this.props.method==='mdn') {//if the search method is by mdn (mobile device number)
       return (
-        <form onSubmit={this.handleSubmit}>
-          <input type="text" value={this.state.mdn} onChange={this.mdnForm} />
-          <input type="submit" value="Search" />
-        </form>
+         <div>
+         {JSON.stringify(this.state.data)}
+          <form onSubmit={this.handleSubmit}>
+            <input type="text" value={this.state.mdn} onChange={this.mdnForm} />
+            <input type="submit" value="Search" />
+          </form>
+        </div>
       )
     } else if (this.props.method==='cityId') {//if the search method is by userName
       return (
-        <form onSubmit={this.handleSubmit}>
-          <select onChange={this.cityForm} value={this.state.cityId}>
-            {this.props.cityData.map((item, i) => {
-              return (
-                <option key={i} value={item.id}>{item.name}</option>
-              )
-            })}
-          </select>
-          <input type="submit" value="Search" />
-        </form>
+        <div>
+        {JSON.stringify(this.state.data)}
+          <form onSubmit={this.handleSubmit}>
+            <select onChange={this.cityForm} value={this.state.cityId}>
+              {this.props.cityData.map((item, i) => {
+                return (
+                  <option key={i} value={item.id}>{item.name}</option>
+                )
+              })}
+            </select>
+            <input type="submit" value="Search" />
+          </form>
+        </div>
       )
     }
   }//End of Component Render

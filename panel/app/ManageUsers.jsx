@@ -31,6 +31,7 @@ class DynamicForms extends React.Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <input type="text" value={this.state.userName} onChange={this.nameForm} />
+        <input type="submit" value="Search" />
       </form>
     )
   }

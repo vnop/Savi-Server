@@ -136,7 +136,8 @@ describe('Cities endpoints', () => {
 
   after((done) => {
     fs.unlinkSync(path.join(__dirname, '../img/' + 'central-city_city.jpg'));
-    done();
+    db.syncTables(true, schema).then(() => {done()});
+    // done();
   });
 
   it('/api/cities should respond', (done) => {
@@ -207,7 +208,8 @@ describe('Tours endpoints', () => {
 
   after((done) => {
     fs.unlinkSync(path.join(__dirname, '../img/' + 'gotham-eats_tour.jpg'));
-    done();
+    db.syncTables(true, schema).then(() => {done()});
+    // done();
   });
 
   it('/api/tours/ should respond', (done) => {
@@ -316,6 +318,10 @@ describe('Bookings endpoint', () => {
     server.close(done);
   });
 
+  after((done) => {
+    db.syncTables(true, schema).then(() => {done()});
+  });
+
   it('/api/bookings should respond with 400 if no/incorrect queries supplied', (done) => {
     request(server).get('/api/bookings').expect(400, done);
   });
@@ -352,7 +358,8 @@ describe('Images endpoint', () => {
 
   after((done) => {
     fs.unlinkSync(path.join(__dirname, '../img/' + 'test-img0.jpg'));
-    done();
+    db.syncTables(true, schema).then(() => {done()});
+    // done();
   });
 
   it('/api/images should return an error for a nonexistant image', (done) => {
@@ -400,7 +407,8 @@ describe('Users endpoint', () => {
 
   after((done) => {
     fs.unlinkSync(path.join(__dirname, '../img/' + 'barbara-gordon.jpg'));
-    done();
+    db.syncTables(true, schema).then(() => {done()});
+    // done();
   });
 
   beforeEach(() => {

@@ -33,9 +33,6 @@ class DynamicForms extends React.Component {
   }
 
   render() {
-     //reset states when search method changes
-    this.setState({ userName: '', userEmail: '', mdn: '', cityId: '' })
-
     //check for the value of the props.method to determine which form to render
     if (this.props.method==='userName') {//if the search method is by userName
       return (

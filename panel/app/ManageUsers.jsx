@@ -11,7 +11,6 @@ class AddCity extends React.Component {
       name: '',
       email: '',
       mdn: 0, //mobile device number
-      country: '',
       city: ''
     };
 
@@ -43,11 +42,20 @@ class AddCity extends React.Component {
               <option value="userName">User Name</option>
               <option value="userEmail">Email</option>
               <option value="mdn">Phone Number</option>
-              <option value="country">Country</option>
               <option value="city">City</option>              
             </select>
           </label>
-          <input type="submit" value="Add" />
+
+          <label>
+            {(this.method==="userName") ? ()=>{
+              return "Search By User Name"} :
+              ()=>{
+                return "Search By SOMETHING ELSE"
+              }
+            }
+          </label>
+
+          <input type="submit" value="Search" />
         </form>
       </div>
     )

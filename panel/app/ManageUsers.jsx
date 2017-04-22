@@ -48,9 +48,9 @@ class AddCity extends React.Component {
 
           <label>
             {(this.method==="userName") ? ()=>{
-              return "Search By User Name"} :
+              return (<div>Search By User Name</div>)} :
               ()=>{
-                return "Search By SOMETHING ELSE"
+                return (<div>Search By SOMETHING ELSE</div>)
               }
             }
           </label>

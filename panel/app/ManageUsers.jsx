@@ -45,13 +45,10 @@ class DynamicForms extends React.Component {
       }
     }
 
-    console.log(search());
-    if (this.state.userName.length) {//if the userName isn't blank...
-      fetch('https://savi-travel.com:'+config.port+'/api/users'+search())
-        .then(resp => resp.json())
-        .then(data => this.setState({data}))
-        .catch(err => console.error(err));
-    }
+    fetch('https://savi-travel.com:'+config.port+'/api/users'+search())
+      .then(resp => resp.json())
+      .then(data => this.setState({data}))
+      .catch(err => console.error(err));
   }
 
   //DidUpdate _> Runs whenever the page updates due to render

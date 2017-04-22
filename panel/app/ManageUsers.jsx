@@ -35,7 +35,7 @@ class DynamicForms extends React.Component {
       if (this.state.userName.length) {
         return '?userName='+this.state.userName;
       } else if (this.state.userEmail) {
-        return '?userEmail'+this.state.userEmail;
+        return '?userEmail='+this.state.userEmail;
       } else if (this.state.mdn.length) {
         return '?mdn='+this.state.mdn;
       } else if (this.state.cityId) {

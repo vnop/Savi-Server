@@ -32,10 +32,18 @@ class DynamicForms extends React.Component {
     console.log('LOGGING', this.props.method);
   }
 
+  componentWillMount() {
+    this.setState({
+      userName: '',
+      userEmail: '',
+      mdn: '', //mobile device number
+      cityId: ''
+    })
+  }
+
   render() {
     //check for the value of the props.method to determine which form to render
     if (this.props.method==='userName') {//if the search method is by userName
-      this.setState({ userName: '', userEmail: '', mdn: '', cityId: '' });
       return (
         <form onSubmit={this.handleSubmit}>BY USERNAME
           <input type="text" value={this.state.userName} onChange={this.nameForm} />

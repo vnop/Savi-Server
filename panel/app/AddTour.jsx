@@ -91,10 +91,10 @@ class AddTour extends React.Component {
 
   render() {
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            City:
+      <div className="add-cities-component">
+        <div className="form-wrapper">
+          <h3>Add New City</h3>
+          <form className="new-city-form" onSubmit={this.handleSubmit}>
             <select onChange={this.cityForm} value={this.state.tourCity}>
               {this.state.cityData.map((item, i) => {
                 return (
@@ -102,49 +102,39 @@ class AddTour extends React.Component {
                 )
               })}
             </select>
-          </label>
+            <div className="input-wrapper">
+              <label>City</label>
+              <input type="text" value={this.state.tourName} onChange={this.nameForm} />
+            </div>
 
-          <label>
-            Tour:
-            <input type="text" value={this.state.tourName} onChange={this.nameForm} />
-          </label>
+            <div className="input-wrapper">
+              <label>Image</label>
+              <input type="text" value={this.state.tourImg} onChange={this.imageForm} />
+            </div>
 
-          <label>
-            Image:
-            <input type="text" value={this.state.tourImg} onChange={this.imageForm} />
-          </label>
+            <div className="input-wrapper">
+              <label>Image</label>
+              <input type="text" value={this.state.tourDesc} onChange={this.descForm} />
+            </div>
 
-          <label>
-            Description:
-            <input type="text" value={this.state.tourDesc} onChange={this.descForm} />
-          </label>
+            <input type="submit" value="Add" />
+          </form>
+        </div>
 
-          <input type="submit" value="Add" />
-        </form>
-
-        <hr/>
-
-        <h2>Available Tours</h2>
-
-        <div>
+        <div className="available-cities">
+          <h2>Available Tours</h2>
           {this.state.cityData.map((item, i) => {
             return (
-              <div key={i}>
-              <h3>{item.name}</h3>
-              {this.processData(this.state.tourData, 'cityId', item.id).map((item, i) => {
-                return (
-                  <div id="tourData" key={i}>
-                    <div id="tourName">{item.title}</div>
-                    <img id="tourImgs" src={"https://savi-travel.com:"+config.port+"/api/images/"+item.mainImage} />
-                    <div id="tourDesc">{item.description}</div>
-                  </div>
-                )
-              })}
+              <div className="city-container" key={i}>
+                <p className="city-name">{item.title}</p>
+                <div className="image-wrapper">
+                  <img className="city-images" src={"https://savi-travel.com:"+config.port+"/api/images/"+item.mainImage} />
+                </div>
               </div>
+              <div id="tourDesc">{item.description}</div>
             )
           })}
         </div>
-
       </div>
     )
   }

@@ -1,5 +1,6 @@
 import React from 'react';
 import config from '../../config/config.js';
+
 class Home extends React.Component {
   constructor(props) {
     super(props);
@@ -23,19 +24,7 @@ class Home extends React.Component {
         </div>
 
         <div className="cities-images">
-          {this.state.cityData.map((city, i) => {
-            return (
-              <div
-                key={i}
-                style={{
-                  backgroundImage: "url('https://savi-travel.com:"+config.port+"/api/images/"+city.mainImage+"')",
-                  backgroundSize: 'cover'
-                }}
-                className="image">
-                <p className="city-name">{city.name}</p>
-              </div>
-            )
-          })}
+          <CityImages cityData={this.state.cityData}/>
         </div>
 
         <div className="info-section">
@@ -67,6 +56,29 @@ class Home extends React.Component {
         </div>
       </div>
     )
+  }
+}
+
+class CityImages extends Component {
+  constructor(props) {
+    super(props);
+
+  }
+
+  render() {
+    {this.props.cityData.map((city, i) => {
+      return (
+        <div
+          key={i}
+          style={{
+            backgroundImage: "url('https://savi-travel.com:"+config.port+"/api/images/"+city.mainImage+"')",
+            backgroundSize: 'cover'
+          }}
+          className="image">
+          <p className="city-name">{city.name}</p>
+        </div>
+      )
+    })}
   }
 }
 

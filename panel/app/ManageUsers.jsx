@@ -30,22 +30,23 @@ class DynamicForms extends React.Component {
   cityForm(e) {this.setState({ cityId: e.target.value })}
 
   handleSubmit(e) {
-    e.preventDefault();//prevent page refresh upon submit
-    const search = () => { //determin a search term to use in our GET request
-      if (this.state.userName.length) {
+    e.preventDefault(); //prevent page refresh upon submit
+    const searchTerm = () => { //determin a search term to use in our GET request
+      if (this.state.userName.length) { //if a username was input...
         return '?userName='+this.state.userName;
-      } else if (this.state.userEmail) {
+      } else if (this.state.userEmail) { //else, if a user email was input...
         return '?userEmail='+this.state.userEmail;
-      } else if (this.state.mdn.length) {
+      } else if (this.state.mdn.length) { //else, if an MDN was input...
         return '?mdn='+this.state.mdn;
-      } else if (this.state.cityId) {
+      } else if (this.state.cityId>0) { //else, if a cityId was selected...
         return '?cityId='+this.state.cityId;
-      } else {
+      } else { //otherwise, return the entire list of users
         return '';
       }
-    }
+    };
 
-    fetch('https://savi-travel.com:'+config.port+'/api/users'+search())
+    //GET request for the input data
+    fetch('https://savi-travel.com:'+config.port+'/api/users'+searchTerm())
       .then(resp => resp.json())
       .then(data => this.setState({data}))
       .catch(err => console.error(err));

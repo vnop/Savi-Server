@@ -81,7 +81,7 @@ class DynamicForms extends React.Component {
     if (this.props.method==='userName') {//if the search method is by userName
       return (
         <div>
-          {this.state.data}
+          {JSON.stringify(this.state.data)}
           <form onSubmit={this.handleSubmit}>
             <input type="text" value={this.state.userName} onChange={this.nameForm} />
             <input type="submit" value="Search" />

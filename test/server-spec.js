@@ -438,6 +438,7 @@ describe('Users endpoint', () => {
     request(server).get('/api/users?userName='+user1Expected.userName).end((err, res) => {
       console.log('THIS IS THE RESULT:', res.body);
       expect(res.body.userName).to.equal(user1Expected.userName, 'should match the searched user');
+      done();
     });
   });
 });

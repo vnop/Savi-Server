@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Match, Route, Link } from 'react-router-dom';
+import config from '../../config/config.js';
 
 //HELPER FOR FORMS
 class DynamicForms extends React.Component {

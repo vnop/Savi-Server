@@ -214,20 +214,6 @@ describe('Tours endpoints', () => {
     request(server).get('/api/tours').expect(200, done);
   });
 
-  it('/api/tours/ should handle requesting tours by city', (done) => {
-    request(server).get('/api/tours?cityId=1').end((err, res) => {
-      expect(res.body.length).to.equal(2, 'should have exactly two tours');
-      expect(compareSomeKeys(tour1Expected, res.body[0])).to.equal(true, 'should have the first tour');
-      expect(compareSomeKeys(tour2Expected, res.body[1])).to.equal(true, 'should have the second tour');
-      let hasCityTwoTours = false;
-      for (var element of res.body) {
-        hasCityTwoTours = hasCityTwoTours || element.cityId===2;
-      }
-      expect(hasCityTwoTours).to.equal(false, 'Should not have any tours from city 2');
-      done();
-    });
-  });
-
   it('/api/tours?tourId=X should respond with the expected tour', (done) => {
     request(server).get('/api/tours?tourId=1').end((err, res) => {
       expect(compareSomeKeys(tour1Expected, res.body)).to.equal(true, 'should return exactly the first tour');
@@ -447,8 +433,28 @@ describe('Users endpoint', () => {
       done();
     });
   });
-});
 
+  it('/api/users/ should handle requesting tours by name', (done) => {
+    request(server).get('/api/users?userName='+user1Expected.userName).end(err, res) => {
+      expect(res.body.length).to.equal(1, 'should have exactly one user');
+    }
+  });
+});
+//////////////////////KILLZONE////////////////////////
+// it('/api/tours/ should handle requesting tours by city', (done) => {
+//   request(server).get('/api/tours?cityId=1').end((err, res) => {
+//     expect(res.body.length).to.equal(2, 'should have exactly two tours');
+//     expect(compareSomeKeys(tour1Expected, res.body[0])).to.equal(true, 'should have the first tour');
+//     expect(compareSomeKeys(tour2Expected, res.body[1])).to.equal(true, 'should have the second tour');
+//     let hasCityTwoTours = false;
+//     for (var element of res.body) {
+//       hasCityTwoTours = hasCityTwoTours || element.cityId===2;
+//     }
+//     expect(hasCityTwoTours).to.equal(false, 'Should not have any tours from city 2');
+//     done();
+//   });
+// });
+///////////////////////KILLZONE///////////////////////
 describe('Automatic mailer', () => {
 
   var server, app;

@@ -64,15 +64,18 @@ class AddCity extends React.Component {
     return (
       <div className="add-cities-component">
         <div className="form-wrapper">
-          <form onSubmit={this.handleSubmit}>
-            <label>
-              City:
+          <h3>Add New City</h3>
+          <form className="new-city-form" onSubmit={this.handleSubmit}>
+            <div className="input-wrapper">
+              <label>City</label>
               <input type="text" value={this.state.cityName} onChange={this.nameForm} />
-            </label>
-            <label>
-              Image:
+            </div>
+
+            <div className="input-wrapper">
+              <label>Image</label>
               <input type="text" value={this.state.cityImg} onChange={this.imageForm} />
-            </label>
+            <div>
+
             <input type="submit" value="Add" />
           </form>
         </div>

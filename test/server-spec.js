@@ -436,17 +436,18 @@ describe('Users endpoint', () => {
 
   it('/api/users/ should handle requesting a user by name', (done) => {
     request(server).get('/api/users?userName=Bruce Wayne').end((err, res) => {
-      console.log(res.body);
-      expect(res.body.userName).to.equal(user1Expected.userName, 'should match the searched user');
+      expect(res.body.userName).to.equal(user1Expected.userName, 'should match the user searched by name');
       done();
     });
   });
-  // it('/api/users/ should handle requesting a user by email', (done) => {
-  //   request(server).get('/api/users?email='+user1Expected.userEmail).end((err, res) => {
-  //     expect(res.body.userEmail).to.equal(user1Expected.userEmail, 'should match the searched user');
-  //     done();
-  //   });
-  // });  
+
+  it('/api/users/ should handle requesting a user by email', (done) => {
+    request(server).get('/api/users?email=bwayne@wayneenterprises.com').end((err, res) => {
+      expect(res.body.userEmail).to.equal(user1Expected.userEmail, 'should match the user searched by email');
+      done();
+    });
+  });
+
 });
 //////////////////////KILLZONE////////////////////////
 // it('/api/tours/ should handle requesting tours by city', (done) => {

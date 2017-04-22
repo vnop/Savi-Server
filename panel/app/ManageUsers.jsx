@@ -213,16 +213,27 @@ class DisplayUsers extends React.Component {
   }//End of Render
 }
 
+//Component to render the specific and editable user data.
+//It is recursively called in the DisplayUser's component.
 class UserData extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      edit: false
+    };
+
+    //Method Bindings
+    this.toggleEdit = this.toggleEdit.bind(this);
+  }
+
+  toggleEdit() {
+    this.setState({edit: !this.state.edit});
   }
 
   render() {
     return (
       <div>
-        {JSON.stringify(this.props)}
+        <button onClick={this.toggleEdit}>{(this.state.edit) ? "Save" : "Edit"}</button>
       </div>
     )
   }

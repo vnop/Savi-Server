@@ -201,6 +201,10 @@ class DisplayUsers extends React.Component {
               <p>{item.userEmail}</p>
               <p>{item.type}</p>
               <p>{item.country}</p>
+              <p>{item.mdn}</p>
+              <p>{item.userAuthId}</p>
+              <p>{item.createdAt}</p>
+              <p>{item.uodatedAt}</p>
             </div>
           )
         })}

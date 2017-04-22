@@ -10,7 +10,7 @@ class DynamicForms extends React.Component {
       userName: '',
       userEmail: '',
       mdn: '', //mobile device number
-      cityId: ''
+      cityId: 0
     };
 
     //METHOD BINDINGS
@@ -32,16 +32,15 @@ class DynamicForms extends React.Component {
     console.log('LOGGING', this.props.method);
   }
 
+  //DidUpdate _> Runs whenever the page updates due to render
   componentDidUpdate() {
     const s = this.state;
     const defaults = { //Default values to make checks agaist and a central place to make changes
       userName: '',
       userEmail: '',
       mdn: '',
-      cityId: ''
+      cityId: 0
     };
-
-    console.log("What's the method?", this.props.method);
     //Resets unused form fields when search method changes
     //If you need to change default values, do so in the "defaults" const above
     if (this.props.method==='userName') { //USERNAME
@@ -94,8 +93,13 @@ class DynamicForms extends React.Component {
     } else if (this.props.method==='cityId') {//if the search method is by userName
       return (
         <form onSubmit={this.handleSubmit}>BY CITY
-          <input type="text" value={this.state.cityId} onChange={this.cityForm} />
-          <input type="submit" value="Search" />
+          <select onChange={this.cityForm} value={this.state.cityId}>
+            {this.props.cityData.map((item, i) => {
+              return (
+                <option key={i} value={item.id}>{item.name}</option>
+              )
+            })}
+          </select>
         </form>
       )
     }
@@ -118,6 +122,14 @@ class ManageUsers extends React.Component {
   //FORM CONTROLS
   methodMenu(e) {this.setState({ method: e.target.value })}
 
+  componentWillMount() {
+    //get the current city list
+    fetch('https://savi-travel.com:'+config.port+'/api/cities', {mode: 'no-cors'})
+      .then(resp => resp.json())
+      .then(data => this.setState({cityData: data}))
+      .catch(err => console.error(err));
+  }
+
   render() {
     return (
       <div>
@@ -130,7 +142,7 @@ class ManageUsers extends React.Component {
             <option value="cityId">City</option>
           </select>
         </form>
-        <DynamicForms method={this.state.method}/>
+        <DynamicForms method={this.state.method} cityData={this.state.cityData} />
       </div>
     )
   }

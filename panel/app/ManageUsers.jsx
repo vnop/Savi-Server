@@ -32,7 +32,7 @@ class DynamicForms extends React.Component {
   handleSubmit(e) {
     e.preventDefault();//prevent page refresh upon submit
     console.log("userName is:", this.state.userName);
-    if (this.state.userName.length<1) {//if the userName isn't blank...
+    if (this.state.userName.length>0) {//if the userName isn't blank...
       fetch('https://savi-travel.com:'+config.port+'/api/users?userName='+this.state.userName)
         .then(resp => resp.json())
         .then(data => this.setState({data}))

@@ -119,9 +119,6 @@ body {
 				div.footer {
 					@include outer-container;
 					background: $lightBlue;
-					height: 150px;
-
-
 
 					div.footer-links {
 						@include span-columns(6);

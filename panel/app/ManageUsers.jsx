@@ -33,24 +33,30 @@ class DynamicForms extends React.Component {
   }
 
   componentDidUpdate() {
+    const s = this.state;
     console.log("What's the method?", this.props.method);
     // Reset unused form fields when search method changes
-    if (this.props.method==='userName') { //if the method is userName, reset all else
-      this.state.userEmail = '';
-      this.state.mdn = '';
-      this.state.cityId = '';
-    } else if (this.props.method==='userEmail') { //if the method is userEmail, reset all else
-      this.state.userName = '';
-      this.state.mdn = '';
-      this.state.cityId = '';
-    } else if (this.props.method==='mdn') { //if the method is mdn, reset all else
-      this.state.userName = '';
-      this.state.userEmail = '';
-      this.state.cityId = '';
-    } else if (this.props.method==='cityId') { //if the method is cityId, reset all else
-      this.state.userName = '';
-      this.state.userEmail = '';
-      this.state.mdn = '';
+    if (this.props.method==='userName') { //USERNAME
+      //if the method is userName, reset all other forms
+      //if forms are already blank, do not set state (prevent forcing a render when not needed)
+      if (s.userEmail!=='') {this.state.userEmail = ''};
+      if (s.mdn!=='') {this.state.mdn = ''};
+      if (s.cityId!=='') {this.state.cityId = ''};
+    } else if (this.props.method==='userEmail') { //USEREMAIL
+      //if the method is userEmail, reset all other forms
+      if (s.userName!=='') {this.state.userName = ''};
+      if (s.mdn!=='') {this.state.mdn = ''};
+      if (s.cityId!=='') {this.state.cityId = ''};
+    } else if (this.props.method==='mdn') { //USER MOBILE DEVICE NUMBER
+      //if the method is mdn, reset all other forms
+      if (s.userName!=='') {this.state.userName = ''};
+      if (s.userEmail!=='') {this.state.userEmail = ''};
+      if (s.cityId!=='') {this.state.cityId = ''};
+    } else if (this.props.method==='cityId') { //USER CITY
+      //if the method is cityId, reset all other forms
+      if (s.userName!=='') {this.state.userName = ''};
+      if (s.userEmail!=='') {this.state.userEmail = ''};
+      if (s.mdn!=='') {this.state.mdn = ''};
     }
   }
 

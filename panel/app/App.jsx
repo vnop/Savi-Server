@@ -58,10 +58,6 @@ export default class App extends React.Component {
             <Route path="/addtour" component={AddTour}/>
             <Route path="/manageusers" component={ManageUsers}/>
           </div>
-
-          <Route exact path="/" component={Home}/>
-          <Route path="/addcity" component={AddCity}/>
-          <Route path="/addtour" component={AddTour}/>
         </div>
       </Router>
     )

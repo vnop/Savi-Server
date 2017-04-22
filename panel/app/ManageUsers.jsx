@@ -35,10 +35,10 @@ class DynamicForms extends React.Component {
   componentDidUpdate() {
     const s = this.state;
     const defaults = { //Default values to make checks agaist and a central place to make changes
-      userName: = '',
-      userEmail: = '',
-      mdn: = '',
-      cityId: = ''
+      userName: '',
+      userEmail: '',
+      mdn: '',
+      cityId: ''
     };
 
     console.log("What's the method?", this.props.method);

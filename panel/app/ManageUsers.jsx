@@ -189,6 +189,13 @@ class DisplayUsers extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
+
+    // //Method Bindings
+    // this.editName = this.editName.bind(this);
+    // this.editEmail = this.editEmail.bind(this);
+    // this.editUserType = this.editUserType.bind(this);
+    // this.editCountry = this.editCountry.bind(this);
+    // this.editMDN = this.editMDN.bind(this);
   }
 
   render() {
@@ -197,14 +204,7 @@ class DisplayUsers extends React.Component {
         {this.props.data.map((item, i) => {
           return (
             <div key={i}>
-              <h3>{item.userName}</h3>
-              <p>{item.userEmail}</p>
-              <p>{item.type}</p>
-              <p>{item.country}</p>
-              <p>{item.mdn}</p>
-              <p>{item.userAuthId}</p>
-              <p>{item.createdAt}</p>
-              <p>{item.uodatedAt}</p>
+              <UserData data={item}/>
             </div>
           )
         })}
@@ -213,6 +213,20 @@ class DisplayUsers extends React.Component {
   }//End of Render
 }
 
+class UserData extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  render() {
+    return (
+      <div>
+        {JSON.stringify(this.props)}
+      </div>
+    )
+  }
+}
 
 //Export the ManageUsers component for use within App.jsx
 module.exports = ManageUsers;

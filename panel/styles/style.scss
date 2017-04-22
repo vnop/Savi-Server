@@ -75,6 +75,33 @@ body {
 					}
 				}
 
+				div.add-cities-component {
+					div.form-wrapper {
+
+					}
+
+					div.available-cities {
+						@include outer-container;
+						h2 {
+							text-align: center;
+						}
+
+						div.city-container {
+							@include span-columns(4);
+							p.city-name {
+
+							}
+
+							div.image-wrapper {
+								img {
+									width: 370px;
+								  height: 250px;
+								}
+							}
+						}
+					}
+				}
+
 				div.home-section {
 					div.callout {
 						font-family: $mainFont;

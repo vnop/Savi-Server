@@ -82,7 +82,7 @@ class AddCity extends React.Component {
           {this.state.data.map((item, i) => {
             return (
               <div className="city-container" key={i}>
-                <div className="city-name">{item.name}</div>
+                <p className="city-name">{item.name}</p>
                 <div className="image-wrapper">
                   <img className="city-images" src={"https://savi-travel.com:"+config.port+"/api/images/"+item.mainImage} />
                 </div>

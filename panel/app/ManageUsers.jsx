@@ -9,7 +9,7 @@ class DynamicForms extends React.Component {
   render() {
     return (
       <div>
-        We got the funk
+        {JSON.stringify(this.props)}
       </div>
     )
   }
@@ -64,7 +64,7 @@ class ManageUsers extends React.Component {
           </label>
 
           <label>
-            <DynamicForms />
+            <DynamicForms method={this.state.method}/>
           </label>
 
           <input type="submit" value="Search" />

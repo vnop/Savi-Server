@@ -239,7 +239,7 @@ class UserData extends React.Component {
     this.setState({edit: !this.state.edit});
   }
 
-  nameForm(e) {this.setState{userName: e.target.value}};
+  nameForm(e) {this.setState({userName: e.target.value})};
 
   render() {
     return (

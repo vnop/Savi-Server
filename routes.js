@@ -74,8 +74,14 @@ module.exports = function(app, express, db, log) {
 
 						for (var tour of tourList) {
 							if (tour.price <= price) {
-								tour.city = cityName;
-								toursArray.push(tour);
+								var newTourInfo = {
+									title: tour.title,
+									description: tour.description,
+									city: cityName,
+									mainImage: tour.mainImage,
+									price: tour.price
+								}
+								toursArray.push(newTourInfo);
 							}
 						}
 						res.json(toursArray).end();

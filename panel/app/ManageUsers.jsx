@@ -232,11 +232,14 @@ class UserData extends React.Component {
 
     //Method Bindings
     this.toggleEdit = this.toggleEdit.bind(this);
+    this.nameForm = this.nameForm.bind(this);
   }
 
   toggleEdit() {
     this.setState({edit: !this.state.edit});
   }
+
+  nameForm(e) {this.setState{userName: e.target.value}};
 
   render() {
     return (
@@ -246,13 +249,13 @@ class UserData extends React.Component {
           if (this.state.edit) {
             return (
               <div>
-                Let's review
+                <input type="text" value={this.state.userName} onChange={this.nameForm}/>
               </div>
             )
           } else {
             return (
               <div>
-                Let's edit
+                Let's Save
               </div>
             )
           }

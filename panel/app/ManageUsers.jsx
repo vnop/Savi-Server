@@ -219,7 +219,15 @@ class UserData extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      //interal UI
       edit: false
+      //form data
+      userName: this.props.data.userName,
+      userEmail: this.props.data.userEmail,
+      mdn: this.props.data.mdn,
+      country: this.props.data.country,
+      type: this.props.data.type,
+      cityId: this.state.data.cityId
     };
 
     //Method Bindings
@@ -234,6 +242,9 @@ class UserData extends React.Component {
     return (
       <div>
         <button onClick={this.toggleEdit}>{(this.state.edit) ? "Save" : "Edit"}</button>
+        {()=>{
+          return (<div>Vikings</div>)
+        }}
       </div>
     )
   }

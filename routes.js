@@ -59,6 +59,32 @@ module.exports = function(app, express, db, log) {
 		}
 	});
 
+	app.get('/api/activities' (req, res) => {
+		let cityName = req.query.city;
+		let price = req.query.price;
+		db.City.find({where: {name: cityName}}).then((city) => {
+			if (!city) {
+				res.status(404).send('no tours available in this city');
+			} else {
+				db.Tour.findAll({where: {cityId: city.id}}).then((tourList) => {
+					if (tourList.length < 1) {
+						res.status(404).send('no tours available in this city');
+					} else {
+						let toursArray = [];
+
+						for (var tour of tourList) {
+							if (tour.price <= price) {
+								tour.city = cityName;
+								toursArray.push(tour);
+							}
+						}
+						res.json(toursArray).end();
+					}
+				}).catch((error) => {res.status(500).send('error fetching tours')});
+			}
+		}).catch((error) => {res.status(500).send('error fetching city information')});
+	});
+
 	app.get('/api/bookings', (req, res) => {
 		// console.log('bookings request...', req.query);
 	  let tourId = req.query.tourId;

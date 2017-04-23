@@ -59,7 +59,7 @@ module.exports = function(app, express, db, log) {
 		}
 	});
 
-	app.get('/api/activities' (req, res) => {
+	app.get('/api/activities', (req, res) => {
 		let cityName = req.query.city;
 		let price = req.query.price;
 		db.City.find({where: {name: cityName}}).then((city) => {

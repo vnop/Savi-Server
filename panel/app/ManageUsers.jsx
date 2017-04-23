@@ -242,9 +242,9 @@ class UserData extends React.Component {
     return (
       <div>
         <button onClick={this.toggleEdit}>{(this.state.edit) ? "Save" : "Edit"}</button>
-        {()=>{
+        {(()=>{
           return (<div>Vikings</div>)
-        }()}
+        })()}
       </div>
     )
   }

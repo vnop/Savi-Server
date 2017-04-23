@@ -227,7 +227,7 @@ class UserData extends React.Component {
       mdn: this.props.data.mdn || '',
       country: this.props.data.country || '',
       type: this.props.data.type || '',
-      cityId: this.state.data.cityId || ''
+      cityId: this.props.data.cityId || ''
     };
 
     //Method Bindings

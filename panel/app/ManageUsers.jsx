@@ -220,7 +220,7 @@ class UserData extends React.Component {
     super(props);
     this.state = {
       //interal UI
-      edit: false
+      edit: false,
       //form data
       userName: this.props.data.userName,
       userEmail: this.props.data.userEmail,

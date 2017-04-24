@@ -132,55 +132,58 @@ class DynamicForms extends React.Component {
   }
 
   render() {
-    //check for the value of the props.method to determine which form to render
-    if (this.props.method==='userName') {//if the search method is by userName
-      return (
-        <div>
-          <form onSubmit={this.handleSubmit}>
-            <input type="text" value={this.state.userName} onChange={this.nameForm} />
-            <input type="submit" value="Search" />
-          </form>
-          <DisplayUsers data={this.state.data}/>
-        </div>
-      )
-    } else if (this.props.method==='userEmail') {//if the search method is by userEmail
-      return (
-        <div>
-          <form onSubmit={this.handleSubmit}>
-            <input type="text" value={this.state.userEmail} onChange={this.emailForm} />
-            <input type="submit" value="Search" />
-          </form>
-          <DisplayUsers data={this.state.data}/>
-        </div>
-      )
-    } else if (this.props.method==='mdn') {//if the search method is by mdn (mobile device number)
-      return (
-         <div>
-          <form onSubmit={this.handleSubmit}>
-            <input type="text" value={this.state.mdn} onChange={this.mdnForm} />
-            <input type="submit" value="Search" />
-          </form>
-          <DisplayUsers data={this.state.data}/>
-        </div>
-      )
-    } else if (this.props.method==='cityId') {//if the search method is by userName
-      return (
-        <div>
-          <form onSubmit={this.handleSubmit}>
-            <select onChange={this.cityForm} value={this.state.cityId}>
-              <option value={0}>*all</option>
-              {this.props.cityData.map((item, i) => {
-                return (
-                  <option key={i} value={item.id}>{item.name}</option>
-                )
-              })}
-            </select>
-            <input type="submit" value="Search" />
-          </form>
-          <DisplayUsers data={this.state.data}/>
-        </div>
-      )
-    }
+    return (
+      <div>
+      {(()=>{
+        //check for the value of the props.method to determine which form to render
+        if (this.props.method==='userName') {//if the search method is by userName
+          return (
+            <div>
+              <form onSubmit={this.handleSubmit}>
+                <input type="text" value={this.state.userName} onChange={this.nameForm} />
+                <input type="submit" value="Search" />
+              </form>
+            </div>
+          )
+        } else if (this.props.method==='userEmail') {//if the search method is by userEmail
+          return (
+            <div>
+              <form onSubmit={this.handleSubmit}>
+                <input type="text" value={this.state.userEmail} onChange={this.emailForm} />
+                <input type="submit" value="Search" />
+              </form>
+            </div>
+          )
+        } else if (this.props.method==='mdn') {//if the search method is by mdn (mobile device number)
+          return (
+             <div>
+              <form onSubmit={this.handleSubmit}>
+                <input type="text" value={this.state.mdn} onChange={this.mdnForm} />
+                <input type="submit" value="Search" />
+              </form>
+            </div>
+          )
+        } else if (this.props.method==='cityId') {//if the search method is by userName
+          return (
+            <div>
+              <form onSubmit={this.handleSubmit}>
+                <select onChange={this.cityForm} value={this.state.cityId}>
+                  <option value={0}>*all</option>
+                  {this.props.cityData.map((item, i) => {
+                    return (
+                      <option key={i} value={item.id}>{item.name}</option>
+                    )
+                  })}
+                </select>
+                <input type="submit" value="Search" />
+              </form>
+            </div>
+          )
+        }
+      })()}
+        <DisplayUsers data={this.state.data}/>
+      </div>
+    )
   }//End of Render
 }
 
@@ -189,13 +192,6 @@ class DisplayUsers extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
-
-    // //Method Bindings
-    // this.editName = this.editName.bind(this);
-    // this.editEmail = this.editEmail.bind(this);
-    // this.editUserType = this.editUserType.bind(this);
-    // this.editCountry = this.editCountry.bind(this);
-    // this.editMDN = this.editMDN.bind(this);
   }
 
   render() {
@@ -213,8 +209,8 @@ class DisplayUsers extends React.Component {
   }//End of Render
 }
 
-//Component to render the specific and editable user data.
-//It is recursively called in the DisplayUser's component.
+//COMPONENT TO RENDER EACH USER ENTRY
+//It is recursively returned in the DisplayUser's component.
 class UserData extends React.Component {
   constructor(props) {
     super(props);

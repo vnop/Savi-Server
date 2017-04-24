@@ -94,6 +94,7 @@ class DynamicForms extends React.Component {
         return '';
       }
     };
+    this.props.callback([]);
     //GET request for the input data
     fetch('https://savi-travel.com:'+config.port+'/api/users'+searchTerm())
       .then(resp => resp.json())

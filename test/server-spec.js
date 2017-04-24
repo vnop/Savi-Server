@@ -494,6 +494,7 @@ describe('Users endpoint', () => {
 
   it('should be able to GET multiple users by city', (done) => {
     request(server).get('/api/users?cityId=1').end((err, res) => {
+      console.log("LOGGING THE RES.BODY", res.body);
       expect(res.body.length>0).to.equal(true, 'should return multiple users');
       done();
     });

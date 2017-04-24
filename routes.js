@@ -317,8 +317,8 @@ module.exports = function(app, express, db, log) {
 					city: req.body.city
 				}, {where: {userAuthId: userAID}});
 				helpers.respondDBQuery(user, req, res);
-			} else { //otherwise...
-				//do something in the case that no user exists
+			} else {
+				res.end();
 			}
 		}).catch((err) => {
 			helpers.respondDBError(err, req, res);

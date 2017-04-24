@@ -317,7 +317,7 @@ module.exports = function(app, express, db, log) {
 					city: req.body.city
 				}, {where: {userAuthId: userAID}});
 				helpers.respondDBQuery(user, req, res);
-			} else {
+			} else { //otherwise... no user exists to be updated. Send 500
 				res.status(500).send('No Such User Exists').end();
 			}
 		}).catch((err) => {

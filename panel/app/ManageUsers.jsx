@@ -194,10 +194,13 @@ class DisplayUsers extends React.Component {
     this.state = {};
   }
 
+  componentWillMount() {
+    console.log(this.props);
+  }
+
   render() {
     return (
       <div>
-        {JSON.stringify(this.props)}
         {this.props.data.map((item, i) => {
           return (
             <div key={i}>

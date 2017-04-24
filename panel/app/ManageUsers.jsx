@@ -7,7 +7,7 @@ class ManageUsers extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: [],
+      users: [],
       method: 'userName'
     };
 
@@ -46,7 +46,7 @@ class ManageUsers extends React.Component {
           </select>
         </form>
         <DynamicForms callback={this.transfer} method={this.state.method} cityData={this.state.cityData} />
-        <DisplayUsers data={this.state.data}/>
+        <DisplayUsers data={this.state.users}/>
       </div>
     )
   }//End of Render

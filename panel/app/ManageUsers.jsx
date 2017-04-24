@@ -99,7 +99,7 @@ class DynamicForms extends React.Component {
       .then(resp => resp.json())
       .then(data => {
         this.setState({data});
-        this.props.callback(data);
+        this.props.callback({userData: data});
       })
       .catch(err => console.error(err));
   }

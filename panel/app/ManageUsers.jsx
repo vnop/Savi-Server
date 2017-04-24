@@ -19,7 +19,7 @@ class ManageUsers extends React.Component {
   //TRANSFER DATA BETWEEN COMPONENTS
   transfer(data) {
     this.setState({ data });
-    console.log(this.state);
+    console.log("State in ManageUsers",this.state);
   }
 
   //FORM CONTROLS
@@ -196,6 +196,7 @@ class DisplayUsers extends React.Component {
 
   render() {
     return (
+      {JSON.stringify(this.props)}
       <div>
         {this.props.data.map((item, i) => {
           return (

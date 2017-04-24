@@ -501,7 +501,7 @@ describe('Users endpoint', () => {
 
   it('should be able use PUT to update an existing user', (done) => {
     request(server).get('/api/users').end((err, res) => {
-      expect(res.body[0]).to.equal('Bruce Wayne', 'should return Bruce Wayne');
+      expect(res.body[0].userName).to.equal('Bruce Wayne', 'should return Bruce Wayne');
       done();
     });
   });

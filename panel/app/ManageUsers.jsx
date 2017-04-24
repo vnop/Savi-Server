@@ -94,7 +94,7 @@ class DynamicForms extends React.Component {
         return '';
       }
     };
-
+    this.props.callback("Data From Child")
     //GET request for the input data
     fetch('https://savi-travel.com:'+config.port+'/api/users'+searchTerm())
       .then(resp => resp.json())
@@ -138,8 +138,6 @@ class DynamicForms extends React.Component {
       if (s.userEmail!==defaults.userEmail) {this.state.userEmail = defaults.userEmail};
       if (s.mdn!==defaults.mdn) {this.state.mdn = defaults.mdn};
     }
-
-    this.props.callback("Data From Child")
   }
 
   render() {

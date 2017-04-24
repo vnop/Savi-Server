@@ -7,8 +7,9 @@ class ManageUsers extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: [],
-      childData: '',
+      childData: {
+        users: []
+      },
       method: 'userName'
     };
 

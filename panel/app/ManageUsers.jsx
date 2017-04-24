@@ -193,15 +193,13 @@ class DynamicForms extends React.Component {
 class DisplayUsers extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      data: []
-    };
+    this.state = {};
   }
 
   render() {
     return (
       <div>
-        {this.state.data.map((item, i) => {
+        {this.props.data.map((item, i) => {
           return (
             <div key={i}>
               <UserData data={item}/>

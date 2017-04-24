@@ -260,11 +260,11 @@ class UserData extends React.Component {
           } else {
             return (
               <div>
-                <p>Name: {this.state.userName}</p>
-                <p>Email: {this.state.userEmail}</p>
-                <p>Phone Number: {this.state.mdn}</p>
-                <p>Country: {this.state.country}</p>
-                <p>Status: {this.state.type}</p>
+                <div>Name: {this.state.userName}</div>
+                <div>Email: {this.state.userEmail}</div>
+                <div>Phone Number: {this.state.mdn}</div>
+                <div>Country: {this.state.country}</div>
+                <div>Status: {this.state.type}</div>
               </div>
             )
           }

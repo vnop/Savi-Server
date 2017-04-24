@@ -306,9 +306,18 @@ module.exports = function(app, express, db, log) {
 
 		db.UserData.find({where: {userAuthId: userAID}}).then((user) => {
 			if (user) { //if a user is found...
-				console.log("USER FOUND!!")
+				const data = {
+					name: req.body.userName,
+					email: req.body.userEmail,
+					mdn: req.body.mdn,
+					country: req.body.country,
+					type: req.body.type,
+					city: req.body.city,
+					photo: req.body.photo
+				}
+				console.log(data);
 			} else { //otherwise...
-				console.log("NO SUCH USER EXISTS")
+				//do something in the case that no user exists
 			}
 		}).catch((err) => {
 			helpers.respondDBError(err, req, res);

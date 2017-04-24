@@ -203,7 +203,10 @@ class DisplayUsers extends React.Component {
   componentDidUpdate() {
     console.log("Component Did Update");
     console.log("DU Props:", this.props);
-    this.setState({users: this.props.data});
+  }
+  componentWillReceiveProps() {
+    console.log("Component Will Receive Props");
+    console.log("WRP Props:", this.props);
   }
 
   render() {

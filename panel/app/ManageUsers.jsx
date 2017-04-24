@@ -40,7 +40,7 @@ class ManageUsers extends React.Component {
             <option value="userName">User Name</option>
             <option value="userEmail">Email</option>
             <option value="mdn">Phone Number</option>
-            <option value="cityId">City</option>
+            <option value="city">City</option>
           </select>
         </form>
         <DynamicForms callback={this.transfer} method={this.state.method} cityData={this.state.cityData} />
@@ -60,7 +60,7 @@ class DynamicForms extends React.Component {
       userName: '',
       userEmail: '',
       mdn: '', //mobile device number
-      cityId: 0
+      city: ''
     };
 
     //METHOD BINDINGS
@@ -75,7 +75,7 @@ class DynamicForms extends React.Component {
   nameForm(e) {this.setState({ userName: e.target.value })}
   emailForm(e) {this.setState({ userEmail: e.target.value })}
   mdnForm(e) {this.setState({ mdn: e.target.value })}
-  cityForm(e) {this.setState({ cityId: e.target.value })}
+  cityForm(e) {this.setState({ city: e.target.value })}
 
   handleSubmit(e) {
     e.preventDefault(); //prevent page refresh upon submit
@@ -86,8 +86,8 @@ class DynamicForms extends React.Component {
         return '?userEmail='+this.state.userEmail;
       } else if (this.state.mdn.length) { //else, if an MDN was input...
         return '?mdn='+this.state.mdn;
-      } else if (this.state.cityId>0) { //else, if a cityId was selected...
-        return '?city='+this.state.cityId;
+      } else if (this.state.city.length) { //else, if a cityId was selected...
+        return '?city='+this.state.city;
       } else { //otherwise, return the entire list of users
         return '';
       }
@@ -107,7 +107,7 @@ class DynamicForms extends React.Component {
       userName: '',
       userEmail: '',
       mdn: '',
-      cityId: 0
+      cityId: ''
     };
     //Resets unused form fields when search method changes
     //If you need to change default values, do so in the "defaults" const above
@@ -116,18 +116,18 @@ class DynamicForms extends React.Component {
       //if forms are already blank, do not set state (prevent forcing a render when not needed)
       if (s.userEmail!==defaults.userEmail) {this.state.userEmail = defaults.userEmail};
       if (s.mdn!==defaults.mdn) {this.state.mdn = defaults.mdn};
-      if (s.cityId!==defaults.cityId) {this.state.cityId = defaults.cityId};
+      if (s.city!==defaults.city) {this.state.city = defaults.city};
     } else if (this.props.method==='userEmail') { //USEREMAIL
       //if the method is userEmail, reset all other forms
       if (s.userName!==defaults.userName) {this.state.userName = defaults.userName};
       if (s.mdn!==defaults.mdn) {this.state.mdn = defaults.mdn};
-      if (s.cityId!==defaults.cityId) {this.state.cityId = defaults.cityId};
+      if (s.city!==defaults.city) {this.state.city = defaults.city};
     } else if (this.props.method==='mdn') { //USER MOBILE DEVICE NUMBER
       //if the method is mdn, reset all other forms
       if (s.userName!==defaults.userName) {this.state.userName = defaults.userName};
       if (s.userEmail!==defaults.userEmail) {this.state.userEmail = defaults.userEmail};
-      if (s.cityId!==defaults.cityId) {this.state.cityId = defaults.cityId};
-    } else if (this.props.method==='cityId') { //USER CITY
+      if (s.city!==defaults.city) {this.state.city = defaults.city};
+    } else if (this.props.method==='city') { //USER CITY
       //if the method is cityId, reset all other forms
       if (s.userName!==defaults.userName) {this.state.userName = defaults.userName};
       if (s.userEmail!==defaults.userEmail) {this.state.userEmail = defaults.userEmail};
@@ -168,7 +168,7 @@ class DynamicForms extends React.Component {
       return (
         <div>
           <form onSubmit={this.handleSubmit}>
-            <select onChange={this.cityForm} value={this.state.cityId}>
+            <select onChange={this.cityForm} value={this.state.city}>
               <option value={0} selected disabled></option>
               {this.props.cityData.map((item, i) => {
                 return (
@@ -220,7 +220,7 @@ class UserData extends React.Component {
       mdn: this.props.data.mdn || '',
       country: this.props.data.country || '',
       type: this.props.data.type || '',
-      cityId: this.props.data.cityId || ''
+      city: this.props.data.city || ''
     };
 
     //METHOD BINDINGS

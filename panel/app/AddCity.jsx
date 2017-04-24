@@ -62,33 +62,37 @@ class AddCity extends React.Component {
 
   render() {
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            City:
-            <input type="text" value={this.state.cityName} onChange={this.nameForm} />
-          </label>
-          <label>
-            Image:
-            <input type="text" value={this.state.cityImg} onChange={this.imageForm} />
-          </label>
-          <input type="submit" value="Add" />
-        </form>
+      <div className="add-cities-component">
+        <div className="form-wrapper">
+          <h3>Add New City</h3>
+          <form className="centered-form" onSubmit={this.handleSubmit}>
+            <div className="input-wrapper">
+              <label>City</label>
+              <input type="text" value={this.state.cityName} onChange={this.nameForm} />
+            </div>
 
-        <hr/>
+            <div className="input-wrapper">
+              <label>Image</label>
+              <input type="text" value={this.state.cityImg} onChange={this.imageForm} />
+            </div>
 
-        <h2>Available Cities</h2>
-        <div>
+            <input type="submit" value="Add" />
+          </form>
+        </div>
+
+        <div className="available-records">
+          <h2>Available Cities</h2>
           {this.state.data.map((item, i) => {
             return (
-              <div key={i}>
-                <div id="cityName">{item.name}</div>
-                <img id="cityImgs" src={"https://savi-travel.com:"+config.port+"/api/images/"+item.mainImage} />
+              <div className="record-container" key={i}>
+                <p className="record-name">{item.name}</p>
+                <div className="image-wrapper">
+                  <img className="record-images" src={"https://savi-travel.com:"+config.port+"/api/images/"+item.mainImage} />
+                </div>
               </div>
             )
           })}
         </div>
-
       </div>
     )
   }

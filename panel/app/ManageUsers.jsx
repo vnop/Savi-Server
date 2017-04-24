@@ -24,7 +24,7 @@ class ManageUsers extends React.Component {
       .then(resp => resp.json())
       .then(data => this.setState({cityData: data}))
       .catch(err => console.error(err));
-  }
+  }//
 
   render() {
     return (

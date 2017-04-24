@@ -19,7 +19,7 @@ class ManageUsers extends React.Component {
   //TRANSFER DATA BETWEEN COMPONENTS
   transfer(data) {
     this.setState({ data });
-    console.log(this.state.childData);
+    console.log(this.state);
   }
 
   //FORM CONTROLS

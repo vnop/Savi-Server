@@ -8,6 +8,7 @@ class ManageUsers extends React.Component {
     super(props);
     this.state = {
       data: [],
+      inbox: '',
       method: 'userName'
     };
 
@@ -34,6 +35,7 @@ class ManageUsers extends React.Component {
   render() {
     return (
       <div>
+        <div>{JSON.stringify(this.state.inbox)}</div>
         <form>
           Search By:
           <select onChange={this.methodMenu} value={this.state.method}>
@@ -92,7 +94,6 @@ class DynamicForms extends React.Component {
       }
     };
 
-    console.log(this.props.callback);
     //GET request for the input data
     fetch('https://savi-travel.com:'+config.port+'/api/users'+searchTerm())
       .then(resp => resp.json())
@@ -136,6 +137,8 @@ class DynamicForms extends React.Component {
       if (s.userEmail!==defaults.userEmail) {this.state.userEmail = defaults.userEmail};
       if (s.mdn!==defaults.mdn) {this.state.mdn = defaults.mdn};
     }
+
+    this.props.callback("Data From Child")
   }
 
   render() {

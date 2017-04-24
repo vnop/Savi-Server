@@ -181,7 +181,7 @@ class DynamicForms extends React.Component {
         </div>
       )
     }
-  }//End of Render
+  }//End of Render/
 }
 
 //COMPONENT TO DYNAMICALLY DISPLAY SEARCH RESULTS AND ALLOW DETAIL EDITING

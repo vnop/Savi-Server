@@ -305,8 +305,10 @@ module.exports = function(app, express, db, log) {
 		let userAID = req.params.userAuthId;
 
 		db.UserData.find({where: {userAuthId: userAID}}).then((user) => {
-			if (user) {
-				console.log("USER FOUND")
+			if (user) { //if a user is found...
+				console.log("USER FOUND!!")
+			} else { //otherwise...
+				console.log("NO SUCH USER EXISTS")
 			}
 		}).catch((err) => {
 			helpers.respondDBError(err, req, res);

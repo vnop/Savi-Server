@@ -306,20 +306,17 @@ module.exports = function(app, express, db, log) {
 
 		db.UserData.find({where: {userAuthId: userAID}}).then((user) => {
 			if (user) { //if a user is found...
-				const data = { //store the body data in an object
-					name: req.body.userName,
-					email: req.body.userEmail,
+				//Update the data in the database for the user that matches the userAuthId
+				db.UserData.update({
+					userName: req.body.userName,
+					userEmail: req.body.userEmail,
 					mdn: req.body.mdn,
 					country: req.body.country,
+					photo: req.body.photo,
 					type: req.body.type,
-					city: req.body.city,
-					photo: req.body.photo
-				};
-
-				db.UserData.update({
-					userName: data.name
+					city: req.body.city
 				}, {where: {userAuthId: userAID}});
-
+				res.send('Updated user info for', userAID);
 			} else { //otherwise...
 				//do something in the case that no user exists
 			}

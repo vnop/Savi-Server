@@ -19,7 +19,7 @@ class ManageUsers extends React.Component {
 
   //TRANSFER DATA BETWEEN COMPONENTS
   transfer(data) {
-    this.setState({ inbox: data });
+    this.setState({ childData: data });
   }
 
   //FORM CONTROLS
@@ -36,7 +36,7 @@ class ManageUsers extends React.Component {
   render() {
     return (
       <div>
-        <div>{JSON.stringify(this.state.inbox)}</div>
+        <div>{JSON.stringify(this.state.childData)}</div>
         <form>
           Search By:
           <select onChange={this.methodMenu} value={this.state.method}>
@@ -47,6 +47,7 @@ class ManageUsers extends React.Component {
           </select>
         </form>
         <DynamicForms callback={this.transfer} method={this.state.method} cityData={this.state.cityData} />
+        <DisplayUsers data={this.state.childData.users}/>
       </div>
     )
   }//End of Render
@@ -99,7 +100,7 @@ class DynamicForms extends React.Component {
       .then(resp => resp.json())
       .then(data => {
         this.setState({data});
-        this.props.callback({userData: data});
+        this.props.callback({users: data}); //sends the data up to the ManageUsers component
       })
       .catch(err => console.error(err));
   }
@@ -189,7 +190,6 @@ class DynamicForms extends React.Component {
           )
         }
       })()}
-      <DisplayUsers data={this.state.data}/>
       </div>
     )
   }//End of Render

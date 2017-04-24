@@ -169,7 +169,7 @@ class DynamicForms extends React.Component {
         <div>
           <form onSubmit={this.handleSubmit}>
             <select onChange={this.cityForm} value={this.state.cityId}>
-              <option value={0}>*all</option>
+              <option value={0} selected disabled></option>
               {this.props.cityData.map((item, i) => {
                 return (
                   <option key={i} value={item.id}>{item.name}</option>
@@ -259,15 +259,6 @@ class UserData extends React.Component {
                 <div>Phone Number: <input type="text" value={this.state.mdn} onChange={this.mdnForm}/></div>
                 <div>Country: <input type="text" value={this.state.country} onChange={this.countryForm}/></div>
                 <div>Status: <input type="text" value={this.state.type} onChange={this.typeForm}/></div>
-                <div>
-                  Status:
-                  <select onChange={this.typeForm} value={this.state.type}>
-                    <option {(this.state.type==="Regular User") ? "selected" : ""} value="Regular User">Regular User</option>
-                    <option {(this.state.type==="Driver") ? "selected" : ""} value="Driver">Driver</option>
-                    <option {(this.state.type==="Tour Guide") ? "selected" : ""} value="Tour Guide">Tour Guide</option>
-                    <option {(this.state.type==="Driver Guide") ? "selected" : ""} value="Driver Guide">Driver Guide</option>
-                  </select>
-                </div>
               </div>
             )
           } else {

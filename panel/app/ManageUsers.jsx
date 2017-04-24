@@ -8,7 +8,7 @@ class ManageUsers extends React.Component {
     super(props);
     this.state = {
       data: [],
-      inbox: '',
+      childData: '',
       method: 'userName'
     };
 

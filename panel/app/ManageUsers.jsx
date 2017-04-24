@@ -7,7 +7,7 @@ class ManageUsers extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: [],
+      data: [],//container for search results data
       method: 'userName'
     };
 
@@ -223,16 +223,24 @@ class UserData extends React.Component {
       cityId: this.props.data.cityId || ''
     };
 
-    //Method Bindings
+    //METHOD BINDINGS
     this.toggleEdit = this.toggleEdit.bind(this);
     this.nameForm = this.nameForm.bind(this);
+    this.emailForm = this.emailForm.bind(this);
+    this.mdnForm = this.mdnForm.bind(this);
+    this.countryForm = this.countryForm.bind(this);
+    this.typeForm = this.typeForm.bind(this);
+
   }
 
-  toggleEdit() {
-    this.setState({edit: !this.state.edit});
-  }
-
+  //FORM CONTROLS
   nameForm(e) {this.setState({userName: e.target.value})};
+  emailForm(e) {this.setState({userEmail: e.target.value})};
+  mdnForm(e) {this.setState({mdn: e.target.value})};
+  countryForm(e) {this.setState({country: e.target.value})};
+  typeForm(e) {this.setState({type: e.target.value})};
+  //toggle edit option for individual users
+  toggleEdit() {this.setState({edit: !this.state.edit})}
 
   render() {
     return (
@@ -243,12 +251,20 @@ class UserData extends React.Component {
             return (
               <div>
                 <input type="text" value={this.state.userName} onChange={this.nameForm}/>
+                <input type="text" value={this.state.userEmail} onChange={this.emailForm}/>
+                <input type="text" value={this.state.mdn} onChange={this.mdnForm}/>
+                <input type="text" value={this.state.country} onChange={this.countryForm}/>
+                <input type="text" value={this.state.type} onChange={this.typeForm}/>
               </div>
             )
           } else {
             return (
               <div>
                 {this.state.userName}
+                {this.state.userEmail}
+                {this.state.mdn}
+                {this.state.country}
+                {this.state.type}
               </div>
             )
           }

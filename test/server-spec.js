@@ -492,10 +492,16 @@ describe('Users endpoint', () => {
     });
   });
 
-  it('should be able to GET multiple users by city', (done) => {
-    request(server).get('/api/users?cityId=1').end((err, res) => {
-      console.log("LOGGING THE RES.BODY", res.body);
-      expect(res.body.length>0).to.equal(true, 'should return multiple users');
+  it('should be able to GET the exact number of users entered', (done) => {
+    request(server).get('/api/users').end((err, res) => {
+      expect(res.body.length).to.equal(2, 'should return 2 users');
+      done();
+    });
+  });
+
+  it('should be able use PUT to update an existing user', (done) => {
+    request(server).get('/api/users').end((err, res) => {
+      expect(res.body[0]).to.equal('Bruce Wayne', 'should return Bruce Wayne');
       done();
     });
   });

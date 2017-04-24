@@ -195,7 +195,16 @@ class DisplayUsers extends React.Component {
   }
 
   componentWillMount() {
-    console.log(this.props);
+    console.log("Component Will Mount";
+  }
+  componentDidMount() {
+    console.log("Component Did Mount";
+  }
+  componentWillUpdate() {
+    console.log("Component Will Update";
+  }
+  componentDidUpdate() {
+    console.log("Component Did Update";
   }
 
   render() {

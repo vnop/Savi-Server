@@ -318,7 +318,7 @@ module.exports = function(app, express, db, log) {
 				}, {where: {userAuthId: userAID}});
 				helpers.respondDBQuery(user, req, res);
 			} else {
-				res.end();
+				res.status(500).send('No Such User Exists').end();
 			}
 		}).catch((err) => {
 			helpers.respondDBError(err, req, res);

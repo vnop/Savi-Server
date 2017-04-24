@@ -47,11 +47,15 @@ class Home extends React.Component {
             consequat.
           </p>
           <form action="/payments" enctype='application/json'>
-            <label>
-              Name:
-              <input type="text" name="name" />
-            </label>
-            <input type="submit" value="Submit" />
+            <script
+              src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+              data-key="pk_test_N9ZQM6REo9EoseqpvjWt9atA"
+              data-amount="999"
+              data-name="Demo Site"
+              data-description="Widget"
+              data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+              data-locale="auto">
+            </script>
           </form>
         </div>
 

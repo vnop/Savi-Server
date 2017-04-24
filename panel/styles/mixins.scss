@@ -44,6 +44,8 @@
 
 
 @mixin three-column-frames {
+	padding-bottom: 150px;
+
 	div.available-records {
 		@include outer-container;
 		font-family: $mainFont;

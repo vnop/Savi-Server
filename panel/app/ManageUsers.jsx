@@ -107,7 +107,7 @@ class DynamicForms extends React.Component {
       userName: '',
       userEmail: '',
       mdn: '',
-      cityId: ''
+      city: ''
     };
     //Resets unused form fields when search method changes
     //If you need to change default values, do so in the "defaults" const above
@@ -164,7 +164,7 @@ class DynamicForms extends React.Component {
           </form>
         </div>
       )
-    } else if (this.props.method==='cityId') {//if the search method is by userName
+    } else if (this.props.method==='city') {//if the search method is by userName
       return (
         <div>
           <form onSubmit={this.handleSubmit}>

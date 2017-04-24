@@ -21,6 +21,11 @@ module.exports = function(app, express, db, log) {
 	app.use(bodyParser.json());
 	app.use(bodyParser.urlencoded({ extended: true }));
 
+	app.post('/payments', function(req, res){
+	  	console.log('payment request..', req.body)
+	  	res.redirect('/');
+	});
+
 	app.get('/api/cities', (req, res) => {
 	  let cityId = req.query.cityId;
 	  if (!cityId) {

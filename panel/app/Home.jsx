@@ -46,6 +46,13 @@ class Home extends React.Component {
             quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
             consequat.
           </p>
+          <form action="/payments" enctype='application/json'>
+            <label>
+              Name:
+              <input type="text" name="name" />
+            </label>
+            <input type="submit" value="Submit" />
+          </form>
         </div>
 
         <div className="footer">

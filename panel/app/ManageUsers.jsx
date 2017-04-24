@@ -21,7 +21,6 @@ class ManageUsers extends React.Component {
   //TRANSFER DATA BETWEEN COMPONENTS
   transfer(data) {
     this.setState({ childData: data });
-    this.forceUpdate();
   }
 
   //FORM CONTROLS
@@ -100,7 +99,9 @@ class DynamicForms extends React.Component {
     fetch('https://savi-travel.com:'+config.port+'/api/users'+searchTerm())
       .then(resp => resp.json())
       .then(data => {
+        this.setState({data});
         this.props.callback({users: data}); //sends the data up to the ManageUsers component
+        console.log(this.state);
       })
       .catch(err => console.error(err));
   }

@@ -242,6 +242,10 @@ class UserData extends React.Component {
   //toggle edit option for individual users
   toggleEdit() {this.setState({edit: !this.state.edit})}
 
+  saveHandler(e) {
+    //PUT request for updating the database
+  }
+
   render() {
     return (
       <div>

@@ -247,7 +247,7 @@ module.exports = function(app, express, db, log) {
 				helpers.respondDBError(err, req, res);
 			});
 		} else if (!!user.city) { //else, if a user city exists...
-			db.UserData.findAll({where: {cityId: user.city}}).then((users) => { //grab all that match
+			db.UserData.findAll({where: {city: user.city}}).then((users) => { //grab all that match
 				helpers.respondDBQuery(users, req, res);
 			}).catch((err) => {
 				helpers.respondDBError(err, req, res);

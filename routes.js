@@ -316,7 +316,7 @@ module.exports = function(app, express, db, log) {
 					type: req.body.type,
 					city: req.body.city
 				}, {where: {userAuthId: userAID}});
-				res.send('Updated user info for', userAID);
+				helpers.respondDBQuery(user, req, res);
 			} else { //otherwise...
 				//do something in the case that no user exists
 			}

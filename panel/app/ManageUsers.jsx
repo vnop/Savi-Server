@@ -17,10 +17,8 @@ class ManageUsers extends React.Component {
   }
 
   //TRANSFER DATA BETWEEN COMPONENTS
-  transfer(data) {
-    this.setState({ data });
-    console.log("State in ManageUsers",this.state);
-  }
+  //passed in as a callback prop to DynamicForms component
+  transfer(data) {this.setState({ data })};
 
   //FORM CONTROLS
   methodMenu(e) {this.setState({ method: e.target.value })}
@@ -94,13 +92,11 @@ class DynamicForms extends React.Component {
         return '';
       }
     };
-    this.props.callback([]);
+    this.props.callback([]);//Reset the "Data" state in ManageUsers before updating it
     //GET request for the input data
     fetch('https://savi-travel.com:'+config.port+'/api/users'+searchTerm())
       .then(resp => resp.json())
-      .then(data => {
-        this.props.callback(data); //sends the data up to the ManageUsers component
-      })
+      .then(data => this.props.callback(data))//sends the data up to the ManageUsers component
       .catch(err => console.error(err));
   }
 

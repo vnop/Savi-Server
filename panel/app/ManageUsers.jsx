@@ -21,6 +21,7 @@ class ManageUsers extends React.Component {
   //TRANSFER DATA BETWEEN COMPONENTS
   transfer(data) {
     this.setState({ childData: data });
+    this.forceUpdate();
   }
 
   //FORM CONTROLS
@@ -195,10 +196,6 @@ class DisplayUsers extends React.Component {
     this.state = {
       data: []
     };
-  }
-
-  componentDidMount() {
-    this.setState({data: this.props.data});
   }
 
   render() {

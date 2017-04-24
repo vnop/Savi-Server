@@ -46,9 +46,9 @@ class Home extends React.Component {
             quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
             consequat.
           </p>
-          <form action="/payments" enctype='application/json'>
+          <form action="/payments" encType='application/json'>
             <script
-              src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+              src="https://checkout.stripe.com/checkout.js" className="stripe-button"
               data-key="pk_test_N9ZQM6REo9EoseqpvjWt9atA"
               data-amount="999"
               data-name="Demo Site"

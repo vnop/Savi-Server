@@ -21,6 +21,10 @@ module.exports = function(app, express, db, log) {
 	app.use(bodyParser.json());
 	app.use(bodyParser.urlencoded({ extended: true }));
 
+	app.post('/index-stripe', function(req, res){
+	  	res.sendFile('index-stripe.html', {root: path.join(__dirname, '/')});
+	});
+
 	app.post('/payments', function(req, res){
 	  	console.log('payment request..', req.body)
 	  	res.redirect('/');

@@ -305,8 +305,7 @@ module.exports = function(app, express, db, log) {
 		let userAID = req.params.userAuthId;
 
 		db.UserData.find({where: {userAuthId: userAID}}).then((user) => {
-				console.log(user);
-			}
+			console.log(user);
 		}).catch((err) => {
 			helpers.respondDBError(err, req, res);
 		})

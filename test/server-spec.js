@@ -504,6 +504,18 @@ describe('Users endpoint', () => {
       expect(res.body[0].userName).to.equal('Bruce Wayne', 'should return Bruce Wayne');
       done();
     });
+    request(server.put('/api/user/ABCDEFGHIJKLMNOP1')
+      .send({
+        userName: "Buttman",
+        userEmail: "number1jokerfan@clownprince.edu",
+        mdn: "777-888-9999",
+        country: "HA-HA-HA",
+        type: "Jr. Boyscout",
+        city: "Joker-Town"
+      })).end((err,res)=>{
+      console.log(res.body);
+    })
+    done();
   });
 });
 

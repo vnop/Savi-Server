@@ -19,9 +19,7 @@ class ManageUsers extends React.Component {
   }
 
   //TRANSFER DATA BETWEEN COMPONENTS
-  transfer(data) {
-    this.setState({ childData: data });
-  }
+  transfer(data) {this.setState({ childData: data })}
 
   //FORM CONTROLS
   methodMenu(e) {this.setState({ method: e.target.value })}
@@ -37,7 +35,6 @@ class ManageUsers extends React.Component {
   render() {
     return (
       <div>
-        <div>{JSON.stringify(this.state.childData)}</div>
         <form>
           Search By:
           <select onChange={this.methodMenu} value={this.state.method}>
@@ -143,55 +140,51 @@ class DynamicForms extends React.Component {
 
   render() {
     return (
-      <div>
-      {(()=>{
-        //check for the value of the props.method to determine which form to render
-        if (this.props.method==='userName') {//if the search method is by userName
-          return (
-            <div>
-              <form onSubmit={this.handleSubmit}>
-                <input type="text" value={this.state.userName} onChange={this.nameForm} />
-                <input type="submit" value="Search" />
-              </form>
-            </div>
-          )
-        } else if (this.props.method==='userEmail') {//if the search method is by userEmail
-          return (
-            <div>
-              <form onSubmit={this.handleSubmit}>
-                <input type="text" value={this.state.userEmail} onChange={this.emailForm} />
-                <input type="submit" value="Search" />
-              </form>
-            </div>
-          )
-        } else if (this.props.method==='mdn') {//if the search method is by mdn (mobile device number)
-          return (
-             <div>
-              <form onSubmit={this.handleSubmit}>
-                <input type="text" value={this.state.mdn} onChange={this.mdnForm} />
-                <input type="submit" value="Search" />
-              </form>
-            </div>
-          )
-        } else if (this.props.method==='cityId') {//if the search method is by userName
-          return (
-            <div>
-              <form onSubmit={this.handleSubmit}>
-                <select onChange={this.cityForm} value={this.state.cityId}>
-                  <option value={0}>*all</option>
-                  {this.props.cityData.map((item, i) => {
-                    return (
-                      <option key={i} value={item.id}>{item.name}</option>
-                    )
-                  })}
-                </select>
-                <input type="submit" value="Search" />
-              </form>
-            </div>
-          )
-        }
-      })()}
-      </div>
+      //check for the value of the props.method to determine which form to render
+      if (this.props.method==='userName') {//if the search method is by userName
+        return (
+          <div>
+            <form onSubmit={this.handleSubmit}>
+              <input type="text" value={this.state.userName} onChange={this.nameForm} />
+              <input type="submit" value="Search" />
+            </form>
+          </div>
+        )
+      } else if (this.props.method==='userEmail') {//if the search method is by userEmail
+        return (
+          <div>
+            <form onSubmit={this.handleSubmit}>
+              <input type="text" value={this.state.userEmail} onChange={this.emailForm} />
+              <input type="submit" value="Search" />
+            </form>
+          </div>
+        )
+      } else if (this.props.method==='mdn') {//if the search method is by mdn (mobile device number)
+        return (
+           <div>
+            <form onSubmit={this.handleSubmit}>
+              <input type="text" value={this.state.mdn} onChange={this.mdnForm} />
+              <input type="submit" value="Search" />
+            </form>
+          </div>
+        )
+      } else if (this.props.method==='cityId') {//if the search method is by userName
+        return (
+          <div>
+            <form onSubmit={this.handleSubmit}>
+              <select onChange={this.cityForm} value={this.state.cityId}>
+                <option value={0}>*all</option>
+                {this.props.cityData.map((item, i) => {
+                  return (
+                    <option key={i} value={item.id}>{item.name}</option>
+                  )
+                })}
+              </select>
+              <input type="submit" value="Search" />
+            </form>
+          </div>
+        )
+      }
     )
   }//End of Render
 }

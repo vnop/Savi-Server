@@ -21,7 +21,6 @@ class ManageUsers extends React.Component {
   //TRANSFER DATA BETWEEN COMPONENTS
   transfer(data) {
     this.setState({ childData: data });
-    render();
   }
 
   //FORM CONTROLS
@@ -193,13 +192,19 @@ class DynamicForms extends React.Component {
 class DisplayUsers extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      data = []
+    };
+  }
+
+  componentDidUpdate() {
+    this.setState({data: this.props.data});
   }
 
   render() {
     return (
       <div>
-        {this.props.data.map((item, i) => {
+        {this.state.data.map((item, i) => {
           return (
             <div key={i}>
               <UserData data={item}/>

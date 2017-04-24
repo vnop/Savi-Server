@@ -273,6 +273,7 @@ class UserData extends React.Component {
             )
           }
         })()}
+        <hr/>
       </div>
     )
   }

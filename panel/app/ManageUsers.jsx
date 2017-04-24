@@ -15,6 +15,11 @@ class ManageUsers extends React.Component {
     this.methodMenu = this.methodMenu.bind(this);
   }
 
+  //TRANSFER DATA BETWEEN COMPONENTS
+  transfer(data) {
+    this.setState({ inbox: data })
+  }
+
   //FORM CONTROLS
   methodMenu(e) {this.setState({ method: e.target.value })}
 
@@ -38,7 +43,7 @@ class ManageUsers extends React.Component {
             <option value="cityId">City</option>
           </select>
         </form>
-        <DynamicForms method={this.state.method} cityData={this.state.cityData} />
+        <DynamicForms callback={this.transfer} method={this.state.method} cityData={this.state.cityData} />
       </div>
     )
   }//End of Render
@@ -86,6 +91,8 @@ class DynamicForms extends React.Component {
         return '';
       }
     };
+
+    console.log(this.props.callback);
     //GET request for the input data
     fetch('https://savi-travel.com:'+config.port+'/api/users'+searchTerm())
       .then(resp => resp.json())

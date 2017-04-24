@@ -208,6 +208,11 @@ class DisplayUsers extends React.Component {
     console.log("Component Will Receive Props");
     console.log("WRP Props:", this.props);
   }
+  shouldComponentUpdate() {
+    console.log("Should Component Update");
+    console.log("SU Props:", this.props);
+  }
+
 
   render() {
     return (

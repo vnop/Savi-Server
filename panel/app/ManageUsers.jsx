@@ -14,11 +14,12 @@ class ManageUsers extends React.Component {
 
     //METHOD BINDINGS
     this.methodMenu = this.methodMenu.bind(this);
+    this.transfer = this.transfer.bind(this);
   }
 
   //TRANSFER DATA BETWEEN COMPONENTS
   transfer(data) {
-    this.setState({ inbox: data })
+    this.setState({ inbox: data });
   }
 
   //FORM CONTROLS

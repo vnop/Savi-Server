@@ -191,28 +191,8 @@ class DynamicForms extends React.Component {
 class DisplayUsers extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      users: []
-    };
+    this.state = {};
   }
-
-  componentWillUpdate() {
-    console.log("Component Will Update");
-    console.log("WU Props:", this.props);
-  }
-  componentDidUpdate() {
-    console.log("Component Did Update");
-    console.log("DU Props:", this.props);
-  }
-  componentWillReceiveProps() {
-    console.log("Component Will Receive Props");
-    console.log("WRP Props:", this.props);
-  }
-  shouldComponentUpdate(true) {
-    console.log("Should Component Update");
-    console.log("SU Props:", this.props);
-  }
-
 
   render() {
     return (

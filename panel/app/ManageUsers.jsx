@@ -250,21 +250,21 @@ class UserData extends React.Component {
           if (this.state.edit) {
             return (
               <div>
-                <input type="text" value={this.state.userName} onChange={this.nameForm}/>
-                <input type="text" value={this.state.userEmail} onChange={this.emailForm}/>
-                <input type="text" value={this.state.mdn} onChange={this.mdnForm}/>
-                <input type="text" value={this.state.country} onChange={this.countryForm}/>
-                <input type="text" value={this.state.type} onChange={this.typeForm}/>
+                <div><input type="text" value={this.state.userName} onChange={this.nameForm}/></div>
+                <div><input type="text" value={this.state.userEmail} onChange={this.emailForm}/></div>
+                <div><input type="text" value={this.state.mdn} onChange={this.mdnForm}/></div>
+                <div><input type="text" value={this.state.country} onChange={this.countryForm}/></div>
+                <div><input type="text" value={this.state.type} onChange={this.typeForm}/></div>
               </div>
             )
           } else {
             return (
               <div>
-                <p>{this.state.userName}</p>
-                <p>{this.state.userEmail}</p>
-                <p>{this.state.mdn}</p>
-                <p>{this.state.country}</p>
-                <p>{this.state.type}</p>
+                <p>Name: {this.state.userName}</p>
+                <p>Email: {this.state.userEmail}</p>
+                <p>Phone Number: {this.state.mdn}</p>
+                <p>Country: {this.state.country}</p>
+                <p>Status: {this.state.type}</p>
               </div>
             )
           }

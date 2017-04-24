@@ -197,7 +197,7 @@ class DisplayUsers extends React.Component {
     };
   }
 
-  componentDidUpdate() {
+  componentDidMount() {
     this.setState({data: this.props.data});
   }
 

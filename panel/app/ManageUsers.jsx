@@ -191,7 +191,9 @@ class DynamicForms extends React.Component {
 class DisplayUsers extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      users: []
+    };
   }
 
   componentWillUpdate() {
@@ -201,6 +203,7 @@ class DisplayUsers extends React.Component {
   componentDidUpdate() {
     console.log("Component Did Update");
     console.log("DU Props:", this.props);
+    this.setState({users: this.props.data});
   }
 
   render() {

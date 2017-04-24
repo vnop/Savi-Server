@@ -181,7 +181,7 @@ class DynamicForms extends React.Component {
           )
         }
       })()}
-        <DisplayUsers data={this.state.data}/>
+      <DisplayUsers data={this.state.data}/>
       </div>
     )
   }//End of Render

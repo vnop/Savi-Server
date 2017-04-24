@@ -301,6 +301,17 @@ module.exports = function(app, express, db, log) {
 		})
 	});
 
+	app.put('/api/users/:userAuthId', (req, res, next) => {
+		let userAID = req.params.userAuthId;
+
+		db.UserData.find({where: {userAuthId: userAID}}).then((user) => {
+				console.log(user);
+			}
+		}).catch((err) => {
+			helpers.respondDBError(err, req, res);
+		})
+	});
+
 	//Redirect Panel for invalid extensions
 	app.get('*', function (req, res) {
   	res.status(302).redirect('/')

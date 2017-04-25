@@ -20,6 +20,9 @@ class Home extends React.Component {
       .then(data => {
         fetch('https://savi-travel.com:8084/payments', {
           method: 'POST',
+          headers: {
+            "Content-Type": "application/json",
+          }
           body: {
             "stripeToken": data.id
           }

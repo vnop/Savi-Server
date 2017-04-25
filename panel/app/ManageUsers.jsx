@@ -307,6 +307,7 @@ class UserData extends React.Component {
                 <div>Email: {this.state.userEmail}</div>
                 <div>Phone Number: {this.state.mdn}</div>
                 <div>Country: {this.state.country}</div>
+                <div>City: {this.state.city}</div>
                 <div>Status: {this.state.type}</div>
               </div>
             )

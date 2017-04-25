@@ -75,6 +75,7 @@ var syncTables = function(force, schema) {
   module.exports.Booking.belongsTo(module.exports.UserData, {as: 'driver'});
   module.exports.Booking.belongsTo(module.exports.UserData, {as: 'tourGuide'});
   module.exports.Booking.belongsTo(module.exports.UserData, {as: 'tourist'});
+  module.exports.Booking.belongsTo(module.exports.Tour, {as: 'tour'});
   module.exports.EmployeeData.belongsTo(module.exports.City, {as: 'city'});
   module.exports.UserData.belongsToMany(module.exports.Languages, {as: 'user', through: module.exports.UserLanguages, foreignKey: 'userId' });
   module.exports.Languages.belongsToMany(module.exports.UserData, {as: 'languages', through: module.exports.UserLanguages, foreignKey: 'languageId' });

@@ -21,6 +21,10 @@ class Home extends React.Component {
         console.log('success..', data)
         fetch('https://savi-travel.com:8084/payments', {
           method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
           body: JSON.stringify({testing: "correct"})
         }).then(function(response) {console.log(response)}).catch(err => console.error(err));
       })

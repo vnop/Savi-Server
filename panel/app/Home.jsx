@@ -10,7 +10,13 @@ class Home extends React.Component {
   }
 
   stripeTest() {
-    fetch('https://savi-travel.com:'+config.port+'/api/cities', {mode: 'no-cors'})
+    fetch('https://api.stripe.com/v1/tokens?card[number]=4242424242424242&card[exp_month]=2&card[exp_year]=2020&card[cvc]=123&amount=999&currency=usd', {
+      mode: 'no-cors',
+      method: 'POST',
+      headers: new Headers({
+        'Authorization': 'Bearer sk_test_t33bUz9G1cD2X6UexENeMvpd
+      })
+    })
       .then(resp => resp.json())
       .then(data => console.log('success, ', data))
       .catch(err => console.error(err));
@@ -53,7 +59,7 @@ class Home extends React.Component {
             quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
             consequat.
           </p>
-          <button onClick={() => {this.stripeTest}}>Stripe Test</button>
+          <button onClick={() => {this.stripeTest()}}>Stripe Test</button>
         </div>
 
         <div className="footer">

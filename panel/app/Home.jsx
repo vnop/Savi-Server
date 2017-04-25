@@ -14,7 +14,7 @@ class Home extends React.Component {
       mode: 'no-cors',
       method: 'POST',
       headers: new Headers({
-        'Authorization': 'Bearer sk_test_t33bUz9G1cD2X6UexENeMvpd
+        'Authorization': 'Bearer sk_test_t33bUz9G1cD2X6UexENeMvpd'
       })
     })
       .then(resp => resp.json())

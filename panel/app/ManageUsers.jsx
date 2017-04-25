@@ -214,6 +214,7 @@ class UserData extends React.Component {
       //interal UI
       edit: false,
       //form data
+      userAuthId: this.props.data.userAuthId || '',
       userName: this.props.data.userName || '',
       userEmail: this.props.data.userEmail || '',
       mdn: this.props.data.mdn || '',
@@ -243,7 +244,22 @@ class UserData extends React.Component {
   toggleEdit() {this.setState({ edit: true })};
 
   saveHandler(e) {
-    console.log("DATA SAVED FOR:", this.props.data.userAuthId);
+    fetch('https://savi-travel.com:'+config.port+'/api/users/'+this.state.userAuthId, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        userName: this.state.userName,
+        userEmail: this.state.userEmail,
+        mdn: this.state.mdn,
+        country: this.state.country,
+        //photo: this.state.,
+        type: this.state.type,
+        city: this.state.city
+      })
+    });
     this.setState({ edit: false });
   }
 

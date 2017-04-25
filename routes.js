@@ -343,25 +343,25 @@ module.exports = function(app, express, db, log) {
 				helpers.respondDBError(err, req, res);
 			});
 		} else if (!!employee.type) { //else, if an employee type exists...
-			db.EmployeeData.find({where: {type: employee.type}}).then((employees) => { //grab all that match
+			db.EmployeeData.findAll({where: {type: employee.type}}).then((employees) => { //grab all that match
 				helpers.respondDBQuery(employees, req, res);
 			}).catch((err) => {
 				helpers.respondDBError(err, req, res);
 			});
 		} else if (!!employee.rating) { //else, if an employee rating exists...
-			db.EmployeeData.find({where: {rating: employee.rating}}).then((employees) => { //grab all that match
+			db.EmployeeData.findAll({where: {rating: employee.rating}}).then((employees) => { //grab all that match
 				helpers.respondDBQuery(employees, req, res);
 			}).catch((err) => {
 				helpers.respondDBError(err, req, res);
 			});
 		} else if (!!employee.seats) { //else, if employee seats exists...
-			db.EmployeeData.find({where: {seats: employee.seats}}).then((employees) => { //grab all that match
+			db.EmployeeData.findAll({where: {seats: employee.seats}}).then((employees) => { //grab all that match
 				helpers.respondDBQuery(employees, req, res);
 			}).catch((err) => {
 				helpers.respondDBError(err, req, res);
 			});
 		} else if (!!employee.userId) { //else, if an employee id exists...
-			db.EmployeeData.findAll({where: {userId: employee.userId}}).then((employee) => { //grab all that match
+			db.EmployeeData.find({where: {userId: employee.userId}}).then((employee) => { //grab all that match
 				helpers.respondDBQuery(employee, req, res);
 			}).catch((err) => {
 				helpers.respondDBError(err, req, res);

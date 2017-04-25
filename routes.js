@@ -155,8 +155,9 @@ module.exports = function(app, express, db, log) {
 	               			db.Booking.create({
 	               				driverId: booking.driver.id,
 	               				touristId: user.id,
-	               				guideId: booking.driver.id,
-	               				tourId: tourId
+	               				guideId: booking.guide.id,
+	               				tourId: tourId,
+	               				passengers: req.query.seats || null
 	               			});
 	               		})
 	              	});

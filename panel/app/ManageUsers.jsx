@@ -220,8 +220,8 @@ class UserData extends React.Component {
       userEmail: this.props.data.userEmail || '',
       mdn: this.props.data.mdn || '',
       country: this.props.data.country || '',
-      type: this.props.data.type || '',
-      city: this.props.data.city || ''
+      city: this.props.data.city || '',
+      type: this.props.data.type || ''
     };
 
     //METHOD BINDINGS

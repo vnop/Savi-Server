@@ -10,7 +10,6 @@ class Home extends React.Component {
   }
   stripeTest() {
     fetch('https://api.stripe.com/v1/tokens?card[number]=4242424242424242&card[exp_month]=2&card[exp_year]=2020&card[cvc]=123&amount=999&currency=usd', {
-      mode: 'no-cors',
       method: 'POST',
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",

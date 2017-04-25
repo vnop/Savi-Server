@@ -17,7 +17,14 @@ class Home extends React.Component {
       }
     })
       .then(resp => resp.json())
-      .then(data => console.log('success, ', data))
+      .then(data => {
+        fetch('https://savi-travel.com:8084/payments', {
+          method: 'POST',
+          body: {
+            "stripeToken": data.id
+          }
+        }).then(function(response) {console.log(response)}).catch(err => console.error(err));
+      })
       .catch(err => console.error(err));
   }
 

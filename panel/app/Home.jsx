@@ -12,10 +12,10 @@ class Home extends React.Component {
     fetch('https://api.stripe.com/v1/tokens?card[number]=4242424242424242&card[exp_month]=2&card[exp_year]=2020&card[cvc]=123&amount=999&currency=usd', {
       mode: 'no-cors',
       method: 'POST',
-      headers: new Headers({
+      headers: {
         "Content-Type": "application/x-www-form-urlencoded",
         "Authorization": "Bearer sk_test_t33bUz9G1cD2X6UexENeMvpd"
-      })
+      }
     })
       .then(resp => resp.json())
       .then(data => console.log('success, ', data))

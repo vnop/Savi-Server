@@ -376,18 +376,18 @@ module.exports = function(app, express, db, log) {
 
 	app.post('/api/employees', (req, res) => {
 		if (!req.body) {
+			console.log("Still no body...")
 			res.status(400).send('invalid request');
 		} else {
-			console.log("Got a body!", res.body)
-			let employ = {
-		    type: res.body.type || '',
-		    rating: res.body.rating || '',
-		    seats: res.body.seats || '',
-		    userId: res.body.userId || '',
-		    cityId: res.body.cityId || ''
-		  };
+			console.log("Got a body!")
+			// let employ = {
+		 //    type: res.body.type,
+		 //    rating: res.body.rating,
+		 //    seats: res.body.seats,
+		 //    userId: res.body.userId,
+		 //    cityId: res.body.cityId
+		 //  };
 		}
-		console.log("Still no body...")
 	});
 
 	//Redirect Panel for invalid extensions

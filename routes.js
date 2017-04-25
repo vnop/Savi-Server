@@ -22,7 +22,7 @@ module.exports = function(app, express, db, log) {
 	app.use(bodyParser.urlencoded({ extended: true }));
 
 	app.post('/payments', function(req, res){
-	  	console.log('payment request..', req.body)
+	  	console.log('payment request..', req)
 	  	res.redirect('/');
 	});
 

@@ -242,10 +242,10 @@ class UserData extends React.Component {
   //toggle edit option for individual users
   toggleEdit() {this.setState({ edit: true });
 
-  saveHandler(e) {
-    console.log("DATA SAVED FOR:", this.state.userAuthId);
-    this.setState({ edit: false });
-  };
+  // saveHandler(e) {
+  //   console.log("DATA SAVED FOR:", this.state.userAuthId);
+  //   this.setState({ edit: false });
+  // };
 
   render() {
     return (

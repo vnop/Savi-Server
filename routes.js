@@ -378,7 +378,7 @@ module.exports = function(app, express, db, log) {
 		if (!req.body) {
 			res.status(400).send('invalid request');
 		} else {
-			console.log("Got a body!")
+			console.log("Got a body!", res.body)
 			let employ = {
 		    type: res.body.type || '',
 		    rating: res.body.rating || '',

@@ -96,7 +96,29 @@ module.exports = function(app, express, db, log) {
 	  let tourId = req.query.tourId;
 	  let date = req.query.date;
 	  let userId = req.query.userId;
-	  if (!tourId || !date || !userId) {
+	  if (!tourId && !date && !!userId) {
+	  	db.UserData.find({where: {userAuthId: userId}}).then((user) => {
+	  		db.Booking.findAll({where: {touristId: user.id}}).then((bookingsList) => {
+	  			let returnArr = [];
+	  			let asyncActions = [];
+	  			for (var booking of bookingsList) {
+	  				asyncActions.push(db.Tour.find({where: {id: booking.tourId}}).then((tour) => {
+	  					booking.tour = tour;
+	  				}));
+	  				asyncActions.push(db.UserData.find({where: {id: booking.driverId}}).then((driver) => {
+	  					booking.driver = driver;
+	  				}));
+	  				asyncActions.push(db.UserData.find({where: {id: booking.tourGuideId}}).then((guide) => {
+	  					booking.guide = guide;
+	  				}));
+	  				returnArr.push(booking);
+	  			}
+	  			Promise.all(asyncActions).then(() => {
+	  				res.json(returnArr).end();
+	  			});
+	  		})
+	  	});
+	  } else if (!tourId || !date || !userId) {
 	    res.status(400).send('Invalid query string');
 	  } else {
 	  	// console.log('getting tour..');
@@ -157,13 +179,14 @@ module.exports = function(app, express, db, log) {
 	               				touristId: user.id,
 	               				tourGuideId: booking.guide.id,
 	               				tourId: tourId,
-	               				passengers: req.query.seats || null
+	               				passengers: req.query.seats || null,
+	               				date: date
 	               			});
 	               		})
 	              	});
 
 	              } else {
-	                res.send('We were unable to book you with the given parameters');
+	                res.status(400).send('We were unable to book you with the given parameters');
 	              }
 	            })
 	          }

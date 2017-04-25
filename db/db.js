@@ -51,7 +51,8 @@ var syncTables = function(force, schema) {
   });
 
   module.exports.Booking = schema.define('booking', {
-    passengers: Sequelize.INTEGER
+    passengers: Sequelize.INTEGER,
+    date: Sequelize.STRING
   });
 
   module.exports.Tour = schema.define('tour', {

@@ -498,28 +498,6 @@ describe('Users endpoint', () => {
       done();
     });
   });
-
-  it('should be able use PUT to update an existing user', (done) => {
-    let change = {
-      userName: "Buttman",
-      userEmail: "number1jokerfan@clownprince.edu",
-      mdn: "777-888-9999",
-      country: "HA-HA-HA",
-      type: "Jr. Boyscout",
-      city: "Joker-Town"
-    }
-
-    request(server).get('/api/users').end((err, res) => {
-      expect(res.body[0].userName).to.equal('Bruce Wayne', 'should return Bruce Wayne');
-      //done();
-    });
-
-    request(server).put('api/users/ABCDEFGHIJKLMNOP1').send(change)
-      .end((err, res) => {
-        console.log(err);
-      })
-      done();
-  });
 });
 
 describe('Automatic mailer', () => {

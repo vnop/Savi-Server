@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Match, Route, Link } from 'react-router-dom';
 import config from '../../config/config.js';
+import countries from './countriesArray.js';
 
 //MAIN COMPONENT
 class ManageUsers extends React.Component {
@@ -211,23 +212,26 @@ class UserData extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      //interal UI
+      //interal UI controls
       edit: false,
       //form data
+      userAuthId: this.props.data.userAuthId || '',
       userName: this.props.data.userName || '',
       userEmail: this.props.data.userEmail || '',
       mdn: this.props.data.mdn || '',
       country: this.props.data.country || '',
-      type: this.props.data.type || '',
-      city: this.props.data.city || ''
+      city: this.props.data.city || '',
+      type: this.props.data.type || ''
     };
 
     //METHOD BINDINGS
     this.toggleEdit = this.toggleEdit.bind(this);
+    this.saveHandler = this.saveHandler.bind(this);
     this.nameForm = this.nameForm.bind(this);
     this.emailForm = this.emailForm.bind(this);
     this.mdnForm = this.mdnForm.bind(this);
     this.countryForm = this.countryForm.bind(this);
+    this.cityForm = this.cityForm.bind(this);
     this.typeForm = this.typeForm.bind(this);
 
   }
@@ -237,18 +241,36 @@ class UserData extends React.Component {
   emailForm(e) {this.setState({userEmail: e.target.value})};
   mdnForm(e) {this.setState({mdn: e.target.value})};
   countryForm(e) {this.setState({country: e.target.value})};
+  cityForm(e) {this.setState({city: e.target.value})};
   typeForm(e) {this.setState({type: e.target.value})};
   //toggle edit option for individual users
-  toggleEdit() {this.setState({edit: !this.state.edit})}
+  toggleEdit() {this.setState({ edit: true })};
 
   saveHandler(e) {
-    //PUT request for updating the database
+    //PUT REQUEST FOR UPDATING USER INFORMATION
+    fetch('https://savi-travel.com:'+config.port+'/api/users/'+this.state.userAuthId, {
+      method: 'PUT',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        userName: this.state.userName,
+        userEmail: this.state.userEmail,
+        mdn: this.state.mdn,
+        country: this.state.country,
+        //photo: this.state.,
+        type: this.state.type,
+        city: this.state.city
+      })
+    });
+    this.setState({ edit: false });//Toggle state back to false when save button is clicked
   }
 
   render() {
     return (
       <div>
-        <button onClick={this.toggleEdit}>{(this.state.edit) ? "Save" : "Edit"}</button>
+        <button onClick={(this.state.edit) ? this.saveHandler : this.toggleEdit}>{(this.state.edit) ? "Save" : "Edit"}</button>
         {(()=>{
           if (this.state.edit) {
             return (
@@ -256,8 +278,26 @@ class UserData extends React.Component {
                 <div>Name: <input type="text" value={this.state.userName} onChange={this.nameForm}/></div>
                 <div>Email: <input type="text" value={this.state.userEmail} onChange={this.emailForm}/></div>
                 <div>Phone Number: <input type="text" value={this.state.mdn} onChange={this.mdnForm}/></div>
-                <div>Country: <input type="text" value={this.state.country} onChange={this.countryForm}/></div>
-                <div>Status: <input type="text" value={this.state.type} onChange={this.typeForm}/></div>
+                <div>
+                  Country:
+                  <select onChange={this.countryForm} value={this.state.country}>
+                    {countries.map((item, i) => {
+                      return (
+                        <option key={i} value={item}>{item}</option>
+                      )
+                    })}
+                  </select>
+                </div>
+                <div>City: <input type="text" value={this.state.city} onChange={this.cityForm}/></div>
+                <div>
+                  Status:
+                  <select onChange={this.typeForm} value={this.state.type}>
+                    <option value="Tourist">Tourist</option>
+                    <option value="Driver">Driver</option>
+                    <option value="Tour Guide">Tour Guide</option>
+                    <option value="Driver Guide">Driver Guide</option>
+                  </select>
+                </div>
               </div>
             )
           } else {
@@ -267,6 +307,7 @@ class UserData extends React.Component {
                 <div>Email: {this.state.userEmail}</div>
                 <div>Phone Number: {this.state.mdn}</div>
                 <div>Country: {this.state.country}</div>
+                <div>City: {this.state.city}</div>
                 <div>Status: {this.state.type}</div>
               </div>
             )

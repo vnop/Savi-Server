@@ -511,7 +511,7 @@ describe('Users endpoint', () => {
 
     request(server).get('/api/users').end((err, res) => {
       expect(res.body[0].userName).to.equal('Bruce Wayne', 'should return Bruce Wayne');
-      done();
+      //done();
     });
 
     request(server).put('api/user'+user1Expected.userAuthId).send(change)

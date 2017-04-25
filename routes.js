@@ -327,11 +327,52 @@ module.exports = function(app, express, db, log) {
 
 	//returns a list of employee data
 	app.get('/api/employees', (req, res) => {
-		db.EmployeeData.findAll().then((employees)=>{
-			helpers.respondDBQuery(employees, req, res);
-		}).catch((err) => {
-			helpers.respondDBError(err, req, res);
-		});
+		let employee = { //object to hold inbound employee data
+	    type: req.query.type
+	    rating: req.query.rating,
+	    seats: req.query.seats,
+	    userId: req.query.userId,
+	    cityId: req.query.cityId
+		};
+
+		//Depending on the query data, do one of the following searches...
+		if (!employee.type && !employee.rating && !employee.seats && !employee.userId && !employee.cityId) {//if no employee query was submitted...
+			db.EmployeeData.findAll().then((employees)=>{//get all the employee data
+				helpers.respondDBQuery(employees, req, res);
+			}).catch((err) => {
+				helpers.respondDBError(err, req, res);
+			});
+		} else if (!!employee.type) { //else, if an employee type exists...
+			db.EmployeeData.find({where: {type: employee.type}}).then((employees) => { //grab all that match
+				helpers.respondDBQuery(employees, req, res);
+			}).catch((err) => {
+				helpers.respondDBError(err, req, res);
+			});
+		} else if (!!employee.rating) { //else, if an employee rating exists...
+			db.EmployeeData.find({where: {rating: employee.rating}}).then((employees) => { //grab all that match
+				helpers.respondDBQuery(employees, req, res);
+			}).catch((err) => {
+				helpers.respondDBError(err, req, res);
+			});
+		} else if (!!employee.seats) { //else, if employee seats exists...
+			db.EmployeeData.find({where: {seats: employee.seats}}).then((employees) => { //grab all that match
+				helpers.respondDBQuery(employees, req, res);
+			}).catch((err) => {
+				helpers.respondDBError(err, req, res);
+			});
+		} else if (!!employee.userId) { //else, if an employee id exists...
+			db.EmployeeData.findAll({where: {userId: employee.userId}}).then((employee) => { //grab all that match
+				helpers.respondDBQuery(employee, req, res);
+			}).catch((err) => {
+				helpers.respondDBError(err, req, res);
+			});
+		} else if (!!employee.cityId) { //else, if am employee cityId exists...
+			db.EmployeeData.findAll({where: {cityId: employee.cityId}}).then((employees) => { //grab all that match
+				helpers.respondDBQuery(employees, req, res);
+			}).catch((err) => {
+				helpers.respondDBError(err, req, res);
+			});
+		}
 	});
 
 	//Redirect Panel for invalid extensions
@@ -340,3 +381,51 @@ module.exports = function(app, express, db, log) {
 	})
 
 }
+/*
+	app.get('/api/users', (req, res) => {
+		let user = {
+			name: req.query.userName,
+			email: req.query.userEmail,
+			mdn: req.query.mdn, //mobile device number
+			country: req.query.country,
+			city: req.query.city
+		};
+
+		if (!user.name && !user.email && !user.mdn && !user.country && !user.city) { //if no user data came from the req.body...
+			db.UserData.findAll().then((users) => { //grab all data from the table instead
+				helpers.respondDBQuery(users, req, res);
+			}).catch((err) => {
+				helpers.respondDBError(err, req, res);
+			});
+		} else if (!!user.name) { //else, if a user name exists...
+			db.UserData.find({where: {userName: user.name}}).then((user) => {
+				helpers.respondDBQuery(user, req, res);
+			}).catch((err) => {
+				helpers.respondDBError(err, req, res);
+			});
+		} else if (!!user.email) { //else, if a user email exists...
+			db.UserData.find({where: {userEmail: user.email}}).then((user) => {
+				helpers.respondDBQuery(user, req, res);
+			}).catch((err) => {
+				helpers.respondDBError(err, req, res);
+			});
+		} else if (!!user.mdn) { //else, if a user mobile device number exists...
+			db.UserData.find({where: {mdn: user.mdn}}).then((user) => {
+				helpers.respondDBQuery(user, req, res);
+			}).catch((err) => {
+				helpers.respondDBError(err, req, res);
+			});
+		} else if (!!user.country) { //else, if a user country exists...
+			db.UserData.findAll({where: {country: user.country}}).then((users) => { //grab all that match
+				helpers.respondDBQuery(users, req, res);
+			}).catch((err) => {
+				helpers.respondDBError(err, req, res);
+			});
+		} else if (!!user.city) { //else, if a user city exists...
+			db.UserData.findAll({where: {city: user.city}}).then((users) => { //grab all that match
+				helpers.respondDBQuery(users, req, res);
+			}).catch((err) => {
+				helpers.respondDBError(err, req, res);
+			});
+		}
+	});

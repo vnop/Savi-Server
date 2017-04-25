@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Match, Route, Link } from 'react-router-dom';
 import config from '../../config/config.js';
+import countries from './countriesArray.js';
 
 //MAIN COMPONENT
 class ManageUsers extends React.Component {
@@ -262,6 +263,7 @@ class UserData extends React.Component {
       })
     });
     this.setState({ edit: false });//Toggle state back to false when save button is clicked
+    console.log(countries);
   }
 
   render() {

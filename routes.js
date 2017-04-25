@@ -334,7 +334,6 @@ module.exports = function(app, express, db, log) {
 	    userId: req.query.userId,
 	    cityId: req.query.cityId
 		};
-
 		//Depending on the query data, do one of the following searches...
 		if (!employee.type && !employee.rating && !employee.seats && !employee.userId && !employee.cityId) {//if no employee query was submitted...
 			db.EmployeeData.findAll().then((employees)=>{//get all the employee data

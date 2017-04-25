@@ -375,7 +375,8 @@ module.exports = function(app, express, db, log) {
 	});
 
 	app.post('/api/employees', (res, req) => {
-		console.log("hi");
+		let test = req.body;
+		console.log(test);
 	});
 
 	//Redirect Panel for invalid extensions

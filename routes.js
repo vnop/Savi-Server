@@ -22,8 +22,24 @@ module.exports = function(app, express, db, log) {
 	app.use(bodyParser.urlencoded({ extended: true }));
 
 	app.post('/payments', function(req, res){
-	  	console.log('payment request..', req.body)
-	  	res.redirect('/');
+  	console.log('payment request..', req.body)
+  	var token = req.body.stripeToken; // Using Express
+
+		//Charge the user's card:
+		var charge = stripe.charges.create({
+		  amount: 555,
+		  currency: "usd",
+		  description: "savi first charge",
+		  source: token,
+		}, function(err, charge) {
+			if(err) {
+				console.log(err);
+			} else {
+		  		console.log('success savi payment', charge);
+			}
+		});
+
+	  res.redirect('/');
 	});
 
 	app.get('/api/cities', (req, res) => {

@@ -25,7 +25,7 @@ class Home extends React.Component {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({testing: "correct"})
+          body: JSON.stringify({stripeToken: data.id})
         }).then(function(response) {console.log(response)}).catch(err => console.error(err));
       })
       .catch(err => console.error(err));

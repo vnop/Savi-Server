@@ -279,7 +279,7 @@ module.exports = function(app, express, db, log) {
 				helpers.respondDBError(err, req, res);
 			});
 		} else if (!!user.city) { //else, if a user city exists...
-			db.UserData.findAll({where: {cityId: user.city}}).then((users) => { //grab all that match
+			db.UserData.findAll({where: {city: user.city}}).then((users) => { //grab all that match
 				helpers.respondDBQuery(users, req, res);
 			}).catch((err) => {
 				helpers.respondDBError(err, req, res);
@@ -330,6 +330,30 @@ module.exports = function(app, express, db, log) {
 			} else {
 				res.json({exists: true, user: user}).end();
 			}
+		})
+	});
+
+	app.put('/api/users/:userAuthId', (req, res, next) => {
+		let userAID = req.params.userAuthId;
+
+		db.UserData.find({where: {userAuthId: userAID}}).then((user) => {
+			if (user) { //if a user is found...
+				//Update the data in the database for the user that matches the userAuthId
+				db.UserData.update({
+					userName: req.body.userName,
+					userEmail: req.body.userEmail,
+					mdn: req.body.mdn,
+					country: req.body.country,
+					photo: req.body.photo,
+					type: req.body.type,
+					city: req.body.city
+				}, {where: {userAuthId: userAID}});
+				helpers.respondDBQuery(user, req, res);
+			} else { //otherwise... no user exists to be updated. Send 500
+				res.status(500).send('No Such User Exists').end();
+			}
+		}).catch((err) => {
+			helpers.respondDBError(err, req, res);
 		})
 	});
 

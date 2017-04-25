@@ -492,9 +492,9 @@ describe('Users endpoint', () => {
     });
   });
 
-  it('should be able to GET multiple users by city', (done) => {
-    request(server).get('/api/users?cityId=1').end((err, res) => {
-      expect(res.body.length>0).to.equal(true, 'should return multiple users');
+  it('should be able to GET the exact number of users entered', (done) => {
+    request(server).get('/api/users').end((err, res) => {
+      expect(res.body.length).to.equal(2, 'should return 2 users');
       done();
     });
   });

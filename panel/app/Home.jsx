@@ -8,13 +8,12 @@ class Home extends React.Component {
       cityData: []
     }
   }
-
   stripeTest() {
     fetch('https://api.stripe.com/v1/tokens?card[number]=4242424242424242&card[exp_month]=2&card[exp_year]=2020&card[cvc]=123&amount=999&currency=usd', {
       mode: 'no-cors',
       method: 'POST',
       headers: new Headers({
-        'Authorization': 'Bearer sk_test_t33bUz9G1cD2X6UexENeMvpd'
+        "Authorization": "Bearer sk_test_t33bUz9G1cD2X6UexENeMvpd"
       })
     })
       .then(resp => resp.json())

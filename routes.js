@@ -327,7 +327,7 @@ module.exports = function(app, express, db, log) {
 
 	//returns a list of employee data
 	app.get('/api/employees', (req, res) => {
-		let employee = { //object to hold inbound employee data
+		let employ = { //object to hold inbound employee data
 	    type: req.query.type,
 	    rating: req.query.rating,
 	    seats: req.query.seats,
@@ -335,42 +335,62 @@ module.exports = function(app, express, db, log) {
 	    cityId: req.query.cityId
 		};
 		//Depending on the query data, do one of the following searches...
-		if (!employee.type && !employee.rating && !employee.seats && !employee.userId && !employee.cityId) {//if no employee query was submitted...
+		if (!employ.type && !employ.rating && !employ.seats && !employ.userId && !employ.cityId) {//if no employee query was submitted...
 			db.EmployeeData.findAll().then((employees)=>{//get all the employee data
 				helpers.respondDBQuery(employees, req, res);
 			}).catch((err) => {
 				helpers.respondDBError(err, req, res);
 			});
-		} else if (!!employee.type) { //else, if an employee type exists...
-			db.EmployeeData.findAll({where: {type: employee.type}}).then((employees) => { //grab all that match
+		} else if (!!employ.type) { //else, if an employee type exists...
+			db.EmployeeData.findAll({where: {type: employ.type}}).then((employees) => { //grab all that match
 				helpers.respondDBQuery(employees, req, res);
 			}).catch((err) => {
 				helpers.respondDBError(err, req, res);
 			});
-		} else if (!!employee.rating) { //else, if an employee rating exists...
-			db.EmployeeData.findAll({where: {rating: employee.rating}}).then((employees) => { //grab all that match
+		} else if (!!employ.rating) { //else, if an employee rating exists...
+			db.EmployeeData.findAll({where: {rating: employ.rating}}).then((employees) => { //grab all that match
 				helpers.respondDBQuery(employees, req, res);
 			}).catch((err) => {
 				helpers.respondDBError(err, req, res);
 			});
-		} else if (!!employee.seats) { //else, if employee seats exists...
-			db.EmployeeData.findAll({where: {seats: employee.seats}}).then((employees) => { //grab all that match
+		} else if (!!employ.seats) { //else, if employee seats exists...
+			db.EmployeeData.findAll({where: {seats: employ.seats}}).then((employees) => { //grab all that match
 				helpers.respondDBQuery(employees, req, res);
 			}).catch((err) => {
 				helpers.respondDBError(err, req, res);
 			});
-		} else if (!!employee.userId) { //else, if an employee id exists...
-			db.EmployeeData.find({where: {userId: employee.userId}}).then((employee) => { //grab all that match
-				helpers.respondDBQuery(employee, req, res);
+		} else if (!!employ.userId) { //else, if an employee id exists...
+			db.EmployeeData.find({where: {userId: employ.userId}}).then((employee) => { //grab all that match
+				helpers.respondDBQuery(employ, req, res);
 			}).catch((err) => {
 				helpers.respondDBError(err, req, res);
 			});
-		} else if (!!employee.cityId) { //else, if am employee cityId exists...
-			db.EmployeeData.findAll({where: {cityId: employee.cityId}}).then((employees) => { //grab all that match
+		} else if (!!employ.cityId) { //else, if am employee cityId exists...
+			db.EmployeeData.findAll({where: {cityId: employ.cityId}}).then((employees) => { //grab all that match
 				helpers.respondDBQuery(employees, req, res);
 			}).catch((err) => {
 				helpers.respondDBError(err, req, res);
 			});
+		}
+	});
+
+	app.post('/api/employees', (res, req) => {
+		let employ = {//object to hold inbound employee data
+	    type: req.body.type,
+	    rating: req.body.rating,
+	    seats: req.body.seats,
+	    userId: req.body.userId,
+	    cityId: req.body.cityId
+		};
+
+		db.EmployeeData.find({where: {userId: employ.userId}}).then(employee) => {//check the database for an entry for the provided userId
+			if (!employee) {//if employee data doesn't already exists for inbound userId...
+				db.EmployeeData.create(employ).catch((err) => {
+					res.status(500).send('error creating employee', JSON.stringify(err));
+				});
+			} else {
+				res.json({exists: true, employee: employee}).end();
+			}
 		}
 	});
 

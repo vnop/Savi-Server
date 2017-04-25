@@ -155,7 +155,7 @@ module.exports = function(app, express, db, log) {
 	               			db.Booking.create({
 	               				driverId: booking.driver.id,
 	               				touristId: user.id,
-	               				guideId: booking.guide.id,
+	               				tourGuideId: booking.guide.id,
 	               				tourId: tourId,
 	               				passengers: req.query.seats || null
 	               			});

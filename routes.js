@@ -328,7 +328,7 @@ module.exports = function(app, express, db, log) {
 	//returns a list of employee data
 	app.get('/api/employees', (req, res) => {
 		let employee = { //object to hold inbound employee data
-	    type: req.query.type
+	    type: req.query.type,
 	    rating: req.query.rating,
 	    seats: req.query.seats,
 	    userId: req.query.userId,

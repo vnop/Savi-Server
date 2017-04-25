@@ -325,6 +325,15 @@ module.exports = function(app, express, db, log) {
 		})
 	});
 
+	//returns a list of employee data
+	app.get('/api/employees', (req, res) => {
+		db.EmployeeData.findAll().then((employees)=>{
+			helpers.respondDBQuery(employees, req, res);
+		}).catch((err) => {
+			helpers.respondDBError(err, req, res);
+		});
+	});
+
 	//Redirect Panel for invalid extensions
 	app.get('*', function (req, res) {
   	res.status(302).redirect('/')

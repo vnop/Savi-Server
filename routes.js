@@ -95,7 +95,8 @@ module.exports = function(app, express, db, log) {
 		// console.log('bookings request...', req.query);
 	  let tourId = req.query.tourId;
 	  let date = req.query.date;
-	  if (!tourId || !date) {
+	  let userId = req.query.userId;
+	  if (!tourId || !date || !userId) {
 	    res.status(400).send('Invalid query string');
 	  } else {
 	  	// console.log('getting tour..');
@@ -150,6 +151,14 @@ module.exports = function(app, express, db, log) {
 		              		// console.log(error)
 		              	});
 	               		res.json(booking).end();
+	               		db.UserData.find({where: {userAuthId: userId}}).then((user) => {
+	               			db.Booking.create({
+	               				driverId: booking.driver.id,
+	               				touristId: user.id,
+	               				guideId: booking.driver.id,
+	               				tourId: tourId
+	               			});
+	               		})
 	              	});
 
 	              } else {

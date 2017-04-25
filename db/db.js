@@ -70,7 +70,7 @@ var syncTables = function(force, schema) {
   // module.exports.Offering.belongsTo(module.exports.UserData, {as: 'tourGuide'});
   module.exports.Offering.belongsTo(module.exports.UserData, {as: 'user'});
   // module.exports.Offering.belongsTo(module.exports.EmployeeData, {as: 'employee'});
-  module.exports.Booking.belongsTo(module.exports.Offering, {as: 'offering'});
+  // module.exports.Booking.belongsTo(module.exports.Offering, {as: 'offering'});
   module.exports.Booking.belongsTo(module.exports.UserData, {as: 'driver'});
   module.exports.Booking.belongsTo(module.exports.UserData, {as: 'tourGuide'});
   module.exports.Booking.belongsTo(module.exports.UserData, {as: 'tourist'});

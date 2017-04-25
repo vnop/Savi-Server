@@ -245,7 +245,7 @@ class UserData extends React.Component {
 
   saveHandler(e) {
     fetch('https://savi-travel.com:'+config.port+'/api/users/'+this.state.userAuthId, {
-      method: 'POST',
+      method: 'PUT',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'

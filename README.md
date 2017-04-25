@@ -19,7 +19,8 @@ With that done, and the DB created on each environment, you should be able to ty
   - `/api/cities` gets all cities from the DB
   - `/api/cities?cityId=X` gets the city with ID X
   - `/api/images/~imagename~` gets the image of that name
-  - `/api/bookings?tourId=X&date=Y` returns a booking with a driver and guide for the given tourID (X) and date (Y)
+  - `/api/bookings?tourId=X&date=Y&userId=Z` returns a booking with a driver and guide for the given tourID (X) and date (Y), books that for user with the OAuth ID of Z
+  - `/api/bookings?userId=Z` returns an array of all bookings for the user with that OAuth ID
 
 - POST
   - `/api/cities` Posts new city to DB

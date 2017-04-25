@@ -167,16 +167,21 @@ module.exports = function(app, express, db, log) {
 		              	}, function(error) {
 		              		// console.log(error)
 		              	});
-	               		res.json(booking).end();
 	               		db.UserData.find({where: {userAuthId: userId}}).then((user) => {
-	               			db.Booking.create({
-	               				driverId: booking.driver.id,
-	               				touristId: user.id,
-	               				tourGuideId: booking.guide.id,
-	               				tourId: tourId,
-	               				passengers: req.query.seats || null,
-	               				date: date
-	               			});
+	               			if (!user) {
+	               				res.status(400).send('user does not exist');
+	               			} else {
+		               			db.Booking.create({
+		               				driverId: booking.driver.id,
+		               				touristId: user.id,
+		               				tourGuideId: booking.guide.id,
+		               				tourId: tourId,
+		               				passengers: req.query.seats || null,
+		               				date: date,
+		               				cityId: booking.city.id
+		               			});
+		               			res.json(booking).end();
+	               			}
 	               		})
 	              	});
 

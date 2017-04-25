@@ -74,6 +74,10 @@ const fillBookingData = (booking, db) => {
     asyncActions.push(db.UserData.find({where: {id: booking.tourGuideId}}).then((guide) => {
       newObj.guide = guide;
     }));
+    asyncActions.push(db.City.find({where: {id: booking.cityId}}).then((city) => {
+      newObj.city = city;
+    }))
+    newObj.date = booking.date;
     Promise.all(asyncActions).then(() => {
       res(newObj)
     });

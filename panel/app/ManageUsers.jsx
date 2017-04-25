@@ -243,7 +243,7 @@ class UserData extends React.Component {
   toggleEdit() {this.setState({ edit: true })};
 
   saveHandler(e) {
-    console.log("DATA SAVED FOR:", this.props.userAuthId);
+    console.log("DATA SAVED FOR:", this.props.data.userAuthId);
     this.setState({ edit: false });
   }
 

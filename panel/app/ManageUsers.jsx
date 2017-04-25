@@ -224,6 +224,7 @@ class UserData extends React.Component {
 
     //METHOD BINDINGS
     this.toggleEdit = this.toggleEdit.bind(this);
+    this.saveHandler = this.saveHandler.bind(this);
     this.nameForm = this.nameForm.bind(this);
     this.emailForm = this.emailForm.bind(this);
     this.mdnForm = this.mdnForm.bind(this);
@@ -242,9 +243,9 @@ class UserData extends React.Component {
   toggleEdit() {this.setState({ edit: true });
 
   saveHandler(e) {
-    console.log("DATA SAVED FOR:", this.state.userAuthId)
-    this.setState({ edit: false })
-  }
+    console.log("DATA SAVED FOR:", this.state.userAuthId);
+    this.setState({ edit: false });
+  };
 
   render() {
     return (

@@ -514,7 +514,7 @@ describe('Users endpoint', () => {
       //done();
     });
 
-    request(server).put('api/user'+user1Expected.userAuthId).send(change)
+    request(server).put('api/user/'+user1Expected.userAuthId).send(change)
       .end((err, res) => {
         console.log(err);
       })

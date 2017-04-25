@@ -212,7 +212,7 @@ class UserData extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      //interal UI
+      //interal UI controls
       edit: false,
       //form data
       userAuthId: this.props.data.userAuthId || '',

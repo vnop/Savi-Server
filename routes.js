@@ -380,11 +380,11 @@ module.exports = function(app, express, db, log) {
 		} else {
 			console.log("Got a body!")
 			let employ = {
-		    type: res.body.type,
-		    rating: res.body.rating,
-		    seats: res.body.seats,
-		    userId: res.body.userId,
-		    cityId: res.body.cityId
+		    type: res.body.type || '',
+		    rating: res.body.rating || '',
+		    seats: res.body.seats || '',
+		    userId: res.body.userId || '',
+		    cityId: res.body.cityId || ''
 		  };
 		}
 		console.log("Still no body...")

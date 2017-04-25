@@ -234,23 +234,23 @@ class UserData extends React.Component {
   }
 
   //FORM CONTROLS
-  nameForm(e) {this.setState({userName: e.target.value})}
-  emailForm(e) {this.setState({userEmail: e.target.value})}
+  nameForm(e) {this.setState({userName: e.target.value})};
+  emailForm(e) {this.setState({userEmail: e.target.value})};
   mdnForm(e) {this.setState({mdn: e.target.value})};
-  countryForm(e) {this.setState({country: e.target.value})}
-  typeForm(e) {this.setState({type: e.target.value})}
+  countryForm(e) {this.setState({country: e.target.value})};
+  typeForm(e) {this.setState({type: e.target.value})};
   //toggle edit option for individual users
-  toggleEdit() {this.setState({ edit: true })
+  toggleEdit() {this.setState({ edit: true })};
 
-  // saveHandler(e) {
-  //   console.log("DATA SAVED FOR:", this.state.userAuthId);
-  //   this.setState({ edit: false });
-  // }
+  saveHandler(e) {
+    console.log("DATA SAVED FOR:", this.state.userAuthId);
+    this.setState({ edit: false });
+  }
 
   render() {
     return (
       <div>
-        <button onClick={this.toggleEdit}>{(this.state.edit) ? "Save" : "Edit"}</button>
+        <button onClick={(this.state.edit) ? this.saveHandler : this.toggleEdit}>{(this.state.edit) ? "Save" : "Edit"}</button>
         {(()=>{
           if (this.state.edit) {
             return (

@@ -276,8 +276,8 @@ class UserData extends React.Component {
                 <div>Email: <input type="text" value={this.state.userEmail} onChange={this.emailForm}/></div>
                 <div>Phone Number: <input type="text" value={this.state.mdn} onChange={this.mdnForm}/></div>
                 <div>Country: <input type="text" value={this.state.country} onChange={this.countryForm}/></div>
-                <div>Status: <input type="text" value={this.state.type} onChange={this.typeForm}/></div>
                 <div>
+                  Status:
                   <select onChange={this.typeForm} value={this.state.type}>
                     <option value="Tourist">Tourist</option>
                     <option value="Driver">Driver</option>

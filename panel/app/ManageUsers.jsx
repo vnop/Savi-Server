@@ -277,6 +277,14 @@ class UserData extends React.Component {
                 <div>Phone Number: <input type="text" value={this.state.mdn} onChange={this.mdnForm}/></div>
                 <div>Country: <input type="text" value={this.state.country} onChange={this.countryForm}/></div>
                 <div>Status: <input type="text" value={this.state.type} onChange={this.typeForm}/></div>
+                <div>
+                  <select onChange={this.typeForm} value={this.state.type}>
+                    <option value="Tourist">Tourist</option>
+                    <option value="Driver">Driver</option>
+                    <option value="Tour Guide">Tour Guide</option>
+                    <option value="Driver Guide">Driver Guide</option>
+                  </select>
+                </div>
               </div>
             )
           } else {

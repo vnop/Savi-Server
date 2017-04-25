@@ -382,8 +382,8 @@ module.exports = function(app, express, db, log) {
 	    userId: req.body.userId,
 	    cityId: req.body.cityId
 		};
-		//check the database for an entry for the provided userId
-		db.EmployeeData.find({where: {userId: employ.userId}}).then(employee) => {
+
+		db.EmployeeData.find({where: {userId: employ.userId}}).then((employee) => {//check the database for an entry for the provided userId
 			if (!employee) {//if employee data doesn't already exists for inbound userId...
 				// db.EmployeeData.create(employ).catch((err) => {
 				// 	res.status(500).send('error creating employee', JSON.stringify(err));
@@ -393,7 +393,7 @@ module.exports = function(app, express, db, log) {
 				//res.json({exists: true, employee: employee}).end();
 				console.log("EMPLOYEE FOUND");
 			}
-		}
+		})
 	});
 
 	//Redirect Panel for invalid extensions

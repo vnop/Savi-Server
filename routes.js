@@ -385,11 +385,13 @@ module.exports = function(app, express, db, log) {
 
 		db.EmployeeData.find({where: {userId: employ.userId}}).then(employee) => {//check the database for an entry for the provided userId
 			if (!employee) {//if employee data doesn't already exists for inbound userId...
-				db.EmployeeData.create(employ).catch((err) => {
-					res.status(500).send('error creating employee', JSON.stringify(err));
-				});
+				// db.EmployeeData.create(employ).catch((err) => {
+				// 	res.status(500).send('error creating employee', JSON.stringify(err));
+				// });
+				console.log("NO EMPLOYEE FOUND");
 			} else {
-				res.json({exists: true, employee: employee}).end();
+				//res.json({exists: true, employee: employee}).end();
+				console.log("EMPLOYEE FOUND");
 			}
 		}
 	});

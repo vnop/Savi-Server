@@ -231,6 +231,7 @@ class UserData extends React.Component {
     this.emailForm = this.emailForm.bind(this);
     this.mdnForm = this.mdnForm.bind(this);
     this.countryForm = this.countryForm.bind(this);
+    this.cityForm = this.cityForm.bind(this);
     this.typeForm = this.typeForm.bind(this);
 
   }
@@ -240,6 +241,7 @@ class UserData extends React.Component {
   emailForm(e) {this.setState({userEmail: e.target.value})};
   mdnForm(e) {this.setState({mdn: e.target.value})};
   countryForm(e) {this.setState({country: e.target.value})};
+  cityForm(e) {this.setState({city: e.target.value})};
   typeForm(e) {this.setState({type: e.target.value})};
   //toggle edit option for individual users
   toggleEdit() {this.setState({ edit: true })};
@@ -276,7 +278,6 @@ class UserData extends React.Component {
                 <div>Name: <input type="text" value={this.state.userName} onChange={this.nameForm}/></div>
                 <div>Email: <input type="text" value={this.state.userEmail} onChange={this.emailForm}/></div>
                 <div>Phone Number: <input type="text" value={this.state.mdn} onChange={this.mdnForm}/></div>
-                <div>Country: <input type="text" value={this.state.country} onChange={this.countryForm}/></div>
                 <div>
                   Country:
                   <select onChange={this.countryForm} value={this.state.country}>
@@ -287,6 +288,7 @@ class UserData extends React.Component {
                     })}
                   </select>
                 </div>
+                <div>City: <input type="text" value={this.state.city} onChange={this.cityForm}/></div>
                 <div>
                   Status:
                   <select onChange={this.typeForm} value={this.state.type}>

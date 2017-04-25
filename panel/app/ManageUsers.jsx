@@ -239,16 +239,17 @@ class UserData extends React.Component {
   countryForm(e) {this.setState({country: e.target.value})};
   typeForm(e) {this.setState({type: e.target.value})};
   //toggle edit option for individual users
-  toggleEdit() {this.setState({edit: !this.state.edit})}
+  toggleEdit() {this.setState({ edit: true )}
 
   saveHandler(e) {
-    //PUT request for updating the database
+    console.log("DATA SAVED FOR:", this.state.userAuthId)
+    this.setState({ edit: false })
   }
 
   render() {
     return (
       <div>
-        <button onClick={this.toggleEdit}>{(this.state.edit) ? "Save" : "Edit"}</button>
+        <button onClick={(this.state.edit) ? this.saveHandler : this.toggleEdit}>{(this.state.edit) ? "Save" : "Edit"}</button>
         {(()=>{
           if (this.state.edit) {
             return (

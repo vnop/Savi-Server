@@ -375,16 +375,7 @@ module.exports = function(app, express, db, log) {
 	});
 
 	app.post('/api/employees', (res, req) => {
-		let employ = {//object to hold inbound employee data
-	    type: req.body.type,
-	    rating: req.body.rating,
-	    seats: req.body.seats,
-	    userId: req.body.userId,
-	    cityId: req.body.cityId
-		};
-
-		db.EmployeeData.find({where: {userId: employ.userId}}).then(employee) => {//check the database for an entry for the provided userId
-			console.log(employee);
+		console.log("HELLO")
 	});
 
 	//Redirect Panel for invalid extensions

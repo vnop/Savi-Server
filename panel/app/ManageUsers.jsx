@@ -244,6 +244,7 @@ class UserData extends React.Component {
   toggleEdit() {this.setState({ edit: true })};
 
   saveHandler(e) {
+    //PUT REQUEST FOR UPDATING USER INFORMATION
     fetch('https://savi-travel.com:'+config.port+'/api/users/'+this.state.userAuthId, {
       method: 'PUT',
       headers: {
@@ -260,7 +261,7 @@ class UserData extends React.Component {
         city: this.state.city
       })
     });
-    this.setState({ edit: false });
+    this.setState({ edit: false });//Toggle state back to false when save button is clicked
   }
 
   render() {

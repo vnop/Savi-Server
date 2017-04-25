@@ -13,6 +13,7 @@ class Home extends React.Component {
       mode: 'no-cors',
       method: 'POST',
       headers: new Headers({
+        "Content-Type": "application/x-www-form-urlencoded",
         "Authorization": "Bearer sk_test_t33bUz9G1cD2X6UexENeMvpd"
       })
     })

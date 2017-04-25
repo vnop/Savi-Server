@@ -263,7 +263,6 @@ class UserData extends React.Component {
       })
     });
     this.setState({ edit: false });//Toggle state back to false when save button is clicked
-    console.log(countries);
   }
 
   render() {
@@ -278,6 +277,16 @@ class UserData extends React.Component {
                 <div>Email: <input type="text" value={this.state.userEmail} onChange={this.emailForm}/></div>
                 <div>Phone Number: <input type="text" value={this.state.mdn} onChange={this.mdnForm}/></div>
                 <div>Country: <input type="text" value={this.state.country} onChange={this.countryForm}/></div>
+                <div>
+                  Country:
+                  <select onChange={this.countryForm} value={this.state.country}>
+                    {countries.map((item, i) => {
+                      return (
+                        <option key={i} value={item}>{item}</option>
+                      )
+                    })}
+                  </select>
+                </div>
                 <div>
                   Status:
                   <select onChange={this.typeForm} value={this.state.type}>

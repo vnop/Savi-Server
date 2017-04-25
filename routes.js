@@ -99,22 +99,17 @@ module.exports = function(app, express, db, log) {
 	  if (!tourId && !date && !!userId) {
 	  	db.UserData.find({where: {userAuthId: userId}}).then((user) => {
 	  		db.Booking.findAll({where: {touristId: user.id}}).then((bookingsList) => {
-	  			let returnArr = [];
+	  			let retArr = [];
 	  			let asyncActions = [];
+
 	  			for (var booking of bookingsList) {
-	  				asyncActions.push(db.Tour.find({where: {id: booking.tourId}}).then((tour) => {
-	  					booking.tour = tour;
+	  				asyncActions.push(helpers.fillBookingData(booking, db).then((newBooking) => {
+	  					retArr.push(newBooking);
 	  				}));
-	  				asyncActions.push(db.UserData.find({where: {id: booking.driverId}}).then((driver) => {
-	  					booking.driver = driver;
-	  				}));
-	  				asyncActions.push(db.UserData.find({where: {id: booking.tourGuideId}}).then((guide) => {
-	  					booking.guide = guide;
-	  				}));
-	  				returnArr.push(booking);
 	  			}
+
 	  			Promise.all(asyncActions).then(() => {
-	  				res.json(returnArr).end();
+	  				res.json(retArr).end();
 	  			});
 	  		})
 	  	});

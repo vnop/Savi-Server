@@ -9,6 +9,13 @@ class Home extends React.Component {
     }
   }
 
+  stripeTest() {
+    fetch('https://savi-travel.com:'+config.port+'/api/cities', {mode: 'no-cors'})
+      .then(resp => resp.json())
+      .then(data => console.log('success, ', data))
+      .catch(err => console.error(err));
+  }
+
   componentWillMount() {
     fetch('https://savi-travel.com:'+config.port+'/api/cities', {mode: 'no-cors'})
       .then(resp => resp.json())
@@ -46,17 +53,7 @@ class Home extends React.Component {
             quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
             consequat.
           </p>
-          <form action="/payments" encType='application/json'>
-            <script
-              src="https://checkout.stripe.com/checkout.js" className="stripe-button"
-              data-key="pk_test_N9ZQM6REo9EoseqpvjWt9atA"
-              data-amount="999"
-              data-name="Demo Site"
-              data-description="Widget"
-              data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
-              data-locale="auto">
-            </script>
-          </form>
+          <button onClick={() => {this.stripeTest}}>Stripe Test</button>
         </div>
 
         <div className="footer">

@@ -251,8 +251,9 @@ class UserData extends React.Component {
 
   saveHandler(e) {
     console.log("ORIGINAL STATE", this.props.data.type)
+    console.log("NEW STATE", this.state.type)
     if (this.props.data.type !== this.state.type) {//if the original props "type" doesn't match the state "type"...
-      console.log("IF THIS.STATE.TYPE", this.state.type)
+      console.log("CHECKING ORIGINAL vs NEW", this.props.data.type !== this.state.type);
       if (this.state.type === "Tourist") {//if the new type is "Tourist"...
         //delete the employee entry for this userId
         fetch('https://savi-travel.com:'+config.port+'/api/employees', {

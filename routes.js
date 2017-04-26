@@ -397,7 +397,7 @@ module.exports = function(app, express, db, log) {
 		  	} else {//otherwise...
 		  		console.log("Updating existing user");
 		  		db.EmployeeData.update({employ}, {where: {userId: employ.userId}});
-		  		res.json({exists: true, employee: employee}).end();
+		  		res.end();
 		  	}
 		  });
 		}

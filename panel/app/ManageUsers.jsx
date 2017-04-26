@@ -242,9 +242,18 @@ class UserData extends React.Component {
   emailForm(e) {this.setState({userEmail: e.target.value})};
   mdnForm(e) {this.setState({mdn: e.target.value})};
   countryForm(e) {this.setState({country: e.target.value})};
+  //special method to manage city name and city ID seperately
   cityForm(e) {
-    console.log(e.target.value);
-    this.setState({city: e.target.value.name})
+    //function to parse the city name from a city ID
+    const cityParse = (cities, id) => {
+      return cities.filter((city)=>{
+        return city.id === id;
+      })
+    };
+    this.setState({cityId: e.target.value});//set the cityId to the numeric value from the dropdown menu
+    this.setState({city: cityParse(this.props.cityData, e.target.value)});//set the city name from the parse
+    console.log("City Name is:",this.state.city);
+    console.log("City ID is:",this.state.cityId);
   };
   typeForm(e) {this.setState({type: e.target.value})};
   //toggle edit option for individual users
@@ -263,7 +272,7 @@ class UserData extends React.Component {
         userEmail: this.state.userEmail,
         mdn: this.state.mdn,
         country: this.state.country,
-        //photo: this.state.,
+        //photo: this.state.photo,
         type: this.state.type,
         city: this.state.city
       })

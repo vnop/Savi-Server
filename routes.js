@@ -424,8 +424,8 @@ module.exports = function(app, express, db, log) {
 		})
 	});
 
-	app.delete('/api/employees/:userId', (req, res, next) => {
-		let userId = req.params.userId;
+	app.delete('/api/employees/', (req, res, next) => {
+		let userId = req.body.userId;
 
 		db.EmployeeData.find({where: {userId: userId}}).then((employee) => {
 			if (employee) { //if a emplpoyee is found...

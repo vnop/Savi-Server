@@ -254,43 +254,22 @@ class UserData extends React.Component {
   toggleEdit() {this.setState({ edit: true })};
 
   saveHandler(e) {
-    console.log("ORIGINAL STATE", this.state.origType)
-    console.log("NEW STATE", this.state.type)
-    if (this.state.origType !== this.state.type) {//if the original props "type" doesn't match the state "type"...
-      console.log("CHECKING ORIGINAL vs NEW", this.state.origType !== this.state.type);
-      if (this.state.type === "Tourist") {//if the new type is "Tourist"...
-        //delete the employee entry for this userId
-        fetch('https://savi-travel.com:'+config.port+'/api/employees', {
-          method: 'DELETE',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            userId: this.props.data.id
-          })
-        });
-      } else if (this.state.type === "Driver" || this.state.type === "Tour Guide") {//otherwise, the new state must be either "Tour Guide" or "Driver"
-        //create a new employee entry for this userId
-        console.log("CREATING NEW EMPLOYEE");
-        fetch('https://savi-travel.com:'+config.port+'/api/employees', {
-          method: 'POST',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            type: this.state.type,
-            rating: null,
-            seats: this.state.seats,
-            userId: this.props.data.id,
-            city: this.state.city
-          })
-        });
-      }
-      //send a request to update the employee
-      fetch('https://savi-travel.com:'+config.port+'/api/employees/'+this.props.data.id, {
-        method: 'PUT',
+    if (this.state.type === "Tourist") {//if the new type is "Tourist"...
+      //delete the employee entry for this userId
+      fetch('https://savi-travel.com:'+config.port+'/api/employees', {
+        method: 'DELETE',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userId: this.props.data.id
+        })
+      });
+    } else if (this.state.type === "Driver" || this.state.type === "Tour Guide") {//otherwise, the new state must be either "Tour Guide" or "Driver"
+      //create a new employee entry for this userId
+      fetch('https://savi-travel.com:'+config.port+'/api/employees', {
+        method: 'POST',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
@@ -299,10 +278,25 @@ class UserData extends React.Component {
           type: this.state.type,
           rating: null,
           seats: this.state.seats,
+          userId: this.props.data.id,
           city: this.state.city
         })
       });
-    }//... and then do the following in every case
+    }
+    //send a request to update the employee
+    fetch('https://savi-travel.com:'+config.port+'/api/employees/'+this.props.data.id, {
+      method: 'PUT',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        type: this.state.type,
+        rating: null,
+        seats: this.state.seats,
+        city: this.state.city
+      })
+    });
 
     //PUT REQUEST FOR UPDATING USER INFORMATION
     fetch('https://savi-travel.com:'+config.port+'/api/users/'+this.state.userAuthId, {

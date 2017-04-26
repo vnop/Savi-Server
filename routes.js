@@ -478,32 +478,26 @@ module.exports = function(app, express, db, log) {
 	});
 
 	app.put('/api/employees/:userId', (req, res, next) => {
-		let userId = req.params.userId;//store the userId for lookup
-		let employ = {
-	    type: req.body.type,
-	    rating: req.body.rating,
-	    seats: req.body.seats
-	   };
 
 	  //get the cityId from the City table
 		db.City.find({where: {name: req.body.city}}).then((city) => {
-			if (!!city) {//if the city is found...
-				employ.cityId = city.dataValues.id;//set the value
-			} else {//otherwise...
-				employ.cityId = 1;//default to Paris until otherwise a better method forms
-			}
-		}).catch((err) => {
-			helpers.respondDBError(err, req, res);
-		});
+			let userId = req.params.userId;//store the userId for lookup
+			let employ = {
+		    type: req.body.type,
+		    rating: req.body.rating,
+		    seats: req.body.seats,
+		    cityId: city.dataValues.id
+		   };
 
-		db.EmployeeData.find({where: {userId: userId}}).then((employee) => {
-			if (employee) { //if a emplpoyee is found...
-				//Update the data in the database for the employee that matches the userId
-				db.EmployeeData.update(employ, {where: {userId: userId}});
-				helpers.respondDBQuery(employee, req, res);
-			} else { //otherwise... no user exists to be updated. Send 500
-				res.status(500).send('No Such Employee Exists').end();
-			}
+			db.EmployeeData.find({where: {userId: userId}}).then((employee) => {
+				if (employee) { //if a emplpoyee is found...
+					//Update the data in the database for the employee that matches the userId
+					db.EmployeeData.update(employ, {where: {userId: userId}});
+					helpers.respondDBQuery(employee, req, res);
+				} else { //otherwise... no user exists to be updated. Send 500
+					res.status(500).send('No Such Employee Exists').end();
+				}
+			})
 		}).catch((err) => {
 			helpers.respondDBError(err, req, res);
 		})

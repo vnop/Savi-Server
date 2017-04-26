@@ -332,9 +332,10 @@ class UserData extends React.Component {
       method: 'GET'
     }).then(resp => resp.json())
     .then(data => {
-      if (data && data.seats>0) {
-        this.setState({seats: data.seats});
-      }
+      console.log(data)
+      // if (data && data.seats>0) {
+      //   this.setState({seats: data.seats});
+      // }
     })
     .catch(err => console.error(err));
   }

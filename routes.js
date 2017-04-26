@@ -224,9 +224,9 @@ module.exports = function(app, express, db, log) {
 													user.dataValues
 				              	];
 				              	mailer.sendMailToAll(destinataries, tourName, booking.date).then(function(response){
-				              		// console.log('mail response', response);
+				              		console.log('mail response', response);
 				              	}, function(error) {
-				              		// console.log(error)
+				              		console.log(error)
 				              	});
 		               			db.Booking.create({
 		               				driverId: booking.driver.id,

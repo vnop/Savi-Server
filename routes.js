@@ -389,18 +389,13 @@ module.exports = function(app, express, db, log) {
 		  //first, check to see if an employee entry exists already
 		  db.EmployeeData.find({where: {userId: employ.userId}}).then((employee) => {
 		  	if (!employee) {//if such an employee already exists...
-		  		db.EmployeeData.create(employ).then((employee) => {
+		  		db.EmployeeData.create(employ).then((employee) => {//create a new entry in the employee database
 		  			res.json({exists: true, employee: employee}).end();
-		  		}).catch((err) => {
+		  		}).catch((err) => {//error handling
 		  			res.status(500).send('error creating new employee ' + JSON.stringify(err));
-		  		})
-		  	} else {//otherwise...
-		  		console.log("Updating existing user");
-		  		db.EmployeeData.update({employ}, {where: {userId: employ.userId}}).then((employee) => {
-		  			res.json({exists: true, employee: employee}).end();
-		  		}).catch((err) => {
-		  			res.status(500).send('error updating employee ' + JSON.stringify(err));
 		  		});
+		  	} else {//otherwise...
+		  		res.json({exists: true, employee: employee}).end();//do nothing important
 		  	}
 		  });
 		}

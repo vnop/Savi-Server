@@ -392,7 +392,7 @@ module.exports = function(app, express, db, log) {
 		  		console.log("Employee found!")
 		  	} else {//otherwise...
 		  		db.EmployeeData.create(employ).then((employee) => {//create a new entry for this user
-		  			res.send('created', employee.dataValues.type);
+		  			res.status(200).send('created', employee.dataValues.type);
 		  		}).catch((err) => {
 		  			res.status(500).send('error creating employee', JSON.stringify(err));
 		  		});

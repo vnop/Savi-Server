@@ -379,7 +379,7 @@ module.exports = function(app, express, db, log) {
 			console.log("Still no body...")
 			res.status(400).send('invalid request');
 		} else {
-			console.log("Got a body!")
+			console.log("Got a body! It's:", typeof req.body);
 			// let employ = {
 		 //    type: res.body.type,
 		 //    rating: res.body.rating,

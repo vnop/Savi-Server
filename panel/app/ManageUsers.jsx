@@ -245,7 +245,7 @@ class UserData extends React.Component {
 
   //special method to manage city name and city ID seperately
   cityForm(e) {
-    console.log(typeof e.target.value)
+    console.log(e.target.value)
   };
 
   typeForm(e) {this.setState({type: e.target.value})};
@@ -299,7 +299,7 @@ class UserData extends React.Component {
                   <select onChange={this.cityForm} value={this.state.city}>
                     {this.props.cityData.map((item, i) => {
                       return (
-                        <option key={i} value={item}>{item.name}</option>
+                        <option key={i} value={item.id}>{item.name}</option>
                       )
                     })}
                   </select>

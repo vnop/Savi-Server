@@ -250,7 +250,7 @@ class UserData extends React.Component {
         return city.id === id;
       })
     };
-    console.log(cityParse(this.props.cityData, e.target.value));
+    console.log(e.target.value);
     this.setState({cityId: e.target.value, city: cityParse(this.props.cityData, e.target.value)});//set the city name from the parse
     console.log("City Name is:",this.state.city);
     console.log("City ID is:",this.state.cityId);

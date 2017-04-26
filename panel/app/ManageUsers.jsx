@@ -276,7 +276,7 @@ class UserData extends React.Component {
         },
         body: JSON.stringify({
           type: this.state.type,
-          rating: null,
+          rating: 3,
           seats: this.state.seats,
           userId: this.props.data.id,
           city: this.state.city
@@ -292,7 +292,7 @@ class UserData extends React.Component {
       },
       body: JSON.stringify({
         type: this.state.type,
-        rating: null,
+        rating: 3,
         seats: this.state.seats,
         city: this.state.city
       })

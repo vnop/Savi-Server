@@ -253,6 +253,8 @@ class UserData extends React.Component {
       })
     };
     const cityName = cityParse(cities, cityId);
+    console.log(cities);
+    console.log(cityId);
     console.log(cityName);
   };
   typeForm(e) {this.setState({type: e.target.value})};

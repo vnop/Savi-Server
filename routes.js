@@ -390,17 +390,15 @@ module.exports = function(app, express, db, log) {
 		  	if (employee) {//if such an employee already exists...
 		  		//update them with new data
 		  		console.log("Employee found!")
-		  		res.end()
 		  	} else {//otherwise...
-		  		console.log("Attempting to create...", JSON.stringify(employ))
 		  		db.EmployeeData.create(employ).then((employee) => {//create a new entry for this user
-		  			res.status(200).send('created', employee.dataValues.type).end();
+		  			res.send('created', employee.dataValues.type);
 		  		}).catch((err) => {
-		  			res.status(500).send('error creating employee', JSON.stringify(err)).end();
+		  			res.status(500).send('error creating employee', JSON.stringify(err));
 		  		});
 		  	}
 		  }).catch((err) => {
-		  	res.end();
+		  	helpers.respondDBError(err, res, req);
 		  });
 		}
 	});

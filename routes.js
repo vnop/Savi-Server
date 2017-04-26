@@ -375,9 +375,9 @@ module.exports = function(app, express, db, log) {
 	});
 
 	app.post('/api/employees', (req, res) => {
-		if (!req.body) {
+		if (!req.body) { //if no body exists, send 400
 			res.status(400).send('invalid request');
-		} else {
+		} else { //otherwise...
 			let employ = {//store inbound employee data in employ object
 		    userId: req.body.userId,
 		    cityId: req.body.cityId,
@@ -386,20 +386,46 @@ module.exports = function(app, express, db, log) {
 		    seats: req.body.seats
 		  };
 
+		  //first, check to see if an employee entry exists already
 		  db.EmployeeData.find({where: {userId: employ.userId}}).then((employee) => {
 		  	if (!employee) {//if such an employee already exists...
-		  		console.log("Create Employee!");
 		  		db.EmployeeData.create(employ).then((employee) => {
 		  			res.json({exists: true, employee: employee}).end();
 		  		}).catch((err) => {
 		  			res.status(500).send('error creating new employee ' + JSON.stringify(err));
 		  		})
 		  	} else {//otherwise...
-		  		console.log("Employee found!", employee.dataValues)
+		  		console.log("Updating existing user");
+		  		db.EmployeeData.update({employ}, {where: {userId: employ.userId}});
 		  		res.json({exists: true, employee: employee}).end();
 		  	}
 		  });
 		}
+	});
+
+	///////////KILL ZONE////////////
+		app.put('/api/users/:userAuthId', (req, res, next) => {
+		let userAID = req.params.userAuthId;
+
+		db.UserData.find({where: {userAuthId: userAID}}).then((user) => {
+			if (user) { //if a user is found...
+				//Update the data in the database for the user that matches the userAuthId
+				db.UserData.update({
+					userName: req.body.userName,
+					userEmail: req.body.userEmail,
+					mdn: req.body.mdn,
+					country: req.body.country,
+					photo: req.body.photo,
+					type: req.body.type,
+					city: req.body.city
+				}, {where: {userAuthId: userAID}});
+				helpers.respondDBQuery(user, req, res);
+			} else { //otherwise... no user exists to be updated. Send 500
+				res.status(500).send('No Such User Exists').end();
+			}
+		}).catch((err) => {
+			helpers.respondDBError(err, req, res);
+		})
 	});
 
 	//Redirect Panel for invalid extensions

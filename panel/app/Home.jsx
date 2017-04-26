@@ -8,28 +8,6 @@ class Home extends React.Component {
       cityData: []
     }
   }
-  stripeTest() {
-    fetch('https://api.stripe.com/v1/tokens?card[number]=4242424242424242&card[exp_month]=2&card[exp_year]=2020&card[cvc]=123&amount=999&currency=usd', {
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-        "Authorization": "Bearer sk_test_t33bUz9G1cD2X6UexENeMvpd"
-      }
-    })
-      .then(resp => resp.json())
-      .then(data => {
-        console.log('success..', data)
-        fetch('https://savi-travel.com:8084/payments', {
-          method: 'POST',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({stripeToken: data.id})
-        }).then(function(response) {console.log(response)}).catch(err => console.error(err));
-      })
-      .catch(err => console.error(err));
-  }
 
   componentWillMount() {
     fetch('https://savi-travel.com:'+config.port+'/api/cities', {mode: 'no-cors'})
@@ -68,7 +46,6 @@ class Home extends React.Component {
             quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
             consequat.
           </p>
-          <button onClick={() => {this.stripeTest()}}>Stripe Test</button>
         </div>
 
         <div className="footer">

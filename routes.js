@@ -44,6 +44,7 @@ module.exports = function(app, express, db, log) {
 	app.post('/payments', function(req, res){
   	console.log('payment request..', req.body)
   	var token = req.body.stripeToken; // Using Express
+  	var totalAmount = req.body.totalAmount
 
   	// Create a Customer:
 		// stripe.customers.create({
@@ -62,9 +63,9 @@ module.exports = function(app, express, db, log) {
 
 		//Charge the user's card:
 		var charge = stripe.charges.create({
-		  amount: 444,
+		  amount: totalAmount,
 		  currency: "usd",
-		  description: "savi test charge",
+		  description: "savi test realAmount charges",
 		  source: token,
 		}, function(err, charge) {
 			if(err) {

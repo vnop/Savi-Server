@@ -244,13 +244,17 @@ class UserData extends React.Component {
   countryForm(e) {this.setState({country: e.target.value})};
   //special method to manage city name and city ID seperately
   cityForm(e) {
+    const cities = this.props.cityData;
+    const cityId = e.target.value;
     //function to parse the city name from a city ID
     const cityParse = (cities, id) => {
       return cities.filter((city)=>{
         return city.id === id;
       })
     };
-    console.log(this.props.cityData);
+    cityName = cityParse(cities, cityId);
+
+    console.log(cityName);
     this.setState({cityId: e.target.value, city: cityParse(this.props.cityData, e.target.value)});//set the city name from the parse
     console.log("City Name is:",this.state.city);
     console.log("City ID is:",this.state.cityId);

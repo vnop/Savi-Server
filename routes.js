@@ -401,25 +401,21 @@ module.exports = function(app, express, db, log) {
 		}
 	});
 
-	///////////KILL ZONE////////////
-		app.put('/api/users/:userAuthId', (req, res, next) => {
-		let userAID = req.params.userAuthId;
+	app.put('/api/employees/:userId', (req, res, next) => {
+		let userId = req.params.userId;
 
-		db.UserData.find({where: {userAuthId: userAID}}).then((user) => {
-			if (user) { //if a user is found...
-				//Update the data in the database for the user that matches the userAuthId
-				db.UserData.update({
-					userName: req.body.userName,
-					userEmail: req.body.userEmail,
-					mdn: req.body.mdn,
-					country: req.body.country,
-					photo: req.body.photo,
-					type: req.body.type,
-					city: req.body.city
-				}, {where: {userAuthId: userAID}});
-				helpers.respondDBQuery(user, req, res);
+		db.EmployeeData.find({where: {userId: userId}}).then((employee) => {
+			if (employee) { //if a emplpoyee is found...
+				//Update the data in the database for the employee that matches the userId
+				db.Employee.update({
+			    cityId: req.body.cityId,
+			    type: req.body.type,
+			    rating: req.body.rating,
+			    seats: req.body.seats
+				}, {where: {userId: userId}});
+				helpers.respondDBQuery(employee, req, res);
 			} else { //otherwise... no user exists to be updated. Send 500
-				res.status(500).send('No Such User Exists').end();
+				res.status(500).send('No Such Employee Exists').end();
 			}
 		}).catch((err) => {
 			helpers.respondDBError(err, req, res);

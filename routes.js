@@ -27,19 +27,19 @@ module.exports = function(app, express, db, log) {
 
 		//Charge the user's card:
 		var charge = stripe.charges.create({
-		  amount: 555,
+		  amount: 444,
 		  currency: "usd",
 		  description: "savi first charge",
 		  source: token,
 		}, function(err, charge) {
 			if(err) {
 				console.log(err);
+				res.send('Failed')
 			} else {
-		  		console.log('success savi payment', charge);
+		  	console.log('success savi payment', charge);
+		  	res.send(charge)
 			}
 		});
-
-	  res.redirect('/');
 	});
 
 	app.get('/api/cities', (req, res) => {

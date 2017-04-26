@@ -243,8 +243,7 @@ class UserData extends React.Component {
   mdnForm(e) {this.setState({mdn: e.target.value})};
   countryForm(e) {this.setState({country: e.target.value})};
   cityForm(e) {
-    console.log("City Name:", e.target.value.name);
-    console.log("City ID:", e.target.value.id);
+    console.log("Value Is:", e.target.value);
     this.setState({city: e.target.value.name})
   };
   typeForm(e) {this.setState({type: e.target.value})};

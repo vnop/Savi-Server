@@ -253,11 +253,7 @@ class UserData extends React.Component {
       })
     };
     const cityName = cityParse(cities, cityId);
-
     console.log(cityName);
-    this.setState({cityId: e.target.value, city: cityParse(this.props.cityData, e.target.value)});//set the city name from the parse
-    console.log("City Name is:",this.state.city);
-    console.log("City ID is:",this.state.cityId);
   };
   typeForm(e) {this.setState({type: e.target.value})};
   //toggle edit option for individual users

@@ -17,7 +17,7 @@ const config = require('./config/config');
 const schema = new Sequelize(config.dbName, 'root', config.password);
 
 db.syncTables(false, schema);
-const app = express();
+const app = express()
 
 
 

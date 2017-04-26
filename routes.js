@@ -59,11 +59,61 @@ module.exports = function(app, express, db, log) {
 		}
 	});
 
+	app.get('/api/activities', (req, res) => {
+		let cityName = req.query.city;
+		let price = req.query.price;
+		db.City.find({where: {name: cityName}}).then((city) => {
+			if (!city) {
+				res.status(404).send('no tours available in this city');
+			} else {
+				db.Tour.findAll({where: {cityId: city.id}}).then((tourList) => {
+					if (tourList.length < 1) {
+						res.status(404).send('no tours available in this city');
+					} else {
+						let toursArray = [];
+
+						for (var tour of tourList) {
+							if (tour.price <= price) {
+								var newTourInfo = {
+									title: tour.title,
+									description: tour.description,
+									city: cityName,
+									mainImage: tour.mainImage,
+									price: tour.price
+								}
+								toursArray.push(newTourInfo);
+							}
+						}
+						res.json(toursArray).end();
+					}
+				}).catch((error) => {res.status(500).send('error fetching tours')});
+			}
+		}).catch((error) => {res.status(500).send('error fetching city information')});
+	});
+
 	app.get('/api/bookings', (req, res) => {
 		// console.log('bookings request...', req.query);
 	  let tourId = req.query.tourId;
 	  let date = req.query.date;
-	  if (!tourId || !date) {
+	  let userId = req.query.userId;
+	  if (!tourId && !date && !!userId) {
+	  	db.UserData.find({where: {userAuthId: userId}}).then((user) => {
+	  		db.Booking.findAll({where: {touristId: user.id}}).then((bookingsList) => {
+	  			let retArr = [];
+	  			let asyncActions = [];
+
+	  			for (var booking of bookingsList) {
+	  				asyncActions.push(helpers.fillBookingData(booking, db).then((newBooking) => {
+	  					retArr.push(newBooking);
+	  				}));
+	  			}
+
+	  			Promise.all(asyncActions).then(() => {
+	  				res.json(retArr).end();
+	  			});
+	  		})
+	  	});
+	  } else if (!tourId || !date || !userId) {
 	    res.status(400).send('Invalid query string');
 	  } else {
 	  	// console.log('getting tour..');
@@ -117,11 +167,26 @@ module.exports = function(app, express, db, log) {
 		              	}, function(error) {
 		              		// console.log(error)
 		              	});
-	               		res.json(booking).end();
+	               		db.UserData.find({where: {userAuthId: userId}}).then((user) => {
+	               			if (!user) {
+	               				res.status(400).send('user does not exist');
+	               			} else {
+		               			db.Booking.create({
+		               				driverId: booking.driver.id,
+		               				touristId: user.id,
+		               				tourGuideId: booking.guide.id,
+		               				tourId: tourId,
+		               				passengers: req.query.seats || null,
+		               				date: date,
+		               				cityId: booking.city.id
+		               			});
+		               			res.json(booking).end();
+	               			}
+	               		})
 	              	});
 
 	              } else {
-	                res.send('We were unable to book you with the given parameters');
+	                res.status(400).send('We were unable to book you with the given parameters');
 	              }
 	            })
 	          }

@@ -280,7 +280,7 @@ class UserData extends React.Component {
         },
         body: JSON.stringify({
           type: this.state.type,
-          rating: 3//need to change this to be more dynamic,
+          rating: 3,//need to change this to be more dynamic,
           seats: this.state.seats,
           cityId: 0//need to accurately pair the cityId with the cityName
         })

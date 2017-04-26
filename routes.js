@@ -399,7 +399,7 @@ module.exports = function(app, express, db, log) {
 		  		});
 		  	}
 		  }).catch((err) => {
-		  	helpers.respondDBError(err, res, req);
+		  	res.end();
 		  });
 		}
 	});

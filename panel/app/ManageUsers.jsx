@@ -36,6 +36,7 @@ class ManageUsers extends React.Component {
   render() {
     return (
       <div>
+      {JSON.stringify(this.state.data)}
         <form>
           Search By:
           <select onChange={this.methodMenu} value={this.state.method}>

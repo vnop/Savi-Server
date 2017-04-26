@@ -1,11 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { Redirect } from 'react-router';
 import Home from './Home.jsx';
 import Styles from '../styles/styles.js';
 import AddCity from './AddCity.jsx';
 import AddTour from './AddTour.jsx';
 import ManageUsers from './ManageUsers.jsx';
+import Login from './Login.jsx';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -46,17 +48,21 @@ export default class App extends React.Component {
                     <Link to="/manageusers">Manage Users</Link>
                   </span>
 
+                  <span id="navItem" className="nav-item">
+                    <Link to="/login">Login</Link>
+                  </span>
+
                 </div>
               </div>
             </nav>
             <div style={Styles.logoWrapper} className="logo-wrapper">
               <img id="saviLogo" src="../assets/savi_logo.png"/>
             </div>
-
-            <Route exact path="/" component={Home}/>
-            <Route path="/addcity" component={AddCity}/>
-            <Route path="/addtour" component={AddTour}/>
-            <Route path="/manageusers" component={ManageUsers}/>
+            <Route exact path="/" render={() => (loggedIn ? (<Home/>) : (<Redirect to="/login"/>))}/>
+            <Route path="/addcity" render={() => (loggedIn ? (<AddCity/>) : (<Redirect to="/login"/>))}/>
+            <Route path="/addtour" render={() => (loggedIn ? (<AddTour/>) : (<Redirect to="/login"/>))}/>
+            <Route path="/manageusers" render={() => (loggedIn ? (<ManageUsers/>) : (<Redirect to="/login"/>))}/>
+            <Route path="/login" render={() => (loggedIn ? (<Redirect to="/"/>) : (<Login/>))}/>
           </div>
         </div>
       </Router>
@@ -65,3 +71,9 @@ export default class App extends React.Component {
 }
 
 module.exports = App;
+
+            // <Route exact path="/" component={Home}/>
+            // <Route path="/addcity" component={AddCity}/>
+            // <Route path="/addtour" component={AddTour}/>
+            // <Route path="/manageusers" component={ManageUsers}/>
+            // <Route path="/login" component={Login}/>

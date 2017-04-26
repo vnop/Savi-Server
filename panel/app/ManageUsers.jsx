@@ -332,7 +332,7 @@ class UserData extends React.Component {
       fetch('https://savi-travel.com:'+config.port+'/api/employees?userId='+this.props.data.id, {
         method: 'GET'
       }).then(resp => resp.json())
-      .then(data => {console.log(data)})
+      .then(data => {console.log(data.seats)})
       .catch(err => console.error(err));
     }
   }

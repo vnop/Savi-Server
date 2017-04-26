@@ -267,13 +267,13 @@ class UserData extends React.Component {
             type: this.state.type,
             rating: 3, //need to change this to be more dynamic
             seats: this.state.seats,
-            userId: this.props.data.userId,
+            userId: this.props.data.id,
             cityId: 0//need to accurately pair the cityId with the cityName
           })
         });
       }
       //send a request to update the employee
-      fetch('https://savi-travel.com:'+config.port+'/api/employees/'+this.props.userId, {
+      fetch('https://savi-travel.com:'+config.port+'/api/employees/'+this.props.data.id, {
         method: 'PUT',
         headers: {
           'Accept': 'application/json',

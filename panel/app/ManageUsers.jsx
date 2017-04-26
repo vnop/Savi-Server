@@ -328,15 +328,13 @@ class UserData extends React.Component {
   }
 
   componentWillMount() {
-    fetch('https://savi-travel.com:'+config.port+'/api/employees?userId='+this.props.data.id, {
-      method: 'GET'
-    }).then(resp => resp.json())
-    .then(data => {
-      if (!!data) {
-        console.log(data)
-      }
-    })
-    .catch(err => console.error(err));
+    if (this.props.data.type !== "Tourist") {
+      fetch('https://savi-travel.com:'+config.port+'/api/employees?userId='+this.props.data.id, {
+        method: 'GET'
+      }).then(resp => resp.json())
+      .then(data => {console.log(data)})
+      .catch(err => console.error(err));
+    }
   }
 
   render() {

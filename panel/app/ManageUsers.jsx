@@ -9,7 +9,8 @@ class ManageUsers extends React.Component {
     super(props);
     this.state = {
       data: [],//container for search results data
-      method: 'userName'
+      method: 'userName',
+      cityData: []
     };
 
     //METHOD BINDINGS
@@ -45,7 +46,7 @@ class ManageUsers extends React.Component {
           </select>
         </form>
         <DynamicForms callback={this.transfer} method={this.state.method} cityData={this.state.cityData} />
-        <DisplayUsers data={this.state.data}/>
+        <DisplayUsers data={this.state.data} cityData={this.state.cityData}/>
       </div>
     )
   }//End of Render
@@ -197,7 +198,9 @@ class DisplayUsers extends React.Component {
         {this.props.data.map((item, i) => {
           return (
             <div key={i}>
+              {JSON.stringify(this.props.cityData)}
               <UserData data={item}/>
+              }
             </div>
           )
         })}

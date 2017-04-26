@@ -5,6 +5,7 @@ const https = require('https');
 const morgan = require('morgan');
 const express = require('express');
 const Promise = require('bluebird');
+const bcrypt = require('bcrypt-nodejs');
 const bodyParser = require('body-parser');
 const helpers = require('./helpers');
 const nodemailer = require('nodemailer');
@@ -20,6 +21,25 @@ module.exports = function(app, express, db, log) {
 	}
 	app.use(bodyParser.json());
 	app.use(bodyParser.urlencoded({ extended: true }));
+
+	app.post('/api/admin', (req, res) => {
+		if (!req.body || !req.body.userName || !req.body.password) {
+			res.status(400).send(JSON.stringify('Bad request'));
+		} else {
+			db.Administrator.find({where: {userName: req.body.userName}}).then((user) => {
+				if (!user) {
+					res.status(400).send(JSON.stringify('User not found'));
+				} else {
+					let authorized = bcrypt.compareSync(req.body.password, user.password);
+					if (authorized) {
+						res.send(JSON.stringify('Logged In Successfully'));
+					} else {
+						res.status(401).send(JSON.sringify('Bad Credentials'));
+					}
+				}
+			});
+		}
+	});
 
 	app.get('/api/cities', (req, res) => {
 	  let cityId = req.query.cityId;

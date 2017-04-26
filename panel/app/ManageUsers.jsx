@@ -246,10 +246,9 @@ class UserData extends React.Component {
   countryForm(e) {this.setState({country: e.target.value})};
   cityForm(e) {//specialized cityForm method to handle multiple data returns
     //process the inbound data...
-    let data = e.target.value;
-
+    let data = e.target.value.split(',');
     //set both states
-    this.setState({city: data, cityId: data});
+    this.setState({city: data[0], cityId: data[1]});
   };
   typeForm(e) {this.setState({type: e.target.value})};
   //toggle edit option for individual users
@@ -353,7 +352,7 @@ class UserData extends React.Component {
                   <select onChange={this.cityForm} value={this.state.city}>
                     {this.props.cityData.map((item, i) => {
                       return (
-                        <option key={i} value={item.name}>{item.name}</option>
+                        <option key={i} value={[item.name, item.id]}>{item.name}</option>
                       )
                     })}
                   </select>

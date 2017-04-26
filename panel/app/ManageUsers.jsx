@@ -222,7 +222,6 @@ class UserData extends React.Component {
       mdn: this.props.data.mdn,
       country: this.props.data.country,
       city: this.props.data.city,
-      cityId: 1,
       type: this.props.data.type,
       origType: this.props.data.type,
       seats: 1
@@ -300,7 +299,7 @@ class UserData extends React.Component {
           type: this.state.type,
           rating: null,
           seats: this.state.seats,
-          cityId: this.state.cityId
+          city: this.state.city
         })
       });
     }//... and then do the following in every case

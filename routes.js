@@ -451,11 +451,16 @@ module.exports = function(app, express, db, log) {
 		    seats: req.body.seats
 		  };
 
+		  //get the cityId from the City table
 			db.City.find({where: {name: req.body.city}}).then((city) => {
-				console.log(city.dataValues.id);
-				employ.cityId = city.dataValues.id;
-			})
-
+				if (!!city) {//if the city is found...
+					employ.cityId = city.dataValues.id;//set the value
+				} else {//otherwise...
+					employ.cityId = 1;//default to Paris until otherwise a better method forms
+				}
+			}).catch((err) => {
+				helpers.respondDBError(err, req, res);
+			});
 
 		  //first, check to see if an employee entry exists already
 		  db.EmployeeData.find({where: {userId: employ.userId}}).then((employee) => {
@@ -474,13 +479,25 @@ module.exports = function(app, express, db, log) {
 
 	app.put('/api/employees/:userId', (req, res, next) => {
 		let userId = req.params.userId;//store the userId for lookup
+		let cityId = 0;
+
+	  //get the cityId from the City table
+		db.City.find({where: {name: req.body.city}}).then((city) => {
+			if (!!city) {//if the city is found...
+				cityId = city.dataValues.id;//set the value
+			} else {//otherwise...
+				cityId = 1;//default to Paris until otherwise a better method forms
+			}
+		}).catch((err) => {
+			helpers.respondDBError(err, req, res);
+		});
 
 		db.EmployeeData.find({where: {userId: userId}}).then((employee) => {
 			if (employee) { //if a emplpoyee is found...
 				console.log("FOUND EMPLOYEE", req.body)
 				//Update the data in the database for the employee that matches the userId
 				db.EmployeeData.update({
-			    cityId: req.body.cityId,
+			    cityId: cityId,
 			    type: req.body.type,
 			    rating: req.body.rating,
 			    seats: req.body.seats

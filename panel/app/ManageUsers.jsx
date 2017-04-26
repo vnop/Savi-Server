@@ -285,7 +285,7 @@ class UserData extends React.Component {
             rating: null,
             seats: this.state.seats,
             userId: this.props.data.id,
-            cityId: this.state.cityId
+            city: this.state.city
           })
         });
       }
@@ -351,7 +351,7 @@ class UserData extends React.Component {
                   <select onChange={this.cityForm} value={this.state.city}>
                     {this.props.cityData.map((item, i) => {
                       return (
-                        <option key={i} value={[item.name, item.id][0]}>{item.name}</option>
+                        <option key={i} value={item.name}>{item.name}</option>
                       )
                     })}
                   </select>

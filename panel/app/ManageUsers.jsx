@@ -265,7 +265,7 @@ class UserData extends React.Component {
         });
       } else if (this.state.type === "Driver" || this.state.type === "Tour Guide") {//otherwise, the new state must be either "Tour Guide" or "Driver"
         //create a new employee entry for this userId
-        console.log("CREATING NEW EMPLOYEE")
+        console.log("CREATING NEW EMPLOYEE");
         fetch('https://savi-travel.com:'+config.port+'/api/employees', {
           method: 'POST',
           headers: {

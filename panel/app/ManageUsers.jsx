@@ -253,7 +253,16 @@ class UserData extends React.Component {
     if (this.props.data.type !== this.state.type) {//if the original props "type" doesn't match the state "type"...
       if (this.state.type === "Tourist") {//if the new type is "Tourist"...
         //delete the employee entry for this userId
-        console.log("DELETE THIS NAUGHTY EMPLOYEE")
+        fetch('https://savi-travel.com:'+config.port+'/api/employees', {
+          method: 'DELETE',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            userId: this.props.data.id
+          })
+        });
       } else {//otherwise, the new state must be either "Tour Guide" or "Driver"
         //create a new employee entry for this userId
         fetch('https://savi-travel.com:'+config.port+'/api/employees', {

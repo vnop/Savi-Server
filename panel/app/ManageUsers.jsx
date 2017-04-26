@@ -252,7 +252,7 @@ class UserData extends React.Component {
         return city.id === id;
       })
     };
-    const cityName = cityParse(cities, cityId);
+    const cityName = cities.filter((city)=>{return city.id === cityId});
     console.log(cities);
     console.log(cityId);
     console.log(cityName);

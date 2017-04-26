@@ -406,7 +406,7 @@ module.exports = function(app, express, db, log) {
 
 		db.EmployeeData.find({where: {userId: userId}}).then((employee) => {
 			if (employee) { //if a emplpoyee is found...
-				console.log("FOUND EMPLOYEE")
+				console.log("FOUND EMPLOYEE", req.body)
 				//Update the data in the database for the employee that matches the userId
 				db.EmployeeData.update({
 			    cityId: req.body.cityId,

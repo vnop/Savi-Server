@@ -20,7 +20,15 @@ class ManageUsers extends React.Component {
 
   //TRANSFER DATA BETWEEN COMPONENTS
   //passed in as a callback prop to DynamicForms component
-  transfer(data) {this.setState({ data })};
+  transfer(data) {
+    if (Array.isArray(data)) {
+      console.log("It's an array")
+    } else {
+      console.log("It's not an array")
+    }
+
+    this.setState({ data })
+  };
 
   //FORM CONTROLS
   methodMenu(e) {this.setState({ method: e.target.value })}

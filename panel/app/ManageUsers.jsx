@@ -216,13 +216,14 @@ class UserData extends React.Component {
       //interal UI controls
       edit: false,
       //form data
-      userAuthId: this.props.data.userAuthId || '',
-      userName: this.props.data.userName || '',
-      userEmail: this.props.data.userEmail || '',
-      mdn: this.props.data.mdn || '',
-      country: this.props.data.country || '',
-      city: this.props.data.city || '',
-      type: this.props.data.type || ''
+      userAuthId: this.props.data.userAuthId,
+      userName: this.props.data.userName,
+      userEmail: this.props.data.userEmail,
+      mdn: this.props.data.mdn,
+      country: this.props.data.country,
+      city: this.props.data.city,
+      cityId: 0,
+      type: this.props.data.type
     };
 
     //METHOD BINDINGS
@@ -266,6 +267,17 @@ class UserData extends React.Component {
       })
     });
     this.setState({ edit: false });//Toggle state back to false when save button is clicked
+  }
+
+  componentWillUpdate() {
+    var cityParse = (cities, name) => {
+      return cities.filter((city)=>{
+        return city.name === name;
+      })[0][id]
+    }
+
+    this.state.cityId = cityParse(this.props.cityData, this.state.city)
+    console.log(this.state.cityId)
   }
 
   render() {

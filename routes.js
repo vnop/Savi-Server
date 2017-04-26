@@ -406,6 +406,7 @@ module.exports = function(app, express, db, log) {
 
 		db.EmployeeData.find({where: {userId: userId}}).then((employee) => {
 			if (employee) { //if a emplpoyee is found...
+				console.log("FOUND EMPLOYEE")
 				//Update the data in the database for the employee that matches the userId
 				db.EmployeeData.update({
 			    cityId: req.body.cityId,
@@ -413,6 +414,7 @@ module.exports = function(app, express, db, log) {
 			    rating: req.body.rating,
 			    seats: req.body.seats
 				}, {where: {userId: userId}});
+				console.log("UPDATED THE EMPLOYEE")
 				helpers.respondDBQuery(employee, req, res);
 			} else { //otherwise... no user exists to be updated. Send 500
 				res.status(500).send('No Such Employee Exists').end();

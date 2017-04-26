@@ -402,7 +402,7 @@ module.exports = function(app, express, db, log) {
 	});
 
 	app.put('/api/employees/:userId', (req, res, next) => {
-		let userId = req.params.userId;
+		let userId = req.params.userId;//store the userId for lookup
 
 		db.EmployeeData.find({where: {userId: userId}}).then((employee) => {
 			if (employee) { //if a emplpoyee is found...

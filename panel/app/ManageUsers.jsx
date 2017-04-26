@@ -251,6 +251,7 @@ class UserData extends React.Component {
     this.setState({city: data[0], cityId: data[1]});
   };
   typeForm(e) {this.setState({type: e.target.value})};
+  seatsForm(e) {this.setState({seats: e.target.value})};
   //toggle edit option for individual users
   toggleEdit() {this.setState({ edit: true })};
 
@@ -319,12 +320,12 @@ class UserData extends React.Component {
     this.setState({ edit: false, origType: this.state.type });//Toggle state back to false when save button is clicked
   }
 
-  // componentWillMount() {
-  //   fetch('https://savi-travel.com'+config.port+'/api/employees?userId='+this.props.data.id, {method: 'GET'})
-  //     .then(resp => resp.json())
-  //     .then(data => console.log(data))
-  //     .catch(err => console.error(err));
-  // }
+  componentWillMount() {
+    fetch('https://savi-travel.com'+config.port+'/api/employees?userId='+this.props.data.id, {method: 'GET'})
+      .then(resp => resp.json())
+      .then(data => console.log(data))
+      .catch(err => console.error(err));
+  }
 
   render() {
     return (

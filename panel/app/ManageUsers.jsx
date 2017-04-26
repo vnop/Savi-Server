@@ -242,21 +242,12 @@ class UserData extends React.Component {
   emailForm(e) {this.setState({userEmail: e.target.value})};
   mdnForm(e) {this.setState({mdn: e.target.value})};
   countryForm(e) {this.setState({country: e.target.value})};
+
   //special method to manage city name and city ID seperately
   cityForm(e) {
-    const cities = this.props.cityData;
-    const cityId = e.target.value;
-    //function to parse the city name from a city ID
-    const cityParse = (cities, id) => {
-      return cities.filter((city)=>{
-        return city.id === id;
-      })
-    };
-
-    console.log(cities);
-    console.log(cityId);
-    console.log(cities.filter((city)=>{return city.id === cityId}));
+    console.log(e.target.value)
   };
+
   typeForm(e) {this.setState({type: e.target.value})};
   //toggle edit option for individual users
   toggleEdit() {this.setState({ edit: true })};
@@ -308,7 +299,7 @@ class UserData extends React.Component {
                   <select onChange={this.cityForm} value={this.state.city}>
                     {this.props.cityData.map((item, i) => {
                       return (
-                        <option key={i} value={item.id}>{item.name}</option>
+                        <option key={i} value={typeof item}>{item.name}</option>
                       )
                     })}
                   </select>

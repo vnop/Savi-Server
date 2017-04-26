@@ -250,7 +250,7 @@ class UserData extends React.Component {
         return city.id === id;
       })
     };
-    this.setState({cityId: e.target.value});//set the cityId to the numeric value from the dropdown menu
+    this.state.cityId = e.target.value;//set the cityId to the numeric value from the dropdown menu
     this.setState({city: cityParse(this.props.cityData, e.target.value)});//set the city name from the parse
     console.log("City Name is:",this.state.city);
     console.log("City ID is:",this.state.cityId);

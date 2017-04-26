@@ -273,7 +273,7 @@ class UserData extends React.Component {
     var cityParse = (cities, name) => {
       return cities.filter((city)=>{
         return city.name === name;
-      })[0][id]
+      })[0].id
     }
 
     this.state.cityId = cityParse(this.props.cityData, this.state.city)

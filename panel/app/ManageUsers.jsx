@@ -243,7 +243,10 @@ class UserData extends React.Component {
   emailForm(e) {this.setState({userEmail: e.target.value})};
   mdnForm(e) {this.setState({mdn: e.target.value})};
   countryForm(e) {this.setState({country: e.target.value})};
-  cityForm(e) {this.setState({city: e.target.value})};
+  cityForm(e) {
+    this.setState({city: e.target.value})
+    console.log(this.state.cityId)
+  };
   typeForm(e) {this.setState({type: e.target.value})};
   //toggle edit option for individual users
   toggleEdit() {this.setState({ edit: true })};
@@ -277,7 +280,6 @@ class UserData extends React.Component {
     }
 
     this.state.cityId = cityParse(this.props.cityData, this.state.city)
-    console.log(this.state.cityId)
   }
 
   render() {

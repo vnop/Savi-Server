@@ -463,6 +463,7 @@ module.exports = function(app, express, db, log) {
 				  			console.log("CREATED EMPLOYEE")
 				  			res.json({exists: true, employee: employee}).end();
 				  		}).catch((err) => {//error handling
+				  			console.log("BIG PROBLEMS")
 				  			res.status(500).send('error creating new employee ' + JSON.stringify(err));
 				  		});
 				  	} else {//otherwise...
@@ -475,7 +476,6 @@ module.exports = function(app, express, db, log) {
 			}).catch((err) => {
 				helpers.respondDBError(err, req, res);
 			});
-
 		}
 	});
 

@@ -27,7 +27,8 @@ module.exports = {
 							'<h2>The date of the tour is '+ date +'</h2>' +
 							'<h2>Enjoy the experience!</h2>'
 		}
-	}
+	},
+
 	'Tourist': {
 		subject: 'You have a new tour booked! ✔',
 		content: function(name, tourName, date) {

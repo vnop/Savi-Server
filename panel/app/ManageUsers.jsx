@@ -248,7 +248,7 @@ class UserData extends React.Component {
     //process the inbound data...
     let data = e.target.value.split(',');
     //set both states
-    this.setState({city: 'paris', cityId: Number(data[1])});
+    this.setState({city: data[0], cityId: Number(data[1])});
   };
   typeForm(e) {this.setState({type: e.target.value})};
   //toggle edit option for individual users
@@ -348,7 +348,7 @@ class UserData extends React.Component {
                 </div>
                 <div>
                   City:
-                  {JSON.stringify(this.state.cityId)}
+                  {JSON.stringify(this.state.city)}
                   <select onChange={this.cityForm} value={this.state.city}>
                     {this.props.cityData.map((item, i) => {
                       return (

@@ -251,7 +251,7 @@ class UserData extends React.Component {
     let cityId = data[1];
 
     //set both states
-    this.setState({city: data);
+    this.setState({city: data});
   };
   typeForm(e) {this.setState({type: e.target.value})};
   //toggle edit option for individual users

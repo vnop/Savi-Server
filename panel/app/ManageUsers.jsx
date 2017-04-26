@@ -223,7 +223,8 @@ class UserData extends React.Component {
       country: this.props.data.country,
       city: this.props.data.city,
       cityId: 0,
-      type: this.props.data.type
+      type: this.props.data.type,
+      seats: 0
     };
 
     //METHOD BINDINGS
@@ -243,15 +244,49 @@ class UserData extends React.Component {
   emailForm(e) {this.setState({userEmail: e.target.value})};
   mdnForm(e) {this.setState({mdn: e.target.value})};
   countryForm(e) {this.setState({country: e.target.value})};
-  cityForm(e) {
-    this.setState({city: e.target.value})
-    console.log(this.state.cityId)
-  };
+  cityForm(e) {this.setState({city: e.target.value})};
   typeForm(e) {this.setState({type: e.target.value})};
   //toggle edit option for individual users
   toggleEdit() {this.setState({ edit: true })};
 
   saveHandler(e) {
+    if (this.props.data.type !== this.state.type) {//if the original props "type" doesn't match the state "type"...
+      if (this.state.type === "Tourist") {//if the new type is "Tourist"...
+        //delete the employee entry for this userId
+        console.log("DELETE THIS NAUGHTY EMPLOYEE")
+      } else {//otherwise, the new state must be either "Tour Guide" or "Driver"
+        //create a new employee entry for this userId
+        fetch('https://savi-travel.com:'+config.port+'/api/employees', {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            type: this.state.type,
+            rating: 3, //need to change this to be more dynamic
+            seats: this.state.seats,
+            userId: this.props.data.userId,
+            cityId: 0//need to accurately pair the cityId with the cityName
+          })
+        });
+      }
+      //send a request to update the employee
+      fetch('https://savi-travel.com:'+config.port+'/api/employees/'+this.props.userId, {
+        method: 'PUT',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          type: this.state.type,
+          rating: 3//need to change this to be more dynamic,
+          seats: this.state.seats,
+          cityId: 0//need to accurately pair the cityId with the cityName
+        })
+      });
+    }//... and then do the following in every case
+
     //PUT REQUEST FOR UPDATING USER INFORMATION
     fetch('https://savi-travel.com:'+config.port+'/api/users/'+this.state.userAuthId, {
       method: 'PUT',
@@ -270,16 +305,6 @@ class UserData extends React.Component {
       })
     });
     this.setState({ edit: false });//Toggle state back to false when save button is clicked
-  }
-
-  componentWillUpdate() {
-    var cityParse = (cities, name) => {
-      return cities.filter((city)=>{
-        return city.name === name;
-      })[0].id
-    }
-
-    this.state.cityId = cityParse(this.props.cityData, this.state.city)
   }
 
   render() {
@@ -319,7 +344,6 @@ class UserData extends React.Component {
                     <option value="Tourist">Tourist</option>
                     <option value="Driver">Driver</option>
                     <option value="Tour Guide">Tour Guide</option>
-                    <option value="Driver Guide">Driver Guide</option>
                   </select>
                 </div>
               </div>

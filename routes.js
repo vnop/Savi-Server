@@ -396,7 +396,7 @@ module.exports = function(app, express, db, log) {
 		  		})
 		  	} else {//otherwise...
 		  		console.log("Employee found!", employee.dataValues)
-		  		res.json({exists: true, user: user}).end();
+		  		res.json({exists: true, employeee: employeee}).end();
 		  	}
 		  });
 		}

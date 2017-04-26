@@ -320,7 +320,7 @@ class UserData extends React.Component {
   }
 
   componentWillMount() {
-    fetch('https://savi-travel.com'+config.port+'/api/employees?userId='this.props.data.id, {method: 'GET'})
+    fetch('https://savi-travel.com'+config.port+'/api/employees?userId='+this.props.data.id, {method: 'GET'})
       .then(resp => resp.json())
       .then(data => console.log(data))
       .catch(err => console.error(err));

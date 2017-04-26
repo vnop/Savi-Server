@@ -251,7 +251,7 @@ class UserData extends React.Component {
     let cityId = data[1];
 
     //set both states
-    this.setState({city: cityName, cityId: cityId});
+    this.setState({city: cityName});
     console.log(this.state.city)
   };
   typeForm(e) {this.setState({type: e.target.value})};

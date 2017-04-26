@@ -61,8 +61,32 @@ const saveImage = (imageURL, imageName) => {
   });
 }
 
+const fillBookingData = (booking, db) => {
+  return new Promise((res, rej) => {
+    let newObj = {};
+    let asyncActions = [];
+    asyncActions.push(db.Tour.find({where: {id: booking.tourId}}).then((tour) => {
+      newObj.tour = tour;
+    }));
+    asyncActions.push(db.UserData.find({where: {id: booking.driverId}}).then((driver) => {
+      newObj.driver = driver;
+    }));
+    asyncActions.push(db.UserData.find({where: {id: booking.tourGuideId}}).then((guide) => {
+      newObj.guide = guide;
+    }));
+    asyncActions.push(db.City.find({where: {id: booking.cityId}}).then((city) => {
+      newObj.city = city;
+    }))
+    newObj.date = booking.date;
+    Promise.all(asyncActions).then(() => {
+      res(newObj)
+    });
+  });
+}
+
 module.exports = {
   respondDBQuery: respondDBQuery,
   respondDBError: respondDBError,
-  saveImage: saveImage
+  saveImage: saveImage,
+  fillBookingData: fillBookingData
 }

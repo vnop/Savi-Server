@@ -51,7 +51,8 @@ var syncTables = function(force, schema) {
   });
 
   module.exports.Booking = schema.define('booking', {
-    passengers: Sequelize.INTEGER
+    passengers: Sequelize.INTEGER,
+    date: Sequelize.STRING
   });
 
   module.exports.Tour = schema.define('tour', {
@@ -70,10 +71,12 @@ var syncTables = function(force, schema) {
   // module.exports.Offering.belongsTo(module.exports.UserData, {as: 'tourGuide'});
   module.exports.Offering.belongsTo(module.exports.UserData, {as: 'user'});
   // module.exports.Offering.belongsTo(module.exports.EmployeeData, {as: 'employee'});
-  module.exports.Booking.belongsTo(module.exports.Offering, {as: 'offering'});
+  // module.exports.Booking.belongsTo(module.exports.Offering, {as: 'offering'});
   module.exports.Booking.belongsTo(module.exports.UserData, {as: 'driver'});
   module.exports.Booking.belongsTo(module.exports.UserData, {as: 'tourGuide'});
   module.exports.Booking.belongsTo(module.exports.UserData, {as: 'tourist'});
+  module.exports.Booking.belongsTo(module.exports.Tour, {as: 'tour'});
+  module.exports.Booking.belongsTo(module.exports.City, {as: 'city'});
   module.exports.EmployeeData.belongsTo(module.exports.City, {as: 'city'});
   module.exports.UserData.belongsToMany(module.exports.Languages, {as: 'user', through: module.exports.UserLanguages, foreignKey: 'userId' });
   module.exports.Languages.belongsToMany(module.exports.UserData, {as: 'languages', through: module.exports.UserLanguages, foreignKey: 'languageId' });

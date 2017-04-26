@@ -479,14 +479,18 @@ module.exports = function(app, express, db, log) {
 
 	app.put('/api/employees/:userId', (req, res, next) => {
 		let userId = req.params.userId;//store the userId for lookup
-		let cityId = 0;
-
+		let employ = {
+	    type: req.body.type,
+	    rating: req.body.rating,
+	    seats: req.body.seats
+	   };
+		console.log(req.body);
 	  //get the cityId from the City table
 		db.City.find({where: {name: req.body.city}}).then((city) => {
 			if (!!city) {//if the city is found...
-				cityId = city.dataValues.id;//set the value
+				employ.cityId = city.dataValues.id;//set the value
 			} else {//otherwise...
-				cityId = 1;//default to Paris until otherwise a better method forms
+				employ.cityId = 1;//default to Paris until otherwise a better method forms
 			}
 		}).catch((err) => {
 			helpers.respondDBError(err, req, res);
@@ -496,12 +500,7 @@ module.exports = function(app, express, db, log) {
 			if (employee) { //if a emplpoyee is found...
 				console.log("FOUND EMPLOYEE", req.body)
 				//Update the data in the database for the employee that matches the userId
-				db.EmployeeData.update({
-			    cityId: cityId,
-			    type: req.body.type,
-			    rating: req.body.rating,
-			    seats: req.body.seats
-				}, {where: {userId: userId}});
+				db.EmployeeData.update(employ, {where: {userId: userId}});
 				console.log("UPDATED THE EMPLOYEE")
 				helpers.respondDBQuery(employee, req, res);
 			} else { //otherwise... no user exists to be updated. Send 500

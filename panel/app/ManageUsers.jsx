@@ -259,13 +259,7 @@ class UserData extends React.Component {
   typeForm(e) {this.setState({type: e.target.value})};
   seatsForm(e) {this.setState({seats: e.target.value})};
   //toggle edit option for individual users
-  toggleEdit() {
-    this.setState({ edit: true })
-    console.log(this.props.data.id)
-    fetch('https://savi-travel.com:'+config.port+'/api/employees?userId='+this.props.data.id, {
-      method: 'GET'
-    })
-  };
+  toggleEdit() {this.setState({ edit: true })};
 
   //Events that take place when the "Save" button is clicked
   saveHandler(e) {
@@ -331,6 +325,12 @@ class UserData extends React.Component {
       })
     });
     this.setState({ edit: false, origType: this.state.type });//Toggle state back to false when save button is clicked
+  }
+
+  componentWillMount() {
+    fetch('https://savi-travel.com:'+config.port+'/api/employees?userId='+this.props.data.id, {
+      method: 'GET'
+    }).then(data => console.log(data))
   }
 
   render() {

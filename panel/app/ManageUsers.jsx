@@ -261,12 +261,10 @@ class UserData extends React.Component {
   //toggle edit option for individual users
   toggleEdit() {
     this.setState({ edit: true })
-    fetch('https://savi-travel.com'+config.port+'/api/employees?userId='+this.props.data.id, {
+    console.log(this.props.data.id)
+    fetch('https://savi-travel.com:'+config.port+'/api/employees?userId='+this.props.data.id, {
       method: 'GET'
     })
-      .then(resp => resp.json())
-      .then(data => console.log(data))
-      .catch(err => console.error(err));
   };
 
   //Events that take place when the "Save" button is clicked

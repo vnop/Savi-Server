@@ -44,7 +44,7 @@ module.exports = function(app, express, db, log) {
 	app.post('/payments', function(req, res){
   	console.log('payment request..', req.body)
   	var token = req.body.stripeToken; // Using Express
-  	var totalAmount = req.body.totalAmount
+  	var totalAmount = parseFloat(req.body.totalAmount)
 
   	// Create a Customer:
 		// stripe.customers.create({

@@ -9,7 +9,8 @@ class ManageUsers extends React.Component {
     super(props);
     this.state = {
       data: [],//container for search results data
-      method: 'userName'
+      method: 'userName',
+      cityData: []
     };
 
     //METHOD BINDINGS
@@ -45,7 +46,7 @@ class ManageUsers extends React.Component {
           </select>
         </form>
         <DynamicForms callback={this.transfer} method={this.state.method} cityData={this.state.cityData} />
-        <DisplayUsers data={this.state.data}/>
+        <DisplayUsers data={this.state.data} cityData={this.state.cityData}/>
       </div>
     )
   }//End of Render
@@ -197,7 +198,7 @@ class DisplayUsers extends React.Component {
         {this.props.data.map((item, i) => {
           return (
             <div key={i}>
-              <UserData data={item}/>
+              <UserData data={item} cityData={this.props.cityData}/>
             </div>
           )
         })}
@@ -215,13 +216,15 @@ class UserData extends React.Component {
       //interal UI controls
       edit: false,
       //form data
-      userAuthId: this.props.data.userAuthId || '',
-      userName: this.props.data.userName || '',
-      userEmail: this.props.data.userEmail || '',
-      mdn: this.props.data.mdn || '',
-      country: this.props.data.country || '',
-      city: this.props.data.city || '',
-      type: this.props.data.type || ''
+      userAuthId: this.props.data.userAuthId,
+      userName: this.props.data.userName,
+      userEmail: this.props.data.userEmail,
+      mdn: this.props.data.mdn,
+      country: this.props.data.country,
+      city: this.props.data.city,
+      cityId: 1,
+      type: this.props.data.type,
+      seats: 1
     };
 
     //METHOD BINDINGS
@@ -247,6 +250,53 @@ class UserData extends React.Component {
   toggleEdit() {this.setState({ edit: true })};
 
   saveHandler(e) {
+    if (this.props.data.type !== this.state.type) {//if the original props "type" doesn't match the state "type"...
+      if (this.state.type === "Tourist") {//if the new type is "Tourist"...
+        //delete the employee entry for this userId
+        fetch('https://savi-travel.com:'+config.port+'/api/employees', {
+          method: 'DELETE',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            userId: this.props.data.id
+          })
+        });
+      } else if (this.state.type === "Driver" || this.state.type === "Tour Guide") {//otherwise, the new state must be either "Tour Guide" or "Driver"
+        //create a new employee entry for this userId
+        console.log("CREATING NEW EMPLOYEE")
+        fetch('https://savi-travel.com:'+config.port+'/api/employees', {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            type: this.state.type,
+            rating: 3, //need to change this to be more dynamic
+            seats: this.state.seats,
+            userId: this.props.data.id,
+            cityId: 1//need to accurately pair the cityId with the cityName
+          })
+        });
+      }
+      //send a request to update the employee
+      fetch('https://savi-travel.com:'+config.port+'/api/employees/'+this.props.data.id, {
+        method: 'PUT',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          type: this.state.type,
+          rating: 3,//need to change this to be more dynamic,
+          seats: this.state.seats,
+          cityId: 1//need to accurately pair the cityId with the cityName
+        })
+      });
+    }//... and then do the following in every case
+
     //PUT REQUEST FOR UPDATING USER INFORMATION
     fetch('https://savi-travel.com:'+config.port+'/api/users/'+this.state.userAuthId, {
       method: 'PUT',
@@ -259,7 +309,7 @@ class UserData extends React.Component {
         userEmail: this.state.userEmail,
         mdn: this.state.mdn,
         country: this.state.country,
-        //photo: this.state.,
+        //photo: this.state.photo,
         type: this.state.type,
         city: this.state.city
       })
@@ -288,14 +338,22 @@ class UserData extends React.Component {
                     })}
                   </select>
                 </div>
-                <div>City: <input type="text" value={this.state.city} onChange={this.cityForm}/></div>
+                <div>
+                  City:
+                  <select onChange={this.cityForm} value={this.state.city}>
+                    {this.props.cityData.map((item, i) => {
+                      return (
+                        <option key={i} value={item.name}>{item.name}</option>
+                      )
+                    })}
+                  </select>
+                </div>
                 <div>
                   Status:
                   <select onChange={this.typeForm} value={this.state.type}>
                     <option value="Tourist">Tourist</option>
                     <option value="Driver">Driver</option>
                     <option value="Tour Guide">Tour Guide</option>
-                    <option value="Driver Guide">Driver Guide</option>
                   </select>
                 </div>
               </div>

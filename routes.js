@@ -444,7 +444,7 @@ module.exports = function(app, express, db, log) {
 			res.status(400).send('invalid request');
 		} else { //otherwise...
 
-			db.City.find({where: {cityName: req.body.city}}).then((city) => {
+			db.City.find({where: {name: req.body.city}}).then((city) => {
 				console.log(city)
 			})
 

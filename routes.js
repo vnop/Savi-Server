@@ -449,17 +449,18 @@ module.exports = function(app, express, db, log) {
 				if (!!city) {//if the city is found...
 					console.log("CITY FOUND")
 					let employ = {//store inbound employee data in employ object
-				    userId: req.body.userId,
-				    cityId: city.dataValues.id,
 				    type: req.body.type,
 				    rating: req.body.rating,
-				    seats: req.body.seats
+				    seats: req.body.seats,
+				    userId: req.body.userId,
+				    cityId: city.dataValues.id
 				  };
 				  //first, check to see if an employee entry exists already
 				  db.EmployeeData.find({where: {userId: employ.userId}}).then((employee) => {
 				  	if (!employee) {//if such an employee already exists...
 				  		console.log("NO EMPLOYEE FOUND")
 				  		db.EmployeeData.create(employ).then((employee) => {//create a new entry in the employee database
+				  			console.log("CREATED EMPLOYEE")
 				  			res.json({exists: true, employee: employee}).end();
 				  		}).catch((err) => {//error handling
 				  			res.status(500).send('error creating new employee ' + JSON.stringify(err));

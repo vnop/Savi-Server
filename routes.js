@@ -213,20 +213,21 @@ module.exports = function(app, express, db, log) {
 	              	asyncActions.push(db.Offering.destroy({where: {id: driverOffering.id}}));
 	              	asyncActions.push(db.Offering.destroy({where: {id: guideOffering.id}}));
 	              	Promise.all(asyncActions).then(() => {
-		              	let tourName = booking.tour.dataValues.title;
-		              	let destinataries = [
-											booking.driver.dataValues,
-											booking.guide.dataValues
-		              	];
-		              	mailer.sendMailToAll(destinataries, tourName, booking.date).then(function(response){
-		              		// console.log('mail response', response);
-		              	}, function(error) {
-		              		// console.log(error)
-		              	});
 	               		db.UserData.find({where: {userAuthId: userId}}).then((user) => {
 	               			if (!user) {
 	               				res.status(400).send(JSON.stringify('user does not exist'));
 	               			} else {
+				              	let tourName = booking.tour.dataValues.title;
+				              	let destinataries = [
+													booking.driver.dataValues,
+													booking.guide.dataValues,
+													user.dataValues
+				              	];
+				              	mailer.sendMailToAll(destinataries, tourName, booking.date).then(function(response){
+				              		// console.log('mail response', response);
+				              	}, function(error) {
+				              		// console.log(error)
+				              	});
 		               			db.Booking.create({
 		               				driverId: booking.driver.id,
 		               				touristId: user.id,

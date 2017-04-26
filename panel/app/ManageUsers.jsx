@@ -224,6 +224,7 @@ class UserData extends React.Component {
       city: this.props.data.city,
       cityId: 1,
       type: this.props.data.type,
+      origType: this.props.data.type,
       seats: 1
     };
 
@@ -236,7 +237,6 @@ class UserData extends React.Component {
     this.countryForm = this.countryForm.bind(this);
     this.cityForm = this.cityForm.bind(this);
     this.typeForm = this.typeForm.bind(this);
-
   }
 
   //FORM CONTROLS
@@ -250,10 +250,10 @@ class UserData extends React.Component {
   toggleEdit() {this.setState({ edit: true })};
 
   saveHandler(e) {
-    console.log("ORIGINAL STATE", this.props.data.type)
+    console.log("ORIGINAL STATE", this.state.origType)
     console.log("NEW STATE", this.state.type)
     if (this.props.data.type !== this.state.type) {//if the original props "type" doesn't match the state "type"...
-      console.log("CHECKING ORIGINAL vs NEW", this.props.data.type !== this.state.type);
+      console.log("CHECKING ORIGINAL vs NEW", this.state.origType !== this.state.type);
       if (this.state.type === "Tourist") {//if the new type is "Tourist"...
         //delete the employee entry for this userId
         fetch('https://savi-travel.com:'+config.port+'/api/employees', {

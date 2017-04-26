@@ -379,14 +379,14 @@ module.exports = function(app, express, db, log) {
 			console.log("Still no body...")
 			res.status(400).send('invalid request');
 		} else {
+			let employ = {
+		    type: req.body.type,
+		    rating: req.body.rating,
+		    seats: req.body.seats,
+		    userId: req.body.userId,
+		    cityId: req.body.cityId
+		  };
 			console.log("Got a body! It's:", req.body);
-			// let employ = {
-		 //    type: res.body.type,
-		 //    rating: res.body.rating,
-		 //    seats: res.body.seats,
-		 //    userId: res.body.userId,
-		 //    cityId: res.body.cityId
-		 //  };
 		}
 	});
 

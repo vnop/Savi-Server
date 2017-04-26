@@ -252,10 +252,10 @@ class UserData extends React.Component {
         return city.id === id;
       })
     };
-    const cityName = cities.filter((city)=>{return city.id === cityId});
+
     console.log(cities);
     console.log(cityId);
-    console.log(cityName);
+    console.log(cities.filter((city)=>{return city.id === cityId}));
   };
   typeForm(e) {this.setState({type: e.target.value})};
   //toggle edit option for individual users

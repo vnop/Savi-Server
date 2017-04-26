@@ -393,7 +393,7 @@ module.exports = function(app, express, db, log) {
 		  		console.log("Employee not found!")
 		  	}
 		  }).catch((err) => {
-		  	helpers.respondDBError(err, res, req);
+		  	console.log("Some error...")
 		  });
 		}
 	});

@@ -9,6 +9,7 @@ const bodyParser = require('body-parser');
 const helpers = require('./helpers');
 const nodemailer = require('nodemailer');
 const mailer = require('./mailer/mailer');
+var stripe = require('stripe')('sk_test_t33bUz9G1cD2X6UexENeMvpd');
 
 module.exports = function(app, express, db, log) {
 	if (log === undefined) {
@@ -25,11 +26,26 @@ module.exports = function(app, express, db, log) {
   	console.log('payment request..', req.body)
   	var token = req.body.stripeToken; // Using Express
 
+  	// Create a Customer:
+		// stripe.customers.create({
+		//   email: "paying.user@example.com",
+		//   source: token,
+		// }).then(function(customer) {
+		  // // YOUR CODE: Save the customer ID and other info in a database for later.
+		//   return stripe.charges.create({
+		//     amount: 1000,
+		//     currency: "usd",
+		//     customer: customer.id,
+		//   });
+		// }).then(function(charge) {
+		  // // Use and save the charge info.
+		// });
+
 		//Charge the user's card:
 		var charge = stripe.charges.create({
 		  amount: 444,
 		  currency: "usd",
-		  description: "savi first charge",
+		  description: "savi test charge",
 		  source: token,
 		}, function(err, charge) {
 			if(err) {

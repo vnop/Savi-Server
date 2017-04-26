@@ -444,6 +444,7 @@ module.exports = function(app, express, db, log) {
 			res.status(400).send('invalid request');
 		} else { //otherwise...
 		  //get the cityId from the City table
+		  console.log("BODY IS:", req.body)
 			db.City.find({where: {name: req.body.city}}).then((city) => {
 				if (!!city) {//if the city is found...
 					console.log("CITY FOUND")

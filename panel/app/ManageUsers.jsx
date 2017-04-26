@@ -244,16 +244,13 @@ class UserData extends React.Component {
   emailForm(e) {this.setState({userEmail: e.target.value})};
   mdnForm(e) {this.setState({mdn: e.target.value})};
   countryForm(e) {this.setState({country: e.target.value})};
-  cityForm(e) {
+  cityForm(e) {//specialized cityForm method to handle multiple data returns
+    //process the inbound data...
     let data = e.target.value.split(',');
     let cityName = data[0];
     let cityId = data[1];
-
-    console.log(data);
-    console.log(cityName);
-    console.log(cityId);
-
-    this.setState({city: e.target.value})
+    //set both states
+    this.setState({city: cityName, cityId: cityId})
   };
   typeForm(e) {this.setState({type: e.target.value})};
   //toggle edit option for individual users
@@ -287,10 +284,10 @@ class UserData extends React.Component {
           },
           body: JSON.stringify({
             type: this.state.type,
-            rating: 3, //need to change this to be more dynamic
+            rating: null,
             seats: this.state.seats,
             userId: this.props.data.id,
-            cityId: 1//need to accurately pair the cityId with the cityName
+            cityId: this.state.cityId
           })
         });
       }
@@ -303,9 +300,9 @@ class UserData extends React.Component {
         },
         body: JSON.stringify({
           type: this.state.type,
-          rating: 3,//need to change this to be more dynamic,
+          rating: null,
           seats: this.state.seats,
-          cityId: 1//need to accurately pair the cityId with the cityName
+          cityId: this.state.cityId
         })
       });
     }//... and then do the following in every case

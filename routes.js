@@ -390,7 +390,7 @@ module.exports = function(app, express, db, log) {
 		  	if (employee) {//if such an employee already exists...
 		  		console.log("Employee found!", employee.dataValues)
 		  	} else {//otherwise...
-		  		console.log("Employee not found!")
+		  		console.log("Employee not found!", employee.dataValues)
 		  	}
 		  }).catch((err) => {
 		  	console.log("Some error...")

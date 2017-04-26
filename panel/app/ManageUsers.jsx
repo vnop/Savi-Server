@@ -341,7 +341,7 @@ class UserData extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="manage-users-component">
         <button onClick={(this.state.edit) ? this.saveHandler : this.toggleEdit}>{(this.state.edit) ? "Save" : "Edit"}</button>
         {(()=>{
           if (this.state.edit) {

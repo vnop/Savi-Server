@@ -447,7 +447,7 @@ module.exports = function(app, express, db, log) {
 		  console.log("BODY IS:", req.body)
 			db.City.find({where: {name: req.body.city}}).then((city) => {
 				if (!!city) {//if the city is found...
-					console.log("CITY FOUND")
+					console.log("CITY FOUND", city.dataValues.id)
 					let employ = {//store inbound employee data in employ object
 				    type: req.body.type,
 				    rating: req.body.rating,

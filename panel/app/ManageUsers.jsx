@@ -368,7 +368,7 @@ class UserData extends React.Component {
                   if (this.state.type === "Driver") {
                     return (
                       <div>
-                        He's a driver
+                        Make a menu for seats
                       </div>
                     )
                   }

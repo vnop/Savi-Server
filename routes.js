@@ -443,9 +443,14 @@ module.exports = function(app, express, db, log) {
 		if (!req.body) { //if no body exists, send 400
 			res.status(400).send('invalid request');
 		} else { //otherwise...
+
+			db.City.find({where: {cityName: req.body.city}}).then((city) => {
+				console.log(city)
+			})
+
 			let employ = {//store inbound employee data in employ object
 		    userId: req.body.userId,
-		    cityId: req.body.cityId,
+		    cityId: req.body.city,
 		    type: req.body.type,
 		    rating: req.body.rating,
 		    seats: req.body.seats

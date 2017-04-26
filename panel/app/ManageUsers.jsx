@@ -198,8 +198,7 @@ class DisplayUsers extends React.Component {
         {this.props.data.map((item, i) => {
           return (
             <div key={i}>
-              {JSON.stringify(this.props.cityData)}
-              <UserData data={item}/>
+              <UserData data={item} cityData={this.props.cityData}/>
               }
             </div>
           )
@@ -291,7 +290,16 @@ class UserData extends React.Component {
                     })}
                   </select>
                 </div>
-                <div>City: <input type="text" value={this.state.city} onChange={this.cityForm}/></div>
+                <div>
+                  City:
+                  <select onChange={this.cityForm} value={this.state.city}>
+                    {this.props.cityData.map((item, i) => {
+                      return (
+                        <option key={i} value={item.name} subVal={item.id}>{item.name}</option>
+                      )
+                    })}
+                  </select>
+                </div>
                 <div>
                   Status:
                   <select onChange={this.typeForm} value={this.state.type}>

@@ -424,6 +424,24 @@ module.exports = function(app, express, db, log) {
 		})
 	});
 
+	app.delete('/api/employee/:userId', (req, res, next) => {
+		let userId = req.params.userId;
+
+		db.EmployeeData.find({where: {userId: userId}}).then((employee) => {
+			if (employee) { //if a emplpoyee is found...
+				console.log("FOUND EMPLOYEE", req.body)
+				//Update the data in the database for the employee that matches the userId
+				db.EmployeeData.destroy({where: {userId: userId}});
+				console.log("DELETED THE EMPLOYEE")
+				helpers.respondDBQuery(employee, req, res);
+			} else { //otherwise... no user exists to be updated. Send 500
+				res.status(500).send('No Such Employee Exists').end();
+			}
+		}).catch((err) => {
+			helpers.respondDBError(err, req, res);
+		})
+	});
+
 	//Redirect Panel for invalid extensions
 	app.get('*', function (req, res) {
   	res.status(302).redirect('/')

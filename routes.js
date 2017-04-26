@@ -379,26 +379,74 @@ module.exports = function(app, express, db, log) {
 			res.status(400).send('invalid request');
 		} else {
 			let employ = {//store inbound employee data in employ object
+		    userId: req.body.userId,
+		    cityId: req.body.cityId,
 		    type: req.body.type,
 		    rating: req.body.rating,
-		    seats: req.body.seats,
-		    userId: req.body.userId,
-		    cityId: req.body.cityId
+		    seats: req.body.seats
 		  };
 
 		  db.EmployeeData.find({where: {userId: employ.userId}}).then((employee) => {
-		  	if (!!employee) {//if such an employee already exists...
-		  		console.log("Employee found!", employee.dataValues);
-		  		res.end()
+		  	if (!employee) {//if such an employee already exists...
+		  		console.log("Create Employee!");
+		  		db.EmployeeData.create(employ).then((employee) => {
+		  			res.json({exists: true, employee: employee}).end();
+		  		}).carch((err) => {
+		  			res.status(500).send('error creating new employee ' + JSON.stringify(err));
+		  		})
 		  	} else {//otherwise...
-		  		console.log("Employee not found!", employee.dataValues);
-		  		res.end()
+		  		console.log("Employee found!", employee.dataValues)
+		  		res.json({exists: true, user: user}).end();
 		  	}
-		  }).catch((err) => {
-		  	console.log("Some error...")
-		  	res.end()
 		  });
 		}
+	});
+	////////KILLZONE///////////
+
+	app.post('/api/users', (req, res) => {
+		let userId = req.body.userId;
+		db.UserData.find({where: {userAuthId: userId}}).then((user) => {
+			if(!user) {
+				if (!req.body.profileData) {
+					res.json({exists: false, user: null}).end();
+				} else {
+					let newUser = {
+						userName: req.body.profileData.name,
+						userEmail: req.body.profileData.email,
+						mdn: req.body.profileData.phone,
+						country: req.body.profileData.country,
+						city: req.body.profileData.city,
+						userAuthId: req.body.userId
+					};
+					helpers.saveImage(req.body.profileData.photo, newUser.userName.split(' ').join('-').toLowerCase()).then((imageName) => {
+						newUser.photo = imageName;
+						// if (!city) {
+						// 	res.status(404).send('City not found');
+						// } else {
+						db.UserData.create(newUser).then((user) => {
+							for (var language of req.body.profileData.languages) {
+								db.Languages.find({where: {title: language}}).then((lang) => {
+									if (lang) {
+										db.UserLanguages.create({
+											userId: user.dataValues.id,
+											languageId: lang.dataValues.id
+										});
+									}
+								});
+							}
+							res.json({exists: true, user: user}).end();
+						}).catch((error) => {
+							res.status(500).send('error creating new user ' + JSON.stringify(error));
+						});
+
+					}, (error) => {
+						res.status(500).send('error saving image ' + JSON.stringify(error))
+					});
+				}
+			} else {
+				res.json({exists: true, user: user}).end();
+			}
+		})
 	});
 
 	//Redirect Panel for invalid extensions

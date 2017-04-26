@@ -395,7 +395,7 @@ module.exports = function(app, express, db, log) {
 		  		db.EmployeeData.create(employ).then((employee) => {//create a new entry for this user
 		  			res.status(200).send('created', employee.dataValues.type).end();
 		  		}).catch((err) => {
-		  			res.status(500).send('error creating employee', JSON.stringify(err));
+		  			res.status(500).send('error creating employee', JSON.stringify(err)).end();
 		  		});
 		  	}
 		  }).catch((err) => {

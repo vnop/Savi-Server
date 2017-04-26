@@ -317,7 +317,7 @@ class UserData extends React.Component {
         city: this.state.city
       })
     });
-    this.setState({ edit: false });//Toggle state back to false when save button is clicked
+    this.setState({ edit: false, origType: this.state.type });//Toggle state back to false when save button is clicked
   }
 
   render() {

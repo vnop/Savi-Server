@@ -391,7 +391,11 @@ module.exports = function(app, express, db, log) {
 		  		//update them with new data
 		  		console.log("Employee found!")
 		  	} else {//otherwise...
-		  		console.log("No employee found")
+		  		db.EmployeeData.create(employ).then((employee) => {//create a new entry for this user
+		  			helpers.respondDBQuery(employee, res, req);
+		  		}).catch((err) => {
+		  			helpers.respondDBError(err, res, req);
+		  		})
 		  	}
 		  }).catch((err) => {
 		  	helpers.respondDBError(err, res, req);

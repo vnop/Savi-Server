@@ -376,17 +376,21 @@ module.exports = function(app, express, db, log) {
 
 	app.post('/api/employees', (req, res) => {
 		if (!req.body) {
-			console.log("Still no body...")
 			res.status(400).send('invalid request');
 		} else {
-			let employ = {
+			let employ = {//store inbound employee data in employ object
 		    type: req.body.type,
 		    rating: req.body.rating,
 		    seats: req.body.seats,
 		    userId: req.body.userId,
 		    cityId: req.body.cityId
 		  };
-			console.log("Got a body! It's:", req.body);
+
+		  db.EmployeeData.find({where: {userId: employ.userId}}).then((employee) => {
+		  	console.log(employee);
+		  }).catch((err) => {
+		  	helpers.respondDBError(err, res, req);
+		  });
 		}
 	});
 

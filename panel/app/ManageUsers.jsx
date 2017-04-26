@@ -199,7 +199,6 @@ class DisplayUsers extends React.Component {
           return (
             <div key={i}>
               <UserData data={item} cityData={this.props.cityData}/>
-              }
             </div>
           )
         })}
@@ -244,9 +243,9 @@ class UserData extends React.Component {
   mdnForm(e) {this.setState({mdn: e.target.value})};
   countryForm(e) {this.setState({country: e.target.value})};
   cityForm(e) {
-    console.log("City Name:", e.target.value);
-    console.log("City ID:", e.target.subVal);
-    this.setState({city: e.target.value})
+    console.log("City Name:", e.target.value.name);
+    console.log("City ID:", e.target.value.id);
+    this.setState({city: e.target.value.name})
   };
   typeForm(e) {this.setState({type: e.target.value})};
   //toggle edit option for individual users
@@ -299,7 +298,7 @@ class UserData extends React.Component {
                   <select onChange={this.cityForm} value={this.state.city}>
                     {this.props.cityData.map((item, i) => {
                       return (
-                        <option key={i} value={item.name} subVal={item.id}>{item.name}</option>
+                        <option key={i} value={item}>{item.name}</option>
                       )
                     })}
                   </select>

@@ -348,7 +348,7 @@ class UserData extends React.Component {
                 </div>
                 <div>
                   City:
-                  {JSON.stringify(this.state.city)}
+                  {JSON.stringify(JSON.parse(this.state.city))}
                   <select onChange={this.cityForm} value={this.state.city}>
                     {this.props.cityData.map((item, i) => {
                       return (

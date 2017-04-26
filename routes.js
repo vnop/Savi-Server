@@ -387,7 +387,12 @@ module.exports = function(app, express, db, log) {
 		  };
 
 		  db.EmployeeData.find({where: {userId: employ.userId}}).then((employee) => {
-		  	console.log(employee);
+		  	if (employee) {//if such an employee already exists...
+		  		//update them with new data
+		  		console.log("Employee found!")
+		  	} else {//otherwise...
+		  		console.log("No employee found")
+		  	}
 		  }).catch((err) => {
 		  	helpers.respondDBError(err, res, req);
 		  });

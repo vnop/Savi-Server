@@ -326,12 +326,12 @@ class UserData extends React.Component {
     this.setState({ edit: false, origType: this.state.type });//Toggle state back to false when save button is clicked
   }
 
-  // componentWillMount() {
-  //   fetch('https://savi-travel.com'+config.port+'/api/employees?userId='+this.props.data.id, {mode: 'no-cors'})
-  //     .then(resp => resp.json())
-  //     .then(data => console.log(data))
-  //     .catch(err => console.error(err));
-  // }
+  componentDidMount() {
+    fetch('https://savi-travel.com'+config.port+'/api/employees?userId='+this.props.data.id, {mode: 'no-cors'})
+      .then(resp => resp.json())
+      .then(data => console.log(data))
+      .catch(err => console.error(err));
+  }
 
   render() {
     return (

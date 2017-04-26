@@ -222,9 +222,9 @@ class UserData extends React.Component {
       mdn: this.props.data.mdn,
       country: this.props.data.country,
       city: this.props.data.city,
-      cityId: 0,
+      cityId: 1,
       type: this.props.data.type,
-      seats: 0
+      seats: 1
     };
 
     //METHOD BINDINGS
@@ -268,7 +268,7 @@ class UserData extends React.Component {
             rating: 3, //need to change this to be more dynamic
             seats: this.state.seats,
             userId: this.props.data.id,
-            cityId: 0//need to accurately pair the cityId with the cityName
+            cityId: 1//need to accurately pair the cityId with the cityName
           })
         });
       }
@@ -283,7 +283,7 @@ class UserData extends React.Component {
           type: this.state.type,
           rating: 3,//need to change this to be more dynamic,
           seats: this.state.seats,
-          cityId: 0//need to accurately pair the cityId with the cityName
+          cityId: 1//need to accurately pair the cityId with the cityName
         })
       });
     }//... and then do the following in every case

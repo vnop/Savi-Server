@@ -21,10 +21,10 @@ class ManageUsers extends React.Component {
   //TRANSFER DATA BETWEEN COMPONENTS
   //passed in as a callback prop to DynamicForms component
   transfer(data) {
-    if (!Array.isArray(data)) {
-      this.setState({data: [data]});
-    } else {
-      this.setState({ data });
+    if (!Array.isArray(data)) {//check if the data came back as an array
+      this.setState({data: [data]});//if not, store it as an array so it can be processed accordingly
+    } else {//otherwise, it's already an array
+      this.setState({ data });//store it in the state
     }
   };
 
@@ -42,7 +42,6 @@ class ManageUsers extends React.Component {
   render() {
     return (
       <div>
-      {JSON.stringify(this.state.data)}
         <form>
           Search By:
           <select onChange={this.methodMenu} value={this.state.method}>

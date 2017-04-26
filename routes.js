@@ -34,7 +34,7 @@ module.exports = function(app, express, db, log) {
 					if (authorized) {
 						res.send(JSON.stringify('Logged In Successfully'));
 					} else {
-						res.status(401).send(JSON.sringify('Bad Credentials'));
+						res.status(401).send(JSON.stringify('Bad Credentials'));
 					}
 				}
 			});

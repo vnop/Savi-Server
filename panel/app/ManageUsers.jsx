@@ -371,7 +371,7 @@ class UserData extends React.Component {
                     return (
                       <div>
                         <select onChange={this.seatsForm} value={this.state.seats}>
-                          {[1,2,3,4,5,6,7,8,9,10].map((map, i) => {
+                          {[1,2,3,4,5,6,7,8,9,10].map((item, i) => {
                             <option key={i} value={item}>item</option>
                           })}
                         </select>

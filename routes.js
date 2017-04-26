@@ -5,6 +5,7 @@ const https = require('https');
 const morgan = require('morgan');
 const express = require('express');
 const Promise = require('bluebird');
+const bcrypt = require('bcrypt-nodejs');
 const bodyParser = require('body-parser');
 const helpers = require('./helpers');
 const nodemailer = require('nodemailer');
@@ -22,6 +23,24 @@ module.exports = function(app, express, db, log) {
 	app.use(bodyParser.json());
 	app.use(bodyParser.urlencoded({ extended: true }));
 
+	app.post('/api/admin', (req, res) => {
+		if (!req.body || !req.body.userName || !req.body.password) {
+			res.status(400).send(JSON.stringify('Bad request'));
+		} else {
+			db.Administrator.find({where: {userName: req.body.userName}}).then((user) => {
+				if (!user) {
+					res.status(400).send(JSON.stringify('User not found'));
+				} else {
+					let authorized = bcrypt.compareSync(req.body.password, user.password);
+					if (authorized) {
+						res.send(JSON.stringify('Logged In Successfully'));
+					} else {
+						res.status(401).send(JSON.stringify('Bad Credentials'));
+					}
+				}
+			});
+		}
+	});
 	app.post('/payments', function(req, res){
   	console.log('payment request..', req.body)
   	var token = req.body.stripeToken; // Using Express
@@ -86,12 +105,12 @@ module.exports = function(app, express, db, log) {
 				db.City.create({name: name, mainImage: imageName}).then((newCity) => {
 					res.send('created ' + newCity.dataValues.name);
 				}).catch((error) => {
-					res.status(500).send('error creating new tour ' + JSON.stringify(error));
+					res.status(500).send(JSON.stringify('error creating new tour ' + JSON.stringify(error)));
 				});
 			}, (error) => {
-				res.status(500).send('error saving image ' + JSON.stringify(error))
+				res.status(500).send(JSON.stringify('error saving image ' + JSON.stringify(error)));
 			}).catch((error) => {
-				res.status(500).send('unknown error ' + JSON.stringify(error));
+				res.status(500).send(JSON.stringify('unknown error ' + JSON.stringify(error)));
 			});
 		}
 	});
@@ -101,11 +120,11 @@ module.exports = function(app, express, db, log) {
 		let price = req.query.price;
 		db.City.find({where: {name: cityName}}).then((city) => {
 			if (!city) {
-				res.status(404).send('no tours available in this city');
+				res.status(404).send(JSON.stringify('no tours available in this city'));
 			} else {
 				db.Tour.findAll({where: {cityId: city.id}}).then((tourList) => {
 					if (tourList.length < 1) {
-						res.status(404).send('no tours available in this city');
+						res.status(404).send(JSON.stringify('no tours available in this city'));
 					} else {
 						let toursArray = [];
 
@@ -123,9 +142,9 @@ module.exports = function(app, express, db, log) {
 						}
 						res.json(toursArray).end();
 					}
-				}).catch((error) => {res.status(500).send('error fetching tours')});
+				}).catch((error) => {res.status(500).send(JSON.stringify('error fetching tours'))});
 			}
-		}).catch((error) => {res.status(500).send('error fetching city information')});
+		}).catch((error) => {res.status(500).send(JSON.stringify('error fetching city information'))});
 	});
 
 	app.get('/api/bookings', (req, res) => {
@@ -151,16 +170,16 @@ module.exports = function(app, express, db, log) {
 	  		})
 	  	});
 	  } else if (!tourId || !date || !userId) {
-	    res.status(400).send('Invalid query string');
+	    res.status(400).send(JSON.stringify('Invalid query string'));
 	  } else {
 	  	// console.log('getting tour..');
 	    db.Tour.find({where: {id: tourId}}).then((tour) =>  {
 	      if (!tour) {
-	        res.status(404).send('Tour not found');
+	        res.status(404).send(JSON.stringify('Tour not found'));
 	      } else {
 	        db.City.find({where: {id: tour.dataValues.cityId}}).then((city) => {
 	          if(!city) {
-	            res.status(404).send('City not found');
+	            res.status(404).send(JSON.stringify('City not found'));
 	          } else {
 	            let booking = {tour: tour, city: city, date: date};
 	            var driverOffering, guideOffering;
@@ -206,7 +225,7 @@ module.exports = function(app, express, db, log) {
 		              	});
 	               		db.UserData.find({where: {userAuthId: userId}}).then((user) => {
 	               			if (!user) {
-	               				res.status(400).send('user does not exist');
+	               				res.status(400).send(JSON.stringify('user does not exist'));
 	               			} else {
 		               			db.Booking.create({
 		               				driverId: booking.driver.id,
@@ -223,7 +242,7 @@ module.exports = function(app, express, db, log) {
 	              	});
 
 	              } else {
-	                res.status(400).send('We were unable to book you with the given parameters');
+	                res.status(400).send(JSON.stringify('We were unable to book you with the given parameters'));
 	              }
 	            })
 	          }
@@ -250,9 +269,9 @@ module.exports = function(app, express, db, log) {
 	  if (imageName && exists) {
 	    res.sendFile(path.join(__dirname, '/img/' + imageName));
 	  } else if (!exists) {
-	    res.status(404).send('Image does not exist');
+	    res.status(404).send(JSON.stringify('Image does not exist'));
 	  } else {
-	    res.status(400).send('Invalid param string');
+	    res.status(400).send(JSON.stringify('Invalid param string'));
 	  }
 	});
 
@@ -279,13 +298,13 @@ module.exports = function(app, express, db, log) {
 	      helpers.respondDBError(err, req, res);
 	    });
 	  } else {
-	    res.status(400).end('Invalid query string');
+	    res.status(400).send(JSON.stringify('Invalid query string'));
 	  }
 	});
 
 	app.post('/api/tours', (req, res) => {
 		if (!req.body || !req.body.title || !req.body.description || !req.body.cityId || !req.body.mainImage) {
-			res.status(400).send('invalid request');
+			res.status(400).send(JSON.stringify('invalid request'));
 		} else {
 			let mainImage = req.body.title.split(' ').join('-').toLowerCase() + '_tour';
 			helpers.saveImage(req.body.mainImage, mainImage).then((imageName) => {
@@ -299,12 +318,12 @@ module.exports = function(app, express, db, log) {
 				db.Tour.create(newTour).then((newTour) => {
 					res.send('created ' + newTour.dataValues.title);
 				}).catch((error) => {
-					res.status(500).send('error creating new tour ' + JSON.stringify(error));
+					res.status(500).send(JSON.stringify('error creating new tour ' + JSON.stringify(error)));
 				});
 			}, (error) => {
-				res.status(500).send('error saving image ' + JSON.stringify(error))
+				res.status(500).send(JSON.stringify('error saving image ' + JSON.stringify(error)));
 			}).catch((error) => {
-				res.status(500).send('unknown error ' + JSON.stringify(error));
+				res.status(500).send(JSON.stringify('unknown error ' + JSON.stringify(error)));
 			});
 		}
 	});
@@ -390,11 +409,11 @@ module.exports = function(app, express, db, log) {
 							}
 							res.json({exists: true, user: user}).end();
 						}).catch((error) => {
-							res.status(500).send('error creating new user ' + JSON.stringify(error));
+							res.status(500).send(JSON.stringify('error creating new user ' + JSON.stringify(error)));
 						});
 
 					}, (error) => {
-						res.status(500).send('error saving image ' + JSON.stringify(error))
+						res.status(500).send(JSON.stringify('error saving image ' + JSON.stringify(error)));
 					});
 				}
 			} else {
@@ -420,7 +439,7 @@ module.exports = function(app, express, db, log) {
 				}, {where: {userAuthId: userAID}});
 				helpers.respondDBQuery(user, req, res);
 			} else { //otherwise... no user exists to be updated. Send 500
-				res.status(500).send('No Such User Exists').end();
+				res.status(500).send(JSON.stringify('No Such User Exists'));
 			}
 		}).catch((err) => {
 			helpers.respondDBError(err, req, res);
@@ -478,7 +497,7 @@ module.exports = function(app, express, db, log) {
 
 	app.post('/api/employees', (req, res) => {
 		if (!req.body) { //if no body exists, send 400
-			res.status(400).send('invalid request');
+			res.status(400).send(JSON.stringify('invalid request'));
 		} else { //otherwise...
 			let employ = {//store inbound employee data in employ object
 		    userId: req.body.userId,
@@ -494,7 +513,7 @@ module.exports = function(app, express, db, log) {
 		  		db.EmployeeData.create(employ).then((employee) => {//create a new entry in the employee database
 		  			res.json({exists: true, employee: employee}).end();
 		  		}).catch((err) => {//error handling
-		  			res.status(500).send('error creating new employee ' + JSON.stringify(err));
+		  			res.status(500).send(JSON.stringify('error creating new employee ' + JSON.stringify(err)));
 		  		});
 		  	} else {//otherwise...
 		  		res.json({exists: true, employee: employee}).end();//do nothing important
@@ -519,7 +538,7 @@ module.exports = function(app, express, db, log) {
 				console.log("UPDATED THE EMPLOYEE")
 				helpers.respondDBQuery(employee, req, res);
 			} else { //otherwise... no user exists to be updated. Send 500
-				res.status(500).send('No Such Employee Exists').end();
+				res.status(500).send(JSON.stringify('No Such Employee Exists'));
 			}
 		}).catch((err) => {
 			helpers.respondDBError(err, req, res);
@@ -537,7 +556,7 @@ module.exports = function(app, express, db, log) {
 				console.log("DELETED THE EMPLOYEE")
 				helpers.respondDBQuery(employee, req, res);
 			} else { //otherwise... no user exists to be updated. Send 500
-				res.status(500).send('No Such Employee Exists').end();
+				res.status(500).send(JSON.stringify('No Such Employee Exists'));
 			}
 		}).catch((err) => {
 			helpers.respondDBError(err, req, res);

@@ -388,12 +388,15 @@ module.exports = function(app, express, db, log) {
 
 		  db.EmployeeData.find({where: {userId: employ.userId}}).then((employee) => {
 		  	if (!!employee) {//if such an employee already exists...
-		  		console.log("Employee found!", employee.dataValues)
+		  		console.log("Employee found!", employee.dataValues);
+		  		res.end()
 		  	} else {//otherwise...
-		  		console.log("Employee not found!", employee.dataValues)
+		  		console.log("Employee not found!", employee.dataValues);
+		  		res.end()
 		  	}
 		  }).catch((err) => {
 		  	console.log("Some error...")
+		  	res.end()
 		  });
 		}
 	});

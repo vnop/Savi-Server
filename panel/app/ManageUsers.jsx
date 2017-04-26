@@ -31,7 +31,7 @@ class ManageUsers extends React.Component {
       .then(resp => resp.json())
       .then(data => this.setState({cityData: data}))
       .catch(err => console.error(err));
-  }//
+  }
 
   render() {
     return (
@@ -236,6 +236,7 @@ class UserData extends React.Component {
     this.countryForm = this.countryForm.bind(this);
     this.cityForm = this.cityForm.bind(this);
     this.typeForm = this.typeForm.bind(this);
+    this.seatsForm = this.seatsForm.bind(this);
   }
 
   //FORM CONTROLS
@@ -318,6 +319,13 @@ class UserData extends React.Component {
     this.setState({ edit: false, origType: this.state.type });//Toggle state back to false when save button is clicked
   }
 
+  componentWillMount() {
+    fetch('https://savi-travel.com'+config.port+'/api/employees?userId='this.props.data.id, {method: 'GET'})
+      .then(resp => resp.json())
+      .then(data => console.log(data))
+      .catch(err => console.error(err));
+  }
+
   render() {
     return (
       <div>
@@ -361,7 +369,11 @@ class UserData extends React.Component {
                   if (this.state.type === "Driver") {
                     return (
                       <div>
-                        Make a menu for seats
+                        <select onChange={this.seatsForm} value={this.state.seats}>
+                          {[1,2,3,4,5,6,7,8,9,10].map((map, i) => {
+                            <option key={i} value={item}>item</option>
+                          })}
+                        </select>
                       </div>
                     )
                   }

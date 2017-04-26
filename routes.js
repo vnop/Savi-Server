@@ -443,11 +443,6 @@ module.exports = function(app, express, db, log) {
 		if (!req.body) { //if no body exists, send 400
 			res.status(400).send('invalid request');
 		} else { //otherwise...
-
-			db.City.find({where: {name: req.body.city}}).then((city) => {
-				console.log(city)
-			})
-
 			let employ = {//store inbound employee data in employ object
 		    userId: req.body.userId,
 		    cityId: req.body.city,
@@ -455,6 +450,12 @@ module.exports = function(app, express, db, log) {
 		    rating: req.body.rating,
 		    seats: req.body.seats
 		  };
+
+			db.City.find({where: {name: req.body.city}}).then((city) => {
+				console.log(city.dataValues.id);
+				employ.cityId = city.dataValues.id;
+			})
+
 
 		  //first, check to see if an employee entry exists already
 		  db.EmployeeData.find({where: {userId: employ.userId}}).then((employee) => {

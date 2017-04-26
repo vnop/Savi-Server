@@ -361,7 +361,7 @@ module.exports = function(app, express, db, log) {
 			});
 		} else if (!!employ.userId) { //else, if an employee id exists...
 			db.EmployeeData.find({where: {userId: employ.userId}}).then((employee) => { //grab all that match
-				helpers.respondDBQuery(employ, req, res);
+				helpers.respondDBQuery(employee, req, res);
 			}).catch((err) => {
 				helpers.respondDBError(err, req, res);
 			});

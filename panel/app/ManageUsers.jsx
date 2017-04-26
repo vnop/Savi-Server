@@ -348,8 +348,6 @@ class UserData extends React.Component {
                 </div>
                 <div>
                   City:
-                  {this.state.cityId}
-                  {this.state.city}
                   <select onChange={this.cityForm} value={this.state.city}>
                     {this.props.cityData.map((item, i) => {
                       return (
@@ -366,6 +364,15 @@ class UserData extends React.Component {
                     <option value="Tour Guide">Tour Guide</option>
                   </select>
                 </div>
+                {(()=>{
+                  if (this.state.type === "Driver") {
+                    return (
+                      <div>
+                        He's a driver
+                      </div>
+                    )
+                  }
+                })()}
               </div>
             )
           } else {

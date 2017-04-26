@@ -97,7 +97,10 @@ class DynamicForms extends React.Component {
     this.props.callback([]);//Reset the "Data" state in ManageUsers before updating it
     //GET request for the input data
     fetch('https://savi-travel.com:'+config.port+'/api/users'+searchTerm(), {mode: 'no-cors'})
-      .then(resp => resp.json())
+      .then(resp => {
+        resp.json();
+        console.log("DATA GET")
+      })
       .then(data => {
       this.props.callback(data);
       console.log("DATA SEND")

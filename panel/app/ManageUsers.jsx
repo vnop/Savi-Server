@@ -41,7 +41,7 @@ class ManageUsers extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="manage-users-component">
         <form>
           Search By:
           <select onChange={this.methodMenu} value={this.state.method}>
@@ -341,7 +341,7 @@ class UserData extends React.Component {
 
   render() {
     return (
-      <div className="manage-users-component">
+      <div>
         <button onClick={(this.state.edit) ? this.saveHandler : this.toggleEdit}>{(this.state.edit) ? "Save" : "Edit"}</button>
         {(()=>{
           if (this.state.edit) {

@@ -124,7 +124,22 @@ body {
 					}
 
 					div.users-data-loop {
+						div.user-data-container {
+							div.user-data-inner-container {
+								@include outer-container;
+								div.data-details-display {
+									@include span-columns(8);
+								}
 
+								div.data-details-edit {
+									@include span-columns(8);
+								}
+
+								div.edit-button {
+									@include span-columns(4);
+								}
+							}
+						}
 					}
 				}
 

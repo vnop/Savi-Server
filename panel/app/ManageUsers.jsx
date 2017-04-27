@@ -348,9 +348,6 @@ class UserData extends React.Component {
   render() {
     return (
       <div className="user-data-inner-container">
-        <div className="edit-button">
-          <button onClick={(this.state.edit) ? this.saveHandler : this.toggleEdit}>{(this.state.edit) ? "Save" : "Edit"}</button>
-        </div>
         {(()=>{
           if (this.state.edit) {
             return (
@@ -426,7 +423,9 @@ class UserData extends React.Component {
             )
           }
         })()}
-        <hr/>
+        <div className="edit-button">
+          <button onClick={(this.state.edit) ? this.saveHandler : this.toggleEdit}>{(this.state.edit) ? "Save" : "Edit"}</button>
+        </div>
       </div>
     )
   }

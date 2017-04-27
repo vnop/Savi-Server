@@ -14,7 +14,7 @@ const db = require('./db/db');
 const helpers = require('./helpers');
 const config = require('./config/config');
 
-const schema = new Sequelize(config.dbName, 'root', config.password);
+const schema = new Sequelize(config.dbName, config.uname, config.password);
 
 db.syncTables(false, schema);
 const app = express()
@@ -23,11 +23,11 @@ const app = express()
 
 require('./routes.js')(app, express, db);
 
-var pKey = fs.readFileSync('/etc/letsencrypt/live/savi-travel.com/privkey.pem');
-var cert = fs.readFileSync('/etc/letsencrypt/live/savi-travel.com/fullchain.pem');
-var ca = fs.readFileSync('/etc/letsencrypt/live/savi-travel.com/chain.pem');
+var pKey = fs.readFileSync(config.pKeyPath);
+var cert = fs.readFileSync(config.certPath);
+// var ca = fs.readFileSync('/etc/letsencrypt/live/savi-travel.com/chain.pem');
 
-let server = https.createServer({key: pKey, cert: cert, ca: ca}, app);
+let server = https.createServer({key: pKey, cert: cert}, app);
 
 server.listen(config.port, () => {console.log('listening on port', config.port)});
 

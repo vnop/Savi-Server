@@ -209,7 +209,7 @@ class DisplayUsers extends React.Component {
       <div className="users-data-loop">
         {this.props.data.map((item, i) => {
           return (
-            <div key={i}>
+            <div className="user-data-container" key={i}>
               <UserData data={item} cityData={this.props.cityData}/>
             </div>
           )
@@ -347,12 +347,14 @@ class UserData extends React.Component {
 
   render() {
     return (
-      <div>
-        <button onClick={(this.state.edit) ? this.saveHandler : this.toggleEdit}>{(this.state.edit) ? "Save" : "Edit"}</button>
+      <div className="user-data-inner-container">
+        <div className="edit-button">
+          <button onClick={(this.state.edit) ? this.saveHandler : this.toggleEdit}>{(this.state.edit) ? "Save" : "Edit"}</button>
+        </div>
         {(()=>{
           if (this.state.edit) {
             return (
-              <div>
+              <div className="data-details">
                 <div>Name: <input type="text" value={this.state.userName} onChange={this.nameForm}/></div>
                 <div>Email: <input type="text" value={this.state.userEmail} onChange={this.emailForm}/></div>
                 <div>Phone Number: <input type="text" value={this.state.mdn} onChange={this.mdnForm}/></div>

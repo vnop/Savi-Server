@@ -120,7 +120,8 @@ class AddTour extends React.Component {
             <input type="submit" value="Add" />
           </form>
         </div>
-
+        {JSON.stringify(this.state.cityData[0])}
+        {JSON.stringify(this.state.tourData[0])}
         <div className="available-records">
           <h2>Available Tours</h2>
           {this.state.cityData.map((item, i) => {

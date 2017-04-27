@@ -405,21 +405,30 @@ class UserData extends React.Component {
           } else {
             return (
               <div className="data-details-display">
-                <div>Name: {this.state.userName}</div>
-                <div>Email: {this.state.userEmail}</div>
-                <div>Phone Number: {this.state.mdn}</div>
-                <div>Country: {this.state.country}</div>
-                <div>City: {this.state.city}</div>
-                <div>Status: {this.state.type}</div>
-                {(()=>{
-                  if (this.state.type === "Driver") {
-                    return (
-                      <div>
-                        Available Seats: {this.state.seats}
-                      </div>
-                    )
-                  }
-                })()}
+                <div className="data-wrapper">
+                  <p className="element">Name:</p>
+                  <p className="data">{this.state.userName}</p>
+                </div>
+                <div>
+                  <p className="element">Email:</p>
+                  <p className="data">{this.state.userEmail}</p>
+                </div>
+                <div>
+                  <p className="element">Phone Number:</p>
+                  <p className="data">{this.state.mdn}</p>
+                </div>
+                <div>
+                  <p className="element">Country:</p>
+                  <p className="data">{this.state.country}</p>
+                </div>
+                <div>
+                  <p className="element">City:</p>
+                  <p className="data">{this.state.city}</p></p>
+                </div>
+                <div>
+                  <p className="element">Status:</p>
+                  <p className="data">{this.state.type}</p>
+                </div>
               </div>
             )
           }

@@ -131,9 +131,21 @@ body {
 								margin: 0 15%;
 							}
 							div.user-data-inner-container {
+								padding: 5% 0;
 								@include outer-container;
 								div.data-details-display {
 									@include span-columns(8);
+
+									div.data-wrapper {
+										@include outer-container;
+										p.element {
+											@include span-columns(6);
+										}
+
+										p.data {
+											@include span-columns(6);
+										}
+									}
 								}
 
 								div.data-details-edit {

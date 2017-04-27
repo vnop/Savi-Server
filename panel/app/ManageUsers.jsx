@@ -353,11 +353,20 @@ class UserData extends React.Component {
           if (this.state.edit) {
             return (
               <div className="data-details-edit">
-                <div>Name: <input type="text" value={this.state.userName} onChange={this.nameForm}/></div>
-                <div>Email: <input type="text" value={this.state.userEmail} onChange={this.emailForm}/></div>
-                <div>Phone Number: <input type="text" value={this.state.mdn} onChange={this.mdnForm}/></div>
-                <div>
-                  Country:
+                <div className="data-wrapper">
+                  <p className="element">Name:</p>
+                  <input type="text" value={this.state.userName} onChange={this.nameForm}/>
+                </div>
+                <div className="data-wrapper">
+                  <p className="element">Email:</p>
+                  <input type="text" value={this.state.userEmail} onChange={this.emailForm}/>
+                </div>
+                <div className="data-wrapper">
+                  <p className="element">Phone Number:</p>
+                  <input type="text" value={this.state.mdn} onChange={this.mdnForm}/>
+                </div>
+                <div className="data-wrapper">
+                  <p className="element">Country:</p>
                   <select onChange={this.countryForm} value={this.state.country}>
                     {countries.map((item, i) => {
                       return (
@@ -366,8 +375,8 @@ class UserData extends React.Component {
                     })}
                   </select>
                 </div>
-                <div>
-                  City:
+                <div className="data-wrapper">
+                  <p className="element">City:</p>
                   <select onChange={this.cityForm} value={this.state.city}>
                     {this.props.cityData.map((item, i) => {
                       return (
@@ -376,8 +385,8 @@ class UserData extends React.Component {
                     })}
                   </select>
                 </div>
-                <div>
-                  Status:
+                <div className="data-wrapper">
+                  <p className="element">Status:</p>
                   <select onChange={this.typeForm} value={this.state.type}>
                     <option value="Tourist">Tourist</option>
                     <option value="Driver">Driver</option>

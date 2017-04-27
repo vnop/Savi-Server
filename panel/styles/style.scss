@@ -135,6 +135,7 @@ body {
 							div.user-data-inner-container {
 								padding: 5% 0;
 								@include outer-container;
+
 								div.data-details-display {
 									@include span-columns(8);
 
@@ -158,6 +159,22 @@ body {
 
 								div.data-details-edit {
 									@include span-columns(8);
+									div.data-wrapper {
+										margin-bottom: 5px;
+										@include outer-container;
+										p.element {
+											@include span-columns(6);
+											padding-left: 35%;
+											margin-top: 0;
+											margin-bottom: 0;
+										}
+
+										input, select {
+											@include span-columns(6);
+											margin-top: 0;
+											margin-bottom: 0;
+										}
+									}
 								}
 
 								div.edit-button {

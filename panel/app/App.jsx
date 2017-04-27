@@ -49,7 +49,7 @@ export default class App extends React.Component {
                   </span>
 
                   <span id="navItem" className="nav-item">
-                    <Link to="/login">Login</Link>
+                    <Link onClick={() => {window.loggedIn = false}}>Logout</Link>
                   </span>
 
                 </div>

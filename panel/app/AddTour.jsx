@@ -129,16 +129,16 @@ class AddTour extends React.Component {
                 <div>
                   {this.processData(this.state.tourData, "cityId", item.id).map((item, i) => {
                     return (
-                      <div className="record-container" key={i}>
-                        <p className="record-name">{item.title}</p>
+                      <div key={i}>
+                        <p>{item.title}</p>
+                        <div className="image-wrapper">
+                          <img className="record-images" src={"https://savi-travel.com:"+config.port+"/api/images/"+item.mainImage} />
+                        </div>
+                        <div className="record-description">{item.description}</div>
                       </div>
                     )
                   })}
                 </div>
-                <div className="image-wrapper">
-                  <img className="record-images" src={"https://savi-travel.com:"+config.port+"/api/images/"+item.mainImage} />
-                </div>
-                <div className="record-description">{item.description}</div>
               </div>
             )
           })}

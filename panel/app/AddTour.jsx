@@ -53,6 +53,10 @@ class AddTour extends React.Component {
           cityId: this.state.tourCity
         })
       }).then((res) => {
+        fetch('https://savi-travel.com:'+config.port+'/api/cities')
+          .then(resp => resp.json())
+          .then(data => this.setState({data}))
+          .catch(err => console.error(err));
         fetch('https://savi-travel.com:'+config.port+'/api/tours')
           .then(resp => resp.json())
           .then(data => this.setState({data}))

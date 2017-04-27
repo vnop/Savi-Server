@@ -153,7 +153,7 @@ class DynamicForms extends React.Component {
           <form onSubmit={this.handleSubmit}>
             <p>Key Word</p>
             <input type="text" value={this.state.userName} onChange={this.nameForm} />
-            <input type="submit" value="Search" />
+            <input type="submit" value="Search" className="manage-form-submit" />
           </form>
         </div>
       )
@@ -163,7 +163,7 @@ class DynamicForms extends React.Component {
           <form onSubmit={this.handleSubmit}>
             <p>Key Word</p>
             <input type="text" value={this.state.userEmail} onChange={this.emailForm} />
-            <input type="submit" value="Search" />
+            <input type="submit" value="Search" className="manage-form-submit" />
           </form>
         </div>
       )
@@ -173,7 +173,7 @@ class DynamicForms extends React.Component {
           <form onSubmit={this.handleSubmit}>
             <p>Key Word</p>
             <input type="text" value={this.state.mdn} onChange={this.mdnForm} />
-            <input type="submit" value="Search" />
+            <input type="submit" value="Search" className="manage-form-submit" />
           </form>
         </div>
       )
@@ -189,7 +189,7 @@ class DynamicForms extends React.Component {
                 )
               })}
             </select>
-            <input type="submit" value="Search" />
+            <input type="submit" value="Search" className="manage-form-submit" />
           </form>
         </div>
       )

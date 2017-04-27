@@ -29,7 +29,7 @@
 
 #### Running the app
   - To run the app you will need to build the app as well as start the server
-    - `npm build` will build the application
+    - `npm run build` will build the application
     - `npm start` will start the server application
     - `npm run live` will do both of these, in order
 

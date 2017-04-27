@@ -18,7 +18,7 @@ module.exports = function(app, express, db, log) {
 	}
 	app.use((req, res, next) => {
 		res.header('Access-Control-Allow-Origin', '*');
-		res.header('Access-Control-Allow-Headers', '*');
+		res.header('Access-Control-Allow-Headers', require('./headers-list'));
 		next();
 	});
 	app.use(express.static(path.join(__dirname, '/panel'))); //serves up access to panel

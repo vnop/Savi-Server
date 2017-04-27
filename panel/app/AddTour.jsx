@@ -96,6 +96,7 @@ class AddTour extends React.Component {
           <h3>Add New City</h3>
           <form className="centered-form" onSubmit={this.handleSubmit}>
             <select onChange={this.cityForm} value={this.state.tourCity}>
+              <label>Select City</label>
               {this.state.cityData.map((item, i) => {
                 return (
                   <option key={i} value={item.id}>{item.name}</option>
@@ -103,7 +104,7 @@ class AddTour extends React.Component {
               })}
             </select>
             <div className="input-wrapper">
-              <label>City</label>
+              <label>Tour Name</label>
               <input type="text" value={this.state.tourName} onChange={this.nameForm} />
             </div>
 

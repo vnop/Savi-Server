@@ -230,7 +230,7 @@ class UserData extends React.Component {
       city: this.props.data.city,
       type: this.props.data.type,
       origType: this.props.data.type,
-      seats: 1
+      seats: 0
     };
 
     //METHOD BINDINGS
@@ -332,7 +332,7 @@ class UserData extends React.Component {
       fetch('https://savi-travel.com:'+config.port+'/api/employees?userId='+this.props.data.id, {
         method: 'GET'
       }).then(resp => resp.json())
-      .then(data => {console.log(data.seats)})
+      .then(data => this.setState({seats: data.seats}))
       .catch(err => console.error(err));
     }
   }

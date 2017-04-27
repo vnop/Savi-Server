@@ -137,13 +137,19 @@ body {
 									@include span-columns(8);
 
 									div.data-wrapper {
+										margin-bottom: 5px;
 										@include outer-container;
 										p.element {
 											@include span-columns(6);
+											padding-left: 35%;
+											margin-top: 0;
+											margin-bottom: 0;
 										}
 
 										p.data {
 											@include span-columns(6);
+											margin-top: 0;
+											margin-bottom: 0;
 										}
 									}
 								}

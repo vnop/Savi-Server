@@ -10,6 +10,7 @@ $middleBlue: #1F4788;
 $lightGreen: #2ABB9B;
 
 $mainFont: play, Georgia;
+$secondaryFont: alegreya, Georgia;
 
 body {
 	background: $almostWhite;
@@ -87,7 +88,7 @@ body {
 				}
 
 				div.manage-users-component {
-					font-family: $mainFont;
+					font-family: $secondaryFont;
 					div.search-container {
 						margin: 0 35%;
 						form.search-by-form {

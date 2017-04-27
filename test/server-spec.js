@@ -372,11 +372,11 @@ describe('Bookings endpoint', () => {
   });
 
   it('/api/bookings should respond with a failure if there are no offerings', (done) => {
-    request(server).get('/api/bookings?tourId=1&date=00-00-0000&userId=ABCDEFGHIJKLMNOP3').expect('We were unable to book you with the given parameters', done);
+    request(server).get('/api/bookings?tourId=1&date=00-00-0000&userId=ABCDEFGHIJKLMNOP3').expect('"We were unable to book you with the given parameters"', done);
   });
 
   it('/api/bookings should respond with an error if the userId does not exist', (done) => {
-    request(server).get('/api/bookings?tourId=1&date=00-00-0001&userId=ABCDEFGHIJKLMNOP4').expect('user does not exist', done);
+    request(server).get('/api/bookings?tourId=1&date=00-00-0001&userId=ABCDEFGHIJKLMNOP4').expect('"user does not exist"', done);
   });
 });
 

@@ -48,10 +48,6 @@ export default class App extends React.Component {
                     <Link to="/manageusers">Manage Users</Link>
                   </span>
 
-                  <span id="navItem" className="nav-item">
-                    <Link onClick={() => {window.loggedIn = false}}>Logout</Link>
-                  </span>
-
                 </div>
               </div>
             </nav>

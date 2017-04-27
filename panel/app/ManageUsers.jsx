@@ -263,7 +263,7 @@ class UserData extends React.Component {
 
   //Events that take place when the "Save" button is clicked
   saveHandler(e) {
-    if (this.state.type === "Tourist") {//if the new type is "Tourist"...
+    if (this.state.type === "Tourist" && this.state.origType !== "Tourist") {//if the new type is "Tourist"...
       //delete the employee entry for this userId
       fetch('https://savi-travel.com:'+config.port+'/api/employees', {
         method: 'DELETE',
@@ -275,7 +275,7 @@ class UserData extends React.Component {
           userId: this.props.data.id
         })
       });
-    } else if (this.state.type === "Driver" || this.state.type === "Tour Guide") {//otherwise, the new state must be either "Tour Guide" or "Driver"
+    } else if ((this.state.type === "Driver" || this.state.type === "Tour Guide") && this.state.origType === "Tourist") {//otherwise, the new state must be either "Tour Guide" or "Driver"
       //create a new employee entry for this userId
       fetch('https://savi-travel.com:'+config.port+'/api/employees', {
         method: 'POST',
@@ -291,21 +291,22 @@ class UserData extends React.Component {
           city: this.state.city
         })
       });
+    } else {//in any other case...
+      //send a request to update the employee
+      fetch('https://savi-travel.com:'+config.port+'/api/employees/'+this.props.data.id, {
+        method: 'PUT',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          type: this.state.type,
+          rating: 3,
+          seats: this.state.seats,
+          city: this.state.city
+        })
+      });
     }
-    //send a request to update the employee
-    fetch('https://savi-travel.com:'+config.port+'/api/employees/'+this.props.data.id, {
-      method: 'PUT',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        type: this.state.type,
-        rating: 3,
-        seats: this.state.seats,
-        city: this.state.city
-      })
-    });
 
     //PUT REQUEST FOR UPDATING USER INFORMATION
     fetch('https://savi-travel.com:'+config.port+'/api/users/'+this.state.userAuthId, {

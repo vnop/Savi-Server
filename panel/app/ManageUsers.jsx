@@ -396,8 +396,8 @@ class UserData extends React.Component {
                 {(()=>{
                   if (this.state.type === "Driver") {
                     return (
-                      <div>
-                      Available Seats:
+                      <div className="data-wrapper">
+                      <p className="element">Available Seats:</p>
                         <select onChange={this.seatsForm} value={this.state.seats}>
                           {[0,1,2,3,4,5,6,7,8,9,10].map((item, i) => {
                             return (
@@ -438,6 +438,16 @@ class UserData extends React.Component {
                   <p className="element">Status:</p>
                   <p className="data">{this.state.type}</p>
                 </div>
+                {(()=>{
+                  if (this.state.type === "Driver") {
+                    return (
+                      <div className="data-wrapper">
+                        <p className="element">Available Seats:</p>
+                        <p className="data">{this.state.seats}</p>
+                      </div>
+                    )
+                  }
+                })()}
               </div>
             )
           }

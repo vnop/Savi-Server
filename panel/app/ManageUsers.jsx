@@ -43,7 +43,7 @@ class ManageUsers extends React.Component {
     return (
       <div className="manage-users-component">
         <div className="search-container">
-          <form className="serach-by-form">
+          <form className="search-by-form">
             <p>Search By:</p>
             <select onChange={this.methodMenu} value={this.state.method}>
               <option value="userName">User Name</option>
@@ -181,6 +181,7 @@ class DynamicForms extends React.Component {
       return (
         <div className="word-to-search">
           <form onSubmit={this.handleSubmit}>
+            <p>Select City</p>
             <select onChange={this.cityForm} value={this.state.city}>
               {this.props.cityData.map((item, i) => {
                 return (

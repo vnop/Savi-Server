@@ -4,7 +4,7 @@
   "description": "its our server",
   "main": "server.js",
   "scripts": {
-    "test": "mocha -R spec test/server-spec.js",
+    "test": "mocha -R spec test/*.js",
     "start": "nodemon server.js 2>&1 | tee server.log",
     "build": "node_modules/.bin/webpack --config webpack.config.js",
     "local": "npm run build && nodemon server-local-testing.js",

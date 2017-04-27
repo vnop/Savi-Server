@@ -30,7 +30,6 @@ const saveImage = (imageURL, imageName) => {
   return new Promise((resolve, reject) => {
     request(options, (err, res, body) => {
       if (err) {
-        console.log('false because error on get')
         reject(err);
       } else {
         let bodyHeader = body.toString('hex', 0, 4);

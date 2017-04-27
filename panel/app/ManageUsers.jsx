@@ -404,6 +404,15 @@ class UserData extends React.Component {
                 <div>Country: {this.state.country}</div>
                 <div>City: {this.state.city}</div>
                 <div>Status: {this.state.type}</div>
+                {(()=>{
+                  if (this.state.type === "Driver") {
+                    return (
+                      <div>
+                        Available Seats: {this.state.seats}
+                      </div>
+                    )
+                  }
+                })()}
               </div>
             )
           }

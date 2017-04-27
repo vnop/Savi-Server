@@ -125,6 +125,7 @@ class AddTour extends React.Component {
           {this.state.cityData.map((item, i) => {
             return (
               <div className="record-container" key={i}>
+                {JSON.stringify(item)}
                 <p className="record-name">{item.title}</p>
                 <div>
                   {this.processData(this.state.tourData, "cityId", item.id).map((item, i) => {

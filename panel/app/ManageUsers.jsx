@@ -33,7 +33,7 @@ class ManageUsers extends React.Component {
 
   componentWillMount() {
     //get the current city list
-    fetch('https://savi-travel.com:'+config.port+'/api/cities', {mode: 'no-cors'})
+    fetch('https://savi-travel.com:'+config.port+'/api/cities')
       .then(resp => resp.json())
       .then(data => this.setState({cityData: data}))
       .catch(err => console.error(err));
@@ -104,7 +104,7 @@ class DynamicForms extends React.Component {
     };
     this.props.callback([]);//Reset the "Data" state in ManageUsers before updating it
     //GET request for the input data
-    fetch('https://savi-travel.com:'+config.port+'/api/users'+searchTerm(), {mode: 'no-cors'})
+    fetch('https://savi-travel.com:'+config.port+'/api/users'+searchTerm())
       .then(resp => resp.json())
       .then(data => this.props.callback(data))//sends the data up to the ManageUsers component
       .catch(err => console.error(err));

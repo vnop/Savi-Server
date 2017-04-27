@@ -78,12 +78,12 @@ class AddTour extends React.Component {
   //INITIAL DATA FETCH
   componentWillMount() {
     //get the current city list
-    fetch('https://savi-travel.com:'+config.port+'/api/cities', {mode: 'no-cors'})
+    fetch('https://savi-travel.com:'+config.port+'/api/cities')
       .then(resp => resp.json())
       .then(data => this.setState({cityData: data}))
       .catch(err => console.error(err));
     //get the current tour list
-    fetch('https://savi-travel.com:'+config.port+'/api/tours', {mode: 'no-cors'})
+    fetch('https://savi-travel.com:'+config.port+'/api/tours')
       .then(resp => resp.json())
       .then(data => this.setState({tourData: data}))
       .catch(err => console.error(err));
@@ -113,7 +113,7 @@ class AddTour extends React.Component {
             </div>
 
             <div className="input-wrapper">
-              <label>Image</label>
+              <label>Description</label>
               <input type="text" value={this.state.tourDesc} onChange={this.descForm} />
             </div>
 

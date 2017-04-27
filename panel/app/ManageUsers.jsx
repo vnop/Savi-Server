@@ -44,7 +44,7 @@ class ManageUsers extends React.Component {
       <div className="manage-users-component">
         <div className="search-container">
           <form className="serach-by-form">
-            Search By:
+            <p>Search By:</p>
             <select onChange={this.methodMenu} value={this.state.method}>
               <option value="userName">User Name</option>
               <option value="userEmail">Email</option>

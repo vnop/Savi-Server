@@ -126,11 +126,11 @@ class AddTour extends React.Component {
           {this.state.cityData.map((item, i) => {
             return (
               <div className="record-container" key={i}>
-                <p className="record-name">{item.title}</p>
+                <h3 className="record-name">{item.title}</h3>
                 {this.state.tourData.map((item, i) => {
                   return (
-                    <div>
-                      {JSON.stringify(item)}
+                    <div className="record-container" key{i}>
+                      <p className="record-name">{item.title}</p>
                     </div>
                   )
                 })}

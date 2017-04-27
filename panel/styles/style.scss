@@ -10,6 +10,7 @@ $middleBlue: #1F4788;
 $lightGreen: #2ABB9B;
 
 $mainFont: play, Georgia;
+$secondaryFont: alegreya, Georgia;
 
 body {
 	background: $almostWhite;
@@ -86,11 +87,133 @@ body {
 					@include three-column-frames;
 				}
 
+				div.manage-users-component {
+					div.search-container {
+						font-family: $mainFont;
+						margin: 0 35%;
+						form.search-by-form {
+							p {
+								margin: 20px 0 5px 0;
+							}
+
+							select {
+								width: 100%;
+								height: 30px;
+							}
+						}
+
+						div.word-to-search {
+							form {
+								p {
+									margin: 14px 0 5px 0;
+								}
+								select {
+									width: 100%;
+									height: 30px;
+								}
+								input[type="text"] {
+									width: 100%;
+									height: 30px;
+									border-radius: 5px;
+									border: 1px solid $mainBlue;
+								}
+								input.manage-form-submit {
+									margin-top: 25px;
+							    width: 100%;
+							    background: $mainBlue;
+							    padding: 5px;
+							    border: 0;
+							    font-size: 1.2em;
+							    color: $almostWhite;
+							    border-radius: 3px;
+								}
+							}
+						}
+					}
+
+					div.users-data-loop {
+						font-family: $secondaryFont;
+						margin-top: 50px;
+						div.user-data-container {
+							div.separator {
+								border-top: 1.5px solid $mainBlue;
+								border-left: 130px solid transparent;
+								border-right: 130px solid transparent;
+								margin: 0 15%;
+							}
+							div.user-data-inner-container {
+								padding: 5% 0;
+								@include outer-container;
+
+								div.data-details-display {
+									@include span-columns(8);
+
+									div.data-wrapper {
+										margin-bottom: 5px;
+										@include outer-container;
+										p.element {
+											@include span-columns(6);
+											padding-left: 35%;
+											margin-top: 0;
+											margin-bottom: 0;
+										}
+
+										p.data {
+											@include span-columns(6);
+											margin-top: 0;
+											margin-bottom: 0;
+										}
+									}
+								}
+
+								div.data-details-edit {
+									@include span-columns(8);
+									div.data-wrapper {
+										margin-bottom: 5px;
+										@include outer-container;
+										p.element {
+											@include span-columns(6);
+											padding-left: 35%;
+											margin-top: 0;
+											margin-bottom: 0;
+										}
+
+										input, select {
+											@include span-columns(6);
+											margin-top: 0;
+											margin-bottom: 0;
+										}
+									}
+								}
+
+								div.edit-button {
+									@include span-columns(4);
+									padding: 4% 18% 0 2%;
+									button {
+										width: 100%;
+										padding: 6px 0;
+										border-radius: 3px;
+										border: 0;
+										font-size: 1.1em;
+										background: $lightGreen;
+										color: $almostWhite;
+									}
+								}
+							}
+						}
+					}
+				}
+
 				div.home-section {
 					div.callout {
 						font-family: $mainFont;
 						height: 270px;
 						text-align: center;
+
+						h1 {
+							padding-top: 5%;
+    					font-size: 2.4em;
+						}
 					}
 
 					div.cities-images {
@@ -131,6 +254,53 @@ body {
 				div.info-section {
 					background: $almostWhite;
 					height: 270px;
+				}
+
+				div.login {
+					height: 100vh;
+			    position: absolute;
+			    top: 0;
+			    left: 0;
+			    width: 100vw;
+			    background: rgba(0, 0, 0, 0.8);
+
+			    div.login-form-wrapper {
+			    	margin: 0 33%;
+
+			    	form {
+			    		background: white;
+					    padding: 31px 32px 58px 32px;
+					    margin-top: 52%;
+					    border-radius: 3px;
+					    font-family: $mainFont;
+
+					    h4 {
+					    	text-align: center;
+					    }
+
+					    p {
+
+					    }
+
+					    input {
+								width: 100%;
+						    height: 30px;
+						    border-radius: 3px;
+						    border: 1px solid $mainBlue;
+					    }
+
+					    button {
+						    width: 100%;
+						    margin-top: 36px;
+						    height: 30px;
+						    border-radius: 3px;
+						    border: 0;
+						    background: $mainBlue;
+						    color: $almostWhite;
+						    font-size: 16px;
+					    }
+			    	}
+			    }
 				}
 
 				div.footer {

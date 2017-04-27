@@ -40,12 +40,17 @@ class Login extends React.Component {
   render() {
     return loggedIn ? (<Redirect to="/"/>) :
     (
-      <div>
-        <form onSubmit={this.attemptSignin}>
-          Username: <input type="text" ref="uName"></input>
-          Password: <input type="password" ref="pWord"></input>
-          <button type="submit">Submit</button>
-        </form>
+      <div className="login">
+        <div className="login-form-wrapper">
+          <form onSubmit={this.attemptSignin}>
+            <h4>Admin Login</h4>
+            <p>Username</p>
+            <input type="text" ref="uName"></input>
+            <p>Password</p>
+            <input type="password" ref="pWord"></input>
+            <button type="submit">Submit</button>
+          </form>
+        </div>
       </div>
     );
   }

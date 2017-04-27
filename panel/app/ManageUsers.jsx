@@ -41,17 +41,19 @@ class ManageUsers extends React.Component {
 
   render() {
     return (
-      <div>
-        <form>
-          Search By:
-          <select onChange={this.methodMenu} value={this.state.method}>
-            <option value="userName">User Name</option>
-            <option value="userEmail">Email</option>
-            <option value="mdn">Phone Number</option>
-            <option value="city">City</option>
-          </select>
-        </form>
-        <DynamicForms callback={this.transfer} method={this.state.method} cityData={this.state.cityData} />
+      <div className="manage-users-component">
+        <div className="search-container">
+          <form className="search-by-form">
+            <p>Search By:</p>
+            <select onChange={this.methodMenu} value={this.state.method}>
+              <option value="userName">User Name</option>
+              <option value="userEmail">Email</option>
+              <option value="mdn">Phone Number</option>
+              <option value="city">City</option>
+            </select>
+          </form>
+          <DynamicForms callback={this.transfer} method={this.state.method} cityData={this.state.cityData} />
+        </div>
         <DisplayUsers data={this.state.data} cityData={this.state.cityData}/>
       </div>
     )
@@ -147,35 +149,39 @@ class DynamicForms extends React.Component {
     //check for the value of the props.method to determine which form to render
     if (this.props.method==='userName') {//if the search method is by userName
       return (
-        <div>
+        <div className="word-to-search">
           <form onSubmit={this.handleSubmit}>
+            <p>Key Word</p>
             <input type="text" value={this.state.userName} onChange={this.nameForm} />
-            <input type="submit" value="Search" />
+            <input type="submit" value="Search" className="manage-form-submit" />
           </form>
         </div>
       )
     } else if (this.props.method==='userEmail') {//if the search method is by userEmail
       return (
-        <div>
+        <div className="word-to-search">
           <form onSubmit={this.handleSubmit}>
+            <p>Key Word</p>
             <input type="text" value={this.state.userEmail} onChange={this.emailForm} />
-            <input type="submit" value="Search" />
+            <input type="submit" value="Search" className="manage-form-submit" />
           </form>
         </div>
       )
     } else if (this.props.method==='mdn') {//if the search method is by mdn (mobile device number)
       return (
-         <div>
+         <div className="word-to-search">
           <form onSubmit={this.handleSubmit}>
+            <p>Key Word</p>
             <input type="text" value={this.state.mdn} onChange={this.mdnForm} />
-            <input type="submit" value="Search" />
+            <input type="submit" value="Search" className="manage-form-submit" />
           </form>
         </div>
       )
     } else if (this.props.method==='city') {//if the search method is by userName
       return (
-        <div>
+        <div className="word-to-search">
           <form onSubmit={this.handleSubmit}>
+            <p>Select City</p>
             <select onChange={this.cityForm} value={this.state.city}>
               {this.props.cityData.map((item, i) => {
                 return (
@@ -183,7 +189,7 @@ class DynamicForms extends React.Component {
                 )
               })}
             </select>
-            <input type="submit" value="Search" />
+            <input type="submit" value="Search" className="manage-form-submit" />
           </form>
         </div>
       )
@@ -200,10 +206,11 @@ class DisplayUsers extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="users-data-loop">
         {this.props.data.map((item, i) => {
           return (
-            <div key={i}>
+            <div className="user-data-container" key={i}>
+              <div className="separator"></div>
               <UserData data={item} cityData={this.props.cityData}/>
             </div>
           )
@@ -341,17 +348,25 @@ class UserData extends React.Component {
 
   render() {
     return (
-      <div>
-        <button onClick={(this.state.edit) ? this.saveHandler : this.toggleEdit}>{(this.state.edit) ? "Save" : "Edit"}</button>
+      <div className="user-data-inner-container">
         {(()=>{
           if (this.state.edit) {
             return (
-              <div>
-                <div>Name: <input type="text" value={this.state.userName} onChange={this.nameForm}/></div>
-                <div>Email: <input type="text" value={this.state.userEmail} onChange={this.emailForm}/></div>
-                <div>Phone Number: <input type="text" value={this.state.mdn} onChange={this.mdnForm}/></div>
-                <div>
-                  Country:
+              <div className="data-details-edit">
+                <div className="data-wrapper">
+                  <p className="element">Name:</p>
+                  <input type="text" value={this.state.userName} onChange={this.nameForm}/>
+                </div>
+                <div className="data-wrapper">
+                  <p className="element">Email:</p>
+                  <input type="text" value={this.state.userEmail} onChange={this.emailForm}/>
+                </div>
+                <div className="data-wrapper">
+                  <p className="element">Phone Number:</p>
+                  <input type="text" value={this.state.mdn} onChange={this.mdnForm}/>
+                </div>
+                <div className="data-wrapper">
+                  <p className="element">Country:</p>
                   <select onChange={this.countryForm} value={this.state.country}>
                     {countries.map((item, i) => {
                       return (
@@ -360,8 +375,8 @@ class UserData extends React.Component {
                     })}
                   </select>
                 </div>
-                <div>
-                  City:
+                <div className="data-wrapper">
+                  <p className="element">City:</p>
                   <select onChange={this.cityForm} value={this.state.city}>
                     {this.props.cityData.map((item, i) => {
                       return (
@@ -370,8 +385,8 @@ class UserData extends React.Component {
                     })}
                   </select>
                 </div>
-                <div>
-                  Status:
+                <div className="data-wrapper">
+                  <p className="element">Status:</p>
                   <select onChange={this.typeForm} value={this.state.type}>
                     <option value="Tourist">Tourist</option>
                     <option value="Driver">Driver</option>
@@ -398,27 +413,38 @@ class UserData extends React.Component {
             )
           } else {
             return (
-              <div>
-                <div>Name: {this.state.userName}</div>
-                <div>Email: {this.state.userEmail}</div>
-                <div>Phone Number: {this.state.mdn}</div>
-                <div>Country: {this.state.country}</div>
-                <div>City: {this.state.city}</div>
-                <div>Status: {this.state.type}</div>
-                {(()=>{
-                  if (this.state.type === "Driver") {
-                    return (
-                      <div>
-                        Available Seats: {this.state.seats}
-                      </div>
-                    )
-                  }
-                })()}
+              <div className="data-details-display">
+                <div className="data-wrapper">
+                  <p className="element">Name:</p>
+                  <p className="data">{this.state.userName}</p>
+                </div>
+                <div className="data-wrapper">
+                  <p className="element">Email:</p>
+                  <p className="data">{this.state.userEmail}</p>
+                </div>
+                <div className="data-wrapper">
+                  <p className="element">Phone Number:</p>
+                  <p className="data">{this.state.mdn}</p>
+                </div>
+                <div className="data-wrapper">
+                  <p className="element">Country:</p>
+                  <p className="data">{this.state.country}</p>
+                </div>
+                <div className="data-wrapper">
+                  <p className="element">City:</p>
+                  <p className="data">{this.state.city}</p>
+                </div>
+                <div className="data-wrapper">
+                  <p className="element">Status:</p>
+                  <p className="data">{this.state.type}</p>
+                </div>
               </div>
             )
           }
         })()}
-        <hr/>
+        <div className="edit-button">
+          <button onClick={(this.state.edit) ? this.saveHandler : this.toggleEdit}>{(this.state.edit) ? "Save" : "Edit"}</button>
+        </div>
       </div>
     )
   }

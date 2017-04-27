@@ -126,6 +126,10 @@ body {
 					div.users-data-loop {
 						margin-top: 50px;
 						div.user-data-container {
+							div.separator {
+								border-top: 1px solid $mainBlue;
+								margin: 0 15%;
+							}
 							div.user-data-inner-container {
 								@include outer-container;
 								div.data-details-display {

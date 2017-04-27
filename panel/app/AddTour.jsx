@@ -95,8 +95,8 @@ class AddTour extends React.Component {
         <div className="form-wrapper">
           <h3>Add New City</h3>
           <form className="centered-form" onSubmit={this.handleSubmit}>
+            <label>Select City</label>
             <select onChange={this.cityForm} value={this.state.tourCity}>
-              <label>Select City</label>
               {this.state.cityData.map((item, i) => {
                 return (
                   <option key={i} value={item.id}>{item.name}</option>

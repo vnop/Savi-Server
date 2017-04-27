@@ -329,7 +329,8 @@ class UserData extends React.Component {
   }
 
   componentWillMount() {
-    if (this.props.data.type !== "Tourist") {
+    if (this.props.data.type !== "Tourist") {//If the user is not a tourist...
+      //get their employee data and set their "seat" value to match what is returned
       fetch('https://savi-travel.com:'+config.port+'/api/employees?userId='+this.props.data.id, {
         method: 'GET'
       }).then(resp => resp.json())

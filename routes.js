@@ -16,6 +16,10 @@ module.exports = function(app, express, db, log) {
 	if (log === undefined) {
 		var log = true;
 	}
+	app.use((req, res, next) => {
+		res.header('Access-Control-Allow-Origin', '*');
+		next();
+	});
 	app.use(express.static(path.join(__dirname, '/panel'))); //serves up access to panel
 	if(log) {
 		app.use(morgan('dev')); //set logger

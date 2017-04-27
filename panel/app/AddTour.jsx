@@ -126,8 +126,14 @@ class AddTour extends React.Component {
           {this.state.cityData.map((item, i) => {
             return (
               <div className="record-container" key={i}>
-                {JSON.stringify(item)}
                 <p className="record-name">{item.title}</p>
+                {this.state.tourData.map((item, i) => {
+                  return (
+                    <div>
+                      {JSON.stringify(item)}
+                    </div>
+                  )
+                })}
                 <div className="image-wrapper">
                   <img className="record-images" src={"https://savi-travel.com:"+config.port+"/api/images/"+item.mainImage} />
                 </div>

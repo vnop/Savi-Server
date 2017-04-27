@@ -423,7 +423,7 @@ class UserData extends React.Component {
                 </div>
                 <div>
                   <p className="element">City:</p>
-                  <p className="data">{this.state.city}</p></p>
+                  <p className="data">{this.state.city}</p>
                 </div>
                 <div>
                   <p className="element">Status:</p>

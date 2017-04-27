@@ -88,12 +88,32 @@ body {
 
 				div.manage-users-component {
 					div.search-container {
+						margin: 0 35%;
 						form.search-by-form {
+							p {
 
+							}
+
+							select {
+								width: 100%;
+							}
 						}
 
 						div.word-to-search {
+							form {
+								p {
 
+								}
+								select {
+									width: 100%;
+								}
+								input[type="text"] {
+									width: 100%;
+								}
+								input[type="submit"] {
+									width: 100%;
+								}
+							}
 						}
 					}
 

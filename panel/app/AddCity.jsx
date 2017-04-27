@@ -43,10 +43,15 @@ class AddCity extends React.Component {
           name: this.state.cityName,
           mainImage: this.state.cityImg
         })
-      });
-      this.state.data.push({
-        name: this.state.cityName,
-        mainImage: this.state.cityName.replace(' ', '-').toLowerCase()+'_city.jpg'
+      }).then((res) => {
+        // this.state.data.push({
+        //   name: this.state.cityName,
+        //   mainImage: this.state.cityName.replace(' ', '-').toLowerCase()+'_city.jpg'
+        // });
+        fetch('https://savi-travel.com:'+config.port+'/api/cities')
+          .then(resp => resp.json())
+          .then(data => this.setState({data}))
+          .catch(err => console.error(err));
       });
       this.setState({ cityName: '', cityImg: '' }); //Clear the form after submission
     }
@@ -54,7 +59,7 @@ class AddCity extends React.Component {
 
   //INITIAL DATA FETCH
   componentWillMount() {
-    fetch('https://savi-travel.com:'+config.port+'/api/cities', {mode: 'no-cors'})
+    fetch('https://savi-travel.com:'+config.port+'/api/cities')
       .then(resp => resp.json())
       .then(data => this.setState({data}))
       .catch(err => console.error(err));

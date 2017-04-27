@@ -88,8 +88,8 @@ body {
 				}
 
 				div.manage-users-component {
-					font-family: $secondaryFont;
 					div.search-container {
+						font-family: $mainFont;
 						margin: 0 35%;
 						form.search-by-form {
 							p {
@@ -126,6 +126,7 @@ body {
 					}
 
 					div.users-data-loop {
+						font-family: $secondaryFont;
 						margin-top: 50px;
 						div.user-data-container {
 							div.separator {

@@ -113,7 +113,7 @@ class AddTour extends React.Component {
             </div>
 
             <div className="input-wrapper">
-              <label>Image</label>
+              <label>Description</label>
               <input type="text" value={this.state.tourDesc} onChange={this.descForm} />
             </div>
 

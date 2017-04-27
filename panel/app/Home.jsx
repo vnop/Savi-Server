@@ -10,7 +10,7 @@ class Home extends React.Component {
   }
 
   componentWillMount() {
-    fetch('https://savi-travel.com:'+config.port+'/api/cities')
+    fetch('https://savi-travel.com:'+config.port+'/api/cities') 
       .then(resp => resp.json())
       .then(data => this.setState({cityData: data}))
       .catch(err => console.error(err));
@@ -61,7 +61,7 @@ class Home extends React.Component {
                 <img src="https://kidtrol.com/wp-content/uploads/2015/12/kidtrol-app-download.png" />
               </div>
               <div className="image-wrapper">
-                <img src="https://cdn-images-1.medium.com/max/1200/1*OIIv4FEjJQMqh-zEPhtlYA.png" />
+                <img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" />
               </div>
             </div>
           </div>

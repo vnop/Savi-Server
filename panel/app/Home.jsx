@@ -61,7 +61,7 @@ class Home extends React.Component {
                 <img src="https://kidtrol.com/wp-content/uploads/2015/12/kidtrol-app-download.png" />
               </div>
               <div className="image-wrapper">
-                <img src="http://www.thelevites312.com/wp-content/uploads/2013/03/icon-google-play.png" />
+                <img src="https://cdn-images-1.medium.com/max/1200/1*OIIv4FEjJQMqh-zEPhtlYA.png" />
               </div>
             </div>
           </div>

@@ -409,23 +409,23 @@ class UserData extends React.Component {
                   <p className="element">Name:</p>
                   <p className="data">{this.state.userName}</p>
                 </div>
-                <div>
+                <div className="data-wrapper">
                   <p className="element">Email:</p>
                   <p className="data">{this.state.userEmail}</p>
                 </div>
-                <div>
+                <div className="data-wrapper">
                   <p className="element">Phone Number:</p>
                   <p className="data">{this.state.mdn}</p>
                 </div>
-                <div>
+                <div className="data-wrapper">
                   <p className="element">Country:</p>
                   <p className="data">{this.state.country}</p>
                 </div>
-                <div>
+                <div className="data-wrapper">
                   <p className="element">City:</p>
                   <p className="data">{this.state.city}</p>
                 </div>
-                <div>
+                <div className="data-wrapper">
                   <p className="element">Status:</p>
                   <p className="data">{this.state.type}</p>
                 </div>

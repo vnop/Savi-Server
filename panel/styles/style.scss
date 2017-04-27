@@ -257,8 +257,43 @@ body {
 			    top: 0;
 			    left: 0;
 			    width: 100vw;
-			    background: black;
-			    opacity: .7;
+			    background: rgba(0, 0, 0, 0.8);
+
+			    div.login-form-wrapper {
+			    	margin: 0 33%;
+
+			    	form {
+			    		background: white;
+					    padding: 58px 32px;
+					    margin-top: 52%;
+					    border-radius: 3px;
+
+					    h4 {
+					    	text-align: center;
+					    }
+
+					    p {
+
+					    }
+
+					    input {
+								width: 100%;
+						    height: 30px;
+						    border-radius: 3px;
+					    }
+
+					    button {
+						    width: 100%;
+						    margin-top: 36px;
+						    height: 30px;
+						    border-radius: 3px;
+						    border: 0;
+						    background: $mainBlue;
+						    color: $almostWhite;
+						    font-size: 16px;
+					    }
+			    	}
+			    }
 				}
 
 				div.footer {

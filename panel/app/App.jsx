@@ -19,6 +19,7 @@ export default class App extends React.Component {
       <Router>
         <div style={Styles.mainContainer} className="main-container">
           <div style={Styles.innerWrapper} className="inner-wrapper">
+            <div className="overlay"></div>
             <nav style={Styles.navbar} className="navbar">
               <div style={Styles.navInnerWrapper} className="nav-inner-wrapper">
                 <div className="workers-nav">

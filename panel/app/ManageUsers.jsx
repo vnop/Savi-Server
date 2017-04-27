@@ -438,6 +438,16 @@ class UserData extends React.Component {
                   <p className="element">Status:</p>
                   <p className="data">{this.state.type}</p>
                 </div>
+                {(()=>{
+                  if (this.state.type === "Driver") {
+                    return (
+                      <div className="data-wrapper">
+                        <p className="element">Available Seats:</p>
+                        <p className="data">{this.state.seats}</p>
+                      </div>
+                    )
+                  }
+                })()}
               </div>
             )
           }

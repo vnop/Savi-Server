@@ -105,7 +105,7 @@ body {
 						div.word-to-search {
 							form {
 								p {
-									margin: 20px 0 5px 0;
+									margin: 14px 0 5px 0;
 								}
 								select {
 									width: 100%;
@@ -115,10 +115,10 @@ body {
 									width: 100%;
 									height: 30px;
 									border-radius: 5px;
-									border: 0;
+									border: 1px solid $mainBlue;
 								}
 								input.manage-form-submit {
-									margin-top: 19px;
+									margin-top: 25px;
 							    width: 100%;
 							    background: $mainBlue;
 							    padding: 5px;
@@ -249,6 +249,16 @@ body {
 				div.info-section {
 					background: $almostWhite;
 					height: 270px;
+				}
+
+				div.login {
+					height: 100vh;
+			    position: absolute;
+			    top: 0;
+			    left: 0;
+			    width: 100vw;
+			    background: black;
+			    opacity: .7;
 				}
 
 				div.footer {

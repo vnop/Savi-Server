@@ -209,6 +209,11 @@ body {
 						font-family: $mainFont;
 						height: 270px;
 						text-align: center;
+
+						h1 {
+							padding-top: 5%;
+    					font-size: 2.4em;
+						}
 					}
 
 					div.cities-images {

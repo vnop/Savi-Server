@@ -208,6 +208,7 @@ class DisplayUsers extends React.Component {
     return (
       <div className="users-data-loop">
         {this.props.data.map((item, i) => {
+          <div className="separator"></div>
           return (
             <div className="user-data-container" key={i}>
               <UserData data={item} cityData={this.props.cityData}/>

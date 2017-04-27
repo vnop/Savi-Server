@@ -27,7 +27,7 @@ var pKey = fs.readFileSync(config.pKeyPath);
 var cert = fs.readFileSync(config.certPath);
 // var ca = fs.readFileSync('/etc/letsencrypt/live/savi-travel.com/chain.pem');
 
-let server = https.createServer({key: pKey, cert: cert}, app);
+let server = https.createServer({key: pKey, cert: cert, passphrase: config.sslPass}, app);
 
 server.listen(config.port, () => {console.log('listening on port', config.port)});
 

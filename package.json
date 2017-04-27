@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "mocha -R spec test/server-spec.js",
-    "start": "sudo nodemon server.js 2>&1 | tee server.log",
+    "start": "nodemon server.js 2>&1 | tee server.log",
     "build": "node_modules/.bin/webpack --config webpack.config.js",
     "local": "npm run build && nodemon server-local-testing.js",
     "live": "npm run build && npm start",

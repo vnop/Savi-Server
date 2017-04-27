@@ -354,7 +354,7 @@ class UserData extends React.Component {
         {(()=>{
           if (this.state.edit) {
             return (
-              <div className="data-details">
+              <div className="data-details-edit">
                 <div>Name: <input type="text" value={this.state.userName} onChange={this.nameForm}/></div>
                 <div>Email: <input type="text" value={this.state.userEmail} onChange={this.emailForm}/></div>
                 <div>Phone Number: <input type="text" value={this.state.mdn} onChange={this.mdnForm}/></div>
@@ -406,7 +406,7 @@ class UserData extends React.Component {
             )
           } else {
             return (
-              <div>
+              <div className="data-details-display">
                 <div>Name: {this.state.userName}</div>
                 <div>Email: {this.state.userEmail}</div>
                 <div>Phone Number: {this.state.mdn}</div>

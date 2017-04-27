@@ -12,7 +12,7 @@ class Home extends React.Component {
   componentWillMount() {
     fetch('https://savi-travel.com:'+config.port+'/api/cities', {mode: 'no-cors'})
       .then(resp => resp.json())
-      .then(data => this.setState({cityData: data}))
+      .then((data) => {this.setState({cityData: data})})
       .catch((err) => {console.error(err)});
   }
 

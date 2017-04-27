@@ -19,8 +19,6 @@ const schema = new Sequelize(config.dbName, config.uname, config.password);
 db.syncTables(false, schema);
 const app = express()
 
-
-
 require('./routes.js')(app, express, db);
 
 var pKey = fs.readFileSync(config.pKeyPath);

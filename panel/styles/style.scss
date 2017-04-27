@@ -27,55 +27,60 @@ body {
 				background-size: cover;
 				height: 480px;
 
-				nav.navbar {
-					padding-top: 15px;
-					font-family: $mainFont;
+				div.overlay {
+					background: rgba(255, 255, 255, .3);
+					nav.navbar {
+						padding-top: 15px;
+						font-family: $mainFont;
 
-				  div.nav-inner-wrapper {
-				  	@include outer-container(100%);
+					  div.nav-inner-wrapper {
+					  	@include outer-container(100%);
 
-						div.workers-nav {
-							@include span-columns(6);
-							padding-left: 3%;
+							div.workers-nav {
+								@include span-columns(6);
+								padding-left: 3%;
 
-							span {
-								background: $lightGreen;
+								span {
+									background: $lightGreen;
+		    						padding: 5px 24px;
+		    						border-radius: 2px;
+		    						margin: 0 8px;
+									a {
+										text-decoration: none;
+										color: $almostWhite;
+									}
+								}
+							}
+
+							div.tourist-nav {
+								@include span-columns(6);
+								text-align: right;
+								padding-right: 3%;
+
+								span {
+									background: $mainBlue;
 	    						padding: 5px 24px;
 	    						border-radius: 2px;
 	    						margin: 0 8px;
-								a {
-									text-decoration: none;
-									color: $almostWhite;
+
+									a {
+										text-decoration: none;
+										color: $almostWhite;
+									}
 								}
 							}
-						}
-
-						div.tourist-nav {
-							@include span-columns(6);
-							text-align: right;
-							padding-right: 3%;
-
-							span {
-								background: $mainBlue;
-    						padding: 5px 24px;
-    						border-radius: 2px;
-    						margin: 0 8px;
-
-								a {
-									text-decoration: none;
-									color: $almostWhite;
-								}
-							}
-						}
-				  }
-				}
-
-				div.logo-wrapper {
-					text-align: center;
-					img {
-						width: 480px;
+					  }
 					}
+
+					div.logo-wrapper {
+						text-align: center;
+						img {
+							width: 480px;
+						}
+					}
+
 				}
+
 
 				div.add-cities-component {
 					@include row-centered-form;

@@ -95,7 +95,6 @@ class AddTour extends React.Component {
         <div className="form-wrapper">
           <h3>Add New City</h3>
           <form className="centered-form" onSubmit={this.handleSubmit}>
-            <label>Select City</label>
             <select onChange={this.cityForm} value={this.state.tourCity}>
               {this.state.cityData.map((item, i) => {
                 return (
@@ -127,6 +126,7 @@ class AddTour extends React.Component {
           {this.state.cityData.map((item, i) => {
             return (
               <div className="record-container" key={i}>
+                {JSON.stringify(item)}
                 <p className="record-name">{item.title}</p>
                 <div className="image-wrapper">
                   <img className="record-images" src={"https://savi-travel.com:"+config.port+"/api/images/"+item.mainImage} />

@@ -129,7 +129,7 @@ class AddTour extends React.Component {
                 <h3 className="record-name">{item.title}</h3>
                 {this.state.tourData.map((item, i) => {
                   return (
-                    <div className="record-container" key{i}>
+                    <div className="record-container" key={i}>
                       <p className="record-name">{item.title}</p>
                     </div>
                   )

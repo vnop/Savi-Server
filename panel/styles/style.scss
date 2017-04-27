@@ -91,27 +91,32 @@ body {
 						margin: 0 35%;
 						form.search-by-form {
 							p {
-
+								margin: 20px 0 5px 0;
 							}
 
 							select {
 								width: 100%;
+								height: 30px;
 							}
 						}
 
 						div.word-to-search {
 							form {
 								p {
-
+									margin: 20px 0 5px 0;
 								}
 								select {
 									width: 100%;
+									height: 30px;
 								}
 								input[type="text"] {
 									width: 100%;
+									height: 30px;
 								}
 								input[type="submit"] {
 									width: 100%;
+									margin-top: 20px;
+									height: 30px;
 								}
 							}
 						}

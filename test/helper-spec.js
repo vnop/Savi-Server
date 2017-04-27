@@ -5,7 +5,7 @@ const path = require('path');
 const expect = require('expect.js');
 const helpers = require('../helpers');
 
-describe ('helper function tests', () => {
+describe ('Helper Functions', () => {
 
   after((done) => {
     fs.unlinkSync(path.join(__dirname, '../img/' + 'test-img0.jpg'));

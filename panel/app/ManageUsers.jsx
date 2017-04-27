@@ -43,7 +43,7 @@ class ManageUsers extends React.Component {
     return (
       <div className="manage-users-component">
         <div className="search-container">
-          <form>
+          <form className="serach-by-form">
             Search By:
             <select onChange={this.methodMenu} value={this.state.method}>
               <option value="userName">User Name</option>
@@ -149,7 +149,7 @@ class DynamicForms extends React.Component {
     //check for the value of the props.method to determine which form to render
     if (this.props.method==='userName') {//if the search method is by userName
       return (
-        <div className="search-by-form">
+        <div className="word-to-search">
           <form onSubmit={this.handleSubmit}>
             <input type="text" value={this.state.userName} onChange={this.nameForm} />
             <input type="submit" value="Search" />
@@ -158,7 +158,7 @@ class DynamicForms extends React.Component {
       )
     } else if (this.props.method==='userEmail') {//if the search method is by userEmail
       return (
-        <div className="search-by-form">
+        <div className="word-to-search">
           <form onSubmit={this.handleSubmit}>
             <input type="text" value={this.state.userEmail} onChange={this.emailForm} />
             <input type="submit" value="Search" />
@@ -167,7 +167,7 @@ class DynamicForms extends React.Component {
       )
     } else if (this.props.method==='mdn') {//if the search method is by mdn (mobile device number)
       return (
-         <div className="search-by-form">
+         <div className="word-to-search">
           <form onSubmit={this.handleSubmit}>
             <input type="text" value={this.state.mdn} onChange={this.mdnForm} />
             <input type="submit" value="Search" />
@@ -176,7 +176,7 @@ class DynamicForms extends React.Component {
       )
     } else if (this.props.method==='city') {//if the search method is by userName
       return (
-        <div className="search-by-form">
+        <div className="word-to-search">
           <form onSubmit={this.handleSubmit}>
             <select onChange={this.cityForm} value={this.state.city}>
               {this.props.cityData.map((item, i) => {
@@ -202,7 +202,7 @@ class DisplayUsers extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="users-data-loop">
         {this.props.data.map((item, i) => {
           return (
             <div key={i}>

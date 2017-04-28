@@ -62,6 +62,7 @@ class AddCity extends React.Component {
     fetch('https://savi-travel.com:'+config.port+'/api/cities')
       .then(resp => resp.json())
       .then(data => this.setState({data}))
+      .then(data => console.log(this.state))
       .catch(err => console.error(err));
   }
 

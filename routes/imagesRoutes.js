@@ -9,7 +9,7 @@ module.exports = function(app, db) {
     let folder = path.resolve(__dirname, '..', '/img/' + imageName);
     console.log(path.join(__dirname, '../img/'))
     //let exists = fs.existsSync(path.join(__dirname, '../img/' + imageName));
-    let exists = fs.existsSync(folder);
+    let exists = fs.existsSync(folder+imageName);
     if (imageName && exists) {
       res.sendFile(path.join(__dirname, '/img/' + imageName));
     } else if (!exists) {

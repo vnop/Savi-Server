@@ -11,7 +11,7 @@ module.exports = function(app, db) {
     //let exists = fs.existsSync(path.join(__dirname, '../img/' + imageName));
     let exists = fs.existsSync(folder+imageName);
     if (imageName && exists) {
-      res.sendFile(path.join(__dirname, '/img/' + imageName));
+      res.sendFile(folder+imageName);
     } else if (!exists) {
       res.status(404).send(JSON.stringify('Image does not exist'));
     } else {

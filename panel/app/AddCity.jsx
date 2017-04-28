@@ -50,6 +50,7 @@ class AddCity extends React.Component {
         // });
         fetch('https://savi-travel.com:'+config.port+'/api/cities')
           .then(resp => resp.json())
+          .then(data => data.reverse())
           .then(data => this.setState({data}))
           .catch(err => console.error(err));
       });
@@ -61,6 +62,7 @@ class AddCity extends React.Component {
   componentWillMount() {
     fetch('https://savi-travel.com:'+config.port+'/api/cities')
       .then(resp => resp.json())
+      .then(data => data.reverse())
       .then(data => this.setState({data}))
       .catch(err => console.error(err));
   }

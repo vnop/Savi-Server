@@ -16,6 +16,7 @@ var stripe = require('stripe')('sk_test_t33bUz9G1cD2X6UexENeMvpd');
 const userRoutes = require('./routes/userRoutes.js');
 const cityRoutes = require('./routes/cityRoutes.js');
 const tourRoutes = require('./routes/tourRoutes.js');
+const employeeRoutes = require('./routes/employeeRoutes.js');
 const bookingRoutes = require('./routes/bookingRoutes.js');
 
 module.exports = function(app, express, db, log) {

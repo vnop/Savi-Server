@@ -1,14 +1,11 @@
 const fs = require('fs');
-const Promise = require('bluebird');
 const path = require('path');
 
 module.exports = function(app, db) {
 
   app.get('/api/images/:imageName', (req, res) => {
     let imageName = req.params.imageName;
-    let folder = path.join(__dirname, '../img/');
-    console.log(path.join(__dirname, '../img/'))
-    //let exists = fs.existsSync(path.join(__dirname, '../img/' + imageName));
+    let folder = path.join(__dirname, '../img/');//direct path
     let exists = fs.existsSync(folder+imageName);
     if (imageName && exists) {
       res.sendFile(folder+imageName);

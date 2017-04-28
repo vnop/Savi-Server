@@ -6,7 +6,7 @@ module.exports = function(app, db) {
 
   app.get('/api/images/:imageName', (req, res) => {
     let imageName = req.params.imageName;
-    let folder = path.resolve(__dirname, '..', '/img/' + imageName);
+    let folder = path.join(__dirname, '../img/');
     console.log(path.join(__dirname, '../img/'))
     //let exists = fs.existsSync(path.join(__dirname, '../img/' + imageName));
     let exists = fs.existsSync(folder+imageName);

@@ -4,17 +4,6 @@ const morgan = require('morgan');
 const express = require('express');
 const bodyParser = require('body-parser');
 
-//Individual Endpoints
-const activitiesRoutes = require('./routes/activitiesRoutes.js');
-const adminRoutes = require('./routes/adminRoutes.js');
-const bookingRoutes = require('./routes/bookingRoutes.js');
-const cityRoutes = require('./routes/cityRoutes.js');
-const employeeRoutes = require('./routes/employeeRoutes.js');
-const paymentsRoutes = require('./routes/paymentsRoutes.js');
-const imagesRoutes = require('./routes/imagesRoutes.js');
-const tourRoutes = require('./routes/tourRoutes.js');
-const userRoutes = require('./routes/userRoutes.js');
-
 module.exports = function(app, express, db, log) {
 	if (log === undefined) {
 		var log = true;
@@ -31,16 +20,16 @@ module.exports = function(app, express, db, log) {
 	app.use(bodyParser.json());
 	app.use(bodyParser.urlencoded({ extended: true }));
 
-	activitiesRoutes(app, db);
-	adminRoutes(app, db);
-	bookingRoutes(app, db);
-	cityRoutes(app, db);
-	employeeRoutes(app, db);
-	//imagesRoutes(app, db);
+	//Individual Endpoints
+	require('./routes/activitiesRoutes.js')(app, db);
+	require('./routes/adminRoutes.js')(app, db);
+	require('./routes/bookingRoutes.js')(app, db);
+	require('./routes/cityRoutes.js')(app, db);
+	require('./routes/employeeRoutes.js')(app, db);
+	require('./routes/paymentsRoutes.js')(app, db);
 	require('./routes/imagesRoutes.js')(app, db);
-	paymentsRoutes(app, db);
-	tourRoutes(app, db);
-	userRoutes(app, db);
+	require('./routes/tourRoutes.js')(app, db);
+	require('./routes/userRoutes.js')(app, db);
 
 	//Redirect Panel for invalid extensions
 	app.get('*', function (req, res) {

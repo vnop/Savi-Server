@@ -1,4 +1,5 @@
 const fs = require('fs');
+const Promise = require('bluebird');
 const path = require('path');
 
 module.exports = function(app, db) {

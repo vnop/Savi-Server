@@ -19,6 +19,8 @@ const tourRoutes = require('./routes/tourRoutes.js');
 const employeeRoutes = require('./routes/employeeRoutes.js');
 const bookingRoutes = require('./routes/bookingRoutes.js');
 const activitiesRoutes = require('./routes/activitiesRoutes.js');
+const imagesRoutes = require('./routes/imagesRoutes.js');
+const adminRoutes = require('./routes/adminRoutes.js');
 
 module.exports = function(app, express, db, log) {
 	if (log === undefined) {
@@ -36,24 +38,8 @@ module.exports = function(app, express, db, log) {
 	app.use(bodyParser.json());
 	app.use(bodyParser.urlencoded({ extended: true }));
 
-	app.post('/api/admin', (req, res) => {
-		if (!req.body || !req.body.userName || !req.body.password) {
-			res.status(400).send(JSON.stringify('Bad request'));
-		} else {
-			db.Administrator.find({where: {userName: req.body.userName}}).then((user) => {
-				if (!user) {
-					res.status(400).send(JSON.stringify('User not found'));
-				} else {
-					let authorized = bcrypt.compareSync(req.body.password, user.password);
-					if (authorized) {
-						res.send(JSON.stringify('Logged In Successfully'));
-					} else {
-						res.status(401).send(JSON.stringify('Bad Credentials'));
-					}
-				}
-			});
-		}
-	});
+
+
 	app.post('/payments', function(req, res){
   	console.log('payment request..', req.body)
   	var token = req.body.stripeToken; // Using Express
@@ -91,25 +77,14 @@ module.exports = function(app, express, db, log) {
 		});
 	});
 
+	adminRoutes(app, db);
 	cityRoutes(app, db);
 	activitiesRoutes(app, db);
 	bookingRoutes(app, db);
-
-	app.get('/api/images/:imageName', (req, res) => {
-	  let imageName = req.params.imageName;
-	  let exists = fs.existsSync(path.join(__dirname, '/img/' + imageName));
-	  if (imageName && exists) {
-	    res.sendFile(path.join(__dirname, '/img/' + imageName));
-	  } else if (!exists) {
-	    res.status(404).send(JSON.stringify('Image does not exist'));
-	  } else {
-	    res.status(400).send(JSON.stringify('Invalid param string'));
-	  }
-	});
-
 	tourRoutes(app, db);
 	userRoutes(app, db);
 	employeeRoutes(app, db);
+	imagesRoutes(app, db);
 
 	//Redirect Panel for invalid extensions
 	app.get('*', function (req, res) {

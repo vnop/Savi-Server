@@ -1,16 +1,5 @@
 const fs = require('fs');
 const path = require('path');
-const mysql = require('mysql');
-const https = require('https');
-const morgan = require('morgan');
-const express = require('express');
-const Promise = require('bluebird');
-const bcrypt = require('bcrypt-nodejs');
-const bodyParser = require('body-parser');
-const helpers = require('../helpers');
-const nodemailer = require('nodemailer');
-const mailer = require('../mailer/mailer');
-var stripe = require('stripe')('sk_test_t33bUz9G1cD2X6UexENeMvpd');
 
 module.exports = function(app, db) {
 

@@ -1,4 +1,5 @@
 const helpers = require('../helpers');
+const bcrypt = require('bcrypt-nodejs');
 
 module.exports = function(app, db) {
   app.post('/api/admin', (req, res) => {

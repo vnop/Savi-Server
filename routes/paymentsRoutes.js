@@ -1,6 +1,6 @@
 const helpers = require('../helpers');
 const stripe = require('stripe')('sk_test_t33bUz9G1cD2X6UexENeMvpd');
-
+//
 module.exports = function(app, db) {
 
   app.post('/payments', function(req, res){

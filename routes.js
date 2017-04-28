@@ -13,7 +13,7 @@ const mailer = require('./mailer/mailer');
 var stripe = require('stripe')('sk_test_t33bUz9G1cD2X6UexENeMvpd');
 
 //Individual Endpoints
-const userRouts = require('./routes/userRoutes.js');
+const userRoutes = require('./routes/userRoutes.js');
 
 module.exports = function(app, express, db, log) {
 	if (log === undefined) {

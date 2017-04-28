@@ -87,6 +87,8 @@ module.exports = function(app, express, db, log) {
 		});
 	});
 
+	cityRoutes(app, db);
+
 	// app.get('/api/cities', (req, res) => {
 	//   let cityId = req.query.cityId;
 	//   if (!cityId) {

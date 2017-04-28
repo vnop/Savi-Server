@@ -1,4 +1,6 @@
 const helpers = require('../helpers');
+const mailer = require('../mailer/mailer.js');
+const Promise = require('bluebird');
 
 module.exports = function(app, db) {
 

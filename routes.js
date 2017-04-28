@@ -1,26 +1,27 @@
-const fs = require('fs');
+//const fs = require('fs');
 const path = require('path');
-const mysql = require('mysql');
+//const mysql = require('mysql');
 const https = require('https');
 const morgan = require('morgan');
 const express = require('express');
-const Promise = require('bluebird');
-const bcrypt = require('bcrypt-nodejs');
+// const Promise = require('bluebird');
+//const bcrypt = require('bcrypt-nodejs');
 const bodyParser = require('body-parser');
-const helpers = require('./helpers');
-const nodemailer = require('nodemailer');
-const mailer = require('./mailer/mailer');
-var stripe = require('stripe')('sk_test_t33bUz9G1cD2X6UexENeMvpd');
+//const helpers = require('./helpers');
+// const nodemailer = require('nodemailer');
+// const mailer = require('./mailer/mailer');
+//var stripe = require('stripe')('sk_test_t33bUz9G1cD2X6UexENeMvpd');
 
 //Individual Endpoints
-const userRoutes = require('./routes/userRoutes.js');
-const cityRoutes = require('./routes/cityRoutes.js');
-const tourRoutes = require('./routes/tourRoutes.js');
-const employeeRoutes = require('./routes/employeeRoutes.js');
-const bookingRoutes = require('./routes/bookingRoutes.js');
 const activitiesRoutes = require('./routes/activitiesRoutes.js');
-const imagesRoutes = require('./routes/imagesRoutes.js');
 const adminRoutes = require('./routes/adminRoutes.js');
+const bookingRoutes = require('./routes/bookingRoutes.js');
+const cityRoutes = require('./routes/cityRoutes.js');
+const employeeRoutes = require('./routes/employeeRoutes.js');
+const paymentRoutes = require('./routes/paymentRoutes.js');
+const imagesRoutes = require('./routes/imagesRoutes.js');
+const tourRoutes = require('./routes/tourRoutes.js');
+const userRoutes = require('./routes/userRoutes.js');
 
 module.exports = function(app, express, db, log) {
 	if (log === undefined) {
@@ -39,52 +40,15 @@ module.exports = function(app, express, db, log) {
 	app.use(bodyParser.urlencoded({ extended: true }));
 
 
-
-	app.post('/payments', function(req, res){
-  	console.log('payment request..', req.body)
-  	var token = req.body.stripeToken; // Using Express
-  	var totalAmount = parseFloat(req.body.totalAmount) * 100
-
-  	// Create a Customer:
-		// stripe.customers.create({
-		//   email: "paying.user@example.com",
-		//   source: token,
-		// }).then(function(customer) {
-		  // // YOUR CODE: Save the customer ID and other info in a database for later.
-		//   return stripe.charges.create({
-		//     amount: 1000,
-		//     currency: "usd",
-		//     customer: customer.id,
-		//   });
-		// }).then(function(charge) {
-		  // // Use and save the charge info.
-		// });
-
-		//Charge the user's card:
-		var charge = stripe.charges.create({
-		  amount: totalAmount,
-		  currency: "usd",
-		  description: "savi test realAmount charges",
-		  source: token,
-		}, function(err, charge) {
-			if(err) {
-				console.log(err);
-				res.send('Failed')
-			} else {
-		  	console.log('success savi payment', charge);
-		  		res.send(charge)
-			}
-		});
-	});
-
-	adminRoutes(app, db);
-	cityRoutes(app, db);
 	activitiesRoutes(app, db);
+	adminRoutes(app, db);
 	bookingRoutes(app, db);
-	tourRoutes(app, db);
-	userRoutes(app, db);
+	cityRoutes(app, db);
 	employeeRoutes(app, db);
 	imagesRoutes(app, db);
+	paymentsRoutes(app, db);
+	tourRoutes(app, db);
+	userRoutes(app, db);
 
 	//Redirect Panel for invalid extensions
 	app.get('*', function (req, res) {

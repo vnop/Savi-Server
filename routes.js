@@ -20,16 +20,16 @@ module.exports = function(app, express, db, log) {
 	app.use(bodyParser.json());
 	app.use(bodyParser.urlencoded({ extended: true }));
 
-	//Individual Endpoints
-	require('./routes/activitiesRoutes.js')(app, db);
-	require('./routes/adminRoutes.js')(app, db);
-	require('./routes/bookingRoutes.js')(app, db);
-	require('./routes/cityRoutes.js')(app, db);
-	require('./routes/employeeRoutes.js')(app, db);
-	require('./routes/paymentsRoutes.js')(app, db);
-	require('./routes/imagesRoutes.js')(app, db);
-	require('./routes/tourRoutes.js')(app, db);
-	require('./routes/userRoutes.js')(app, db);
+	//Individual Endpoints, see the "routes" folder to modify their behavior
+	//require('./routes/activitiesRoutes.js')(app, db); //API endpoints available for friends to integrate our app with theirs
+	require('./routes/adminRoutes.js')(app, db); //for handling logins on the control panel
+	require('./routes/bookingRoutes.js')(app, db); //for handling the event of booking a tour
+	require('./routes/cityRoutes.js')(app, db); //for handling GET and POST reqests to the Cities tables
+	require('./routes/employeeRoutes.js')(app, db); //for handling GET, POST, PUT, and DELETE requests on the Employees table
+	require('./routes/paymentsRoutes.js')(app, db); //for handling Stripe related payments
+	require('./routes/imagesRoutes.js')(app, db); //for handling storing image files on the deployment server
+	require('./routes/tourRoutes.js')(app, db); //for handling GET and POST requests on the Tours table
+	require('./routes/userRoutes.js')(app, db); //for handling GET, POST, and PUT requests on the Users table
 
 	//Redirect Panel for invalid extensions
 	app.get('*', function (req, res) {

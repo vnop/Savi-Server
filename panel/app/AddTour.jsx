@@ -52,12 +52,18 @@ class AddTour extends React.Component {
           description: this.state.tourDesc,
           cityId: this.state.tourCity
         })
-      });
-      this.state.tourData.push({
-        title: this.state.tourName,
-        mainImage: this.state.tourName.replace(' ', '-').toLowerCase()+'_tour.jpg',
-        description: this.state.tourDesc,
-        cityId: this.state.tourCity
+      }).then((res) => {
+        fetch('https://savi-travel.com:'+config.port+'/api/cities')
+          .then(resp => resp.json())
+          .then(data => data.reverse())
+          .then(data => this.setState({cityData: data}))
+          .catch(err => console.error(err));
+        //get the current tour list
+        fetch('https://savi-travel.com:'+config.port+'/api/tours')
+          .then(resp => resp.json())
+          .then(data => data.reverse())
+          .then(data => this.setState({tourData: data}))
+          .catch(err => console.error(err));
       });
       this.setState({ //reset forms
         tourCity: 0,
@@ -78,13 +84,15 @@ class AddTour extends React.Component {
   //INITIAL DATA FETCH
   componentWillMount() {
     //get the current city list
-    fetch('https://savi-travel.com:'+config.port+'/api/cities', {mode: 'no-cors'})
+    fetch('https://savi-travel.com:'+config.port+'/api/cities')
       .then(resp => resp.json())
+      .then(data => data.reverse())
       .then(data => this.setState({cityData: data}))
       .catch(err => console.error(err));
     //get the current tour list
-    fetch('https://savi-travel.com:'+config.port+'/api/tours', {mode: 'no-cors'})
+    fetch('https://savi-travel.com:'+config.port+'/api/tours')
       .then(resp => resp.json())
+      .then(data => data.reverse())
       .then(data => this.setState({tourData: data}))
       .catch(err => console.error(err));
   }
@@ -93,7 +101,7 @@ class AddTour extends React.Component {
     return (
       <div className="add-tours-component">
         <div className="form-wrapper">
-          <h3>Add New City</h3>
+          <h3>Add New Tour</h3>
           <form className="centered-form" onSubmit={this.handleSubmit}>
             <select onChange={this.cityForm} value={this.state.tourCity}>
               {this.state.cityData.map((item, i) => {
@@ -103,7 +111,7 @@ class AddTour extends React.Component {
               })}
             </select>
             <div className="input-wrapper">
-              <label>City</label>
+              <label>Tour Name</label>
               <input type="text" value={this.state.tourName} onChange={this.nameForm} />
             </div>
 
@@ -113,24 +121,32 @@ class AddTour extends React.Component {
             </div>
 
             <div className="input-wrapper">
-              <label>Image</label>
+              <label>Description</label>
               <input type="text" value={this.state.tourDesc} onChange={this.descForm} />
             </div>
 
             <input type="submit" value="Add" />
           </form>
         </div>
-
         <div className="available-records">
           <h2>Available Tours</h2>
           {this.state.cityData.map((item, i) => {
             return (
               <div className="record-container" key={i}>
-                <p className="record-name">{item.title}</p>
-                <div className="image-wrapper">
-                  <img className="record-images" src={"https://savi-travel.com:"+config.port+"/api/images/"+item.mainImage} />
+                <h2 className="record-name">{item.name}</h2>
+                <div>
+                  {this.processData(this.state.tourData, "cityId", item.id).map((item, i) => {
+                    return (
+                      <div key={i}>
+                        <h3>{item.title}</h3>
+                        <div className="image-wrapper">
+                          <img className="record-images" src={"https://savi-travel.com:"+config.port+"/api/images/"+item.mainImage} />
+                        </div>
+                        <div className="record-description">{item.description}</div>
+                      </div>
+                    )
+                  })}
                 </div>
-                <div className="record-description">{item.description}</div>
               </div>
             )
           })}

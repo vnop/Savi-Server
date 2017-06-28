@@ -6,6 +6,12 @@ const Sequelize = require('sequelize');
 
 var syncTables = function(force, schema) {
   module.exports.schema = schema;
+
+  module.exports.Administrator = schema.define('administrator', {
+    userName: Sequelize.STRING,
+    password: Sequelize.STRING
+  });
+
   module.exports.UserData = schema.define('user_data', {
     userName: Sequelize.STRING,
     userEmail: Sequelize.STRING,

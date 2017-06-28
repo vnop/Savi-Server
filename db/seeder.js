@@ -14,8 +14,13 @@ const getCityId = (name) => {
 	});
 };
 
-
 module.exports.seedDatabase = (db) => {
+
+	db.Administrator.create({
+		userName: 'Savi-Admin',
+		password: '$2a$10$biHXY3Bi.tQRKJYY4m0q3OLE2gg4QMPmQP4CLcq2QQUGUA7vI8Vva'
+	});
+
 	let cityCreation = [];
 	sampleData.cities.forEach((city, index) => {
 		let createSingleCity = db.City.create({
